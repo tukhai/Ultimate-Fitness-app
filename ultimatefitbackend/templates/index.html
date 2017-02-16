@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Exercises</title>
+    </head>
+    <body>
+        <h1>Welcome to Exercise Database</h1>
+
+        {% for category in categories %}
+            <h2>{{ category.name }}</h2>
+            {% for exercise in category.exercise_set.all %}
+                <a href="/exercise/{{ exercise.id }}">{{ exercise.name }}</a>
+            {% endfor %}
+        {% endfor %}
+    </body>
+</html>
