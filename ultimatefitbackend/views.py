@@ -9,7 +9,7 @@ from .models import Choice, Question
 
 
 class IndexView(generic.ListView):
-    template_name = 'polls/index.html'
+    template_name = 'ultimatefitbackend/index.html'
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
@@ -26,7 +26,7 @@ class IndexView(generic.ListView):
 
 
 class ContactView(generic.ListView):
-    template_name = 'polls/contact.html'
+    template_name = 'ultimatefitbackend/contact.html'
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
@@ -42,7 +42,7 @@ class ContactView(generic.ListView):
         ).order_by('-pub_date')[:5]
 
 class AboutView(generic.ListView):
-    template_name = 'polls/about-us.html'
+    template_name = 'ultimatefitbackend/about-us.html'
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
@@ -58,7 +58,7 @@ class AboutView(generic.ListView):
         ).order_by('-pub_date')[:5]
 
 class TestimonialsView(generic.ListView):
-    template_name = 'polls/Testimonials.html'
+    template_name = 'ultimatefitbackend/Testimonials.html'
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
@@ -74,7 +74,7 @@ class TestimonialsView(generic.ListView):
         ).order_by('-pub_date')[:5]
 
 class ErrorView(generic.ListView):
-    template_name = 'polls/404.html'
+    template_name = 'ultimatefitbackend/404.html'
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
@@ -90,7 +90,7 @@ class ErrorView(generic.ListView):
         ).order_by('-pub_date')[:5]
 
 class faqView(generic.ListView):
-    template_name = 'polls/faq.html'
+    template_name = 'ultimatefitbackend/faq.html'
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
@@ -108,7 +108,7 @@ class faqView(generic.ListView):
 
 class DetailView(generic.DetailView):
     model = Question
-    template_name = 'polls/detail.html'
+    template_name = 'ultimatefitbackend/detail.html'
     def get_queryset(self):
         """
         Excludes any questions that aren't published yet.
@@ -117,35 +117,35 @@ class DetailView(generic.DetailView):
 
 class ResultsView(generic.DetailView):
     model = Question
-    template_name = 'polls/results.html'
+    template_name = 'ultimatefitbackend/results.html'
 
 
 '''def index(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     # output = ', '.join([q.question_text for q in latest_question_list])
     # return HttpResponse(output)
-    template = loader.get_template('polls/index.html')
+    template = loader.get_template('ultimatefitbackend/index.html')
     context = {
         'latest_question_list': latest_question_list,
     }
     return HttpResponse(template.render(context, request))
-    # return HttpResponse("Hello, world. You're at the polls index.")'''
+    # return HttpResponse("Hello, world. You're at the ultimatefitbackend index.")'''
 
 '''def index(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     context = {'latest_question_list': latest_question_list}
-    return render(request, 'polls/index.html', context)'''
+    return render(request, 'ultimatefitbackend/index.html', context)'''
 
 '''def detail(request, question_id):
     try:
         question = Question.objects.get(pk=question_id)
     except Question.DoesNotExist:
         raise Http404("Question does not exist")
-    return render(request, 'polls/detail.html', {'question': question})'''
+    return render(request, 'ultimatefitbackend/detail.html', {'question': question})'''
 
 '''def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'polls/detail.html', {'question': question})'''
+    return render(request, 'ultimatefitbackend/detail.html', {'question': question})'''
 
 # Create your views here.
 
@@ -157,7 +157,7 @@ class ResultsView(generic.DetailView):
     return HttpResponse(response % question_id)'''
 '''def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'polls/results.html', {'question': question})'''
+    return render(request, 'ultimatefitbackend/results.html', {'question': question})'''
 
 '''def vote(request, question_id):
     return HttpResponse("You're voting on question %s." % question_id)'''
@@ -167,7 +167,7 @@ def vote(request, question_id):
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the question voting form.
-        return render(request, 'polls/detail.html', {
+        return render(request, 'ultimatefitbackend/detail.html', {
             'question': question,
             'error_message': "You didn't select a choice.",
         })
@@ -177,4 +177,4 @@ def vote(request, question_id):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+        return HttpResponseRedirect(reverse('ultimatefitbackend:results', args=(question.id,)))
