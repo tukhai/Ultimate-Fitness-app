@@ -6,29 +6,61 @@ from django.db import models
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 
-@python_2_unicode_compatible  # only if you need to support Python 2
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
-    def __str__(self):
-        return self.question_text
-
-    def was_published_recently(self):
-        # return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
-        now = timezone.now()
-        return now - datetime.timedelta(days=1) <= self.pub_date <= now
-    was_published_recently.admin_order_field = 'pub_date'
-    was_published_recently.boolean = True
-    was_published_recently.short_description = 'Published recently?'
-
-
-@python_2_unicode_compatible  # only if you need to support Python 2
-class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
-    def __str__(self):
-        return self.choice_text
-
-
 # Create your models here.
+
+class MenuCategory(models.Model):
+    name = models.CharField(max_length=320)
+    description = models.TextField()
+    image = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+class Menu(models.Model):
+    name = models.CharField(max_length=320)
+    description = models.TextField()
+    image = models.TextField()
+    menucategory = models.ForeignKey(MenuCategory)
+
+    def __str__(self):
+        return self.name
+
+class Customer(models.Model):
+    name = models.CharField(max_length=320)
+    address = models.TextField()
+    phone = models.TextField()
+    history = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+class Order(models.Model):
+    name = models.CharField(max_length=320)
+    price = models.CharField(max_length=320)
+    order_date = models.DateTimeField('date published')
+    customer = models.ForeignKey(Customer)
+
+    def __str__(self):
+        return self.name
+
+class FoodCategory(models.Model):
+    name = models.CharField(max_length=320)
+    image = models.TextField()
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+class Food(models.Model):
+    name = models.CharField(max_length=320)
+    description = models.TextField()
+    image = models.TextField()
+    menu = models.ForeignKey(Menu)
+    order = models.ForeignKey(Order)
+    foodcategory = models.ForeignKey(FoodCategory)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'Foods'
