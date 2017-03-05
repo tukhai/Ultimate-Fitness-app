@@ -36,11 +36,19 @@
 			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 			<script src="vendor/html5shiv.js"></script>
 		<![endif]-->
+		
+		
+		<!--Full Calendar links-->
+		<!--<link rel="stylesheet" type="text/css" href="{% static 'ultimatefitbackend/style.css' %}" />-->
+
+
+		<link rel='stylesheet' href="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.css' %}" />
+		
 	</head>
 
 
-
 	<body>
+		
 		<div class="main_page">
 
 
@@ -298,10 +306,12 @@
 	        	<div class="container">
 	        		<div class="row">
 	        			<div class="col-lg-9 col-md-8 col-sm-12 col-sx-12">
+						
+							<div id='calendar'></div>
 	        					        			
 		        			<div class="row">
-				            
-					            <!--Default Item-->
+								
+								<!--Default Item-->
 					            <div class="col-md-4 col-sm-6 col-xs-12 default-item" style="display: inline-block;">
 					                <div class="inner-box">
 					                    <div class="single-item center">
@@ -946,6 +956,77 @@
 		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/google-map.js' %}"></script>
 
 
+		<script src="{% static 'ultimatefitbackend/fullcalendar/lib/jquery.min.js' %}"></script>
+		<script src="{% static 'ultimatefitbackend/fullcalendar/lib/moment.min.js' %}"></script>
+		<script src="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.js' %}"></script>
+		
+		<script>
+			$(document).ready(function() {
+
+				// page is now ready, initialize the calendar...
+
+				$('#calendar').fullCalendar({
+					// put your options and callbacks here
+					
+					header: { 
+						//left: 'prev',
+						center: 'month,basicWeek,basicDay' 
+						//right: 'next'
+					}, // buttons for switching between views
+					
+					contentHeight: 1000,
+					/*aspectRatio: 2,*/
+					
+					navLinks: true,
+					navLinkDayClick: function(date, jsEvent) {
+						console.log('day', date.format()); // date is a moment
+						console.log('coords', jsEvent.pageX, jsEvent.pageY);
+					},
+					events: 
+						[ 
+							{   
+								title: 'Curry Chicken Wrap',
+								start: '2017-03-03',
+								description: '<img src="http://static.foodmatters.me/images/food/131126-379z%20Curry%20Chicken%20Wrap.jpg" style="width:130px;height:90px;float:left;">'
+							},
+							{   
+								title: 'Curry Chicken Wrap',
+								start: '2017-03-03',
+								description: '<img src="http://static.foodmatters.me/images/food/131126-379z%20Curry%20Chicken%20Wrap.jpg" style="width:130px;height:90px;float:left;">'
+							},
+							{
+								title: 'All Day Event',
+								start: '2017-03-01',
+								description: 'qwerty'
+							},
+							{
+								title: 'All Day Event1',
+								start: '2017-03-01',
+								description: 'qwerty'
+							},
+							{  
+								title: 'Second Event', 
+								start: '2017-03-02'						
+							}
+						],
+
+					eventBackgroundColor: 'silver',
+					eventBorderColor: 'silver',
+						
+					eventRender: function(event, element) { 
+						element.append(event.description); 
+					},
+
+					dayRender: function(date, cell) {
+						cell.css("background-color", "silver");
+					}
+					
+				})
+				
+			});
+		</script>
+		
+		
 		</div> <!-- End of .main_page -->
 	</body>
 </html>

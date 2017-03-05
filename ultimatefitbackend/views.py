@@ -106,7 +106,7 @@ class faqView(generic.ListView):
         ).order_by('description')[:5]
 
 class ShopView(generic.ListView):
-    template_name = 'ultimatefitbackend/about-us.html'
+    template_name = 'ultimatefitbackend/shop.html'
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
