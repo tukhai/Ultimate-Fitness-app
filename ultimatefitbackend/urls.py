@@ -18,12 +18,8 @@ urlpatterns = [
     url(r'^404.html/$', views.ErrorView.as_view(), name='404'),
     # ex: /ultimatefitbackend/5/
     url(r'^faq.html/$', views.faqView.as_view(), name='faq'),
-    
-    
     # ex: /ultimatefitbackend/5/
-    url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
-    # ex: /ultimatefitbackend/5/results/
-    url(r'^(?P<pk>[0-9]+)/results/$', views.ResultsView.as_view(), name='results'),
-    # ex: /ultimatefitbackend/5/vote/
-    url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
+    url(r'^shop.html/$', views.ShopView.as_view(), name='shop'),
+    # ex: /ultimatefitbackend/5/
+    url(r'^shop-single.html/$', views.ShopsingleView.as_view(), name='shopsingle'),
 ]
