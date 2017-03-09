@@ -1000,7 +1000,7 @@
 							{% for food in latest_food_list %}
 							{
 								title: '{{food.name}}',
-								start: '{{food.pub_date_string}}',
+								start: '{{food.convertdate}}',
 								description: '{{food.description}}'
 							},
 							{% endfor %}

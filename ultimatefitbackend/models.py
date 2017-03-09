@@ -81,5 +81,5 @@ class Food(models.Model):
 
     @property
     def convertdate(self):
-        pub_date_string = seft.pub_date.date().strftime('%Y-%m-%dT%H:%M')
+        pub_date_string = self.pub_date.date().strftime('%Y-%m-%dT%H:%M')
         return pub_date_string

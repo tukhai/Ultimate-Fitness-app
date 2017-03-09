@@ -17,7 +17,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 from .models import Food, FoodCategory, Order, Customer, Menu, MenuCategory
 
-from .utcisoformat import utcisoformat
+# from .utcisoformat import utcisoformat
 
 class IndexView(generic.ListView):
     template_name = 'ultimatefitbackend/index.html'
