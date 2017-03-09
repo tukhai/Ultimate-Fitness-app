@@ -1,12 +1,23 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.template import loader
 from django.views import generic
 from django.utils import timezone
 
+from django.core import serializers
+import math
+import json
+import time
+
+from time import strftime
+
+from django.utils.timezone import utc
+from django.core.serializers.json import DjangoJSONEncoder
+
 from .models import Food, FoodCategory, Order, Customer, Menu, MenuCategory
 
+from .utcisoformat import utcisoformat
 
 class IndexView(generic.ListView):
     template_name = 'ultimatefitbackend/index.html'
@@ -106,8 +117,10 @@ class faqView(generic.ListView):
         ).order_by('description')[:5]
 
 class ShopView(generic.ListView):
+    model = Food
     template_name = 'ultimatefitbackend/shop.html'
-    context_object_name = 'latest_question_list'
+    context_object_name = 'latest_food_list'
+
 
     def get_queryset(self):
         """Return the last five published questions."""
@@ -117,9 +130,8 @@ class ShopView(generic.ListView):
         Return the last five published questions (not including those set to be
         published in the future).
         """
-        return Food.objects.filter(
-            description__lte=timezone.now()
-        ).order_by('description')[:5]
+        return Food.objects.all()
+        #return serializers.serialize('python',Food.objects.all())
 
 class ShopsingleView(generic.ListView):
     template_name = 'ultimatefitbackend/shop-single.html'
@@ -181,18 +193,6 @@ class ResultsView(generic.DetailView):
 
 # Create your views here.
 
-'''def detail(request, question_id):
-    return HttpResponse("You're looking at question %s." % question_id)'''
-
-'''def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)'''
-'''def results(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'ultimatefitbackend/results.html', {'question': question})'''
-
-'''def vote(request, question_id):
-    return HttpResponse("You're voting on question %s." % question_id)'''
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -210,3 +210,7 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('ultimatefitbackend:results', args=(question.id,)))
+
+def foods_list(request):
+    response_data = serializers.serialize('python',Food.objects.all())
+    return JsonResponse(response_data, safe=False)

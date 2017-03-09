@@ -48,7 +48,8 @@
 
 
 	<body>
-		
+	
+		{% block content %}
 		<div class="main_page">
 
 
@@ -306,10 +307,10 @@
 	        	<div class="container">
 	        		<div class="row">
 	        			<div class="col-lg-9 col-md-8 col-sm-12 col-sx-12">
-						
-							<div id='calendar'></div>
 	        					        			
 		        			<div class="row">
+							
+								<div id='calendar'></div>
 								
 								<!--Default Item-->
 					            <div class="col-md-4 col-sm-6 col-xs-12 default-item" style="display: inline-block;">
@@ -960,7 +961,8 @@
 		<script src="{% static 'ultimatefitbackend/fullcalendar/lib/moment.min.js' %}"></script>
 		<script src="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.js' %}"></script>
 		
-		<script>
+		<script type="text/javascript">
+			
 			$(document).ready(function() {
 
 				// page is now ready, initialize the calendar...
@@ -969,45 +971,39 @@
 					// put your options and callbacks here
 					
 					header: { 
-						//left: 'prev',
-						center: 'month,basicWeek,basicDay' 
-						//right: 'next'
+						left: 'prev,next today',
+						center: 'title',
+						//center: 'month,basicWeek,basicDay' 
+						right: 'month,basicWeek,basicDay'
 					}, // buttons for switching between views
 					
-					contentHeight: 1000,
-					/*aspectRatio: 2,*/
+					//contentHeight: 1000,
+					//aspectRatio: 2,
 					
 					navLinks: true,
 					navLinkDayClick: function(date, jsEvent) {
 						console.log('day', date.format()); // date is a moment
 						console.log('coords', jsEvent.pageX, jsEvent.pageY);
 					},
+						
 					events: 
-						[ 
+						[
 							{   
 								title: 'Curry Chicken Wrap',
-								start: '2017-03-03',
+								start: '2017-03-10',
 								description: '<img src="http://static.foodmatters.me/images/food/131126-379z%20Curry%20Chicken%20Wrap.jpg" style="width:130px;height:90px;float:left;">'
 							},
 							{   
 								title: 'Curry Chicken Wrap',
-								start: '2017-03-03',
-								description: '<img src="http://static.foodmatters.me/images/food/131126-379z%20Curry%20Chicken%20Wrap.jpg" style="width:130px;height:90px;float:left;">'
+								start: '2017-03-10',
 							},
+							{% for food in latest_food_list %}
 							{
-								title: 'All Day Event',
-								start: '2017-03-01',
-								description: 'qwerty'
+								title: '{{food.name}}',
+								start: '{{food.pub_date_string}}',
+								description: '{{food.description}}'
 							},
-							{
-								title: 'All Day Event1',
-								start: '2017-03-01',
-								description: 'qwerty'
-							},
-							{  
-								title: 'Second Event', 
-								start: '2017-03-02'						
-							}
+							{% endfor %}
 						],
 
 					eventBackgroundColor: 'silver',
@@ -1020,13 +1016,12 @@
 					dayRender: function(date, cell) {
 						cell.css("background-color", "silver");
 					}
-					
-				})
-				
+				})			
 			});
 		</script>
 		
 		
 		</div> <!-- End of .main_page -->
+		{% endblock %}
 	</body>
 </html>
