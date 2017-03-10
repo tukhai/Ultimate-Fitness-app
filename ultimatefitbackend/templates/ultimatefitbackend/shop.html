@@ -957,7 +957,7 @@
 		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/google-map.js' %}"></script>
 
 
-		<script src="{% static 'ultimatefitbackend/fullcalendar/lib/jquery.min.js' %}"></script>
+		<!--<script src="{% static 'ultimatefitbackend/fullcalendar/lib/jquery.min.js' %}"></script>-->
 		<script src="{% static 'ultimatefitbackend/fullcalendar/lib/moment.min.js' %}"></script>
 		<script src="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.js' %}"></script>
 		
@@ -993,10 +993,12 @@
 								start: '2017-03-10',
 								description: '<img src="http://static.foodmatters.me/images/food/131126-379z%20Curry%20Chicken%20Wrap.jpg" style="width:130px;height:90px;float:left;">'
 							},
-							{   
+							/*{   
 								title: 'Curry Chicken Wrap',
 								start: '2017-03-10',
-							},
+								imageurl: 'http://www.athenaspizzaamherst.com/wp-content/uploads/2013/05/front-1-1008x500.jpg'
+							},*/
+							{% autoescape off %}
 							{% for food in latest_food_list %}
 							{
 								title: '{{food.name}}',
@@ -1004,6 +1006,7 @@
 								description: '{{food.description}}'
 							},
 							{% endfor %}
+							{% endautoescape %}
 						],
 
 					eventBackgroundColor: 'silver',
@@ -1012,6 +1015,12 @@
 					eventRender: function(event, element) { 
 						element.append(event.description); 
 					},
+					
+					/*eventRender: function(event, eventElement) {
+						if (event.imageurl) {
+							eventElement.find("div.fc-content").prepend("<img src='" + event.imageurl +"' width='130' height='90'>");
+						}
+					},*/
 
 					dayRender: function(date, cell) {
 						cell.css("background-color", "silver");
