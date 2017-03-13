@@ -37,6 +37,84 @@
 			<script src="vendor/html5shiv.js"></script>
 		<![endif]-->
 		
+		<!--CSS for modal box-->
+		<style>
+			.modal__inner {
+			    position: absolute;
+			}
+		
+			.modalDialog {
+				position: fixed;
+				overflow-y: auto;
+				font-family: Arial, Helvetica, sans-serif;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				background: rgba(0,0,0,0.8);
+				z-index: 99999;
+				opacity:0;
+				-webkit-transition: opacity 400ms ease-in;
+				-moz-transition: opacity 400ms ease-in;
+				transition: opacity 400ms ease-in;
+				pointer-events: none;
+			}
+			
+			
+			/*Customizing scrollbar*/
+			.modalDialog::-webkit-scrollbar {
+				width: 0.2em;
+			}
+			 
+			.modalDialog::-webkit-scrollbar-track {
+				-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+			}
+			 
+			.modalDialog::-webkit-scrollbar-thumb {
+			  background-color: darkgrey;
+			  outline: 1px solid slategrey;
+			}
+			/**/
+			
+
+			.modalDialog:target {
+				opacity:1;
+				pointer-events: auto;
+			}
+
+			.modalDialog > div {
+				width: 90%;
+				position: relative;
+				margin: 10% auto;
+				padding: 5px 20px 13px 20px;
+				border-radius: 10px;
+				background: #fff;
+				background: -moz-linear-gradient(#fff, #999);
+				background: -webkit-linear-gradient(#fff, #999);
+				background: -o-linear-gradient(#fff, #999);
+			}
+
+			.close {
+				background: #606061;
+				color: #FFFFFF;
+				line-height: 25px;
+				position: absolute;
+				right: -12px;
+				text-align: center;
+				top: -10px;
+				width: 24px;
+				text-decoration: none;
+				font-weight: bold;
+				-webkit-border-radius: 12px;
+				-moz-border-radius: 12px;
+				border-radius: 12px;
+				-moz-box-shadow: 1px 1px 3px #000;
+				-webkit-box-shadow: 1px 1px 3px #000;
+				box-shadow: 1px 1px 3px #000;
+			}
+
+			.close:hover { background: #00d9ff; }
+		</style>
 		
 		<!--Full Calendar links-->
 		<!--<link rel="stylesheet" type="text/css" href="{% static 'ultimatefitbackend/style.css' %}" />-->
@@ -1003,7 +1081,7 @@
 							{
 								title: '{{food.name}}',
 								start: '{{food.convertdate}}',
-								description: '{{food.description}}'
+								description: '<a href="#openModal-{{food.name}}" class="btnAdd-{{food.name}}">{{food.description}}</a>'
 							},
 							{% endfor %}
 							{% endautoescape %}
@@ -1026,9 +1104,35 @@
 						cell.css("background-color", "silver");
 					}
 				})			
+				
 			});
 		</script>
 		
+		<script>
+		    function resizeIframe(obj) {
+				obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+		    }
+		</script>
+		
+		{% autoescape off %}
+		{% for food in latest_food_list %}
+			<div class="modal__inner">
+				<div id="openModal-{{food.name}}" class="modalDialog">
+					<div style="overflow:hidden">
+						<a href="#close" title="Close" class="close">X</a>
+						<!--<h2>{{food.name}}</h2>
+						<p>This is a sample modal box that can be created using the powers of CSS3.</p>
+						<p>You could do a lot of things here like have<br>
+						a pop-up ad that shows when your website loads,<br> 
+						or create a login/register form for users.</p>
+						<img src="http://i.imgur.com/TPx9zYo.gif" alt="" />-->
+						<iframe width="100%" scrolling="no" frameborder="0" src="http://localhost:8000/contact.html" onload="resizeIframe(this);" ></iframe>
+						<!--<iframe width="100%" position="fixed" overflow="hidden" frameborder="0" src="http://localhost:8000" ></iframe>-->
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+		{% endautoescape %}
 		
 		</div> <!-- End of .main_page -->
 		{% endblock %}

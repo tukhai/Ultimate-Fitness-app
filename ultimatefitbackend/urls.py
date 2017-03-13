@@ -22,5 +22,7 @@ urlpatterns = [
     url(r'^shop.html/$', views.ShopView.as_view(), name='shop'),
     # ex: /ultimatefitbackend/5/
     url(r'^shop-single.html/$', views.ShopsingleView.as_view(), name='shopsingle'),
+    # ex: /ultimatefitbackend/5/
     url(r'^foods-list/$', views.foods_list, name='foods_list'),
+    # ex: /ultimatefitbackend/5/
 ]
