@@ -83,8 +83,7 @@
 			}
 
 			.modalDialog > div {
-				width: 90%;
-                height: 90%;
+				width: 90%;            
 				position: relative;
 				margin: 10% auto;
 				padding: 5px 20px 13px 20px;
@@ -1109,13 +1108,6 @@
 			});
 		</script>
 		
-		<script>
-		    function resizeIframe(obj) {
-				obj.style.height = 90 + '%';
-{#                    obj.contentWindow.document.body.scrollHeight + '%';#}
-		    }
-		</script>
-		
 		{% autoescape off %}
 		{% for food in latest_food_list %}
 			<div class="modal__inner">
@@ -1128,8 +1120,7 @@
 						a pop-up ad that shows when your website loads,<br> 
 						or create a login/register form for users.</p>
 						<img src="http://i.imgur.com/TPx9zYo.gif" alt="" />-->
-						<iframe width="100%" scrolling="no" frameborder="0" src="http://localhost:8000/contact.html" onload="resizeIframe(this);" ></iframe>
-						<!--<iframe width="100%" position="fixed" overflow="hidden" frameborder="0" src="http://localhost:8000" ></iframe>-->
+						<iframe width="100%" scrolling="no" frameborder="0" src="http://localhost:8000/contact.html" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>
 					</div>
 				</div>
 			</div>
