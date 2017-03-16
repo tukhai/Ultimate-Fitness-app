@@ -74,6 +74,7 @@
 			  background-color: darkgrey;
 			  outline: 1px solid slategrey;
 			}
+			
 			/**/
 			
 
@@ -1114,13 +1115,7 @@
 				<div id="openModal-{{food.name}}" class="modalDialog">
 					<div style="overflow:hidden">
 						<a href="#close" title="Close" class="close">X</a>
-						<!--<h2>{{food.name}}</h2>
-						<p>This is a sample modal box that can be created using the powers of CSS3.</p>
-						<p>You could do a lot of things here like have<br>
-						a pop-up ad that shows when your website loads,<br> 
-						or create a login/register form for users.</p>
-						<img src="http://i.imgur.com/TPx9zYo.gif" alt="" />-->
-						<iframe width="100%" scrolling="no" frameborder="0" src="http://localhost:8000/contact.html" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>
+						<iframe width="100%" scrolling="no" frameborder="0" src="http://localhost:8000/food/{{food.id}}" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>
 					</div>
 				</div>
 			</div>

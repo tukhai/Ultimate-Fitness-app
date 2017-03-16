@@ -5,6 +5,8 @@ from django.template import loader
 from django.views import generic
 from django.utils import timezone
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from django.core import serializers
 import math
 import json
@@ -132,6 +134,13 @@ class ShopView(generic.ListView):
         """
         return Food.objects.all()
         #return serializers.serialize('python',Food.objects.all())
+
+def food(request, id):
+    template = loader.get_template('ultimatefitbackend/food.html')
+    context = {
+        'food': Food.objects.get(id=id)
+    }
+    return HttpResponse(template.render(context, request))
 
 class ShopsingleView(generic.ListView):
     template_name = 'ultimatefitbackend/shop-single.html'

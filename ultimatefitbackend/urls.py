@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 
 from . import views
 
@@ -25,4 +25,6 @@ urlpatterns = [
     # ex: /ultimatefitbackend/5/
     url(r'^foods-list/$', views.foods_list, name='foods_list'),
     # ex: /ultimatefitbackend/5/
+    # url(r'food/(?P<name>[\w]+)$', views.food, name='food'),
+    url(r'food/(?P<id>[0-9]+)$', views.food, name='food'),
 ]

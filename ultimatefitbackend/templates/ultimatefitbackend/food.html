@@ -1,0 +1,513 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<!-- For IE -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- For Resposive Device -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>{{ food.name }}</title>
+		<!-- Favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-57x57.png' %}">
+		<link rel="apple-touch-icon" sizes="60x60" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-60x60.png' %}">
+		<link rel="apple-touch-icon" sizes="72x72" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-72x72.png' %}">
+		<link rel="apple-touch-icon" sizes="76x76" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-76x76.png' %}">
+		<link rel="apple-touch-icon" sizes="114x114" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-114x114.png' %}">
+		<link rel="apple-touch-icon" sizes="120x120" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-120x120.png' %}">
+		<link rel="apple-touch-icon" sizes="144x144" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-144x144.png' %}">
+		<link rel="apple-touch-icon" sizes="152x152" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-152x152.png' %}">
+		<link rel="apple-touch-icon" sizes="180x180" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-180x180.png' %}">
+		<link rel="icon" type="image/png" sizes="192x192"  href="{% static 'ultimatefitbackend/images/fav-icon/android-icon-192x192.png' %}">
+		<link rel="icon" type="image/png" sizes="32x32" href="{% static 'ultimatefitbackend/images/fav-icon/favicon-32x32.png' %}">
+		<link rel="icon" type="image/png" sizes="96x96" href="{% static 'ultimatefitbackend/images/fav-icon/favicon-96x96.png' %}">
+		<link rel="icon" type="image/png" sizes="16x16" href="{% static 'ultimatefitbackend/images/fav-icon/favicon-16x16.png' %}">
+
+
+		<!-- Custom Css -->
+		<link rel="stylesheet" type="text/css" href="{% static 'ultimatefitbackend/css/style.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'ultimatefitbackend/css/responsive.css' %}">
+
+
+		<!-- Fixing Internet Explorer ______________________________________-->
+
+		<!--[if lt IE 9]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+			<script src="vendor/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<div class="main_page">
+
+
+			<!-- Single Shop page content ________________ -->
+
+	        <div class="shop_single_page">
+	        	<div class="container">
+	        		<div class="row">
+
+
+						<!-- _______________________ SIDEBAR ____________________ -->
+	        			<div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 sidebar_styleTwo">
+	        				<div class="wrapper">
+	        					<div class="sidebar_search">
+	        						<form action="#">
+	        							<input type="text">
+	        							<button class="tran3s color1_bg"><i class="fa fa-search" aria-hidden="true"></i></button>
+	        						</form>
+	        					</div> <!-- End of .sidebar_styleOne -->
+
+	        					<div class="sidebar_categories">
+	        						<div class="theme_inner_title">
+										<h4>Categories</h4>
+									</div>
+									<ul>
+										<li><a href="" class="tran3s">Vegetables   (15)</a></li>
+										<li><a href="" class="tran3s">Fruits & Drinks   (06)</a></li>
+										<li><a href="" class="tran3s">Fresh Meat   (12)</a></li>
+										<li><a href="" class="tran3s">Beauty Care   (14)</a></li>
+									</ul>
+	        					</div> <!-- End of .sidebar_categories -->
+
+	        					<div class="price_filter wow fadeInUp">
+									<div class="theme_inner_title">
+										<h4>Filter By Price</h4>
+									</div>
+									<div class="single-sidebar price-ranger">
+										<div id="slider-range"></div>
+										<div class="ranger-min-max-block">
+											<input type="submit" value="Filter">
+											<span>Price:</span>
+											<input type="text" readonly class="min"> 
+											<span>-</span>
+											<input type="text" readonly class="max">
+										</div>
+									</div> <!-- /price-ranger -->
+								</div> <!-- /price_filter -->
+
+								<div class="best_sellers clear_fix wow fadeInUp">
+									<div class="theme_inner_title">
+										<h4>popular products</h4>
+									</div>
+
+									<div class="best_selling_item clear_fix border">
+										<div class="img_holder float_left">
+											<img src="{% static 'ultimatefitbackend/images/shop/9.png' %}" alt="image">
+										</div> <!-- End of .img_holder -->
+
+										<div class="text float_left">
+											<a href="shop-single.html"><h6>Turmeric Powder</h6></a>
+											<ul>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+											</ul>
+											<span>$ 15.00</span>
+										</div> <!-- End of .text -->
+									</div> <!-- End of .best_selling_item -->
+
+									<div class="best_selling_item clear_fix border">
+										<div class="img_holder float_left">
+											<img src="{% static 'ultimatefitbackend/images/shop/10.png' %}" alt="image">
+										</div> <!-- End of .img_holder -->
+
+										<div class="text float_left">
+											<a href="shop-single.html"><h6>Pure Jeans Coffee</h6></a>
+											<ul>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+											</ul>
+											<span>$ 34.00</span>
+										</div> <!-- End of .text -->
+									</div> <!-- End of .best_selling_item -->
+
+									<div class="best_selling_item clear_fix">
+										<div class="img_holder float_left">
+											<img src="{% static 'ultimatefitbackend/images/shop/11.png' %}" alt="image">
+										</div> <!-- End of .img_holder -->
+
+										<div class="text float_left">
+											<a href="shop-single.html"><h6>Columbia Chocolate</h6></a>
+											<ul>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+											</ul>
+											<span>$ 34.99</span>
+										</div> <!-- End of .text -->
+									</div> <!-- End of .best_selling_item -->
+								</div> <!-- End of .best_sellers -->
+
+
+								<div class="sidebar_tags wow fadeInUp">
+	   								<div class="theme_inner_title">
+										<h4>product Tags</h4>
+									</div>
+
+									<ul>
+										<li><a href="#" class="tran3s">fruits</a></li>
+										<li><a href="#" class="tran3s">Cosmetics</a></li>
+										<li><a href="#" class="tran3s">Farmers</a></li>
+										<li><a href="#" class="tran3s">Healthy</a></li>
+										<li><a href="#" class="tran3s">Catering</a>  </li>
+										<li><a href="#" class="tran3s">Chemical</a></li>
+										<li><a href="#" class="tran3s">Post Format</a> </li>
+										<li><a href="#" class="tran3s">Industry</a></li>
+										<li><a href="#" class="tran3s">Research</a></li>
+									</ul>
+	   							</div> <!-- End of .sidebar_tags -->
+
+	        				</div> <!-- End of .wrapper -->
+	        			</div> <!-- End of .sidebar_styleTwo -->
+	        			<div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 product_details">
+	        				<div class="wrapper">
+	        					<div class="product_top_section clear_fix">
+	        						<div class="img_holder float_left">
+	        							<img src="{% static 'ultimatefitbackend/images/shop/15.png' %}" alt="img" class="img-responsive">
+	        						</div> <!-- End of .img_holder -->
+	        						<div class="item_description float_left">
+	        							<h4>{{ food.name }}</h4>
+	        							<ul>
+											<li><i class="fa fa-star" aria-hidden="true"></i></li>
+											<li><i class="fa fa-star" aria-hidden="true"></i></li>
+											<li><i class="fa fa-star" aria-hidden="true"></i></li>
+											<li><i class="fa fa-star" aria-hidden="true"></i></li>
+											<li><i class="fa fa-star" aria-hidden="true"></i></li>
+											<li>(2 Customers Review)</li>
+										</ul>
+										<span class="item_price">$ 19.00</span>
+										<p>There are many variations of passages,the majority suffered uts seds alterationin some of form uts, by injected humour random words which don't look evenslightly believable.</p>
+										<span class="check_location">Check Delivery Option at Your Location:</span>
+										<div class="clear_fix">
+											<input type="text" class="float_left" placeholder="Pincode">
+											<button class="float_left tran3s">Check</button>
+											<span class="float_left color1">*Expected Delivery in 4-10 Days</span>
+										</div>
+										<input type="number" value="1" min="1">
+										<a href="#" class="tran3s color1_bg">Add to Cart</a>
+	        						</div> <!-- End of .item_description -->
+	        					</div> <!-- End of .product_top_section -->
+
+	        					<!-- __________________ Product review ___________________ -->
+	        					<div class="product-review-tab">
+									<ul class="nav nav-pills">
+									    <li><a data-toggle="pill" href="#tab1">Description</a></li>
+									    <li class="active"><a data-toggle="pill" href="#tab2">Reviews(2)</a></li>
+								  	</ul>
+								  
+									 <div class="tab-content">
+									    <div id="tab1" class="tab-pane fade">
+									      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years on purpose.</p>
+									      <p style="margin-top:10px">Distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors when looking.</p>
+									      
+									    </div> <!-- End of #tab1 -->
+
+									    <div id="tab2" class="tab-pane fade in active">
+									      <!-- Single Review -->
+									      <div class="item_review_content clear_fix">
+									      	<div class="img_holder float_left">
+									      		<img src="{% static 'ultimatefitbackend/images/gallery/a1.jpg' %}" alt="img">
+									      	</div> <!-- End of .img_holder -->
+
+									      	<div class="text float_left">
+									      		<div class="sec_up clear_fix">
+									      			<h6 class="float_left">Michel Kong</h6>
+									      			<div class="float_right">
+									      				<span class="p_color">21/08/2015 &nbsp;at &nbsp;09.45</span>
+									      				<ul>
+															<li><i class="fa fa-star" aria-hidden="true"></i></li>
+															<li><i class="fa fa-star" aria-hidden="true"></i></li>
+															<li><i class="fa fa-star" aria-hidden="true"></i></li>
+															<li><i class="fa fa-star" aria-hidden="true"></i></li>
+															<li><i class="fa fa-star" aria-hidden="true"></i></li>
+														</ul>
+									      			</div>
+									      		</div> <!-- End of .sec_up -->
+									      		<p>Many web sites still sed in their infancy Various versions have sed evolveed over the years, sometimes by there accident, sometimes all times purpose rationally sed encounter se consequencess ut that are at sed extremely well painful or again is there anyone who loves or seds of pursues.</p>
+
+									      		<div class="up_down_nav">
+									      			<a href="#"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+									      			<a href="#"><i class="fa fa-angle-down" aria-hidden="true"></i></a>
+									      		</div> <!-- End of .up_down_nav -->
+
+									      		<div class="reply_share_area">
+									      			<a href="#" class="tran3s">Reply</a>
+									      			<a href="#" class="tran3s">Share</a>
+									      		</div> <!-- End of .reply_share_area -->
+									      	</div> <!-- End of .text -->
+									      </div> <!-- End of .item_review_content -->
+
+									      <!-- Single Review -->
+									      <div class="item_review_content clear_fix">
+									      	<div class="img_holder float_left">
+									      		<img src="{% static 'ultimatefitbackend/images/gallery/a2.jpg' %}" alt="img">
+									      	</div> <!-- End of .img_holder -->
+
+									      	<div class="text float_left">
+									      		<div class="sec_up clear_fix">
+									      			<h6 class="float_left">Jeorge Meckey</h6>
+									      			<div class="float_right">
+									      				<span class="p_color">26/08/2015 &nbsp;at &nbsp;05.30</span>
+									      				<ul>
+															<li><i class="fa fa-star" aria-hidden="true"></i></li>
+															<li><i class="fa fa-star" aria-hidden="true"></i></li>
+															<li><i class="fa fa-star" aria-hidden="true"></i></li>
+															<li><i class="fa fa-star" aria-hidden="true"></i></li>
+															<li><i class="fa fa-star-half-o" aria-hidden="true"></i></li>
+														</ul>
+									      			</div>
+									      		</div> <!-- End of .sec_up -->
+									      		<p>Know how to pursue pleasure rationally encounter consequences that are extremely painful nor again is there anyone who loves or pursues or desires to obtain pain seds of itself, because it is pain, under because occasionally circumstances occur in which toil great pleasure.</p>
+
+									      		<div class="up_down_nav">
+									      			<a href="#"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+									      			<a href="#"><i class="fa fa-angle-down" aria-hidden="true"></i></a>
+									      		</div> <!-- End of .up_down_nav -->
+
+									      		<div class="reply_share_area">
+									      			<a href="#" class="tran3s">Reply</a>
+									      			<a href="#" class="tran3s">Share</a>
+									      		</div> <!-- End of .reply_share_area -->
+									      	</div> <!-- End of .text -->
+									      </div> <!-- End of .item_review_content -->
+
+
+									      <div class="add_your_review">
+										      	<div class="theme_inner_title">
+													<h4>Add Your Review</h4>
+												</div>
+
+												<span>Your Rating</span>
+												<ul>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												</ul>
+												<ul>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												</ul>
+												<ul>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												</ul>
+												<ul>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												</ul>
+												<ul class="fix_border">
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												</ul>
+
+												<form action="#">
+													<div class="row">
+														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+															<input type="text" placeholder="Name*">
+														</div>
+														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+															<input type="email" placeholder="Email*">
+														</div>
+														<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+															<textarea placeholder="Your Review..."></textarea>
+														</div>
+													</div>
+													<button class="color1_bg tran3s">Add A Review</button>
+												</form>
+
+									      </div> <!-- End of .add_your_review -->
+									      
+									    </div> <!-- End of #tab2 -->
+									 </div> <!-- End of .tab-content -->
+								</div> <!-- End of .product-review-tab -->
+
+
+								<div class="related_product">
+									<div class="theme_title">
+										<h3>Related Products</h3>
+									</div>
+									
+
+									<!-- Shop Page Content************************ -->
+							        <div class="shop_page featured-product">
+							        	
+						        		<div class="row">
+							            
+								            <!--Default Item-->
+								            <div class="col-md-4 col-sm-6 col-xs-12 default-item" style="display: inline-block;">
+								                <div class="inner-box">
+								                    <div class="single-item center">
+								                        <figure class="image-box"><img src="{% static 'ultimatefitbackend/images/shop/1.png' %}" alt=""><div class="product-model new">New</div></figure>
+								                        <div class="content">
+								                        	<h3><a href="shop-single.html">Turmeric Powder</a></h3>
+								                            <div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>
+								                            <div class="price">$12.99 <span class="prev-rate">$14.99</span></div>
+								                        </div>
+								                        <div class="overlay-box">
+								                        	<div class="inner">
+									                        	<div class="top-content">
+									                        		<ul>
+									                        			<li><a href="#"><span class="fa fa-eye"></span></a></li>
+									                        			<li class="tultip-op"><span class="tultip"><i class="fa fa-sort-desc"></i>ADD TO CART</span><a href="#"><span class="icon-icon-32846"></span></a>
+																			
+																		</li>
+									                        			<li><a href="#"><span class="fa fa-heart-o"></span></a></li>
+									                        		</ul>
+									                        	</div>
+									                        	<div class="bottom-content">
+									                        		<h4><a href="#">It Contains:</a></h4>
+									                        		<p>35% of organic raisins 55% of oats and 10% of butter. </p>
+									                        	</div>
+								                        	</div>
+								                        </div>
+									                </div>
+								                </div>
+								            </div>
+								            
+								            <!--Default Item-->
+								            <div class="col-md-4 col-sm-6 col-xs-12 default-item" style="display: inline-block;">
+								                <div class="inner-box">
+								                    <div class="single-item center">
+								                        <figure class="image-box"><img src="{% static 'ultimatefitbackend/images/shop/2.png' %}" alt=""></figure>
+								                        <div class="content">
+								                        	<h3><a href="shop-single.html">Turmeric Powder</a></h3>
+								                            <div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>
+								                            <div class="price">$12.99 <span class="prev-rate">$14.99</span></div>
+								                        </div>
+								                        <div class="overlay-box">
+								                        	<div class="inner">
+									                        	<div class="top-content">
+									                        		<ul>
+									                        			<li><a href="#"><span class="fa fa-eye"></span></a></li>
+									                        			<li class="tultip-op"><span class="tultip"><i class="fa fa-sort-desc"></i>ADD TO CART</span><a href="#"><span class="icon-icon-32846"></span></a>
+																			
+																		</li>
+									                        			<li><a href="#"><span class="fa fa-heart-o"></span></a></li>
+									                        		</ul>
+									                        	</div>
+									                        	<div class="bottom-content">
+									                        		<h4><a href="#">It Contains:</a></h4>
+									                        		<p>35% of organic raisins 55% of oats and 10% of butter. </p>
+									                        	</div>
+								                        	</div>
+								                        </div>
+									                </div>
+								                </div>
+								            </div>
+								            
+								            <!--Default Item-->
+								            <div class="col-md-4 col-sm-6 col-xs-12 default-item" style="display: inline-block;">
+								                <div class="inner-box">
+								                    <div class="single-item center">
+								                        <figure class="image-box"><img src="{% static 'ultimatefitbackend/images/shop/3.png' %}" alt=""><div class="product-model hot">Hot</div></figure>
+								                        <div class="content">
+								                        	<h3><a href="shop-single.html">Turmeric Powder</a></h3>
+								                            <div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>
+								                            <div class="price">$12.99 <span class="prev-rate">$14.99</span></div>
+								                        </div>
+								                        <div class="overlay-box">
+								                        	<div class="inner">
+									                        	<div class="top-content">
+									                        		<ul>
+									                        			<li><a href="#"><span class="fa fa-eye"></span></a></li>
+									                        			<li class="tultip-op"><span class="tultip"><i class="fa fa-sort-desc"></i>ADD TO CART</span><a href="#"><span class="icon-icon-32846"></span></a>
+																			
+																		</li>
+									                        			<li><a href="#"><span class="fa fa-heart-o"></span></a></li>
+									                        		</ul>
+									                        	</div>
+									                        	<div class="bottom-content">
+									                        		<h4><a href="#">It Contains:</a></h4>
+									                        		<p>35% of organic raisins 55% of oats and 10% of butter. </p>
+									                        	</div>
+								                        	</div>
+								                        </div>
+									                </div>
+								                </div>
+								            </div>
+								            
+						        		</div> <!-- End of .row -->
+							        	
+							        </div> <!-- End of .shop_page -->
+								</div> <!-- End of .related_product -->
+	        				</div> <!-- End of .wrapper -->
+	        			</div> <!-- End of .col -->
+
+
+	        		</div> <!-- End of .row -->
+	        	</div> <!-- End of .container -->
+	        </div> <!-- End of .shop_single_page -->
+
+
+			<!-- Scroll Top Button -->
+			<button class="scroll-top tran3s color2_bg">
+				<span class="fa fa-angle-up"></span>
+			</button>
+			<!-- pre loader  -->
+		 	<div id="loader-wrapper">
+				<div id="loader"></div>
+			</div>
+
+<!-- Js File_________________________________ -->
+
+		<!-- j Query -->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery-2.1.4.js' %}"></script>
+		<!-- Bootstrap JS -->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/bootstrap.min.js' %}"></script>
+
+		<!-- Vendor js _________ -->
+		<!-- Google map js -->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRvBPo3-t31YFk588DpMYS6EqKf-oGBSI"></script> <!-- Gmap Helper -->
+		<script src="{% static 'ultimatefitbackend/js/gmap.js' %}"></script>
+		<!-- owl.carousel -->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/owl.carousel.min.js' %}"></script>
+		<!-- ui js -->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery-ui.min.js' %}"></script>
+		<!-- Responsive menu-->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/menuzord.js' %}"></script>
+		<!-- revolution -->
+		<script src="{% static 'ultimatefitbackend/vendor/revolution/jquery.themepunch.tools.min.js' %}"></script>
+		<script src="{% static 'ultimatefitbackend/vendor/revolution/jquery.themepunch.revolution.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.slideanims.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.layeranimation.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.navigation.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.kenburn.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.actions.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.parallax.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.migration.min.js' %}"></script>
+
+		<!-- landguage switcher js -->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.polyglot.language.switcher.js' %}"></script>
+		<!-- Fancybox js -->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.fancybox.pack.js' %}"></script>
+		<!-- js count to -->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.appear.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.countTo.js' %}"></script>
+		<!-- WOW js -->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/wow.min.js' %}"></script>
+
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/SmoothScroll.js' %}"></script>
+
+		<script src="{% static 'ultimatefitbackend/js/bootstrap-select.min.js' %}"></script>
+		<script src="{% static 'ultimatefitbackend/js/jquery.mixitup.min.js' %}"></script>
+		<!-- Theme js -->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/theme.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/google-map.js' %}"></script>
+
+
+		</div> <!-- End of .main_page -->
+	</body>
+</html>
