@@ -17,12 +17,14 @@ from time import strftime
 from django.utils.timezone import utc
 from django.core.serializers.json import DjangoJSONEncoder
 
+from carton.cart import Cart
+
 from .models import Food, FoodCategory, Order, Customer, Menu, MenuCategory
 
 # from .utcisoformat import utcisoformat
 
 class IndexView(generic.ListView):
-    template_name = 'ultimatefitbackend/index.html'
+    template_name = 'ultimatefitbackend/base.html'
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
@@ -141,6 +143,17 @@ def food(request, id):
         'food': Food.objects.get(id=id)
     }
     return HttpResponse(template.render(context, request))
+
+
+def add(request):
+    cart = Cart(request.session)
+    food = Food.objects.get(id=request.GET.get('id'))
+    cart.add(food, price=food.price)
+    return HttpResponse("Added")
+
+def show(request):
+    return render(request, 'ultimatefitbackend/show-cart.html')
+
 
 class ShopsingleView(generic.ListView):
     template_name = 'ultimatefitbackend/shop-single.html'

@@ -21,6 +21,10 @@ from .models import Food, FoodCategory, Order, Customer, Menu, MenuCategory
     # list_display = ('name')
     # list_filter = ['pub_date']
     # search_fields = ['question_text']'''
+
+#class FoodAdmin(admin.ModelAdmin):
+#    list_display = ('title', 'price', 'stock')
+
     
 admin.site.register(Food)
 admin.site.register(FoodCategory)

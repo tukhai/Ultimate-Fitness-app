@@ -7,7 +7,7 @@ urlpatterns = [
     # ex: /ultimatefitbackend/
     url(r'^$', views.IndexView.as_view(), name='index'),
     # ex: /ultimatefitbackend/
-    url(r'^index.html/$', views.IndexView.as_view(), name='index'),
+    url(r'^base.html/$', views.IndexView.as_view(), name='index'),
     # ex: /ultimatefitbackend/5/
     url(r'^contact.html/$', views.ContactView.as_view(), name='contact'),
     # ex: /ultimatefitbackend/5/
@@ -27,4 +27,9 @@ urlpatterns = [
     # ex: /ultimatefitbackend/5/
     # url(r'food/(?P<name>[\w]+)$', views.food, name='food'),
     url(r'food/(?P<id>[0-9]+)$', views.food, name='food'),
+    # URL FOR ADD TO CART
+    url(r'^add/(\d+)', views.add, name='add'),  
+    #url(r'^remove/(\d+)', views.remove_from_cart, name='remove_from_cart'),
+    #url(r'^cart/', views.cart, name='cart'),
+    #url(r'^shopping-cart/', include('shopping.urls')),
 ]

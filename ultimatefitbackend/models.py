@@ -36,10 +36,12 @@ class Customer(models.Model):
         return self.name
 
 class Order(models.Model):
-    name = models.CharField(max_length=320)
-    price = models.CharField(max_length=320)
-    order_date = models.DateTimeField('date published')
+    name = models.CharField(max_length=320, null=True, blank=True)
+    #active = models.BooleanField(max_length=320, null=True, blank=True)
+    order_date = models.DateTimeField('date published', null=True, blank=True)
     customer = models.ForeignKey(Customer)
+    payment_type = models.CharField(max_length=100, null=True, blank=True)
+    payment_id = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.name
