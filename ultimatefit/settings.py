@@ -25,7 +25,7 @@ SECRET_KEY = '^aypaf)x48l)2im7&fa+n&3f0v8_lqdb4padz^@9f0x-7hz*#!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ultimatefitapp.azurewebsites.net']
 
 
 # Application definition
