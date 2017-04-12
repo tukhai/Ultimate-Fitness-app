@@ -1,11 +1,12 @@
 from django.http import Http404
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.template import loader
 from django.views import generic
 from django.utils import timezone
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.core import serializers
 import math
@@ -19,7 +20,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 from carton.cart import Cart
 
-from .models import Food, FoodCategory, Order, Customer, Menu, MenuCategory
+from .models import Food, FoodCategory, Order, Customer, Menu, MenuCategory, FoodOrder, Cart
 
 # from .utcisoformat import utcisoformat
 
@@ -137,22 +138,90 @@ class ShopView(generic.ListView):
         return Food.objects.all()
         #return serializers.serialize('python',Food.objects.all())
 
-def food(request, id):
+
+def index(request):
+    return render(request, 'ultimatefitbackend/base.html')
+
+
+def shop(request):
+    '''count = Book.objects.all().count()
+    context = {
+        'count': count,
+    }'''
+
+    foods = Food.objects.all()
+    context_object_name = 'latest_food_list'
+    context = {
+        'foods': foods,
+    }
+    
+    '''if request.user.is_authenticated():
+        request.session['location'] = "Earth"
+    else:
+        request.session['location'] = "unknown" '''
+        
+    return render(request, 'ultimatefitbackend/shop.html', context)
+
+
+def food(request, food_id):
     template = loader.get_template('ultimatefitbackend/food.html')
     context = {
-        'food': Food.objects.get(id=id)
+        'food': Food.objects.get(pk=food_id)
     }
     return HttpResponse(template.render(context, request))
 
 
-def add(request):
-    cart = Cart(request.session)
-    food = Food.objects.get(id=request.GET.get('id'))
-    cart.add(food, price=food.price)
-    return HttpResponse("Added")
+def add_to_cart(request, food_id):
+    if request.user.is_authenticated():
+        try:
+            food = Food.objects.get(pk=food_id)
+        except ObjectDoesNotExist:
+            pass
+        else:
+            try:
+                cart = Cart.objects.get(user=request.user, active=True)
+            except ObjectDoesNotExist:
+                cart = Cart.objects.create(
+                    user=request.user
+                )
+                cart.save()
+            cart.add_to_cart(food_id)
+        return redirect('cart')
+    else:
+        return redirect('index')
 
-def show(request):
-    return render(request, 'ultimatefitbackend/show-cart.html')
+
+def remove_from_cart(request, food_id):
+    if request.user.is_authenticated():
+        try:
+            food = Food.objects.get(pk=food_id)
+        except ObjectDoesNotExist:
+            pass
+        else:
+            cart = Cart.objects.get(user=request.user, active=True)
+            cart.remove_from_cart(food_id)
+        return redirect('cart')
+    else:
+        return redirect('index')
+
+
+def cart(request):
+    if request.user.is_authenticated():
+        cart = Cart.objects.filter(user=request.user.id, active=True)
+        orders = FoodOrder.objects.filter(cart=cart)
+        total = 0
+        count = 0
+        for order in orders:
+            total += (order.food.price * order.quantity)
+            count += order.quantity
+        context = {
+            'cart': orders,
+            'total': total,
+            'count': count,
+        }
+        return render(request, 'ultimatefitbackend/shop-cart.html', context)
+    else:
+        return redirect('index')
 
 
 class ShopsingleView(generic.ListView):

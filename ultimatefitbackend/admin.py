@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Food, FoodCategory, Order, Customer, Menu, MenuCategory
+from .models import Food, FoodCategory, Order, Customer, Menu, MenuCategory, FoodOrder, Cart
 
 
 '''class ChoiceInline(admin.TabularInline):
@@ -22,15 +22,26 @@ from .models import Food, FoodCategory, Order, Customer, Menu, MenuCategory
     # list_filter = ['pub_date']
     # search_fields = ['question_text']'''
 
-#class FoodAdmin(admin.ModelAdmin):
-#    list_display = ('title', 'price', 'stock')
+class FoodAdmin(admin.ModelAdmin):
+    list_display = ('name', 'price', 'stock')
+
+
+class FoodOrderAdmin(admin.ModelAdmin):
+    list_display = ('food', 'cart', 'quantity')
+
+
+class CartAdmin(admin.ModelAdmin):
+    list_display = ('user', 'active', 'order_date')
 
     
-admin.site.register(Food)
+admin.site.register(Food, FoodAdmin)
 admin.site.register(FoodCategory)
 admin.site.register(Order)
 admin.site.register(Customer)
 admin.site.register(Menu)
 admin.site.register(MenuCategory)
+
+admin.site.register(FoodOrder, FoodOrderAdmin)
+admin.site.register(Cart, CartAdmin)
 
 
