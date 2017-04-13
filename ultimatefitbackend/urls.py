@@ -4,31 +4,35 @@ from . import views
 
 app_name = 'ultimatefitbackend'
 urlpatterns = [
-    # ex: /ultimatefitbackend/
+    
     #url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^$', views.index, name='index'),
-    # ex: /ultimatefitbackend/
-    url(r'^base.html/$', views.IndexView.as_view(), name='index'),
-    # ex: /ultimatefitbackend/5/
-    url(r'^contact.html/$', views.ContactView.as_view(), name='contact'),
-    # ex: /ultimatefitbackend/5/
-    url(r'^about-us.html/$', views.AboutView.as_view(), name='about'),
-    # ex: /ultimatefitbackend/5/
-    url(r'^Testimonials.html/$', views.TestimonialsView.as_view(), name='testimonials'),
-    # ex: /ultimatefitbackend/5/
-    url(r'^404.html/$', views.ErrorView.as_view(), name='404'),
-    # ex: /ultimatefitbackend/5/
-    url(r'^faq.html/$', views.faqView.as_view(), name='faq'),
-    # ex: /ultimatefitbackend/5/
-    url(r'^shop.html/$', views.ShopView.as_view(), name='shop'),
+    
+    #url(r'^base.html/$', views.IndexView.as_view(), name='index'),
+    
+    #url(r'^contact.html/$', views.ContactView.as_view(), name='contact'),
+    url(r'^contact/', views.contact, name='contact'),
+    
+    # url(r'^about-us.html/$', views.AboutView.as_view(), name='about'),
+    url(r'^about/', views.about, name='about'),
+    
+    #url(r'^Testimonials.html/$', views.TestimonialsView.as_view(), name='testimonials'),
+    url(r'^testimonials/', views.testimonials, name='testimonials'),    
+    
+    #url(r'^404.html/$', views.ErrorView.as_view(), name='404'),
+    url(r'^error/', views.error, name='error'),
+    
+    #url(r'^faq.html/$', views.faqView.as_view(), name='faq'),
+    url(r'^faq/', views.faq, name='faq'),
+    
+    #url(r'^shop.html/$', views.ShopView.as_view(), name='shop'),
     url(r'^shop/', views.shop, name='shop'),
-    # ex: /ultimatefitbackend/5/
+    
     url(r'^shop-single.html/$', views.ShopsingleView.as_view(), name='shopsingle'),
-    # ex: /ultimatefitbackend/5/
+
+    # URL FOR RETURN JSON
     url(r'^foods-list/$', views.foods_list, name='foods_list'),
-    # ex: /ultimatefitbackend/5/
-    # url(r'food/(?P<name>[\w]+)$', views.food, name='food'),
-    # url(r'food/(?P<id>[0-9]+)$', views.food, name='food'),
+    
     url(r'food/(\d+)', views.food, name='food'),
     # URL FOR ADD TO CART
     url(r'^add/(\d+)', views.add_to_cart, name='add_to_cart'),

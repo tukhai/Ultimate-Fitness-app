@@ -206,8 +206,8 @@
 				<div class="container">
 					<nav class="menuzord pull-left" id="main_menu">
 					   <ul class="menuzord-menu">
-					      <li><a href="index.html">Home</a></li>
-					      <li><a href="about-us.html">About us</a></li>
+					      <li><a href="{% url 'ultimatefitbackend:index' %}">Home</a></li>
+					      <li><a href="{% url 'ultimatefitbackend:about' %}">About us</a></li>
 					      <li class="current_page"><a href="#">store</a>
 					      	<ul class="dropdown">
 					            <li><a href="{% url 'ultimatefitbackend:shop' %}">Shop With Sidebar</a></li>
@@ -235,13 +235,13 @@
 
 					      <li><a href="#">Pages</a>
 					      	<ul class="dropdown">
-					            <li><a href="Testimonials.html">Testimonials</a></li>
-					            <li><a href="404.html">404v page</a></li>
-					            <li><a href="faq.html">FAQ</a></li>
+					            <li><a href="{% url 'ultimatefitbackend:testimonials' %}">Testimonials</a></li>
+					            <li><a href="{% url 'ultimatefitbackend:error' %}">404v page</a></li>
+					            <li><a href="{% url 'ultimatefitbackend:faq' %}">FAQ</a></li>
 					         </ul>
 					      </li>
 					      
-					      <li><a href="contact.html">Contact us</a></li>
+					      <li><a href="{% url 'ultimatefitbackend:contact' %}">Contact us</a></li>
 					   </ul> <!-- End of .menuzord-menu -->
 				   </nav> <!-- End of #main_menu -->
 

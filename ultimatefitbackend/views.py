@@ -41,106 +41,20 @@ class IndexView(generic.ListView):
         ).order_by('description')[:5]
 
 
-class ContactView(generic.ListView):
-    template_name = 'ultimatefitbackend/contact.html'
-    context_object_name = 'latest_question_list'
-
-    def get_queryset(self):
-        """Return the last five published questions."""
-        '''return Question.objects.order_by('-pub_date')[:5]'''
-
-        """
-        Return the last five published questions (not including those set to be
-        published in the future).
-        """
-        return Food.objects.filter(
-            description__lte=timezone.now()
-        ).order_by('description')[:5]
-
-class AboutView(generic.ListView):
-    template_name = 'ultimatefitbackend/about-us.html'
-    context_object_name = 'latest_question_list'
-
-    def get_queryset(self):
-        """Return the last five published questions."""
-        '''return Question.objects.order_by('-pub_date')[:5]'''
-
-        """
-        Return the last five published questions (not including those set to be
-        published in the future).
-        """
-        return Food.objects.filter(
-            description__lte=timezone.now()
-        ).order_by('description')[:5]
-
-class TestimonialsView(generic.ListView):
-    template_name = 'ultimatefitbackend/Testimonials.html'
-    context_object_name = 'latest_question_list'
-
-    def get_queryset(self):
-        """Return the last five published questions."""
-        '''return Question.objects.order_by('-pub_date')[:5]'''
-
-        """
-        Return the last five published questions (not including those set to be
-        published in the future).
-        """
-        return Food.objects.filter(
-            description__lte=timezone.now()
-        ).order_by('description')[:5]
-
-class ErrorView(generic.ListView):
-    template_name = 'ultimatefitbackend/404.html'
-    context_object_name = 'latest_question_list'
-
-    def get_queryset(self):
-        """Return the last five published questions."""
-        '''return Question.objects.order_by('-pub_date')[:5]'''
-
-        """
-        Return the last five published questions (not including those set to be
-        published in the future).
-        """
-        return Food.objects.filter(
-            description__lte=timezone.now()
-        ).order_by('description')[:5]
-
-class faqView(generic.ListView):
-    template_name = 'ultimatefitbackend/faq.html'
-    context_object_name = 'latest_question_list'
-
-    def get_queryset(self):
-        """Return the last five published questions."""
-        '''return Question.objects.order_by('-pub_date')[:5]'''
-
-        """
-        Return the last five published questions (not including those set to be
-        published in the future).
-        """
-        return Food.objects.filter(
-            description__lte=timezone.now()
-        ).order_by('description')[:5]
-
-class ShopView(generic.ListView):
-    model = Food
-    template_name = 'ultimatefitbackend/shop.html'
-    context_object_name = 'latest_food_list'
-
-
-    def get_queryset(self):
-        """Return the last five published questions."""
-        '''return Question.objects.order_by('-pub_date')[:5]'''
-
-        """
-        Return the last five published questions (not including those set to be
-        published in the future).
-        """
-        return Food.objects.all()
-        #return serializers.serialize('python',Food.objects.all())
-
-
 def index(request):
-    return render(request, 'ultimatefitbackend/base.html')
+    return render(request, 'base.html')
+
+
+def contact(request):
+    return render(request, 'ultimatefitbackend/contact.html')
+def about(request):
+    return render(request, 'ultimatefitbackend/about-us.html')
+def testimonials(request):
+    return render(request, 'ultimatefitbackend/Testimonials.html')
+def error(request):
+    return render(request, 'ultimatefitbackend/404.html')
+def faq(request):
+    return render(request, 'ultimatefitbackend/faq.html')
 
 
 def shop(request):
