@@ -103,17 +103,34 @@
 							   				<i class="icon-photo"></i>
 							   			</div>
 							   			<div class="login-info">
-								   			<div class="welcome">Welcome!</div>
-									   		<!-- select menu -->
-									            <form action="#" class="select-form">
+								   			{% if request.user.is_authenticated %}
+						
+												<div class="welcome">Welcome, {% if request.user.first_name %}!
+													{{ request.user.first_name }}
+													{% else %}
+													{{ request.user.username }}
+													{% endif %}
+												</div>
+												<div><a href="{% url 'auth_logout' %}"><b>Log Out</b></a></div>
+												
+											{% else %}
+												<div class="welcome">Welcome!</div>
+												<!-- select menu -->
+									            <form action="#" class="select-form" method="post">
 							                        <div class="g-input f1 mb-30">
-							                            <select class="text-capitalize selectpicker" data-style="g-select" data-width="100%">
-							                                <option value="0" selected="">Sign In</option>
-							                                <option value="1">Sign In</option>
-							                                <option value="2">Register Here</option>
+							                            <select class="text-capitalize selectpicker" data-style="g-select" data-width="100%" id="selectbox" name="" onchange="javascript:location.href = this.value;">
+							                                <option value="#" selected="">Sign In</option>
+							                                <option value="{% url 'auth_login' %}">Sign In</option>
+							                                <option value="{% url 'registration_register' %}">Register Here</option>
 							                            </select>
 							                        </div>
 							                    </form>
+												<script type="text/javascript">
+													window.onload = function(){
+														location.href=document.getElementById("selectbox").value;
+													}       
+												</script>
+											{% endif %}
 								   		</div>
 							   		</div> <!-- End of .cart_list -->
 							    </div>
