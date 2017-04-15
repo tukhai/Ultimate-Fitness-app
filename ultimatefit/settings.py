@@ -131,7 +131,7 @@ STATIC_URL = '/static/'
 # Registration
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
-LOGIN_REDIRECT_URL = '/shop.html/'
+LOGIN_REDIRECT_URL = '/'
 
 # Email settings
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"

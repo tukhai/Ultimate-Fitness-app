@@ -33,7 +33,7 @@ urlpatterns = [
     # URL FOR RETURN JSON
     url(r'^foods-list/$', views.foods_list, name='foods_list'),
     
-    url(r'food/(\d+)', views.food, name='food'),
+    url(r'^food/(\d+)', views.food, name='food'),
     # URL FOR ADD TO CART
     url(r'^add/(\d+)', views.add_to_cart, name='add_to_cart'),
     url(r'^remove/(\d+)', views.remove_from_cart, name='remove_from_cart'),

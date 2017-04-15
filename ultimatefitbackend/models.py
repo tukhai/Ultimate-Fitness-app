@@ -98,30 +98,30 @@ class Cart(models.Model):
     payment_type = models.CharField(max_length=100, null=True)
     payment_id = models.CharField(max_length=100, null=True)
 
-    def add_to_cart(self, book_id):
-        book = Book.objects.get(pk=book_id)
+    def add_to_cart(self, food_id):
+        food = Food.objects.get(pk=food_id)
         try:
-            preexisting_order = BookOrder.objects.get(book=book, cart=self)
+            preexisting_order = FoodOrder.objects.get(food=food, cart=self)
             preexisting_order.quantity += 1
             preexisting_order.save()
-        except BookOrder.DoesNotExist:
-            new_order = BookOrder.objects.create(
-                book=book,
+        except FoodOrder.DoesNotExist:
+            new_order = FoodOrder.objects.create(
+                food=food,
                 cart=self,
                 quantity=1
             )
             new_order.save()
 
-    def remove_from_cart(self, book_id):
-        book = Book.objects.get(pk=book_id)
+    def remove_from_cart(self, food_id):
+        food = Food.objects.get(pk=food_id)
         try:
-            preexisting_order = BookOrder.objects.get(book=book, cart=self)
+            preexisting_order = FoodOrder.objects.get(food=food, cart=self)
             if preexisting_order.quantity > 1:
                 preexisting_order.quantity -= 1
                 preexisting_order.save()
             else:
                 preexisting_order.delete()
-        except BookOrder.DoesNotExist:
+        except FoodOrder.DoesNotExist:
             pass
 
 

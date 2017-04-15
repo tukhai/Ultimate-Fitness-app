@@ -306,15 +306,16 @@
 									<th><span>Avalability</span></th>
 									<th><span>Price</span></th>
 									<th><span>Total</span></th>
-									<th><span>Remove</span></th>
+									<th><span>Add/Remove</span></th>
 								</tr>
 
+								{% for item in cart %}
 									<tr>
 										<td class="flex_item clear_fix">
 											<img src="{% static 'ultimatefitbackend/images/shop/9.png' %}" alt="images" class="float_left">
-											<h6 class="float_left">Turmeric Powder</h6>
+											<h6 class="float_left">{{ item.food.name }}</h6>
 										</td>
-										<td><input type="number" name="quantity" min="0" value="1"></td>
+										<td><input type="number" name="quantity" min="0" value="{{ item.quantity }}"></td>
 										<td>
 											<div class="icon_holder border_round">
 												<i class="fa fa-check"></i>
@@ -323,42 +324,14 @@
 										</td>
 										<td><span>$ 25.99</span></td>
 										<td><span class="color2">$ 25.99</span></td>
-										<td><input type="checkbox" style="vertical-align:-2px;"> <span style="padding-left:7px;">Remove</span></td>
+										<!--<td><input type="checkbox" style="vertical-align:-2px;"> <span style="padding-left:7px;">Remove</span></td>-->
+										<td><span style="padding-left:7px;"><a href="{% url 'ultimatefitbackend:add_to_cart' item.food.id %}">[+]</a> / <a href="{% url 'ultimatefitbackend:remove_from_cart' item.food.id %}">[-]</a></span></td>
 									</tr> <!-- /tr -->
-
-									<tr>
-										<td class="flex_item clear_fix">
-											<img src="{% static 'ultimatefitbackend/images/shop/10.png' %}" alt="images" class="float_left">
-											<h6 class="float_left">Pure Jeans Coffee</h6>
-										</td>
-										<td><input type="number" name="quantity" min="0" value="2"></td>
-										<td>
-											<div class="icon_holder border_round">
-												<i class="fa fa-check"></i>
-											</div>
-											<span class="item">Item(s) <br>Avilable Now</span>
-										</td>
-										<td><span>$ 34.99</span></td>
-										<td><span class="color2">$ 69.98</span></td>
-										<td><input type="checkbox" style="vertical-align:-2px;"> <span style="padding-left:7px;">Remove</span></td>
-									</tr> <!-- /tr -->
-
-									<tr>
-										<td class="flex_item clear_fix">
-											<img src="{% static 'ultimatefitbackend/images/shop/11.png' %}" alt="images" class="float_left">
-											<h6 class="float_left">Columbia Chocolate</h6>
-										</td>
-										<td><input type="number" name="quantity" min="0" value="1"></td>
-										<td>
-											<div class="icon_holder border_round">
-												<i class="fa fa-check"></i>
-											</div>
-											<span class="item">Item(s) <br>Avilable Now</span>
-										</td>
-										<td><span>$ 29.00</span></td>
-										<td><span class="color2">$ 29.00</span></td>
-										<td><input type="checkbox" style="vertical-align:-2px;"> <span style="padding-left:7px;">Remove</span></td>
-									</tr> <!-- /tr -->
+								{% empty %}
+									<div>
+									<tr>There are no items in your cart.</tr>
+									</div>
+								{% endfor %}
 
 							</table>
 						</div> <!-- /table-responsive -->

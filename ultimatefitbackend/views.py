@@ -100,9 +100,9 @@ def add_to_cart(request, food_id):
                 )
                 cart.save()
             cart.add_to_cart(food_id)
-        return redirect('cart')
+        return redirect('ultimatefitbackend:cart')
     else:
-        return redirect('index')
+        return redirect('ultimatefitbackend:index')
 
 
 def remove_from_cart(request, food_id):
@@ -114,9 +114,9 @@ def remove_from_cart(request, food_id):
         else:
             cart = Cart.objects.get(user=request.user, active=True)
             cart.remove_from_cart(food_id)
-        return redirect('cart')
+        return redirect('ultimatefitbackend:cart')
     else:
-        return redirect('index')
+        return redirect('ultimatefitbackend:index')
 
 
 def cart(request):
@@ -135,7 +135,7 @@ def cart(request):
         }
         return render(request, 'ultimatefitbackend/shop-cart.html', context)
     else:
-        return redirect('index')
+        return redirect('ultimatefitbackend:index')
 
 
 class ShopsingleView(generic.ListView):
