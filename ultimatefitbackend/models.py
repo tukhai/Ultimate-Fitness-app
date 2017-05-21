@@ -98,7 +98,7 @@ class Cart(models.Model):
     order_date = models.DateField(null=True)
     payment_type = models.CharField(max_length=100, null=True)
     payment_id = models.CharField(max_length=100, null=True)
-    session_key = models.CharField(max_length=40, null=True, blank=True)
+    # session_key = models.CharField(max_length=40, null=True, blank=True)
 
     class Meta:
         unique_together = ('user', 'session_key',)
