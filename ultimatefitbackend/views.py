@@ -18,6 +18,12 @@ from time import strftime
 from django.utils.timezone import utc
 from django.core.serializers.json import DjangoJSONEncoder
 
+from django.core.urlresolvers import reverse
+
+from django.contrib.sessions.models import Session
+
+from django.core.exceptions import MultipleObjectsReturned
+
 from carton.cart import Cart
 
 from .models import Food, FoodCategory, Order, Customer, Menu, MenuCategory, FoodOrder, Cart
@@ -86,6 +92,9 @@ def food(request, food_id):
 
 
 def add_to_cart(request, food_id):
+
+    #session_id = request.session.session_key
+
     if request.user.is_authenticated():
         try:
             food = Food.objects.get(pk=food_id)
@@ -93,7 +102,10 @@ def add_to_cart(request, food_id):
             pass
         else:
             try:
-                cart = Cart.objects.get(user=request.user, active=True)
+                cart = Cart.objects.get(
+                    user=request.user,
+                    active=True
+                )
             except ObjectDoesNotExist:
                 cart = Cart.objects.create(
                     user=request.user
@@ -101,8 +113,28 @@ def add_to_cart(request, food_id):
                 cart.save()
             cart.add_to_cart(food_id)
         return redirect('ultimatefitbackend:cart')
+        #return render(request, 'ultimatefitbackend/shop.html')
     else:
-        return redirect('ultimatefitbackend:index')
+        # return redirect('ultimatefitbackend:index')
+        try:
+            food = Food.objects.get(pk=food_id)
+        except ObjectDoesNotExist:
+            pass
+        else:
+            request.session.set_expiry(300)
+
+            if 'cart' in request.session:
+                print "cart is exist in session"
+                print request.session['cart']
+                print "END"
+                cart = Cart.objects.get(id=request.session['cart'])
+            else:
+                print "cart id is not in session"
+                cart = Cart.objects.create()
+                request.session['cart'] = cart.id
+                cart.save()
+            cart.add_to_cart(food_id)
+        return redirect('ultimatefitbackend:cart')        
 
 
 def remove_from_cart(request, food_id):
@@ -116,17 +148,111 @@ def remove_from_cart(request, food_id):
             cart.remove_from_cart(food_id)
         return redirect('ultimatefitbackend:cart')
     else:
-        return redirect('ultimatefitbackend:index')
+        # return redirect('ultimatefitbackend:index')
+        try:
+            food = Food.objects.get(pk=food_id)
+        except ObjectDoesNotExist:
+            pass
+        else:
+            request.session.set_expiry(300)
+
+            if 'cart' in request.session:
+                print "cart is exist in session"
+                print request.session['cart']
+                print "END"
+                cart = Cart.objects.get(id=request.session['cart'])
+            cart.remove_from_cart(food_id)
+        return redirect('ultimatefitbackend:cart')
 
 
 def cart(request):
     if request.user.is_authenticated():
-        cart = Cart.objects.filter(user=request.user.id, active=True)
+
+        if 'cart' in request.session:
+            print "cart is exist in session"
+            cart_ano = Cart.objects.get(id=request.session['cart'])
+        else:
+            print "cart id is not in session"
+            cart_ano = None
+        orders_ano = FoodOrder.objects.filter(cart=cart_ano)
+        total_ano = 0
+        count_ano = 0
+        for order_ano in orders_ano:
+            total_ano += (order_ano.food.price * order_ano.quantity)
+            count_ano += order_ano.quantity
+        print 'count_ano is: '
+        print count_ano
+        print 'End'
+
+        cart = Cart.objects.filter(
+            user=request.user.id,
+            active=True
+        )
+        
         orders = FoodOrder.objects.filter(cart=cart)
+
+        foodnames_ano = []
+        for order_ano in orders_ano:
+            foodnames_ano.append(order_ano.food.name)
+        print 'AAAAAAAA'
+        print foodnames_ano
+        print 'AAAAAAAA'
+        
+        foodnames = []
+        for order in orders:
+            foodnames.append(order.food.name)
+        print 'BBBBBBB'
+        print foodnames
+        print 'BBBBBBB'
+
+        # take note: what is order_ano.quantity????
+        for order in orders:
+            if order.food.name in foodnames_ano:
+                order.quantity += order_ano.quantity
+                order.save()
+
+        for order_ano in orders_ano:
+            if not order_ano.food.name in foodnames:
+                order = FoodOrder.objects.create(
+                    cart = Cart.objects.get(
+                        user=request.user.id,
+                        active=True
+                    ),
+                    food = Food.objects.get(name = order_ano.food.name),
+                    quantity = order_ano.quantity
+                )
+                order.save()
+    
+        orders = FoodOrder.objects.filter(cart=cart)
+
         total = 0
         count = 0
         for order in orders:
-            total += (order.food.price * order.quantity)
+            total += ((order.food.price * order.quantity) + total_ano) 
+            count += (order.quantity + count_ano)
+        context = {
+            'cart': orders,
+            'total': total,
+            'count': count,
+        }
+        return render(request, 'ultimatefitbackend/shop-cart.html', context)
+    
+    else:
+        request.session.set_expiry(300)
+
+        if 'cart' in request.session:
+            print "cart is exist in session"
+            cart = Cart.objects.get(id=request.session['cart'])
+        else:
+            print "cart id is not in session"
+            cart = None
+
+        orders = FoodOrder.objects.filter(cart=cart)
+        print orders
+        total = 0
+        count = 0
+        for order in orders:
+            total += (order.food.price * order.quantity) 
             count += order.quantity
         context = {
             'cart': orders,
@@ -134,12 +260,27 @@ def cart(request):
             'count': count,
         }
         return render(request, 'ultimatefitbackend/shop-cart.html', context)
-    else:
-        return redirect('ultimatefitbackend:index')
-
+    
 
 class ShopsingleView(generic.ListView):
     template_name = 'ultimatefitbackend/shop-single.html'
+    context_object_name = 'latest_question_list'
+
+    def get_queryset(self):
+        """Return the last five published questions."""
+        '''return Question.objects.order_by('-pub_date')[:5]'''
+
+        """
+        Return the last five published questions (not including those set to be
+        published in the future).
+        """
+        return Food.objects.filter(
+            description__lte=timezone.now()
+        ).order_by('description')[:5]
+
+
+class CheckoutView(generic.ListView):
+    template_name = 'ultimatefitbackend/checkout.html'
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):

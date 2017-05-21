@@ -141,3 +141,7 @@ EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", '')
 EMAIL_PORT = os.environ.get("EMAIL_PORT", '')
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = "ntu.theanh@yahoo.com"
+
+# Session expire
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 5 * 60

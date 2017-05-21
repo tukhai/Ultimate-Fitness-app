@@ -30,12 +30,15 @@ urlpatterns = [
     
     url(r'^shop-single.html/$', views.ShopsingleView.as_view(), name='shopsingle'),
 
+    url(r'^checkout.html/$', views.CheckoutView.as_view(), name='checkout'),
+
     # URL FOR RETURN JSON
     url(r'^foods-list/$', views.foods_list, name='foods_list'),
     
     url(r'^food/(\d+)', views.food, name='food'),
     # URL FOR ADD TO CART
     url(r'^add/(\d+)', views.add_to_cart, name='add_to_cart'),
+    #url(r'^add/[\d+]', views.add_to_cart, name='add_to_cart'),
     url(r'^remove/(\d+)', views.remove_from_cart, name='remove_from_cart'),
     url(r'^cart/', views.cart, name='cart'),
     #url(r'^remove/(\d+)', views.remove_from_cart, name='remove_from_cart'),
