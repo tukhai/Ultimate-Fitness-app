@@ -92,16 +92,16 @@ class Food(models.Model):
 
 
 class Cart(models.Model):
-    # user = models.ForeignKey(User, null=True, blank=True)
-    user = models.OneToOneField(User, blank=True, null=True, related_name='cart')
+    user = models.ForeignKey(User, null=True, blank=True)
+    # user = models.OneToOneField(User, blank=True, null=True, related_name='cart')
     active = models.BooleanField(default=True)
     order_date = models.DateField(null=True)
     payment_type = models.CharField(max_length=100, null=True)
     payment_id = models.CharField(max_length=100, null=True)
     # session_key = models.CharField(max_length=40, null=True, blank=True)
 
-    class Meta:
-        unique_together = ('user', 'session_key',)
+    '''class Meta:
+        unique_together = ('user', 'session_key',)'''
 
     def add_to_cart(self, food_id):
         food = Food.objects.get(pk=food_id)
