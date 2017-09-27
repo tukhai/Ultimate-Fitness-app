@@ -24,7 +24,7 @@ from django.contrib.sessions.models import Session
 
 from django.core.exceptions import MultipleObjectsReturned
 
-from carton.cart import Cart
+#from carton.cart import Cart
 
 from .models import Food, FoodCategory, Order, Customer, Menu, MenuCategory, FoodOrder, Cart
 
@@ -121,7 +121,7 @@ def add_to_cart(request, food_id):
         except ObjectDoesNotExist:
             pass
         else:
-            request.session.set_expiry(300)
+            #request.session.set_expiry(300)
 
             if 'cart' in request.session:
                 print "cart is exist in session"
@@ -154,7 +154,7 @@ def remove_from_cart(request, food_id):
         except ObjectDoesNotExist:
             pass
         else:
-            request.session.set_expiry(300)
+            #request.session.set_expiry(300)
 
             if 'cart' in request.session:
                 print "cart is exist in session"
@@ -168,12 +168,27 @@ def remove_from_cart(request, food_id):
 def cart(request):
     if request.user.is_authenticated():
 
+        # Create cart_ano object in session for anonymous use
+
+        # Although this code works, the code arrangement MAY BE not correct logically
+        # because all the action for anonymous cart suppose to be only in the case
+        # when there's anonymous cart exist in session;
+        # For this code, the empty cart_ano in the case when no anonymous cart in
+        # session would still be added, minus, etc
+
+        # However, to a certain extend, the logical still ok
+
+        # We would TRY to arrange this code to be logically better, but it's not too important
+        # if the code run ok
         if 'cart' in request.session:
             print "cart is exist in session"
+            print request.session
             cart_ano = Cart.objects.get(id=request.session['cart'])
         else:
             print "cart id is not in session"
             cart_ano = None
+        ###########################################################
+
         orders_ano = FoodOrder.objects.filter(cart=cart_ano)
         total_ano = 0
         count_ano = 0
@@ -206,11 +221,13 @@ def cart(request):
         print 'BBBBBBB'
 
         # take note: what is order_ano.quantity????
+        # Add the quantity to the existing object in user cart
         for order in orders:
             if order.food.name in foodnames_ano:
                 order.quantity += order_ano.quantity
                 order.save()
 
+        # When the object exist in anonymous cart, but not in user cart, so have create first
         for order_ano in orders_ano:
             if not order_ano.food.name in foodnames:
                 order = FoodOrder.objects.create(
@@ -223,7 +240,7 @@ def cart(request):
                 )
                 order.save()
     
-        orders = FoodOrder.objects.filter(cart=cart)
+        #orders = FoodOrder.objects.filter(cart=cart)
 
         total = 0
         count = 0
@@ -235,6 +252,9 @@ def cart(request):
             'total': total,
             'count': count,
         }
+        if 'cart' in request.session:
+            del request.session['cart']
+
         return render(request, 'ultimatefitbackend/shop-cart.html', context)
     
     else:
