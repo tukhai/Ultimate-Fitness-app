@@ -253,7 +253,7 @@ def cart(request):
                 )
                 order.save()                        
     
-        orders.update()
+        orders.update() # Just update orders, no need to do the 2nd query
         # Pull data from db again to have the most updated orders
         # orders = FoodOrder.objects.filter(cart=cart)        
 
@@ -269,7 +269,18 @@ def cart(request):
             'total': total,
             'count': count,
         }
+
+        # When logged in and go to cart page, after add anonymous cart into user's cart,
+        # we should delete the redundant anonymous cart in the db and the cart id in session
         if 'cart' in request.session:
+
+            print 'anonymous cart id is:'
+            print request.session['cart']
+
+            # delete the anonymous cart in the db based on the cart.id value saved in session
+            Cart.objects.filter(id=request.session['cart']).delete()
+
+            # delete the session to free the session, prevent redundant stuff
             del request.session['cart']
 
         return render(request, 'ultimatefitbackend/shop-cart.html', context)
