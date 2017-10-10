@@ -47,7 +47,7 @@ class IndexView(generic.ListView):
         ).order_by('description')[:5]
 
 
-def index(request):
+def index(request):                    
     return render(request, 'base.html')
 
 
@@ -166,7 +166,7 @@ def remove_from_cart(request, food_id):
 
 
 def cart(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated():        
 
         # Create cart_ano object in session for anonymous use
 
@@ -182,8 +182,20 @@ def cart(request):
         # if the code run ok
         if 'cart' in request.session:
             print "cart is exist in session"
-            print request.session
+            print request.session            
             cart_ano = Cart.objects.get(id=request.session['cart'])
+            try:
+                cart = Cart.objects.get(
+                    user=request.user,
+                    active=True
+                )
+            except ObjectDoesNotExist:
+                cart = Cart.objects.create(
+                    user=request.user
+                )
+                cart.save()
+            print 'finish create new cart object for user'
+            print cart                        
         else:
             print "cart id is not in session"
             cart_ano = None
@@ -202,9 +214,11 @@ def cart(request):
         cart = Cart.objects.filter(
             user=request.user.id,
             active=True
-        )
-        
+        )        
+
         orders = FoodOrder.objects.filter(cart=cart)
+        print 'orders 1 are ...'
+        print orders        
 
         foodnames_ano = []
         for order_ano in orders_ano:
@@ -218,16 +232,15 @@ def cart(request):
             foodnames.append(order.food.name)
         print 'BBBBBBB'
         print foodnames
-        print 'BBBBBBB'
+        print 'BBBBBBB'                
 
-        # take note: what is order_ano.quantity????
         # Add the quantity to the existing object in user cart
         for order in orders:
             if order.food.name in foodnames_ano:
                 order.quantity += order_ano.quantity
-                order.save()
+                order.save()                
 
-        # When the object exist in anonymous cart, but not in user cart, so have create first
+        # When the object exist in anonymous cart, but not in user cart, so have to create the foodorder object first
         for order_ano in orders_ano:
             if not order_ano.food.name in foodnames:
                 order = FoodOrder.objects.create(
@@ -238,15 +251,19 @@ def cart(request):
                     food = Food.objects.get(name = order_ano.food.name),
                     quantity = order_ano.quantity
                 )
-                order.save()
+                order.save()                        
     
-        #orders = FoodOrder.objects.filter(cart=cart)
+        orders.update()
+        # Pull data from db again to have the most updated orders
+        # orders = FoodOrder.objects.filter(cart=cart)        
 
         total = 0
         count = 0
         for order in orders:
             total += ((order.food.price * order.quantity) + total_ano) 
             count += (order.quantity + count_ano)
+        print 'orders 2 are ...'
+        print orders
         context = {
             'cart': orders,
             'total': total,
