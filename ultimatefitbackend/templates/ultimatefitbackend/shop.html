@@ -25,6 +25,11 @@
 		<link rel="icon" type="image/png" sizes="16x16" href="{% static 'ultimatefitbackend/images/fav-icon/favicon-16x16.png' %}">
 
 
+		<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 		<!-- Custom Css -->
 		<link rel="stylesheet" type="text/css" href="{% static 'ultimatefitbackend/css/style.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'ultimatefitbackend/css/responsive.css' %}">
@@ -1086,7 +1091,7 @@
 						[
 							{   
 								title: 'Curry Chicken Wrap',
-								start: '2017-03-10',
+								start: '2017-10-03',
 								description: '<img src="http://static.foodmatters.me/images/food/131126-379z%20Curry%20Chicken%20Wrap.jpg" style="width:130px;height:90px;float:left;">'
 							},
 							/*{   
@@ -1102,6 +1107,13 @@
 								description: '<a href="#openModal-{{food.name}}" class="btnAdd-{{food.name}}">{{food.description}}</a>'
 							},
 							{% endfor %}
+							/*{% for food in foods %}
+							{
+								title: '{{food.name}}',
+								start: '{{food.convertdate}}',
+								description: '<a href="#my_modal" data-toggle="modal" data-book-id="{{food.id}}" class="btnAdd-{{food.name}}">{{food.description}}</a>'
+							},
+							{% endfor %}*/
 							{% endautoescape %}
 						],
 
@@ -1132,13 +1144,56 @@
 				<div id="openModal-{{food.name}}" class="modalDialog">
 					<div style="overflow:hidden">
 						<a href="#close" title="Close" class="close">X</a>
-						<iframe width="100%" scrolling="no" frameborder="0" src="{% url 'ultimatefitbackend:food' food.id %}" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>
-						<!--could replace iframe with the real simple product detail with add to cart, but have to make it short, in case this page maybe to long, can consider manual/auto delete data after a time-->
+						<iframe width="100%" scrolling="no" frameborder="0" src="{% url 'ultimatefitbackend:food' food.id %}" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>						
 					</div>
 				</div>
 			</div>
 		{% endfor %}
-		{% endautoescape %}
+		<!--could replace iframe with the real simple product detail with add to cart, but have to make it short, in case this page maybe to long, can consider manual/auto delete data after a time-->
+		
+		<!--<div class="modal__inner">
+			<div id="my_modal" class="modalDialog">
+				<div style="overflow:hidden">
+					<a href="#close" title="Close" class="close">X</a>
+					<iframe width="100%" scrolling="no" frameborder="0" src="" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>					
+				</div>
+			</div>
+		</div>-->
+
+		<!--<div class="modal" id="my_modal">
+		    <div class="modal-dialog">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		            <h4 class="modal-title">Modal header</h4>
+		        </div>
+		        <div class="modal-body">
+		          <p>some content</p>
+		          <input type="text" name="bookId" value=""/>
+		        </div>
+
+		        <div style="overflow:hidden">
+					<iframe width="100%" scrolling="no" frameborder="0" src="" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>					
+				</div>
+
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		</div>
+
+		<script>
+		    $(document).on('show.bs.modal', '#my_modal', function(e) {
+		        console.log("HII");
+		        var bookId = $(e.relatedTarget).data('book-id');
+		        //$(e.currentTarget).find('input[name="bookId"]').val(bookId);
+		        $(e.currentTarget).find('h4[class="modal-title"]').html(bookId);
+		        console.log(typeof(bookId.toString()));
+		        $(e.currentTarget).find('iframe').attr("src", "{% url 'ultimatefitbackend:food' 1 %}");
+		    });  
+		</script>-->	
+		{% endautoescape %}		
 		
 		</div> <!-- End of .main_page -->
 		{% endblock %}

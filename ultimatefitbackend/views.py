@@ -135,6 +135,7 @@ def add_to_cart(request, food_id):
                 cart.save()
             cart.add_to_cart(food_id)
         return redirect('ultimatefitbackend:cart')        
+        #return redirect('ultimatefitbackend:food food.id')        
 
 
 def remove_from_cart(request, food_id):
