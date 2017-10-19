@@ -44,6 +44,9 @@
 		
 		<!--CSS for modal box-->
 		<style>
+			body ::-webkit-scrollbar {
+			    width: 0px !important;
+			}
 			.modal__inner {
 			    position: absolute;
 			}
@@ -119,7 +122,7 @@
 				box-shadow: 1px 1px 3px #000;
 			}
 
-			.close:hover { background: #00d9ff; }
+			.close:hover { background: #00d9ff; }			
 		</style>
 		
 		<!--Full Calendar links-->
@@ -1100,20 +1103,20 @@
 								imageurl: 'http://www.athenaspizzaamherst.com/wp-content/uploads/2013/05/front-1-1008x500.jpg'
 							},*/
 							{% autoescape off %}
-							{% for food in foods %}
+							/*{% for food in foods %}
 							{
 								title: '{{food.name}}',
 								start: '{{food.convertdate}}',
 								description: '<a href="#openModal-{{food.name}}" class="btnAdd-{{food.name}}">{{food.description}}</a>'
 							},
-							{% endfor %}
-							/*{% for food in foods %}
+							{% endfor %}*/
+							{% for food in foods %}
 							{
 								title: '{{food.name}}',
 								start: '{{food.convertdate}}',
-								description: '<a href="#my_modal" data-toggle="modal" data-book-id="{{food.id}}" class="btnAdd-{{food.name}}">{{food.description}}</a>'
+								description: '<a href="#my_modal" data-toggle="modal" data-food-id="{{food.name}}" data-modal-id="{% url 'ultimatefitbackend:food' food.id %}" class="btnAdd-{{food.name}}">{{food.description}}</a>'
 							},
-							{% endfor %}*/
+							{% endfor %}
 							{% endautoescape %}
 						],
 
@@ -1139,7 +1142,7 @@
 		</script>
 		
 		{% autoescape off %}
-		{% for food in foods %}
+		<!--{% for food in foods %}
 			<div class="modal__inner">
 				<div id="openModal-{{food.name}}" class="modalDialog">
 					<div style="overflow:hidden">
@@ -1148,11 +1151,11 @@
 					</div>
 				</div>
 			</div>
-		{% endfor %}
+		{% endfor %}-->
 		<!--could replace iframe with the real simple product detail with add to cart, but have to make it short, in case this page maybe to long, can consider manual/auto delete data after a time-->
 		
-		<!--<div class="modal__inner">
-			<div id="my_modal" class="modalDialog">
+		<!--<div class="modal__inner" id="my_modal">
+			<div class="modalDialog">
 				<div style="overflow:hidden">
 					<a href="#close" title="Close" class="close">X</a>
 					<iframe width="100%" scrolling="no" frameborder="0" src="" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>					
@@ -1160,39 +1163,42 @@
 			</div>
 		</div>-->
 
-		<!--<div class="modal" id="my_modal">
-		    <div class="modal-dialog">
-		      <div class="modal-content">
-		        <div class="modal-header">
-		          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		            <h4 class="modal-title">Modal header</h4>
-		        </div>
-		        <div class="modal-body">
-		          <p>some content</p>
-		          <input type="text" name="bookId" value=""/>
-		        </div>
+		<div class="modal" id="my_modal" style="">
+		    <div class="modal-dialog" style="width: 90%;">		    	
+			    <div class="modal-content">
+			        <div class="modal-header">
+			            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			            <h4 class="modal-title">Modal header</h4>
 
-		        <div style="overflow:hidden">
-					<iframe width="100%" scrolling="no" frameborder="0" src="" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>					
-				</div>
+			            <div>			        	
+							<iframe width="100%" scrolling="no" frameborder="0" src="" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>					
+						</div>
+			        </div>
 
-		        <div class="modal-footer">
-		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        </div>
-		      </div>
+			        				
+
+			        <!--<div class="modal-footer">
+			            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        </div>-->
+			    </div>
 		    </div>
 		</div>
 
 		<script>
 		    $(document).on('show.bs.modal', '#my_modal', function(e) {
 		        console.log("HII");
-		        var bookId = $(e.relatedTarget).data('book-id');
-		        //$(e.currentTarget).find('input[name="bookId"]').val(bookId);
-		        $(e.currentTarget).find('h4[class="modal-title"]').html(bookId);
-		        console.log(typeof(bookId.toString()));
-		        $(e.currentTarget).find('iframe').attr("src", "{% url 'ultimatefitbackend:food' 1 %}");
-		    });  
-		</script>-->	
+		        var foodId = $(e.relatedTarget).data('food-id');		        
+		        $(e.currentTarget).find('h4[class="modal-title"]').html(foodId);
+		        console.log(foodId);
+		        console.log(typeof(foodId.toString()));
+
+		        var modalId = $(e.relatedTarget).data('modal-id');
+		        $(e.currentTarget).find('iframe').attr("src", modalId);
+		    });
+		    $(document).on('hidden.bs.modal', '#my_modal', function (e) {
+			    
+			});  
+		</script>
 		{% endautoescape %}		
 		
 		</div> <!-- End of .main_page -->
