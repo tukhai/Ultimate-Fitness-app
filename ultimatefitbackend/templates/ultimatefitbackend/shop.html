@@ -47,6 +47,19 @@
 			body ::-webkit-scrollbar {
 			    width: 0px !important;
 			}
+			.popUpMessage {
+				border-style: solid;
+				border-color: #eaeaea;
+				border-radius: 3px;
+				border-width: 1px;
+				background-color: white;
+				width: 400px;
+				box-shadow: 2px 2px 1px #d8d8d8;
+				margin-bottom: 10px;
+			}
+			.popUpMessage p {
+				margin-left: 10px;
+			}
 			.modal__inner {
 			    position: absolute;
 			}
@@ -138,10 +151,74 @@
 	
 		{% block content %}
 		<div class="main_page">
+			<div id="test" style="position: fixed; margin-top: 10%; margin-left: 10%; z-index: 10000;">
+				
+			</div>
 
+			<!-- Menu ******************************* -->
+			<div class="theme_menu color1_bg" style="position: fixed; width: 100%; z-index: 10;">
+				<div class="container">
+					<nav class="menuzord pull-left" id="main_menu">
+					   <ul class="menuzord-menu">
+					      <li><a href="{% url 'ultimatefitbackend:index' %}">Home</a></li>
+					      <li><a href="{% url 'ultimatefitbackend:about' %}">About us</a></li>
+					      <li class="current_page"><a href="#">store</a>
+					      	<ul class="dropdown">
+					            <li><a href="{% url 'ultimatefitbackend:shop' %}">Shop With Sidebar</a></li>
+					            <li><a href="shop-single.html">Product Detail</a></li>
+					            <li><a href="{% url 'ultimatefitbackend:cart' %}">Cart Page</a></li>
+					            <li><a href="checkout.html">Checkout Page</a></li>
+					            <li><a href="account.html">My Account</a></li>
+					         </ul>
+					      </li>
+					      <li>
+					      	<a href="{% url 'ultimatefitbackend:cart' %}">My Cart</a>
+					      </li>
+					      <li><a href="#">News</a>
+					      	<ul class="dropdown">
+					            <li><a href="blog-Standard.html">News Standard</a></li>
+					            <li><a href="blog-list-sidebar.html">News With Sidebar</a></li>
+					            <li><a href="blog-grid.html">News Masonary</a></li>
+					            <li><a href="blog-details.html">News Single</a></li>
+					         </ul>
+					      </li>
+					      <li><a href="#">gallery</a>
+					      	<ul class="dropdown">
+					            <li><a href="gallery-grid.html">Gallery Grid</a></li>
+                                <li><a href="gallery-masonry.html">Gallery Masonary</a></li>
+                                <li><a href="gallery-single.html">Gallery Single</a></li>
+					         </ul>
+					      </li>
+
+					      <li><a href="#">Pages</a>
+					      	<ul class="dropdown">
+					            <li><a href="{% url 'ultimatefitbackend:testimonials' %}">Testimonials</a></li>
+					            <li><a href="{% url 'ultimatefitbackend:error' %}">404v page</a></li>
+					            <li><a href="{% url 'ultimatefitbackend:faq' %}">FAQ</a></li>
+					         </ul>
+					      </li>
+					      
+					      <li><a href="{% url 'ultimatefitbackend:contact' %}">Contact us</a></li>
+					      
+					   </ul> <!-- End of .menuzord-menu -->
+				   </nav> <!-- End of #main_menu -->
+
+
+				   <!-- ******* Cart And Search Option ******** -->
+				   <div class="nav_side_content pull-right">
+				   		<ul class="icon_header">
+							<li class="border_round tran3s"><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li class="border_round tran3s"><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li class="border_round tran3s"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							<li class="border_round tran3s"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+						</ul>
+				   </div> <!-- End of .nav_side_content -->
+				     
+			   </div> <!-- End of .conatiner -->
+			</div> <!-- End of .theme_menu -->
 
 			<!-- Header *******************************  -->
-			<header>
+			<header style="margin-top: 70px;">
 				<div class="top_header">
 					<div class="container">
 						<div class="pull-left header_left">
@@ -312,10 +389,8 @@
 
 
 
-
-
 			<!-- Menu ******************************* -->
-			<div class="theme_menu color1_bg">
+			<!--<div class="theme_menu color1_bg">
 				<div class="container">
 					<nav class="menuzord pull-left" id="main_menu">
 					   <ul class="menuzord-menu">
@@ -356,11 +431,11 @@
 					      
 					      <li><a href="{% url 'ultimatefitbackend:contact' %}">Contact us</a></li>
 					   </ul> <!-- End of .menuzord-menu -->
-				   </nav> <!-- End of #main_menu -->
+				   <!--</nav> <!-- End of #main_menu -->
 
 
 				   <!-- ******* Cart And Search Option ******** -->
-				   <div class="nav_side_content pull-right">
+				   <!--<div class="nav_side_content pull-right">
 				   		<ul class="icon_header">
 							<li class="border_round tran3s"><a href="#"><i class="fa fa-facebook"></i></a></li>
 							<li class="border_round tran3s"><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -369,8 +444,8 @@
 						</ul>
 				   </div> <!-- End of .nav_side_content -->
 				     
-			   </div> <!-- End of .conatiner -->
-			</div> <!-- End of .theme_menu -->
+			   <!--</div> <!-- End of .conatiner -->
+			<!--</div> <!-- End of .theme_menu -->
 
 
 			<section class="breadcrumb-area" style="background-image:url({% static 'ultimatefitbackend/images/background/2.jpg' %});">
@@ -1164,7 +1239,7 @@
 		</div>-->
 
 		<div class="modal" id="my_modal" style="">
-		    <div class="modal-dialog" style="width: 90%;">		    	
+		    <div class="modal-dialog" style="width: 76%;">		    	
 			    <div class="modal-content">
 			        <div class="modal-header">
 			            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -1173,10 +1248,7 @@
 			            <div>			        	
 							<iframe width="100%" scrolling="no" frameborder="0" src="" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>					
 						</div>
-			        </div>
-
-			        				
-
+			        </div>			        				
 			        <!--<div class="modal-footer">
 			            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			        </div>-->
@@ -1197,7 +1269,7 @@
 		    });
 		    $(document).on('hidden.bs.modal', '#my_modal', function (e) {
 			    
-			});  
+			});
 		</script>
 		{% endautoescape %}		
 		

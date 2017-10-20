@@ -85,8 +85,39 @@ def shop(request):
 
 def food(request, food_id):
     template = loader.get_template('ultimatefitbackend/food.html')
+    if request.user.is_authenticated():
+        cart = Cart.objects.get(
+            user=request.user,
+            active=True
+        );
+        orders = FoodOrder.objects.filter(cart=cart, food=food_id)
+        try:
+            quantityInCart = orders[0].quantity
+        except IndexError:
+            quantityInCart = 0
+    else:
+        if 'cart' in request.session:
+            print "cart is exist in session"
+            cart = Cart.objects.get(id=request.session['cart'])
+        else:
+            print "cart id is not in session"
+            cart = None
+
+        # filter to see in this cart, that food of this food_id has what quantity
+        orders = FoodOrder.objects.filter(cart=cart, food=food_id)
+        print "print quantity of this food in this person's cart"
+
+        # IndexError to catch when orders query set is empty
+        try:
+            quantityInCart = orders[0].quantity
+        except IndexError:
+            quantityInCart = 0
+        
+        print quantityInCart
+
     context = {
-        'food': Food.objects.get(pk=food_id)
+        'food': Food.objects.get(pk=food_id),
+        'quantityInThisCart': quantityInCart
     }
     return HttpResponse(template.render(context, request))
 
