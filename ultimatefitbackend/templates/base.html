@@ -60,9 +60,9 @@
 					            <li><a href="account.html">My Account</a></li>
 					         </ul>
 					      </li>
-					      <li>
+					      <!--<li>
 					      	<a href="{% url 'ultimatefitbackend:cart' %}">My Cart</a>
-					      </li>
+					      </li>-->
 					      <li><a href="#">News</a>
 					      	<ul class="dropdown">
 					            <li><a href="blog-Standard.html">News Standard</a></li>
@@ -87,19 +87,70 @@
 					         </ul>
 					      </li>
 					      
-					      <li><a href="{% url 'ultimatefitbackend:contact' %}">Contact us</a></li>
+					      <li style="margin-right: 7vw;">
+					      	<a href="{% url 'ultimatefitbackend:contact' %}">Contact us</a>
+					      </li>
+					      <!--<li>
+					      	<a href="{% url 'ultimatefitbackend:cart' %}">My Cart</a>
+					      </li>-->
+					      <li>
+					      	<a>
+						      	<button class="cart tran3s dropdown-toggle" id="cartDropdown">
+						      		<i class="fa icon-icon-32846" aria-hidden="true" style="font-size: 130%;"></i>
+						      		<!--<span class="s_color_bg p_color" style="font-size: 80%; margin-bottom: -50px !important; position: auto;">2</span>-->
+						      		<span>My Cart</span>
+						      	</button>						      	
+					        </a>
+					      </li>
+					      <li class="pull-right">
+					      	{% if request.user.is_authenticated %}
+						      	<a>
+						      		<span style="text-transform: lowercase;">
+						      			<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i> 
+						      			{% if request.user.first_name %}!
+										{{ request.user.first_name }}
+										{% else %}
+										{{ request.user.username }}
+										{% endif %}
+									</span>
+						        </a>
+						        <ul class="dropdown">
+						            <li><a href="{% url 'auth_logout' %}">Log Out</a></li>
+						         </ul>
+					        {% else %}
+					        	<!--<a>
+						      		<button>
+							      		<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i>
+							      		<span>Sign In</span>							      		
+						      		</button>
+						      		<span><ul class="dropdown">
+							            <li><a href="{% url 'auth_login' %}">Sign In</a></li>
+							            <li><a href="{% url 'registration_register' %}">Register Here</a></li>
+							        </ul></span>
+						        </a>-->
+						        <a>
+						        	<span style="text-transform: capitalize;">
+						        		<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i> Sign In
+						        	</span>
+						        </a>
+						        <ul class="dropdown">
+						            <li><a href="{% url 'auth_login' %}">Sign In</a></li>
+						            <li><a href="{% url 'registration_register' %}">Register Here</a></li>
+						        </ul>
+					        {% endif %}
+					      </li>
 					   </ul> <!-- End of .menuzord-menu -->
 				   </nav> <!-- End of #main_menu -->
 
 
 				   <!-- ******* Cart And Search Option ******** -->
 				   <div class="nav_side_content pull-right">
-				   		<ul class="icon_header">
+				   		<!--<ul class="icon_header">
 							<li class="border_round tran3s"><a href="#"><i class="fa fa-facebook"></i></a></li>
 							<li class="border_round tran3s"><a href="#"><i class="fa fa-twitter"></i></a></li>
 							<li class="border_round tran3s"><a href="#"><i class="fa fa-google-plus"></i></a></li>
 							<li class="border_round tran3s"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-						</ul>
+						</ul>-->						
 				   </div> <!-- End of .nav_side_content -->
 				     
 			   </div> <!-- End of .conatiner -->
