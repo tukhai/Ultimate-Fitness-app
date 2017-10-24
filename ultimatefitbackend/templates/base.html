@@ -37,6 +37,28 @@
 			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 			<script src="vendor/html5shiv.js"></script>
 		<![endif]-->
+		<style>
+			.distance-between-left-right {
+				margin-right: 90px;
+			}
+			.main-navbar {
+				position: fixed; 
+				width: 100%; 
+				z-index: 10;
+				zoom: 0.8; /* Old IE only */
+			    /*-moz-transform: scale(0.8);
+			    -webkit-transform: scale(0.8);
+			    transform: scale(0.8);*/			    
+			}
+			.list-news {
+				display: none !important;
+			}
+			@media (min-width: 992px) and (max-width: 1159px) {				
+				.distance-between-left-right {
+					margin-right: 0px;
+				}
+			}
+		</style>
 	</head>
 
 
@@ -45,7 +67,7 @@
 		<div class="main_page">
 
 			<!-- Menu ******************************* -->
-			<div class="theme_menu color1_bg" style="position: fixed; width: 100%; z-index: 10; white-space: nowrap;">
+			<div class="theme_menu color1_bg main-navbar">
 				<div class="container">
 					<nav class="menuzord pull-left" id="main_menu">
 					   <ul class="menuzord-menu">
@@ -63,7 +85,7 @@
 					      <!--<li>
 					      	<a href="{% url 'ultimatefitbackend:cart' %}">My Cart</a>
 					      </li>-->
-					      <li><a href="#">News</a>
+					      <li class="list-news"><a href="#">News</a>
 					      	<ul class="dropdown">
 					            <li><a href="blog-Standard.html">News Standard</a></li>
 					            <li><a href="blog-list-sidebar.html">News With Sidebar</a></li>
@@ -87,7 +109,7 @@
 					         </ul>
 					      </li>
 					      
-					      <li style="margin-right: 7vw;">
+					      <li class="distance-between-left-right">
 					      	<a href="{% url 'ultimatefitbackend:contact' %}">Contact us</a>
 					      </li>
 					      <!--<li>
@@ -157,7 +179,7 @@
 			</div> <!-- End of .theme_menu -->
 
 			<!-- Header *******************************  -->
-			<header style="margin-top: 70px;">
+			<header style="margin-top: 56px;">
 				<div class="top_header">
 					<div class="container">
 						<div class="pull-left header_left">
