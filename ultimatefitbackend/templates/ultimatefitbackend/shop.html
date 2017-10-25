@@ -135,7 +135,29 @@
 				box-shadow: 1px 1px 3px #000;
 			}
 
-			.close:hover { background: #00d9ff; }			
+			.close:hover { background: #00d9ff; }
+
+			/*for navbar*/
+			.distance-between-left-right {
+				margin-right: 200px;
+			}
+			.main-navbar {
+				position: fixed; 
+				width: 100%; 
+				z-index: 10;
+				zoom: 0.8; /* Old IE only */
+			    /*-moz-transform: scale(0.8);
+			    -webkit-transform: scale(0.8);
+			    transform: scale(0.8);*/			    
+			}
+			.list-news {
+				display: none !important;
+			}
+			@media (min-width: 992px) and (max-width: 1159px) {				
+				.distance-between-left-right {
+					margin-right: 0px;
+				}
+			}
 		</style>
 		
 		<!--Full Calendar links-->
@@ -156,7 +178,7 @@
 			</div>
 
 			<!-- Menu ******************************* -->
-			<div class="theme_menu color1_bg" style="position: fixed; width: 100%; z-index: 10;">
+			<div class="theme_menu color1_bg main-navbar" style="position: fixed; width: 100%; z-index: 10;">
 				<div class="container">
 					<nav class="menuzord pull-left" id="main_menu">
 					   <ul class="menuzord-menu">
@@ -174,14 +196,14 @@
 					      <!--<li>
 					      	<a href="{% url 'ultimatefitbackend:cart' %}">My Cart</a>
 					      </li>-->
-					      <li><a href="#">News</a>
+					      <!--<li><a href="#">News</a>
 					      	<ul class="dropdown">
 					            <li><a href="blog-Standard.html">News Standard</a></li>
 					            <li><a href="blog-list-sidebar.html">News With Sidebar</a></li>
 					            <li><a href="blog-grid.html">News Masonary</a></li>
 					            <li><a href="blog-details.html">News Single</a></li>
 					         </ul>
-					      </li>
+					      </li>-->
 					      <li><a href="#">gallery</a>
 					      	<ul class="dropdown">
 					            <li><a href="gallery-grid.html">Gallery Grid</a></li>
@@ -190,35 +212,84 @@
 					         </ul>
 					      </li>
 
-					      <li><a href="#">Pages</a>
+					      <!--<li><a href="#">Pages</a>
 					      	<ul class="dropdown">
 					            <li><a href="{% url 'ultimatefitbackend:testimonials' %}">Testimonials</a></li>
 					            <li><a href="{% url 'ultimatefitbackend:error' %}">404v page</a></li>
 					            <li><a href="{% url 'ultimatefitbackend:faq' %}">FAQ</a></li>
 					         </ul>
+					      </li>-->
+					      
+					      <li class="distance-between-left-right">
+					      	<a href="{% url 'ultimatefitbackend:contact' %}">Contact us</a>
 					      </li>
-					      
-					      <li><a href="{% url 'ultimatefitbackend:contact' %}">Contact us</a></li>
-					      
+					      <li>
+					      	<a>
+						      	<button class="cart tran3s dropdown-toggle" id="cartDropdown">
+						      		<i class="fa icon-icon-32846" aria-hidden="true" style="font-size: 130%;"></i>
+						      		<!--<span class="s_color_bg p_color" style="font-size: 80%; margin-bottom: -50px !important; position: auto;">2</span>-->
+						      		<span>My Cart</span>
+						      	</button>						      	
+					        </a>
+					      </li>
+					      <li>
+					      	{% if request.user.is_authenticated %}
+						      	<a>
+						      		<span style="text-transform: lowercase;">
+						      			<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i> 
+						      			{% if request.user.first_name %}!
+										{{ request.user.first_name }}
+										{% else %}
+										{{ request.user.username }}
+										{% endif %}
+									</span>
+						        </a>
+						        <ul class="dropdown">
+						            <li><a href="{% url 'auth_logout' %}">Log Out</a></li>
+						         </ul>
+					        {% else %}
+					        	<!--<a>
+						      		<button>
+							      		<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i>
+							      		<span>Sign In</span>							      		
+						      		</button>
+						      		<span><ul class="dropdown">
+							            <li><a href="{% url 'auth_login' %}">Sign In</a></li>
+							            <li><a href="{% url 'registration_register' %}">Register Here</a></li>
+							        </ul></span>
+						        </a>-->
+						        <a>
+						        	<span style="text-transform: capitalize;">
+						        		<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i> Sign In
+						        	</span>
+						        </a>
+						        <ul class="dropdown">
+						            <li><a href="{% url 'auth_login' %}">Sign In</a></li>
+						            <li><a href="{% url 'registration_register' %}">Register Here</a></li>
+						        </ul>
+					        {% endif %}
+					      </li>
+					      <li>
+					      	<a style="text-transform: capitalize;">
+				      			<span>English</span>				      		
+					        </a>
+					        <ul class="dropdown">
+					            <li><a>English</a></li>
+					            <li><a>Tiếng Việt</a></li>
+					        </ul>
+					      </li>
 					   </ul> <!-- End of .menuzord-menu -->
 				   </nav> <!-- End of #main_menu -->
 
 
 				   <!-- ******* Cart And Search Option ******** -->
-				   <div class="nav_side_content pull-right">
-				   		<ul class="icon_header">
-							<li class="border_round tran3s"><a href="#"><i class="fa fa-facebook"></i></a></li>
-							<li class="border_round tran3s"><a href="#"><i class="fa fa-twitter"></i></a></li>
-							<li class="border_round tran3s"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							<li class="border_round tran3s"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-						</ul>
-				   </div> <!-- End of .nav_side_content -->
+				   <!-- End of .nav_side_content -->
 				     
 			   </div> <!-- End of .conatiner -->
 			</div> <!-- End of .theme_menu -->
 
 			<!-- Header *******************************  -->
-			<header style="margin-top: 70px;">
+			<header style="margin-top: 56px;">
 				<div class="top_header">
 					<div class="container">
 						<div class="pull-left header_left">
