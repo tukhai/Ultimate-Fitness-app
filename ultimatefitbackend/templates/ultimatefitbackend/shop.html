@@ -162,7 +162,7 @@
 
 			/*for navbar*/
 			.distance-between-left-right {
-				margin-right: 200px;
+				margin-right: 175px;
 			}
 			.main-navbar {
 				position: fixed; 
@@ -1253,7 +1253,7 @@
 							{
 								title: '{{food.name}}',
 								start: '{{food.convertdate}}',
-								description: '<a href="#my_modal" data-toggle="modal" data-food-id="{{food.name}}" data-modal-id="{% url 'ultimatefitbackend:food' food.id %}" class="btnAdd-{{food.name}}">{{food.description}}</a>'
+								description: '<a href="#my_modal" data-toggle="modal" data-food-id="{{food.name}}" data-modal-id="{% url 'ultimatefitbackend:food' food.id %}" class="btnAdd-{{food.name}}"><img src="{{food.description}}"  style="width:130px;height:90px;float:left;"></a>'
 							},
 							{% endfor %}
 							{% endautoescape %}

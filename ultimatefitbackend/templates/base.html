@@ -39,7 +39,7 @@
 		<![endif]-->
 		<style>
 			.distance-between-left-right {
-				margin-right: 200px;
+				margin-right: 175px;
 			}
 			.main-navbar {
 				position: fixed; 
@@ -199,64 +199,50 @@
 								   		
 							   		<div class="cart_list color2_bg" aria-labelledby="cartDropdown">
 							   			<ul>
-							   				<li>
-							   					<div class="cart_item_wrapper clear_fix">
-							   						<div class="img_holder float_left"><img src="{% static 'ultimatefitbackend/images/shop/9.png' %}" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
+							   				{% for item in cart %}
+								   				<li id="list-item-{{ item.food.id }}">
+								   					<div class="cart_item_wrapper clear_fix">
+								   						<!--<div class="img_holder float_left"><img src="{% static 'ultimatefitbackend/images/shop/9.png' %}" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
 
-							   						<div class="item_deatils float_left">
-							   							<h6>Turmeric Powde</h6>
-							   							<ul>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														</ul>
-														<span class="font_fix">$ 34.99</span>
-							   						</div> <!-- End of .item_deatils -->
-							   					</div> <!-- End of .cart_item_wrapper -->
-							   				</li>
+								   						<div class="img_holder float_left">
+								   							<img src="{{item.food.description}}" alt="Cart Image" class="img-responsive" style="width:70px;height:80px;float:left;">
+								   						</div>
 
-							   				<li>
-							   					<div class="cart_item_wrapper clear_fix">
-							   						<div class="img_holder float_left"><img src="{% static 'ultimatefitbackend/images/shop/10.png' %}" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
-							   						
-							   						<div class="item_deatils float_left">
-							   							<h6>Pure Jeans Coffee</h6>
-							   							<ul>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														</ul>
-														<span class="font_fix">$ 26.99</span>
-							   						</div> <!-- End of .item_deatils -->
-							   					</div> <!-- End of .cart_item_wrapper -->
-							   				</li>
-
-							   				<li>
-							   					<div class="cart_item_wrapper clear_fix">
-							   						<div class="img_holder float_left"><img src="{% static 'ultimatefitbackend/images/shop/11.png' %}" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
-							   						
-							   						<div class="item_deatils float_left">
-							   							<h6>Columbia Chocolate</h6>
-							   							<ul>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														</ul>
-														<span class="font_fix">$ 26.99</span>
-							   						</div> <!-- End of .item_deatils -->
-							   					</div> <!-- End of .cart_item_wrapper -->
-							   				</li>
+								   						<div class="item_deatils float_left">
+								   							<h6>{{ item.food.name }}</h6>
+								   							<!--<ul>
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>								
+															</ul>-->
+															<div style="margin-top: 9px;">
+																<span class="font_fix">$ {{ item.food.price }}</span> 
+																<span style="float: right; margin-left: 90px;">TOTAL</span>
+															</div>
+															<div> 
+																<a class="remove-from-cart-list" data-id-food="{{item.food.id}}">
+																	<i class="fa fa-minus-circle" aria-hidden="true"></i>
+																</a>
+																&nbsp;
+																<span id="quantity-for-food-id-{{item.food.id}}">{{item.quantity}}</span>
+																&nbsp;
+																<a class="add-to-cart-list" data-id-food="{{item.food.id}}">
+																	<i class="fa fa-plus-circle" aria-hidden="true"></i>
+																</a>
+															</div>
+								   						</div> <!-- End of .item_deatils -->
+								   					</div> <!-- End of .cart_item_wrapper -->
+								   				</li>
+							   				{% empty %}
+							   					<p style="text-align: center; margin-top: 3%; color: white;">There is no item in your cart</p>
+							   				{% endfor %}
 							   			</ul>
 
 							   			<div class="cart_total clear_fix">
 
-							   				<span class="total font_fix float_left">Total - 140$</span>
+							   				<span class="total font_fix float_left">Total - {{ total }}$</span>
 							   				<a href="#" class="s_color_bg float_right tran3s">Checkout</a>
 							   			</div>
 							   		</div> <!-- End of .cart_list -->
@@ -1665,6 +1651,63 @@
 			    $(this).stop(true, true).delay(50).fadeIn(200);
 			}, function() {
 			    $(this).stop(true, true).delay(50).fadeOut(200);
+			});
+
+
+			// When the page is freshly loaded, we would get the current quantity of each food in db
+			// Can't define varible within click function, because the varible would get its value reset whenever we click
+			var quantityOfFoodArray = [];
+			{% for item in cart %}
+				quantityOfFoodArray[{{item.food.id}}] = {{item.quantity}};
+				console.log("Quantity of " + {{item.food.id}} + ".{{item.food.name}}" + " when the page is freshly loaded: " + {{item.quantity}});
+			{% endfor %}
+			// since food id start from 1, this loop array is from 1 to n
+
+			$(".add-to-cart-list").click(function(){
+				var idOfFood = $(this).data('id-food'); 
+			    console.log("Adding food of id: " + idOfFood);
+
+			    $.post(
+			    	"/add/" + idOfFood,
+			        { 
+			          csrfmiddlewaretoken: "{{ csrf_token }}"
+			        },
+			        function(data,status){
+			            console.log("Status: " + status);
+
+			            //Consider moving this out of post function, so the number change faster, and do the check if status success or false, if false show error box/page 404
+			            quantityOfFoodArray[idOfFood] += 1;
+			            console.log("Current quantity of food id " + idOfFood + " in database: " + quantityOfFoodArray[idOfFood]);
+
+			            $("span#quantity-for-food-id-" + idOfFood).html(quantityOfFoodArray[idOfFood]);
+			        }
+		        );
+			});
+
+			$(".remove-from-cart-list").click(function(){
+				var idOfFoodToBeRemoved = $(this).data('id-food'); 
+			    console.log("Removing food of id: " + idOfFoodToBeRemoved);
+
+			    $.post(
+			    	"/remove/" + idOfFoodToBeRemoved,
+			        { 
+			          csrfmiddlewaretoken: "{{ csrf_token }}"
+			        },
+			        function(data,status){
+			            console.log("Status: " + status);
+
+			            //Consider moving this out of post function, so the number change faster, and do the check if status success or false, if false show error box/page 404
+			            quantityOfFoodArray[idOfFoodToBeRemoved] -= 1;
+			            console.log("Current quantity of food id " + idOfFoodToBeRemoved + " in database: " + quantityOfFoodArray[idOfFoodToBeRemoved]);
+
+			            // when quantity = 0, just remove the item from the list
+			            if (quantityOfFoodArray[idOfFoodToBeRemoved] > 0) {
+			            	$("span#quantity-for-food-id-" + idOfFoodToBeRemoved).html(quantityOfFoodArray[idOfFoodToBeRemoved]);
+			        	} else {
+			        		$("li#list-item-" + idOfFoodToBeRemoved).remove();
+			        	};
+			        }
+		        );
 			});
 		</script>
 
