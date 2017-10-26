@@ -53,9 +53,21 @@
 			.list-news {
 				display: none !important;
 			}
-			@media (min-width: 992px) and (max-width: 1159px) {				
+			@media (min-width: 992px) and (max-width: 1199px) {				
 				.distance-between-left-right {
 					margin-right: 0px;
+				}
+			}
+
+			.my-cart-preview {
+				position: fixed; 
+				z-index: 999; 
+				margin-top: -205px; 
+				margin-left: 50vw;
+			}
+			@media (min-width: 992px) and (max-width: 1024px) {				
+				.my-cart-preview {
+					margin-top: -182px;
 				}
 			}
 		</style>
@@ -189,44 +201,10 @@
 
 			<!-- Header *******************************  -->
 			<header style="margin-top: 56px;">
-				<div class="top_header">
-					<div class="container">
-						<div class="pull-left header_left">
-							<ul>
-		        				<li><a href="#">Order On Phone: <span>+321 453 68 739</span></a></li>
-		        				<li><i class="fa fa-envelope-o s_color" aria-hidden="true"></i><a href="#">organicstore@gmail.com</a></li>
-		        			</ul>
-						</div>
-
-						<div class="pull-right header_right">
-							<div class="state" id="value1">
-								<ul>
-			        				<li><i class="fa fa-user s_color" aria-hidden="true"></i><a href="#">Account</a></li>
-			        				<li><i class="fa fa-heart s_color" aria-hidden="true"></i><a href="#">Whishlist </a></li>
-			        				<li><i class="fa fa-truck s_color" aria-hidden="true"></i><a href="#">Whishlist</a></li>
-			        			</ul>
-			        			<div id="polyglotLanguageSwitcher">
-									<form action="#">
-										<select id="polyglot-language-options">
-											<option id="en" value="en" selected>English</option>
-											<option id="fr" value="fr">French</option>
-											<option id="de" value="de">German</option>
-											<option id="it" value="it">Italian</option>
-											<option id="es" value="es">Spanish</option>
-										</select>
-									</form>
-								</div>
-							</div>
-
-								
-						</div>
-					</div> <!-- End of .container -->
-				</div> <!-- End of .top_header -->
-
-				<div class="bottom_header">
+				<div class="bottom_header my-cart-preview">
 					<div class="container">
 						<div class="row">
-							<div class="col-md-4 col-sm-12 col-xs-12">
+							<!--<div class="col-md-4 col-sm-12 col-xs-12">
 								<div class="search-box">
 									<form action="#" class="clearfix">
 										<input type="text" placeholder="Search...">
@@ -238,9 +216,9 @@
 								<div class="logo-area">
 									<a href="index.html" class="pull-left logo"><img src="{% static 'ultimatefitbackend/images/logo/logo.png' %}" alt="LOGO"></a>
 								</div>
-							</div>
+							</div>-->
 							<div class="col-md-4 col-sm-7 col-xs-6 pdt-14">
-								<div class="login_option float_left">
+								<!--<div class="login_option float_left">
 							   		<div class="login_form">
 							   			<div class="user">
 							   				<i class="icon-photo"></i>
@@ -259,7 +237,7 @@
 											{% else %}
 												<div class="welcome">Welcome!</div>
 												<!-- select menu -->
-									            <form action="#" class="select-form" method="post">
+									            <!--<form action="#" class="select-form" method="post">
 							                        <div class="g-input f1 mb-30">
 							                            <select class="text-capitalize selectpicker" data-style="g-select" data-width="100%" id="selectbox" name="" onchange="javascript:location.href = this.value;">
 							                                <option value="#" selected="">Sign In</option>
@@ -276,13 +254,13 @@
 											{% endif %}
 								   		</div>
 							   		</div> <!-- End of .cart_list -->
-							    </div>
-							    <div class="cart_option float_left">
-							   		<button class="cart tran3s dropdown-toggle" id="cartDropdown"><i class="fa icon-icon-32846" aria-hidden="true"></i><span class="s_color_bg p_color">2</span></button>
+							    <!--</div>-->
+							    <div class="cart_option float_right">
+							   		<!--<button class="cart tran3s dropdown-toggle" id="cartDropdown"><i class="fa icon-icon-32846" aria-hidden="true"></i><span class="s_color_bg p_color">2</span></button>
 							   		<div class="cart-info">
 							   			<div>My Cart</div>
 								   		<div class="doller">84.00$</div>
-							   		</div>
+							   		</div>-->
 								   		
 							   		<div class="cart_list color2_bg" aria-labelledby="cartDropdown">
 							   			<ul>
@@ -355,6 +333,41 @@
 
 					</div>
 				</div> <!-- End of .bottom_header -->
+				<div class="top_header">
+					<div class="container">
+						<div class="pull-left header_left">
+							<ul>
+		        				<li><a href="#">Order On Phone: <span>+321 453 68 739</span></a></li>
+		        				<li><i class="fa fa-envelope-o s_color" aria-hidden="true"></i><a href="#">organicstore@gmail.com</a></li>
+		        			</ul>
+						</div>
+
+						<div class="pull-right header_right">
+							<div class="state" id="value1">
+								<ul>
+			        				<li><i class="fa fa-user s_color" aria-hidden="true"></i><a href="#">Account</a></li>
+			        				<li><i class="fa fa-heart s_color" aria-hidden="true"></i><a href="#">Whishlist </a></li>
+			        				<li><i class="fa fa-truck s_color" aria-hidden="true"></i><a href="#">Whishlist</a></li>
+			        			</ul>
+			        			<div id="polyglotLanguageSwitcher">
+									<form action="#">
+										<select id="polyglot-language-options">
+											<option id="en" value="en" selected>English</option>
+											<option id="fr" value="fr">French</option>
+											<option id="de" value="de">German</option>
+											<option id="it" value="it">Italian</option>
+											<option id="es" value="es">Spanish</option>
+										</select>
+									</form>
+								</div>
+							</div>
+
+								
+						</div>
+					</div> <!-- End of .container -->
+				</div> <!-- End of .top_header -->
+
+				
 			</header>
 
 
