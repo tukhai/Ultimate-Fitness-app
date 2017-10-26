@@ -94,9 +94,6 @@
 					            <li><a href="account.html">My Account</a></li>
 					         </ul>
 					      </li>
-					      <!--<li>
-					      	<a href="{% url 'ultimatefitbackend:cart' %}">My Cart</a>
-					      </li>-->
 					      <li class="list-news"><a href="#">News</a>
 					      	<ul class="dropdown">
 					            <li><a href="blog-Standard.html">News Standard</a></li>
@@ -124,11 +121,8 @@
 					      <li class="distance-between-left-right">
 					      	<a href="{% url 'ultimatefitbackend:contact' %}">Contact us</a>
 					      </li>
-					      <!--<li>
-					      	<a href="{% url 'ultimatefitbackend:cart' %}">My Cart</a>
-					      </li>-->
 					      <li>
-					      	<a>
+					      	<a href="{% url 'ultimatefitbackend:cart' %}">
 						      	<button class="cart tran3s dropdown-toggle" id="cartDropdown-hover">
 						      		<i class="fa icon-icon-32846" aria-hidden="true" style="font-size: 130%;"></i>
 						      		<!--<span class="s_color_bg p_color" style="font-size: 80%; margin-bottom: -50px !important; position: auto;">2</span>-->
@@ -184,17 +178,6 @@
 					      </li>
 					   </ul> <!-- End of .menuzord-menu -->
 				   </nav> <!-- End of #main_menu -->
-
-
-				   <!-- ******* Cart And Search Option ******** -->
-				   <!--<div class="nav_side_content pull-right">
-				   		<ul class="icon_header">
-							<li class="border_round tran3s"><a href="#"><i class="fa fa-facebook"></i></a></li>
-							<li class="border_round tran3s"><a href="#"><i class="fa fa-twitter"></i></a></li>
-							<li class="border_round tran3s"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							<li class="border_round tran3s"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-						</ul>						
-				   </div>--> <!-- End of .nav_side_content -->
 				     
 			   </div> <!-- End of .conatiner -->
 			</div> <!-- End of .theme_menu -->
@@ -204,57 +187,7 @@
 				<div class="bottom_header my-cart-preview">
 					<div class="container">
 						<div class="row">
-							<!--<div class="col-md-4 col-sm-12 col-xs-12">
-								<div class="search-box">
-									<form action="#" class="clearfix">
-										<input type="text" placeholder="Search...">
-										<button><i class="fa fa-search"></i></button>
-									</form>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-5 col-xs-6 logo-responsive">
-								<div class="logo-area">
-									<a href="index.html" class="pull-left logo"><img src="{% static 'ultimatefitbackend/images/logo/logo.png' %}" alt="LOGO"></a>
-								</div>
-							</div>-->
 							<div class="col-md-4 col-sm-7 col-xs-6 pdt-14">
-								<!--<div class="login_option float_left">
-							   		<div class="login_form">
-							   			<div class="user">
-							   				<i class="icon-photo"></i>
-							   			</div>
-							   			<div class="login-info">							   			
-											{% if request.user.is_authenticated %}
-						
-												<div class="welcome">Welcome, {% if request.user.first_name %}!
-													{{ request.user.first_name }}
-													{% else %}
-													{{ request.user.username }}
-													{% endif %}
-												</div>
-												<div><a href="{% url 'auth_logout' %}"><b>Log Out</b></a></div>
-												
-											{% else %}
-												<div class="welcome">Welcome!</div>
-												<!-- select menu -->
-									            <!--<form action="#" class="select-form" method="post">
-							                        <div class="g-input f1 mb-30">
-							                            <select class="text-capitalize selectpicker" data-style="g-select" data-width="100%" id="selectbox" name="" onchange="javascript:location.href = this.value;">
-							                                <option value="#" selected="">Sign In</option>
-							                                <option value="{% url 'auth_login' %}">Sign In</option>
-							                                <option value="{% url 'registration_register' %}">Register Here</option>
-							                            </select>
-							                        </div>
-							                    </form>
-												<script type="text/javascript">
-													window.onload = function(){
-														location.href=document.getElementById("selectbox").value;
-													}       
-												</script>
-											{% endif %}
-								   		</div>
-							   		</div> <!-- End of .cart_list -->
-							    <!--</div>-->
 							    <div class="cart_option float_right">
 								   		
 							   		<div class="cart_list color2_bg" aria-labelledby="cartDropdown">
@@ -317,7 +250,7 @@
 							   			<div class="cart_total clear_fix">
 
 							   				<span class="total font_fix float_left">Total - 140$</span>
-							   				<a href="#" class="s_color_bg float_right tran3s">View Cart</a>
+							   				<a href="#" class="s_color_bg float_right tran3s">Checkout</a>
 							   			</div>
 							   		</div> <!-- End of .cart_list -->
 							    </div>
@@ -1716,15 +1649,15 @@
 
 		<script>
 			$('#cartDropdown-hover').hover(function() {
-			    $(document).find('.cart_list').stop(true, true).delay(200).fadeIn(500);
+			    $(document).find('.cart_list').stop(true, true).delay(50).fadeIn(200);
 			}, function() {
-			    $(document).find('.cart_list').stop(true, true).delay(200).fadeOut(500);
+			    $(document).find('.cart_list').stop(true, true).delay(50).fadeOut(200);
 			});
 
 			$('.cart_list').hover(function() {
-			    $(this).stop(true, true).delay(200).fadeIn(500);
+			    $(this).stop(true, true).delay(50).fadeIn(200);
 			}, function() {
-			    $(this).stop(true, true).delay(200).fadeOut(500);
+			    $(this).stop(true, true).delay(50).fadeOut(200);
 			});
 		</script>
 

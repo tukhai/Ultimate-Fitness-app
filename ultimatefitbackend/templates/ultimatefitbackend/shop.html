@@ -158,6 +158,18 @@
 					margin-right: 0px;
 				}
 			}
+
+			.my-cart-preview {
+				position: fixed; 
+				z-index: 999; 
+				margin-top: -205px; 
+				margin-left: 50vw;
+			}
+			@media (min-width: 992px) and (max-width: 1024px) {				
+				.my-cart-preview {
+					margin-top: -182px;
+				}
+			}
 		</style>
 		
 		<!--Full Calendar links-->
@@ -178,13 +190,13 @@
 			</div>
 
 			<!-- Menu ******************************* -->
-			<div class="theme_menu color1_bg main-navbar" style="position: fixed; width: 100%; z-index: 10;">
+			<div class="theme_menu color1_bg main-navbar">
 				<div class="container">
 					<nav class="menuzord pull-left" id="main_menu">
 					   <ul class="menuzord-menu">
-					      <li><a href="{% url 'ultimatefitbackend:index' %}">Home</a></li>
+					      <li class="current_page"><a href="{% url 'ultimatefitbackend:index' %}">Home</a></li>
 					      <li><a href="{% url 'ultimatefitbackend:about' %}">About us</a></li>
-					      <li class="current_page"><a href="#">store</a>
+					      <li><a href="#">store</a>
 					      	<ul class="dropdown">
 					            <li><a href="{% url 'ultimatefitbackend:shop' %}">Shop With Sidebar</a></li>
 					            <li><a href="shop-single.html">Product Detail</a></li>
@@ -193,17 +205,14 @@
 					            <li><a href="account.html">My Account</a></li>
 					         </ul>
 					      </li>
-					      <!--<li>
-					      	<a href="{% url 'ultimatefitbackend:cart' %}">My Cart</a>
-					      </li>-->
-					      <!--<li><a href="#">News</a>
+					      <li class="list-news"><a href="#">News</a>
 					      	<ul class="dropdown">
 					            <li><a href="blog-Standard.html">News Standard</a></li>
 					            <li><a href="blog-list-sidebar.html">News With Sidebar</a></li>
 					            <li><a href="blog-grid.html">News Masonary</a></li>
 					            <li><a href="blog-details.html">News Single</a></li>
 					         </ul>
-					      </li>-->
+					      </li>
 					      <li><a href="#">gallery</a>
 					      	<ul class="dropdown">
 					            <li><a href="gallery-grid.html">Gallery Grid</a></li>
@@ -224,8 +233,8 @@
 					      	<a href="{% url 'ultimatefitbackend:contact' %}">Contact us</a>
 					      </li>
 					      <li>
-					      	<a>
-						      	<button class="cart tran3s dropdown-toggle" id="cartDropdown">
+					      	<a href="{% url 'ultimatefitbackend:cart' %}">
+						      	<button class="cart tran3s dropdown-toggle" id="cartDropdown-hover">
 						      		<i class="fa icon-icon-32846" aria-hidden="true" style="font-size: 130%;"></i>
 						      		<!--<span class="s_color_bg p_color" style="font-size: 80%; margin-bottom: -50px !important; position: auto;">2</span>-->
 						      		<span>My Cart</span>
@@ -280,110 +289,17 @@
 					      </li>
 					   </ul> <!-- End of .menuzord-menu -->
 				   </nav> <!-- End of #main_menu -->
-
-
-				   <!-- ******* Cart And Search Option ******** -->
-				   <!-- End of .nav_side_content -->
 				     
 			   </div> <!-- End of .conatiner -->
 			</div> <!-- End of .theme_menu -->
 
 			<!-- Header *******************************  -->
 			<header style="margin-top: 56px;">
-				<div class="top_header">
-					<div class="container">
-						<div class="pull-left header_left">
-							<ul>
-		        				<li><a href="#">Order On Phone: <span>+321 453 68 739</span></a></li>
-		        				<li><i class="fa fa-envelope-o s_color" aria-hidden="true"></i><a href="#">organicstore@gmail.com</a></li>
-		        			</ul>
-						</div>
-
-						<div class="pull-right header_right">
-							<div class="state" id="value1">
-								<ul>
-			        				<li><i class="fa fa-user s_color" aria-hidden="true"></i><a href="#">Account</a></li>
-			        				<li><i class="fa fa-heart s_color" aria-hidden="true"></i><a href="#">Whishlist </a></li>
-			        				<li><i class="fa fa-truck s_color" aria-hidden="true"></i><a href="#">Whishlist</a></li>
-			        			</ul>
-			        			<div id="polyglotLanguageSwitcher">
-									<form action="#">
-										<select id="polyglot-language-options">
-											<option id="en" value="en" selected>English</option>
-											<option id="fr" value="fr">French</option>
-											<option id="de" value="de">German</option>
-											<option id="it" value="it">Italian</option>
-											<option id="es" value="es">Spanish</option>
-										</select>
-									</form>
-								</div>
-							</div>
-
-								
-						</div>
-					</div> <!-- End of .container -->
-				</div> <!-- End of .top_header -->
-
-				<div class="bottom_header">
+				<div class="bottom_header my-cart-preview">
 					<div class="container">
 						<div class="row">
-							<div class="col-md-4 col-sm-12 col-xs-12">
-								<div class="search-box">
-									<form action="#" class="clearfix">
-										<input type="text" placeholder="Search...">
-										<button><i class="fa fa-search"></i></button>
-									</form>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-5 col-xs-6 logo-responsive">
-								<div class="logo-area">
-									<a href="index.html" class="pull-left logo"><img src="{% static 'ultimatefitbackend/images/logo/logo.png' %}" alt="LOGO"></a>
-								</div>
-							</div>
 							<div class="col-md-4 col-sm-7 col-xs-6 pdt-14">
-								<div class="login_option float_left">
-							   		<div class="login_form">
-							   			<div class="user">
-							   				<i class="icon-photo"></i>
-							   			</div>
-							   			<div class="login-info">
-								   			{% if request.user.is_authenticated %}
-						
-												<div class="welcome">Welcome, {% if request.user.first_name %}!
-													{{ request.user.first_name }}
-													{% else %}
-													{{ request.user.username }}
-													{% endif %}
-												</div>
-												<div><a href="{% url 'auth_logout' %}"><b>Log Out</b></a></div>
-												
-											{% else %}
-												<div class="welcome">Welcome!</div>
-												<!-- select menu -->
-									            <form action="#" class="select-form" method="post">
-							                        <div class="g-input f1 mb-30">
-							                            <select class="text-capitalize selectpicker" data-style="g-select" data-width="100%" id="selectbox" name="" onchange="javascript:location.href = this.value;">
-							                                <option value="#" selected="">Sign In</option>
-							                                <option value="{% url 'auth_login' %}">Sign In</option>
-							                                <option value="{% url 'registration_register' %}">Register Here</option>
-							                            </select>
-							                        </div>
-							                    </form>
-												<script type="text/javascript">
-													window.onload = function(){
-														location.href=document.getElementById("selectbox").value;
-													}       
-												</script>
-											{% endif %}
-								   		</div>
-							   		</div> <!-- End of .cart_list -->
-							    </div>
-							    <div class="cart_option float_left">
-							   		<button class="cart tran3s dropdown-toggle" id="cartDropdown"><i class="fa icon-icon-32846" aria-hidden="true"></i><span class="s_color_bg p_color">2</span></button>
-							   		<div class="cart-info">
-							   			<div>My Cart</div>
-								   		<div class="doller">84.00$</div>
-							   		</div>
+							    <div class="cart_option float_right">
 								   		
 							   		<div class="cart_list color2_bg" aria-labelledby="cartDropdown">
 							   			<ul>
@@ -445,7 +361,7 @@
 							   			<div class="cart_total clear_fix">
 
 							   				<span class="total font_fix float_left">Total - 140$</span>
-							   				<a href="#" class="s_color_bg float_right tran3s">View Cart</a>
+							   				<a href="#" class="s_color_bg float_right tran3s">Checkout</a>
 							   			</div>
 							   		</div> <!-- End of .cart_list -->
 							    </div>
@@ -456,6 +372,39 @@
 
 					</div>
 				</div> <!-- End of .bottom_header -->
+				<div class="top_header">
+					<div class="container">
+						<div class="pull-left header_left">
+							<ul>
+		        				<li><a href="#">Order On Phone: <span>+321 453 68 739</span></a></li>
+		        				<li><i class="fa fa-envelope-o s_color" aria-hidden="true"></i><a href="#">organicstore@gmail.com</a></li>
+		        			</ul>
+						</div>
+
+						<div class="pull-right header_right">
+							<div class="state" id="value1">
+								<ul>
+			        				<li><i class="fa fa-user s_color" aria-hidden="true"></i><a href="#">Account</a></li>
+			        				<li><i class="fa fa-heart s_color" aria-hidden="true"></i><a href="#">Whishlist </a></li>
+			        				<li><i class="fa fa-truck s_color" aria-hidden="true"></i><a href="#">Whishlist</a></li>
+			        			</ul>
+			        			<div id="polyglotLanguageSwitcher">
+									<form action="#">
+										<select id="polyglot-language-options">
+											<option id="en" value="en" selected>English</option>
+											<option id="fr" value="fr">French</option>
+											<option id="de" value="de">German</option>
+											<option id="it" value="it">Italian</option>
+											<option id="es" value="es">Spanish</option>
+										</select>
+									</form>
+								</div>
+							</div>
+
+								
+						</div>
+					</div> <!-- End of .container -->
+				</div> <!-- End of .top_header -->				
 			</header>
 
 
@@ -1210,6 +1159,20 @@
 		<!--<script src="{% static 'ultimatefitbackend/fullcalendar/lib/jquery.min.js' %}"></script>-->
 		<script src="{% static 'ultimatefitbackend/fullcalendar/lib/moment.min.js' %}"></script>
 		<script src="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.js' %}"></script>
+
+		<script>
+			$('#cartDropdown-hover').hover(function() {
+			    $(document).find('.cart_list').stop(true, true).delay(50).fadeIn(200);
+			}, function() {
+			    $(document).find('.cart_list').stop(true, true).delay(50).fadeOut(200);
+			});
+
+			$('.cart_list').hover(function() {
+			    $(this).stop(true, true).delay(50).fadeIn(200);
+			}, function() {
+			    $(this).stop(true, true).delay(50).fadeOut(200);
+			});
+		</script>
 		
 		<script type="text/javascript">
 			
