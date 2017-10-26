@@ -60,7 +60,28 @@
 			.popUpMessage p {
 				margin-left: 10px;
 			}
-			.modal__inner {
+
+			.modal-box-size {
+				width: 76%;
+			}
+
+			@media (min-width: 1500px) {
+				.modal-box-size {
+					width: 66%;
+				}
+			}
+			@media (min-width: 2000px) {
+				.modal-box-size {
+					width: 56%;
+				}
+			}
+			@media (min-width: 2500px) {
+				.modal-box-size {
+					width: 46%;
+				}
+			}
+
+			/*.modal__inner {
 			    position: absolute;
 			}
 		
@@ -79,11 +100,11 @@
 				-moz-transition: opacity 400ms ease-in;
 				transition: opacity 400ms ease-in;
 				pointer-events: none;
-			}
+			}*/
 			
 			
 			/*Customizing scrollbar*/
-			.modalDialog::-webkit-scrollbar {
+			/*.modalDialog::-webkit-scrollbar {
 				width: 0.2em;
 			}
 			 
@@ -94,12 +115,12 @@
 			.modalDialog::-webkit-scrollbar-thumb {
 			  background-color: darkgrey;
 			  outline: 1px solid slategrey;
-			}
+			}*/
 			
 			/**/
 			
 
-			.modalDialog:target {
+			/*.modalDialog:target {
 				opacity:1;
 				pointer-events: auto;
 			}
@@ -114,8 +135,9 @@
 				background: -moz-linear-gradient(#fff, #999);
 				background: -webkit-linear-gradient(#fff, #999);
 				background: -o-linear-gradient(#fff, #999);
-			}
+			}*/
 
+			/*Close button of modal box*/
 			.close {
 				background: #606061;
 				color: #FFFFFF;
@@ -136,6 +158,7 @@
 			}
 
 			.close:hover { background: #00d9ff; }
+
 
 			/*for navbar*/
 			.distance-between-left-right {
@@ -192,7 +215,7 @@
 	
 		{% block content %}
 		<div class="main_page">
-			<div id="test" style="position: fixed; margin-top: 5%; margin-left: 50vw; z-index: 10000;">
+			<div id="test" style="position: fixed; margin-top: 55px; margin-left: 50vw; z-index: 10000;">
 				
 			</div>
 
@@ -1279,8 +1302,8 @@
 			</div>
 		</div>-->
 
-		<div class="modal" id="my_modal" style="">
-		    <div class="modal-dialog" style="width: 76%;">		    	
+		<div class="modal" id="my_modal" style="padding-top: 35px;">
+		    <div class="modal-dialog modal-box-size">		    	
 			    <div class="modal-content">
 			        <div class="modal-header">
 			            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
