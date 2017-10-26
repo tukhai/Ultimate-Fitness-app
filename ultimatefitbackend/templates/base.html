@@ -129,7 +129,7 @@
 					      </li>-->
 					      <li>
 					      	<a>
-						      	<button class="cart tran3s dropdown-toggle" id="cartDropdown">
+						      	<button class="cart tran3s dropdown-toggle" id="cartDropdown-hover">
 						      		<i class="fa icon-icon-32846" aria-hidden="true" style="font-size: 130%;"></i>
 						      		<!--<span class="s_color_bg p_color" style="font-size: 80%; margin-bottom: -50px !important; position: auto;">2</span>-->
 						      		<span>My Cart</span>
@@ -256,11 +256,6 @@
 							   		</div> <!-- End of .cart_list -->
 							    <!--</div>-->
 							    <div class="cart_option float_right">
-							   		<!--<button class="cart tran3s dropdown-toggle" id="cartDropdown"><i class="fa icon-icon-32846" aria-hidden="true"></i><span class="s_color_bg p_color">2</span></button>
-							   		<div class="cart-info">
-							   			<div>My Cart</div>
-								   		<div class="doller">84.00$</div>
-							   		</div>-->
 								   		
 							   		<div class="cart_list color2_bg" aria-labelledby="cartDropdown">
 							   			<ul>
@@ -1718,6 +1713,20 @@
 		<!-- Theme js -->
 		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/theme.js' %}"></script>
 		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/google-map.js' %}"></script>
+
+		<script>
+			$('#cartDropdown-hover').hover(function() {
+			    $(document).find('.cart_list').stop(true, true).delay(200).fadeIn(500);
+			}, function() {
+			    $(document).find('.cart_list').stop(true, true).delay(200).fadeOut(500);
+			});
+
+			$('.cart_list').hover(function() {
+			    $(this).stop(true, true).delay(200).fadeIn(500);
+			}, function() {
+			    $(this).stop(true, true).delay(200).fadeOut(500);
+			});
+		</script>
 
 		</div> <!-- End of .main_page -->
 	</body>
