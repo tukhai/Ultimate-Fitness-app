@@ -129,6 +129,14 @@ class Cart(models.Model):
         except FoodOrder.DoesNotExist:
             pass
 
+    def remove_all_from_cart(self, food_id):
+        food = Food.objects.get(pk=food_id)
+        try:
+            preexisting_order = FoodOrder.objects.get(food=food, cart=self)
+            preexisting_order.delete()
+        except FoodOrder.DoesNotExist:
+            pass
+
     def dump(self):
         return {"cart":{'user':self.user.pk,
                         'order_date':self.order_date,          

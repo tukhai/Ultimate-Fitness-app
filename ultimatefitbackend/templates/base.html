@@ -77,6 +77,19 @@
 					margin-top: -182px;
 				}
 			}
+
+			.fa-times-circle {
+				display: none !important;
+			}
+
+			.close-list-cart {
+				position: absolute; 
+				top: 57px; 
+				right: 25px; 
+				font-size: 18px; 
+				color:#aaaaaa; 
+				cursor: pointer;
+			}
 		</style>
 	</head>
 
@@ -219,21 +232,24 @@
 															</ul>-->
 															<div style="margin-top: 9px;">
 																<span class="font_fix">$ {{ item.food.price }}</span> 
-																<span style="float: right; margin-left: 90px;">TOTAL</span>
+																<span style="float: right; margin-left: 90px;">
+																	$ <span id="total-price-for-food-id-{{item.food.id}}">{% widthratio item.food.price 1 item.quantity %}</span>
+																</span>
 															</div>
 															<div> 
-																<a class="remove-from-cart-list" data-id-food="{{item.food.id}}">
+																<a class="remove-from-cart-list" data-id-food="{{item.food.id}}" data-price-food="{{item.food.price}}">
 																	<i class="fa fa-minus-circle" aria-hidden="true"></i>
 																</a>
 																&nbsp;
 																<span id="quantity-for-food-id-{{item.food.id}}">{{item.quantity}}</span>
 																&nbsp;
-																<a class="add-to-cart-list" data-id-food="{{item.food.id}}">
+																<a class="add-to-cart-list" data-id-food="{{item.food.id}}" data-price-food="{{item.food.price}}">
 																	<i class="fa fa-plus-circle" aria-hidden="true"></i>
 																</a>
 															</div>
 								   						</div> <!-- End of .item_deatils -->
 								   					</div> <!-- End of .cart_item_wrapper -->
+								   					<i class="fa fa-times-circle-o close-list-cart" data-id-food="{{item.food.id}}" aria-hidden="true"></i>
 								   				</li>
 							   				{% empty %}
 							   					<p style="text-align: center; margin-top: 3%; color: white;">There is no item in your cart</p>
@@ -1667,6 +1683,9 @@
 				var idOfFood = $(this).data('id-food'); 
 			    console.log("Adding food of id: " + idOfFood);
 
+			    var priceOfFood = $(this).data('price-food');
+			    console.log("Price of this food: " + priceOfFood);
+
 			    $.post(
 			    	"/add/" + idOfFood,
 			        { 
@@ -1680,6 +1699,7 @@
 			            console.log("Current quantity of food id " + idOfFood + " in database: " + quantityOfFoodArray[idOfFood]);
 
 			            $("span#quantity-for-food-id-" + idOfFood).html(quantityOfFoodArray[idOfFood]);
+			            $("span#total-price-for-food-id-" + idOfFood).html(priceOfFood*quantityOfFoodArray[idOfFood]);
 			        }
 		        );
 			});
@@ -1687,6 +1707,9 @@
 			$(".remove-from-cart-list").click(function(){
 				var idOfFoodToBeRemoved = $(this).data('id-food'); 
 			    console.log("Removing food of id: " + idOfFoodToBeRemoved);
+
+			    var priceOfFoodToBeRemoved = $(this).data('price-food');
+			    console.log("Price of the food to be removed: " + priceOfFoodToBeRemoved);
 
 			    $.post(
 			    	"/remove/" + idOfFoodToBeRemoved,
@@ -1703,11 +1726,35 @@
 			            // when quantity = 0, just remove the item from the list
 			            if (quantityOfFoodArray[idOfFoodToBeRemoved] > 0) {
 			            	$("span#quantity-for-food-id-" + idOfFoodToBeRemoved).html(quantityOfFoodArray[idOfFoodToBeRemoved]);
+			            	$("span#total-price-for-food-id-" + idOfFoodToBeRemoved).html(priceOfFoodToBeRemoved*quantityOfFoodArray[idOfFoodToBeRemoved]);
 			        	} else {
 			        		$("li#list-item-" + idOfFoodToBeRemoved).remove();
 			        	};
 			        }
 		        );
+			});
+
+			$(".close-list-cart").click(function(){
+				var idOfDeleteFood = $(this).data('id-food');
+				console.log("deleting all items type of food id: " + idOfDeleteFood);
+
+				$.post(
+			    	"/removeall/" + idOfDeleteFood,
+			        { 
+			          csrfmiddlewaretoken: "{{ csrf_token }}"
+			        },
+			        function(data,status){
+			            console.log("Status: " + status);
+			            console.log("Successfully delete all food type of id: " + idOfDeleteFood)
+			        }
+		        );
+
+				// When close, make quantity of that food id become 0
+				//Acutally don't need this line because this only affect front-end, but this keep it because of front-end logically correct
+				quantityOfFoodArray[idOfDeleteFood] = 0;
+
+				// Close the list in front-end, not put it inside post function, so it's faster
+				$(this).parent('li').fadeOut(300);
 			});
 		</script>
 

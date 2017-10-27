@@ -225,6 +225,34 @@ def remove_from_cart(request, food_id):
         return redirect('ultimatefitbackend:cart')
 
 
+def remove_all_from_cart(request, food_id):
+    if request.user.is_authenticated():
+        try:
+            food = Food.objects.get(pk=food_id)
+        except ObjectDoesNotExist:
+            pass
+        else:
+            cart = Cart.objects.get(user=request.user, active=True)
+            cart.remove_all_from_cart(food_id)
+        return redirect('ultimatefitbackend:cart')
+    else:
+        # return redirect('ultimatefitbackend:index')
+        try:
+            food = Food.objects.get(pk=food_id)
+        except ObjectDoesNotExist:
+            pass
+        else:
+            #request.session.set_expiry(300)
+
+            if 'cart' in request.session:
+                print "cart is exist in session"
+                print request.session['cart']
+                print "END"
+                cart = Cart.objects.get(id=request.session['cart'])
+            cart.remove_all_from_cart(food_id)
+        return redirect('ultimatefitbackend:cart')
+
+
 def cart(request):
     if request.user.is_authenticated():        
 
