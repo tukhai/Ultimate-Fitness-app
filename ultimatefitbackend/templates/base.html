@@ -78,7 +78,7 @@
 				}
 			}
 
-			.fa-times-circle {
+			.cart_list>ul>li .fa-times-circle {
 				display: none !important;
 			}
 
@@ -249,7 +249,7 @@
 															</div>
 								   						</div> <!-- End of .item_deatils -->
 								   					</div> <!-- End of .cart_item_wrapper -->
-								   					<i class="fa fa-times-circle-o close-list-cart" data-id-food="{{item.food.id}}" aria-hidden="true"></i>
+								   					<i class="fa fa-times-circle-o close-list-cart" data-id-food="{{item.food.id}}" data-price-food="{{item.food.price}}" aria-hidden="true"></i>
 								   				</li>
 							   				{% empty %}
 							   					<p style="text-align: center; margin-top: 3%; color: white;">There is no item in your cart</p>
@@ -258,7 +258,7 @@
 
 							   			<div class="cart_total clear_fix">
 
-							   				<span class="total font_fix float_left">Total - {{ total }}$</span>
+							   				<span class="total font_fix float_left">Total - <text id="total-to-pay">{{ total }}</text> $</span>
 							   				<a href="#" class="s_color_bg float_right tran3s">Checkout</a>
 							   			</div>
 							   		</div> <!-- End of .cart_list -->
@@ -1679,6 +1679,9 @@
 			{% endfor %}
 			// since food id start from 1, this loop array is from 1 to n
 
+			var totalToPay = {{total}};
+			console.log("total money to be paid when the page is freshly loaded: $" + totalToPay);
+
 			$(".add-to-cart-list").click(function(){
 				var idOfFood = $(this).data('id-food'); 
 			    console.log("Adding food of id: " + idOfFood);
@@ -1698,8 +1701,11 @@
 			            quantityOfFoodArray[idOfFood] += 1;
 			            console.log("Current quantity of food id " + idOfFood + " in database: " + quantityOfFoodArray[idOfFood]);
 
+			            totalToPay += priceOfFood;
+
 			            $("span#quantity-for-food-id-" + idOfFood).html(quantityOfFoodArray[idOfFood]);
 			            $("span#total-price-for-food-id-" + idOfFood).html(priceOfFood*quantityOfFoodArray[idOfFood]);
+			            $("text#total-to-pay").html(totalToPay);
 			        }
 		        );
 			});
@@ -1723,10 +1729,13 @@
 			            quantityOfFoodArray[idOfFoodToBeRemoved] -= 1;
 			            console.log("Current quantity of food id " + idOfFoodToBeRemoved + " in database: " + quantityOfFoodArray[idOfFoodToBeRemoved]);
 
+			            totalToPay -= priceOfFoodToBeRemoved;
+
 			            // when quantity = 0, just remove the item from the list
 			            if (quantityOfFoodArray[idOfFoodToBeRemoved] > 0) {
 			            	$("span#quantity-for-food-id-" + idOfFoodToBeRemoved).html(quantityOfFoodArray[idOfFoodToBeRemoved]);
 			            	$("span#total-price-for-food-id-" + idOfFoodToBeRemoved).html(priceOfFoodToBeRemoved*quantityOfFoodArray[idOfFoodToBeRemoved]);
+			            	$("text#total-to-pay").html(totalToPay);
 			        	} else {
 			        		$("li#list-item-" + idOfFoodToBeRemoved).remove();
 			        	};
@@ -1738,6 +1747,9 @@
 				var idOfDeleteFood = $(this).data('id-food');
 				console.log("deleting all items type of food id: " + idOfDeleteFood);
 
+				var priceOfDeleteFood = $(this).data('price-food');
+				console.log("price of 1 item of this type of food: " + priceOfDeleteFood);
+
 				$.post(
 			    	"/removeall/" + idOfDeleteFood,
 			        { 
@@ -1748,6 +1760,9 @@
 			            console.log("Successfully delete all food type of id: " + idOfDeleteFood)
 			        }
 		        );
+
+				totalToPay -= priceOfDeleteFood*quantityOfFoodArray[idOfDeleteFood];
+				$("text#total-to-pay").html(totalToPay);
 
 				// When close, make quantity of that food id become 0
 				//Acutally don't need this line because this only affect front-end, but this keep it because of front-end logically correct
