@@ -205,9 +205,14 @@
 											<button class="float_left tran3s">Check</button>
 											<span class="float_left color1">*Expected Delivery in 4-10 Days</span>
 										</div>
-										<input type="number" value="1" min="1">
+										<input id="display-quantity-modalbox" type="number" value="{{quantityInThisCart}}" min="0" disabled>
 										<!--<a href="{% url 'ultimatefitbackend:add_to_cart' food.id %}" class="tran3s color1_bg" id="add-cart-button">Add to Cart</a>-->
 										<a class="tran3s color1_bg unselectable" id="add-cart-button">Add to Cart</a>
+										<!--<a class="tran3s color1_bg unselectable" id="add-cart-button">
+											<span>&mdash;&nbsp;&nbsp;</span>
+											&nbsp;Add to Cart&nbsp;
+											<span style="font-size: 140%; font-weight: 400;">&nbsp;&nbsp;+</span>
+										</a>-->
 	        						</div> <!-- End of .item_description -->
 	        					</div> <!-- End of .product_top_section -->
 
@@ -545,6 +550,7 @@
 			            // Each click add 1 more, but this is to print to front-end only, because after click this button, the page is not reloaded
 			            //currentQuantityInThisCart += 1;
 			            window.parent.parent.quantityOfFoodArray[{{food.id}}] += 1;
+			            $("input#display-quantity-modalbox").attr("value", window.parent.parent.quantityOfFoodArray[{{food.id}}]);
 			            
 			            console.log("Current quantity of {{food.name}} in database: " + window.parent.parent.quantityOfFoodArray[{{food.id}}]);
 
