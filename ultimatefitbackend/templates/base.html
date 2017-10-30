@@ -95,6 +95,23 @@
 				color:#aaaaaa; 
 				cursor: pointer;
 			}
+
+			@media (min-width: 992px) {
+				.flag-icon-size {
+					width: 19px; 
+					height: 13px; 
+					position: absolute; 
+					margin-top: 26px; 
+					margin-left: -22px; 
+					background-color: white;
+				}
+			}
+
+			@media (max-width: 992px) {
+				.flag-icon-size {
+					display: none;
+				}
+			}
 		</style>
 
 		<link rel='stylesheet' href="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.css' %}" />
@@ -199,11 +216,16 @@
 					      </li>
 					      <li>
 					      	<a style="text-transform: capitalize; cursor: pointer;">
-				      			<span>English</span>				      		
+				      			<span id="flag-icon-language">
+				      				<span class="flag-icon-size">
+				      					<img src="http://www.postkrieg.info/_assets/img/en_icon.png"/>
+				      				</span>
+				      				&nbsp;English
+				      			</span>				      		
 					        </a>
 					        <ul class="dropdown">
-					            <li><a>English</a></li>
-					            <li><a>Tiếng Việt</a></li>
+					            <li class="english-language"><a>English</a></li>
+					            <li class="vietnam-language"><a>Tiếng Việt</a></li>
 					        </ul>
 					      </li>
 					   </ul> <!-- End of .menuzord-menu -->
@@ -1681,6 +1703,15 @@
 			    $(this).stop(true, true).delay(50).fadeIn(200);
 			}, function() {
 			    $(this).stop(true, true).delay(50).fadeOut(200);
+			});
+
+			
+			// This part is the javascript front-end for language change
+			$(document).on("click", "li.english-language", function(){
+				$("span#flag-icon-language").html('<span class="flag-icon-size"><img src="http://www.postkrieg.info/_assets/img/en_icon.png"/></span>&nbsp;English');
+			});
+			$(document).on("click", "li.vietnam-language", function(){
+				$("span#flag-icon-language").html('<span class="flag-icon-size"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png"/></span>&nbsp;Tiếng Việt');
 			});
 
 
