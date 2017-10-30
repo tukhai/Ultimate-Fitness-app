@@ -40,6 +40,15 @@
 			.display-none {
 				display: none !important;
 			}
+			.unselectable {
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				cursor: pointer;
+			}
 		</style>
 	</head>
 
@@ -198,7 +207,7 @@
 										</div>
 										<input type="number" value="1" min="1">
 										<!--<a href="{% url 'ultimatefitbackend:add_to_cart' food.id %}" class="tran3s color1_bg" id="add-cart-button">Add to Cart</a>-->
-										<a class="tran3s color1_bg" id="add-cart-button">Add to Cart</a>
+										<a class="tran3s color1_bg unselectable" id="add-cart-button">Add to Cart</a>
 	        						</div> <!-- End of .item_description -->
 	        					</div> <!-- End of .product_top_section -->
 
