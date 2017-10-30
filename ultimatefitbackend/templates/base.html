@@ -26,6 +26,11 @@
 		<link rel="icon" type="image/png" sizes="16x16" href="{% static 'ultimatefitbackend/images/fav-icon/favicon-16x16.png' %}">
 
 
+		<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 		<!-- Custom Css -->
 		<link rel="stylesheet" type="text/css" href="{% static 'ultimatefitbackend/css/style.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'ultimatefitbackend/css/responsive.css' %}">
@@ -91,12 +96,17 @@
 				cursor: pointer;
 			}
 		</style>
+
+		<link rel='stylesheet' href="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.css' %}" />
 	</head>
 
 
 
 	<body>
 		<div class="main_page">
+			<div id="test" style="position: fixed; margin-top: 55px; margin-left: 50vw; z-index: 10000;">
+				
+			</div>
 
 			<!-- Menu ******************************* -->
 			<div class="theme_menu color1_bg main-navbar">
@@ -252,7 +262,7 @@
 								   					<i class="fa fa-times-circle-o close-list-cart" data-id-food="{{item.food.id}}" data-price-food="{{item.food.price}}" aria-hidden="true"></i>
 								   				</li>
 							   				{% empty %}
-							   					<p style="text-align: center; margin-top: 3%; color: white;">There is no item in your cart</p>
+							   					<!--<p style="text-align: center; margin-top: 3%; color: white;">There is no item in your cart</p>-->
 							   				{% endfor %}
 							   			</ul>
 
@@ -1656,6 +1666,10 @@
 		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/theme.js' %}"></script>
 		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/google-map.js' %}"></script>
 
+		<!--<script src="{% static 'ultimatefitbackend/fullcalendar/lib/jquery.min.js' %}"></script>-->
+		<script src="{% static 'ultimatefitbackend/fullcalendar/lib/moment.min.js' %}"></script>
+		<script src="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.js' %}"></script>
+
 		<script>
 			$('#cartDropdown-hover').hover(function() {
 			    $(document).find('.cart_list').stop(true, true).delay(50).fadeIn(200);
@@ -1680,9 +1694,20 @@
 			// since food id start from 1, this loop array is from 1 to n
 
 			var totalToPay = {{total}};
-			console.log("total money to be paid when the page is freshly loaded: $" + totalToPay);
+			//console.log("total money to be paid when the page is freshly loaded: $" + totalToPay);
 
-			$(".add-to-cart-list").click(function(){
+			function getTotalToPayFromDB() {
+				$.get("/total", function(data, status){
+			        console.log("Data: " + data.total + "\nStatus: " + status);
+			        console.log(typeof(data.total));
+			        totalToPay = data.total;
+			        console.log("TOTAL TO PAY FROM DB: " + totalToPay);
+	            	$("text#total-to-pay").html(totalToPay);
+			    });
+			};
+
+			//$(".add-to-cart-list").click(function(){
+			$(document).on("click", ".add-to-cart-list", function(){
 				var idOfFood = $(this).data('id-food'); 
 			    console.log("Adding food of id: " + idOfFood);
 
@@ -1698,19 +1723,22 @@
 			            console.log("Status: " + status);
 
 			            //Consider moving this out of post function, so the number change faster, and do the check if status success or false, if false show error box/page 404
-			            quantityOfFoodArray[idOfFood] += 1;
+				        quantityOfFoodArray[idOfFood] += 1;
+				        
 			            console.log("Current quantity of food id " + idOfFood + " in database: " + quantityOfFoodArray[idOfFood]);
-
-			            totalToPay += priceOfFood;
 
 			            $("span#quantity-for-food-id-" + idOfFood).html(quantityOfFoodArray[idOfFood]);
 			            $("span#total-price-for-food-id-" + idOfFood).html(priceOfFood*quantityOfFoodArray[idOfFood]);
-			            $("text#total-to-pay").html(totalToPay);
+
+					    if (status == "success") {
+						    getTotalToPayFromDB();
+						};
 			        }
 		        );
 			});
 
-			$(".remove-from-cart-list").click(function(){
+			//$(".remove-from-cart-list").click(function(){
+			$(document).on("click", ".remove-from-cart-list", function(){
 				var idOfFoodToBeRemoved = $(this).data('id-food'); 
 			    console.log("Removing food of id: " + idOfFoodToBeRemoved);
 
@@ -1726,24 +1754,27 @@
 			            console.log("Status: " + status);
 
 			            //Consider moving this out of post function, so the number change faster, and do the check if status success or false, if false show error box/page 404
-			            quantityOfFoodArray[idOfFoodToBeRemoved] -= 1;
+				        quantityOfFoodArray[idOfFoodToBeRemoved] -= 1;
+				        
 			            console.log("Current quantity of food id " + idOfFoodToBeRemoved + " in database: " + quantityOfFoodArray[idOfFoodToBeRemoved]);
-
-			            totalToPay -= priceOfFoodToBeRemoved;
 
 			            // when quantity = 0, just remove the item from the list
 			            if (quantityOfFoodArray[idOfFoodToBeRemoved] > 0) {
 			            	$("span#quantity-for-food-id-" + idOfFoodToBeRemoved).html(quantityOfFoodArray[idOfFoodToBeRemoved]);
 			            	$("span#total-price-for-food-id-" + idOfFoodToBeRemoved).html(priceOfFoodToBeRemoved*quantityOfFoodArray[idOfFoodToBeRemoved]);
-			            	$("text#total-to-pay").html(totalToPay);
 			        	} else {
 			        		$("li#list-item-" + idOfFoodToBeRemoved).remove();
 			        	};
+
+			        	if (status == "success") {
+						    getTotalToPayFromDB();
+						};
 			        }
 		        );
 			});
 
-			$(".close-list-cart").click(function(){
+			//$(".close-list-cart").click(function(){
+			$(document).on("click", ".close-list-cart", function(){
 				var idOfDeleteFood = $(this).data('id-food');
 				console.log("deleting all items type of food id: " + idOfDeleteFood);
 
@@ -1757,12 +1788,13 @@
 			        },
 			        function(data,status){
 			            console.log("Status: " + status);
-			            console.log("Successfully delete all food type of id: " + idOfDeleteFood)
+			            console.log("Successfully delete all food type of id: " + idOfDeleteFood);
+
+			            if (status == "success") {
+						    getTotalToPayFromDB();
+						};
 			        }
 		        );
-
-				totalToPay -= priceOfDeleteFood*quantityOfFoodArray[idOfDeleteFood];
-				$("text#total-to-pay").html(totalToPay);
 
 				// When close, make quantity of that food id become 0
 				//Acutally don't need this line because this only affect front-end, but this keep it because of front-end logically correct

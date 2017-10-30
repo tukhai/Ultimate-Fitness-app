@@ -1,503 +1,127 @@
+{% extends 'base.html' %}
+
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<!-- For IE -->
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<!-- For Resposive Device -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>Organic Store | Responsive HTML5 Template</title>
-		<!-- Favicon -->
-		<link rel="apple-touch-icon" sizes="57x57" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-57x57.png' %}">
-		<link rel="apple-touch-icon" sizes="60x60" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-60x60.png' %}">
-		<link rel="apple-touch-icon" sizes="72x72" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-72x72.png' %}">
-		<link rel="apple-touch-icon" sizes="76x76" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-76x76.png' %}">
-		<link rel="apple-touch-icon" sizes="114x114" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-114x114.png' %}">
-		<link rel="apple-touch-icon" sizes="120x120" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-120x120.png' %}">
-		<link rel="apple-touch-icon" sizes="144x144" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-144x144.png' %}">
-		<link rel="apple-touch-icon" sizes="152x152" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-152x152.png' %}">
-		<link rel="apple-touch-icon" sizes="180x180" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-180x180.png' %}">
-		<link rel="icon" type="image/png" sizes="192x192"  href="{% static 'ultimatefitbackend/images/fav-icon/android-icon-192x192.png' %}">
-		<link rel="icon" type="image/png" sizes="32x32" href="{% static 'ultimatefitbackend/images/fav-icon/favicon-32x32.png' %}">
-		<link rel="icon" type="image/png" sizes="96x96" href="{% static 'ultimatefitbackend/images/fav-icon/favicon-96x96.png' %}">
-		<link rel="icon" type="image/png" sizes="16x16" href="{% static 'ultimatefitbackend/images/fav-icon/favicon-16x16.png' %}">
 
+			
 
-		<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			{% block content %}
+			<style>
+				body ::-webkit-scrollbar {
+				    width: 0px !important;
+				}
+				.popUpMessage {
+					border-style: solid;
+					border-color: #eaeaea;
+					border-radius: 3px;
+					border-width: 1px;
+					background-color: white;
+					width: 400px;
+					box-shadow: 2px 2px 1px #d8d8d8;
+					margin-bottom: 10px;
+				}
+				.popUpMessage p {
+					margin-left: 10px;
+				}
 
-
-		<!-- Custom Css -->
-		<link rel="stylesheet" type="text/css" href="{% static 'ultimatefitbackend/css/style.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'ultimatefitbackend/css/responsive.css' %}">
-
-
-		<!-- Fixing Internet Explorer ______________________________________-->
-
-		<!--[if lt IE 9]>
-			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-			<script src="vendor/html5shiv.js"></script>
-		<![endif]-->
-		
-		<!--CSS for modal box-->
-		<style>
-			body ::-webkit-scrollbar {
-			    width: 0px !important;
-			}
-			.popUpMessage {
-				border-style: solid;
-				border-color: #eaeaea;
-				border-radius: 3px;
-				border-width: 1px;
-				background-color: white;
-				width: 400px;
-				box-shadow: 2px 2px 1px #d8d8d8;
-				margin-bottom: 10px;
-			}
-			.popUpMessage p {
-				margin-left: 10px;
-			}
-
-			.modal-box-size {
-				width: 76%;
-			}
-
-			@media (min-width: 1500px) {
 				.modal-box-size {
-					width: 66%;
+					width: 76%;
 				}
-			}
-			@media (min-width: 2000px) {
-				.modal-box-size {
-					width: 56%;
-				}
-			}
-			@media (min-width: 2500px) {
-				.modal-box-size {
-					width: 46%;
-				}
-			}
 
-			/*.modal__inner {
-			    position: absolute;
-			}
-		
-			.modalDialog {
-				position: fixed;
-				overflow-y: auto;
-				font-family: Arial, Helvetica, sans-serif;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				left: 0;
-				background: rgba(0,0,0,0.8);
-				z-index: 99999;
-				opacity:0;
-				-webkit-transition: opacity 400ms ease-in;
-				-moz-transition: opacity 400ms ease-in;
-				transition: opacity 400ms ease-in;
-				pointer-events: none;
-			}*/
+				@media (min-width: 1500px) {
+					.modal-box-size {
+						width: 66%;
+					}
+				}
+				@media (min-width: 2000px) {
+					.modal-box-size {
+						width: 56%;
+					}
+				}
+				@media (min-width: 2500px) {
+					.modal-box-size {
+						width: 46%;
+					}
+				}
+
+				/*.modal__inner {
+				    position: absolute;
+				}
 			
-			
-			/*Customizing scrollbar*/
-			/*.modalDialog::-webkit-scrollbar {
-				width: 0.2em;
-			}
-			 
-			.modalDialog::-webkit-scrollbar-track {
-				-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-			}
-			 
-			.modalDialog::-webkit-scrollbar-thumb {
-			  background-color: darkgrey;
-			  outline: 1px solid slategrey;
-			}*/
-			
-			/**/
-			
-
-			/*.modalDialog:target {
-				opacity:1;
-				pointer-events: auto;
-			}
-
-			.modalDialog > div {
-				width: 90%;            
-				position: relative;
-				margin: 10% auto;
-				padding: 5px 20px 13px 20px;
-				border-radius: 10px;
-				background: #fff;
-				background: -moz-linear-gradient(#fff, #999);
-				background: -webkit-linear-gradient(#fff, #999);
-				background: -o-linear-gradient(#fff, #999);
-			}*/
-
-			/*Close button of modal box*/
-			.close {
-				background: #606061;
-				color: #FFFFFF;
-				line-height: 25px;
-				position: absolute;
-				right: -12px;
-				text-align: center;
-				top: -10px;
-				width: 24px;
-				text-decoration: none;
-				font-weight: bold;
-				-webkit-border-radius: 12px;
-				-moz-border-radius: 12px;
-				border-radius: 12px;
-				-moz-box-shadow: 1px 1px 3px #000;
-				-webkit-box-shadow: 1px 1px 3px #000;
-				box-shadow: 1px 1px 3px #000;
-			}
-
-			.close:hover { background: #00d9ff; }
-
-
-			/*for navbar*/
-			.distance-between-left-right {
-				margin-right: 175px;
-			}
-			.main-navbar {
-				position: fixed; 
-				width: 100%; 
-				z-index: 10;
-				zoom: 0.8; /* Old IE only */
-			    /*-moz-transform: scale(0.8);
-			    -webkit-transform: scale(0.8);
-			    transform: scale(0.8);*/
-			    /*Text in navbar unselectable*/
-			    -webkit-touch-callout: none;
-				-webkit-user-select: none;
-				-khtml-user-select: none;
-				-moz-user-select: none;
-				-ms-user-select: none;
-				user-select: none;			    
-			}
-			.list-news {
-				display: none !important;
-			}
-			@media (min-width: 992px) and (max-width: 1199px) {				
-				.distance-between-left-right {
-					margin-right: 0px;
-				}
-			}
-
-			.my-cart-preview {
-				position: fixed; 
-				z-index: 999; 
-				margin-top: -205px; 
-				margin-left: 50vw;
-			}
-			@media (min-width: 992px) and (max-width: 1024px) {				
-				.my-cart-preview {
-					margin-top: -182px;
-				}
-			}
-		</style>
-		
-		<!--Full Calendar links-->
-		<!--<link rel="stylesheet" type="text/css" href="{% static 'ultimatefitbackend/style.css' %}" />-->
-
-
-		<link rel='stylesheet' href="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.css' %}" />
-		
-	</head>
-
-
-	<body>
-	
-		{% block content %}
-		<div class="main_page">
-			<div id="test" style="position: fixed; margin-top: 55px; margin-left: 50vw; z-index: 10000;">
+				.modalDialog {
+					position: fixed;
+					overflow-y: auto;
+					font-family: Arial, Helvetica, sans-serif;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					left: 0;
+					background: rgba(0,0,0,0.8);
+					z-index: 99999;
+					opacity:0;
+					-webkit-transition: opacity 400ms ease-in;
+					-moz-transition: opacity 400ms ease-in;
+					transition: opacity 400ms ease-in;
+					pointer-events: none;
+				}*/
 				
-			</div>
+				
+				/*Customizing scrollbar*/
+				/*.modalDialog::-webkit-scrollbar {
+					width: 0.2em;
+				}
+				 
+				.modalDialog::-webkit-scrollbar-track {
+					-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+				}
+				 
+				.modalDialog::-webkit-scrollbar-thumb {
+				  background-color: darkgrey;
+				  outline: 1px solid slategrey;
+				}*/
+				
+				/**/
+				
 
-			<!-- Menu ******************************* -->
-			<div class="theme_menu color1_bg main-navbar">
-				<div class="container">
-					<nav class="menuzord pull-left" id="main_menu">
-					   <ul class="menuzord-menu">
-					      <li class="current_page"><a href="{% url 'ultimatefitbackend:index' %}">Home</a></li>
-					      <li><a href="{% url 'ultimatefitbackend:about' %}">About us</a></li>
-					      <li><a href="#">store</a>
-					      	<ul class="dropdown">
-					            <li><a href="{% url 'ultimatefitbackend:shop' %}">Shop With Sidebar</a></li>
-					            <li><a href="shop-single.html">Product Detail</a></li>
-					            <li><a href="{% url 'ultimatefitbackend:cart' %}">Cart Page</a></li>
-					            <li><a href="checkout.html">Checkout Page</a></li>
-					            <li><a href="account.html">My Account</a></li>
-					         </ul>
-					      </li>
-					      <li class="list-news"><a href="#">News</a>
-					      	<ul class="dropdown">
-					            <li><a href="blog-Standard.html">News Standard</a></li>
-					            <li><a href="blog-list-sidebar.html">News With Sidebar</a></li>
-					            <li><a href="blog-grid.html">News Masonary</a></li>
-					            <li><a href="blog-details.html">News Single</a></li>
-					         </ul>
-					      </li>
-					      <li><a href="#">gallery</a>
-					      	<ul class="dropdown">
-					            <li><a href="gallery-grid.html">Gallery Grid</a></li>
-                                <li><a href="gallery-masonry.html">Gallery Masonary</a></li>
-                                <li><a href="gallery-single.html">Gallery Single</a></li>
-					         </ul>
-					      </li>
+				/*.modalDialog:target {
+					opacity:1;
+					pointer-events: auto;
+				}
 
-					      <!--<li><a href="#">Pages</a>
-					      	<ul class="dropdown">
-					            <li><a href="{% url 'ultimatefitbackend:testimonials' %}">Testimonials</a></li>
-					            <li><a href="{% url 'ultimatefitbackend:error' %}">404v page</a></li>
-					            <li><a href="{% url 'ultimatefitbackend:faq' %}">FAQ</a></li>
-					         </ul>
-					      </li>-->
-					      
-					      <li class="distance-between-left-right">
-					      	<a href="{% url 'ultimatefitbackend:contact' %}">Contact us</a>
-					      </li>
-					      <li>
-					      	<a href="{% url 'ultimatefitbackend:cart' %}">
-						      	<button class="cart tran3s dropdown-toggle" id="cartDropdown-hover">
-						      		<i class="fa icon-icon-32846" aria-hidden="true" style="font-size: 130%;"></i>
-						      		<!--<span class="s_color_bg p_color" style="font-size: 80%; margin-bottom: -50px !important; position: auto;">2</span>-->
-						      		<span>My Cart</span>
-						      	</button>						      	
-					        </a>
-					      </li>
-					      <li>
-					      	{% if request.user.is_authenticated %}
-						      	<a>
-						      		<span style="text-transform: lowercase; cursor: pointer;">
-						      			<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i> 
-						      			{% if request.user.first_name %}!
-										{{ request.user.first_name }}
-										{% else %}
-										{{ request.user.username }}
-										{% endif %}
-									</span>
-						        </a>
-						        <ul class="dropdown">
-						            <li><a href="{% url 'auth_logout' %}">Log Out</a></li>
-						         </ul>
-					        {% else %}
-					        	<!--<a>
-						      		<button>
-							      		<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i>
-							      		<span>Sign In</span>							      		
-						      		</button>
-						      		<span><ul class="dropdown">
-							            <li><a href="{% url 'auth_login' %}">Sign In</a></li>
-							            <li><a href="{% url 'registration_register' %}">Register Here</a></li>
-							        </ul></span>
-						        </a>-->
-						        <a>
-						        	<span style="text-transform: capitalize; cursor: pointer;">
-						        		<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i> Sign In
-						        	</span>
-						        </a>
-						        <ul class="dropdown">
-						            <li><a href="{% url 'auth_login' %}">Sign In</a></li>
-						            <li><a href="{% url 'registration_register' %}">Register Here</a></li>
-						        </ul>
-					        {% endif %}
-					      </li>
-					      <li>
-					      	<a style="text-transform: capitalize; cursor: pointer;">
-				      			<span>English</span>				      		
-					        </a>
-					        <ul class="dropdown">
-					            <li><a>English</a></li>
-					            <li><a>Tiếng Việt</a></li>
-					        </ul>
-					      </li>
-					   </ul> <!-- End of .menuzord-menu -->
-				   </nav> <!-- End of #main_menu -->
-				     
-			   </div> <!-- End of .conatiner -->
-			</div> <!-- End of .theme_menu -->
+				.modalDialog > div {
+					width: 90%;            
+					position: relative;
+					margin: 10% auto;
+					padding: 5px 20px 13px 20px;
+					border-radius: 10px;
+					background: #fff;
+					background: -moz-linear-gradient(#fff, #999);
+					background: -webkit-linear-gradient(#fff, #999);
+					background: -o-linear-gradient(#fff, #999);
+				}*/
 
-			<!-- Header *******************************  -->
-			<header style="margin-top: 56px;">
-				<div class="bottom_header my-cart-preview">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-4 col-sm-7 col-xs-6 pdt-14">
-							    <div class="cart_option float_right">
-								   		
-							   		<div class="cart_list color2_bg" aria-labelledby="cartDropdown">
-							   			<ul>
-							   				<li>
-							   					<div class="cart_item_wrapper clear_fix">
-							   						<div class="img_holder float_left"><img src="{% static 'ultimatefitbackend/images/shop/9.png' %}" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
+				/*Close button of modal box*/
+				.close {
+					background: #606061;
+					color: #FFFFFF;
+					line-height: 25px;
+					position: absolute;
+					right: -12px;
+					text-align: center;
+					top: -10px;
+					width: 24px;
+					text-decoration: none;
+					font-weight: bold;
+					-webkit-border-radius: 12px;
+					-moz-border-radius: 12px;
+					border-radius: 12px;
+					-moz-box-shadow: 1px 1px 3px #000;
+					-webkit-box-shadow: 1px 1px 3px #000;
+					box-shadow: 1px 1px 3px #000;
+				}
 
-							   						<div class="item_deatils float_left">
-							   							<h6>Turmeric Powde</h6>
-							   							<ul>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														</ul>
-														<span class="font_fix">$ 34.99</span>
-							   						</div> <!-- End of .item_deatils -->
-							   					</div> <!-- End of .cart_item_wrapper -->
-							   				</li>
+				.close:hover { background: #00d9ff; }
 
-							   				<li>
-							   					<div class="cart_item_wrapper clear_fix">
-							   						<div class="img_holder float_left"><img src="{% static 'ultimatefitbackend/images/shop/10.png' %}" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
-							   						
-							   						<div class="item_deatils float_left">
-							   							<h6>Pure Jeans Coffee</h6>
-							   							<ul>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														</ul>
-														<span class="font_fix">$ 26.99</span>
-							   						</div> <!-- End of .item_deatils -->
-							   					</div> <!-- End of .cart_item_wrapper -->
-							   				</li>
-
-							   				<li>
-							   					<div class="cart_item_wrapper clear_fix">
-							   						<div class="img_holder float_left"><img src="{% static 'ultimatefitbackend/images/shop/11.png' %}" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
-							   						
-							   						<div class="item_deatils float_left">
-							   							<h6>Columbia Chocolate</h6>
-							   							<ul>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														</ul>
-														<span class="font_fix">$ 26.99</span>
-							   						</div> <!-- End of .item_deatils -->
-							   					</div> <!-- End of .cart_item_wrapper -->
-							   				</li>
-							   			</ul>
-
-							   			<div class="cart_total clear_fix">
-
-							   				<span class="total font_fix float_left">Total - 140$</span>
-							   				<a href="#" class="s_color_bg float_right tran3s">Checkout</a>
-							   			</div>
-							   		</div> <!-- End of .cart_list -->
-							    </div>
-
-							</div>
-
-						</div>
-
-					</div>
-				</div> <!-- End of .bottom_header -->
-				<div class="top_header">
-					<div class="container">
-						<div class="pull-left header_left">
-							<ul>
-		        				<li><a href="#">Order On Phone: <span>+321 453 68 739</span></a></li>
-		        				<li><i class="fa fa-envelope-o s_color" aria-hidden="true"></i><a href="#">organicstore@gmail.com</a></li>
-		        			</ul>
-						</div>
-
-						<div class="pull-right header_right">
-							<div class="state" id="value1">
-								<ul>
-			        				<li><i class="fa fa-user s_color" aria-hidden="true"></i><a href="#">Account</a></li>
-			        				<li><i class="fa fa-heart s_color" aria-hidden="true"></i><a href="#">Whishlist </a></li>
-			        				<li><i class="fa fa-truck s_color" aria-hidden="true"></i><a href="#">Whishlist</a></li>
-			        			</ul>
-			        			<div id="polyglotLanguageSwitcher">
-									<form action="#">
-										<select id="polyglot-language-options">
-											<option id="en" value="en" selected>English</option>
-											<option id="fr" value="fr">French</option>
-											<option id="de" value="de">German</option>
-											<option id="it" value="it">Italian</option>
-											<option id="es" value="es">Spanish</option>
-										</select>
-									</form>
-								</div>
-							</div>
-
-								
-						</div>
-					</div> <!-- End of .container -->
-				</div> <!-- End of .top_header -->				
-			</header>
-
-
-
-			<!-- Menu ******************************* -->
-			<!--<div class="theme_menu color1_bg">
-				<div class="container">
-					<nav class="menuzord pull-left" id="main_menu">
-					   <ul class="menuzord-menu">
-					      <li><a href="{% url 'ultimatefitbackend:index' %}">Home</a></li>
-					      <li><a href="{% url 'ultimatefitbackend:about' %}">About us</a></li>
-					      <li class="current_page"><a href="#">store</a>
-					      	<ul class="dropdown">
-					            <li><a href="{% url 'ultimatefitbackend:shop' %}">Shop With Sidebar</a></li>
-					            <li><a href="shop-single.html">Product Detail</a></li>
-					            <li><a href="{% url 'ultimatefitbackend:cart' %}">Cart Page</a></li>
-					            <li><a href="checkout.html">Checkout Page</a></li>
-					            <li><a href="account.html">My Account</a></li>
-					         </ul>
-					      </li>
-					      <li><a href="#">News</a>
-					      	<ul class="dropdown">
-					            <li><a href="blog-Standard.html">News Standard</a></li>
-					            <li><a href="blog-list-sidebar.html">News With Sidebar</a></li>
-					            <li><a href="blog-grid.html">News Masonary</a></li>
-					            <li><a href="blog-details.html">News Single</a></li>
-					         </ul>
-					      </li>
-					      <li><a href="#">gallery</a>
-					      	<ul class="dropdown">
-					            <li><a href="gallery-grid.html">Gallery Grid</a></li>
-                                <li><a href="gallery-masonry.html">Gallery Masonary</a></li>
-                                <li><a href="gallery-single.html">Gallery Single</a></li>
-					         </ul>
-					      </li>
-
-					      <li><a href="#">Pages</a>
-					      	<ul class="dropdown">
-					            <li><a href="{% url 'ultimatefitbackend:testimonials' %}">Testimonials</a></li>
-					            <li><a href="{% url 'ultimatefitbackend:error' %}">404v page</a></li>
-					            <li><a href="{% url 'ultimatefitbackend:faq' %}">FAQ</a></li>
-					         </ul>
-					      </li>
-					      
-					      <li><a href="{% url 'ultimatefitbackend:contact' %}">Contact us</a></li>
-					   </ul> <!-- End of .menuzord-menu -->
-				   <!--</nav> <!-- End of #main_menu -->
-
-
-				   <!-- ******* Cart And Search Option ******** -->
-				   <!--<div class="nav_side_content pull-right">
-				   		<ul class="icon_header">
-							<li class="border_round tran3s"><a href="#"><i class="fa fa-facebook"></i></a></li>
-							<li class="border_round tran3s"><a href="#"><i class="fa fa-twitter"></i></a></li>
-							<li class="border_round tran3s"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							<li class="border_round tran3s"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-						</ul>
-				   </div> <!-- End of .nav_side_content -->
-				     
-			   <!--</div> <!-- End of .conatiner -->
-			<!--</div> <!-- End of .theme_menu -->
-
-
+			</style>
 			<section class="breadcrumb-area" style="background-image:url({% static 'ultimatefitbackend/images/background/2.jpg' %});">
 			    <div class="container">
 			        <div class="row">
@@ -1041,303 +665,154 @@
 	        	</div> <!-- End of .container -->
 	        </div> <!-- End of .shop_page -->
 
+	        <!--<script src="{% static 'ultimatefitbackend/fullcalendar/lib/jquery.min.js' %}"></script>-->
+			<script src="{% static 'ultimatefitbackend/fullcalendar/lib/moment.min.js' %}"></script>
+			<script src="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.js' %}"></script>
 
-			<!-- Footer************************* -->
-			<footer>
-				<div class="main_footer">
-					<div class="container">
-						<div class="row">
-							<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 footer_logo">
-								<a href="index.html"><img src="{% static 'ultimatefitbackend/images/logo/logo-2.png' %}" alt="Logo"></a>
-								<p>Denouncing pleasures and praising pain was born and I will give you a complete account of the system.</p><p>Expound that actual teachings the great explorer of the truth, the master-builder of human happiness no one rejects, likes, or avoids pleasure itself rationally. </p>
+			<script>
+				$('#cartDropdown-hover').hover(function() {
+				    $(document).find('.cart_list').stop(true, true).delay(50).fadeIn(200);
+				}, function() {
+				    $(document).find('.cart_list').stop(true, true).delay(50).fadeOut(200);
+				});
 
-								<a href="#" class="tran3s">buy theme</a>
+				$('.cart_list').hover(function() {
+				    $(this).stop(true, true).delay(50).fadeIn(200);
+				}, function() {
+				    $(this).stop(true, true).delay(50).fadeOut(200);
+				});
+			</script>
+			
+			<script type="text/javascript">
+				
+				$(document).ready(function() {
+
+					// page is now ready, initialize the calendar...
+
+					$('#calendar').fullCalendar({
+						// put your options and callbacks here
 						
-							</div> <!-- End of .footer_logo -->
+						header: { 
+							left: 'prev,next today',
+							center: 'title',
+							//center: 'month,basicWeek,basicDay' 
+							right: 'month,basicWeek,basicDay'
+						}, // buttons for switching between views
+						
+						//contentHeight: 1000,
+						//aspectRatio: 2,
+						
+						navLinks: true,
+						navLinkDayClick: function(date, jsEvent) {
+							console.log('day', date.format()); // date is a moment
+							console.log('coords', jsEvent.pageX, jsEvent.pageY);
+						},
+							
+						events: 
+							[
+								{   
+									title: 'Curry Chicken Wrap',
+									start: '2017-10-03',
+									description: '<img src="http://static.foodmatters.me/images/food/131126-379z%20Curry%20Chicken%20Wrap.jpg" style="width:130px;height:90px;float:left;">'
+								},
+								/*{   
+									title: 'Curry Chicken Wrap',
+									start: '2017-03-10',
+									imageurl: 'http://www.athenaspizzaamherst.com/wp-content/uploads/2013/05/front-1-1008x500.jpg'
+								},*/
+								{% autoescape off %}
+								/*{% for food in foods %}
+								{
+									title: '{{food.name}}',
+									start: '{{food.convertdate}}',
+									description: '<a href="#openModal-{{food.name}}" class="btnAdd-{{food.name}}">{{food.description}}</a>'
+								},
+								{% endfor %}*/
+								{% for food in foods %}
+								{
+									title: '{{food.name}}',
+									start: '{{food.convertdate}}',
+									description: '<a href="#my_modal" data-toggle="modal" data-food-id="{{food.name}}" data-modal-id="{% url 'ultimatefitbackend:food' food.id %}" class="btnAdd-{{food.name}}"><img src="{{food.description}}"  style="width:130px;height:90px;float:left;"></a>'
+								},
+								{% endfor %}
+								{% endautoescape %}
+							],
 
-							<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 footer_news">
-								<h5>recent post</h5>
+						eventBackgroundColor: 'silver',
+						eventBorderColor: 'silver',
+							
+						eventRender: function(event, element) { 
+							element.append(event.description); 
+						},
+						
+						/*eventRender: function(event, eventElement) {
+							if (event.imageurl) {
+								eventElement.find("div.fc-content").prepend("<img src='" + event.imageurl +"' width='130' height='90'>");
+							}
+						},*/
 
-								<div class="recent-posts">
-									<div class="post">
-			                            <div class="post-thumb"><a href="#"><img src="{% static 'ultimatefitbackend/images/blog/p1.jpg' %}" alt=""></a></div>
-			                            <h4><a href="#">Control your cholestrol & fat in 2 weeks</a></h4>
-			                            <div class="post-info"><i class="fa fa-clock-o"></i>08th Sep, 2015</div>
-			                        </div>
-									<div class="post">
-			                            <div class="post-thumb"><a href="#"><img src="{% static 'ultimatefitbackend/images/blog/p2.jpg' %}" alt=""></a></div>
-			                            <h4><a href="#">Control your cholestrol & fat in 2 weeks</a></h4>
-			                            <div class="post-info"><i class="fa fa-clock-o"></i>08th Sep, 2015</div>
-			                        </div>
-			                        <div class="post">
-			                            <div class="post-thumb"><a href="#"><img src="{% static 'ultimatefitbackend/images/blog/p3.jpg' %}" alt=""></a></div>
-			                            <h4><a href="#">Control your cholestrol & fat in 2 weeks</a></h4>
-			                            <div class="post-info"><i class="fa fa-clock-o"></i>08th Sep, 2015</div>
-			                        </div>
-								</div>
-							</div> <!-- End of .footer_news -->
-
-							<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 footer_subscribe">
-								<h5>categoreis</h5>
-								<ul class="list catagories">
-		                            <li><a href="#"><i class="fa fa-angle-right"></i>Arable & Postoral Farmers</a></li>
-		                            <li><a href="#"><i class="fa fa-angle-right"></i>Become a Member</a></li>
-		                            <li><a href="#"><i class="fa fa-angle-right"></i>Shop Our Prodcuts</a></li>
-		                        </ul>
-		                        <div class="widget popular-tags">
-			                        <div class="sidebar-title"><h5>tags</h5></div>
-			                        
-			                        <a href="#">Fruits</a>
-			                        <a href="#">Cosmetics</a>
-			                        <a href="#">Farmers</a>
-			                        <a href="#">Healthy</a>
-			                        <a href="#">Catering</a>                     
-			                        <a href="#">Post Format</a>                                         
-			                    </div>
-							</div> <!-- End of .footer_subscribe -->
-
-
-							<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 footer_contact">
-								<h5>Get In Touch</h5>
-								<ul class="list catagories">
-		                            <li><a href="#"><i class="fa fa-envelope"></i>Organic store@gmail.com</a></li>
-		                            <li><a href="#"><i class="fa fa-phone"></i>+91 (321) 758 142 5698</a></li>
-		                            <li><a href="#"><i class="fa fa-home"></i>No 271, Red Cross Building, Modern Street, Newyork City, USA.</a></li>
-		                        </ul>
-
-		                        <h5>Business Hours</h5>
-								<div class="list Business">
-		                            <p>Monday - Friday: 09.00am to 07.00pm <br>Saturday: 10.00am to 05.00pm <br>Sunday: <span>Closed</span></p>
-		                        </div>
-		                        
-							</div> <!-- End of .footer_contact -->
+						dayRender: function(date, cell) {
+							cell.css("background-color", "silver");
+						}
+					})			
+					
+				});
+			</script>
+			
+			{% autoescape off %}
+			<!--{% for food in foods %}
+				<div class="modal__inner">
+					<div id="openModal-{{food.name}}" class="modalDialog">
+						<div style="overflow:hidden">
+							<a href="#close" title="Close" class="close">X</a>
+							<iframe width="100%" scrolling="no" frameborder="0" src="{% url 'ultimatefitbackend:food' food.id %}" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>						
 						</div>
 					</div>
-				</div> <!-- End of .main_footer -->
-
-				<div class="bottom_footer clear_fix">
-					<div class="container">
-						<h6 class="pull-left">Copyrights © 2015 All Rights Reserved by<a href="http://themeforest.net/user/steelthemes/portfolio" target="_blank">Steelthemes</a></h6>
-						<ul class="social_icon pull-right">
-							<li><a href="" class="tran3s"><i class="fa fa-cc-visa" aria-hidden="true"></i></a></li>
-							<li><a href="" class="tran3s"><i class="fa fa-cc-mastercard" aria-hidden="true"></i></a></li>
-							<li><a href="" class="tran3s"><i class="fa fa-paypal" aria-hidden="true"></i></a></li>
-							<li><a href="" class="tran3s"><i class="fa fa-credit-card-alt" aria-hidden="true"></i></a></li>
-							<li><a href="" class="tran3s"><i class="fa fa-cc-discover" aria-hidden="true"></i></a></li>
-						</ul>
-					</div>
 				</div>
-			</footer>
-
-
-			<!-- Scroll Top Button -->
-			<button class="scroll-top tran3s color2_bg">
-				<span class="fa fa-angle-up"></span>
-			</button>
-			<!-- pre loader  -->
-		 	<div id="loader-wrapper">
-				<div id="loader"></div>
-			</div>
-
-<!-- Js File_________________________________ -->
-
-		<!-- j Query -->
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery-2.1.4.js' %}"></script>
-		<!-- Bootstrap JS -->
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/bootstrap.min.js' %}"></script>
-
-		<!-- Vendor js _________ -->
-		<!-- Google map js -->
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRvBPo3-t31YFk588DpMYS6EqKf-oGBSI"></script> <!-- Gmap Helper -->
-		<script src="{% static 'ultimatefitbackend/js/gmap.js' %}"></script>
-		<!-- owl.carousel -->
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/owl.carousel.min.js' %}"></script>
-		<!-- ui js -->
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery-ui.min.js' %}"></script>
-		<!-- Responsive menu-->
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/menuzord.js' %}"></script>
-		<!-- revolution -->
-		<script src="{% static 'ultimatefitbackend/vendor/revolution/jquery.themepunch.tools.min.js' %}"></script>
-		<script src="{% static 'ultimatefitbackend/vendor/revolution/jquery.themepunch.revolution.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.slideanims.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.layeranimation.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.navigation.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.kenburn.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.actions.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.parallax.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.migration.min.js' %}"></script>
-
-		<!-- landguage switcher js -->
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.polyglot.language.switcher.js' %}"></script>
-		<!-- Fancybox js -->
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.fancybox.pack.js' %}"></script>
-		<!-- js count to -->
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.appear.js' %}"></script>
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.countTo.js' %}"></script>
-		<!-- WOW js -->
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/wow.min.js' %}"></script>
-
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/SmoothScroll.js' %}"></script>
-
-		<script src="{% static 'ultimatefitbackend/js/bootstrap-select.min.js' %}"></script>
-		<script src="{% static 'ultimatefitbackend/js/jquery.mixitup.min.js' %}"></script>
-		<!-- Theme js -->
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/theme.js' %}"></script>
-		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/google-map.js' %}"></script>
-
-
-		<!--<script src="{% static 'ultimatefitbackend/fullcalendar/lib/jquery.min.js' %}"></script>-->
-		<script src="{% static 'ultimatefitbackend/fullcalendar/lib/moment.min.js' %}"></script>
-		<script src="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.js' %}"></script>
-
-		<script>
-			$('#cartDropdown-hover').hover(function() {
-			    $(document).find('.cart_list').stop(true, true).delay(50).fadeIn(200);
-			}, function() {
-			    $(document).find('.cart_list').stop(true, true).delay(50).fadeOut(200);
-			});
-
-			$('.cart_list').hover(function() {
-			    $(this).stop(true, true).delay(50).fadeIn(200);
-			}, function() {
-			    $(this).stop(true, true).delay(50).fadeOut(200);
-			});
-		</script>
-		
-		<script type="text/javascript">
+			{% endfor %}-->
+			<!--could replace iframe with the real simple product detail with add to cart, but have to make it short, in case this page maybe to long, can consider manual/auto delete data after a time-->
 			
-			$(document).ready(function() {
-
-				// page is now ready, initialize the calendar...
-
-				$('#calendar').fullCalendar({
-					// put your options and callbacks here
-					
-					header: { 
-						left: 'prev,next today',
-						center: 'title',
-						//center: 'month,basicWeek,basicDay' 
-						right: 'month,basicWeek,basicDay'
-					}, // buttons for switching between views
-					
-					//contentHeight: 1000,
-					//aspectRatio: 2,
-					
-					navLinks: true,
-					navLinkDayClick: function(date, jsEvent) {
-						console.log('day', date.format()); // date is a moment
-						console.log('coords', jsEvent.pageX, jsEvent.pageY);
-					},
-						
-					events: 
-						[
-							{   
-								title: 'Curry Chicken Wrap',
-								start: '2017-10-03',
-								description: '<img src="http://static.foodmatters.me/images/food/131126-379z%20Curry%20Chicken%20Wrap.jpg" style="width:130px;height:90px;float:left;">'
-							},
-							/*{   
-								title: 'Curry Chicken Wrap',
-								start: '2017-03-10',
-								imageurl: 'http://www.athenaspizzaamherst.com/wp-content/uploads/2013/05/front-1-1008x500.jpg'
-							},*/
-							{% autoescape off %}
-							/*{% for food in foods %}
-							{
-								title: '{{food.name}}',
-								start: '{{food.convertdate}}',
-								description: '<a href="#openModal-{{food.name}}" class="btnAdd-{{food.name}}">{{food.description}}</a>'
-							},
-							{% endfor %}*/
-							{% for food in foods %}
-							{
-								title: '{{food.name}}',
-								start: '{{food.convertdate}}',
-								description: '<a href="#my_modal" data-toggle="modal" data-food-id="{{food.name}}" data-modal-id="{% url 'ultimatefitbackend:food' food.id %}" class="btnAdd-{{food.name}}"><img src="{{food.description}}"  style="width:130px;height:90px;float:left;"></a>'
-							},
-							{% endfor %}
-							{% endautoescape %}
-						],
-
-					eventBackgroundColor: 'silver',
-					eventBorderColor: 'silver',
-						
-					eventRender: function(event, element) { 
-						element.append(event.description); 
-					},
-					
-					/*eventRender: function(event, eventElement) {
-						if (event.imageurl) {
-							eventElement.find("div.fc-content").prepend("<img src='" + event.imageurl +"' width='130' height='90'>");
-						}
-					},*/
-
-					dayRender: function(date, cell) {
-						cell.css("background-color", "silver");
-					}
-				})			
-				
-			});
-		</script>
-		
-		{% autoescape off %}
-		<!--{% for food in foods %}
-			<div class="modal__inner">
-				<div id="openModal-{{food.name}}" class="modalDialog">
+			<!--<div class="modal__inner" id="my_modal">
+				<div class="modalDialog">
 					<div style="overflow:hidden">
 						<a href="#close" title="Close" class="close">X</a>
-						<iframe width="100%" scrolling="no" frameborder="0" src="{% url 'ultimatefitbackend:food' food.id %}" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>						
+						<iframe width="100%" scrolling="no" frameborder="0" src="" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>					
 					</div>
 				</div>
-			</div>
-		{% endfor %}-->
-		<!--could replace iframe with the real simple product detail with add to cart, but have to make it short, in case this page maybe to long, can consider manual/auto delete data after a time-->
-		
-		<!--<div class="modal__inner" id="my_modal">
-			<div class="modalDialog">
-				<div style="overflow:hidden">
-					<a href="#close" title="Close" class="close">X</a>
-					<iframe width="100%" scrolling="no" frameborder="0" src="" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>					
-				</div>
-			</div>
-		</div>-->
+			</div>-->
 
-		<div class="modal" id="my_modal" style="padding-top: 35px;">
-		    <div class="modal-dialog modal-box-size">		    	
-			    <div class="modal-content">
-			        <div class="modal-header">
-			            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			            <h4 class="modal-title">Modal header</h4>
+			<div class="modal" id="my_modal" style="padding-top: 35px;">
+			    <div class="modal-dialog modal-box-size">		    	
+				    <div class="modal-content">
+				        <div class="modal-header">
+				            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				            <h4 class="modal-title">Modal header</h4>
 
-			            <div>			        	
-							<iframe width="100%" scrolling="no" frameborder="0" src="" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>					
-						</div>
-			        </div>			        				
-			        <!--<div class="modal-footer">
-			            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			        </div>-->
+				            <div>			        	
+								<iframe width="100%" scrolling="no" frameborder="0" src="" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>					
+							</div>
+				        </div>			        				
+				        <!--<div class="modal-footer">
+				            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        </div>-->
+				    </div>
 			    </div>
-		    </div>
-		</div>
+			</div>
 
-		<script>
-		    $(document).on('show.bs.modal', '#my_modal', function(e) {
-		        console.log("HII");
-		        var foodId = $(e.relatedTarget).data('food-id');		        
-		        $(e.currentTarget).find('h4[class="modal-title"]').html(foodId);
-		        console.log(foodId);
-		        console.log(typeof(foodId.toString()));
+			<script>
+			    $(document).on('show.bs.modal', '#my_modal', function(e) {
+			        console.log("HII");
+			        var foodId = $(e.relatedTarget).data('food-id');		        
+			        $(e.currentTarget).find('h4[class="modal-title"]').html(foodId);
+			        console.log(foodId);
+			        console.log(typeof(foodId.toString()));
 
-		        var modalId = $(e.relatedTarget).data('modal-id');
-		        $(e.currentTarget).find('iframe').attr("src", modalId);
-		    });
-		    $(document).on('hidden.bs.modal', '#my_modal', function (e) {
-			    
-			});
-		</script>
-		{% endautoescape %}		
-		
-		</div> <!-- End of .main_page -->
-		{% endblock %}
-	</body>
-</html>
+			        var modalId = $(e.relatedTarget).data('modal-id');
+			        $(e.currentTarget).find('iframe').attr("src", modalId);
+			    });
+			    $(document).on('hidden.bs.modal', '#my_modal', function (e) {
+				    
+				});
+			</script>
+			{% endautoescape %}
+	        {% endblock %}

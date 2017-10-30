@@ -43,6 +43,8 @@ urlpatterns = [
 
     url(r'^removeall/(\d+)', views.remove_all_from_cart, name='remove_all_from_cart'),
     url(r'^cart/', views.cart, name='cart'),
+
+    url(r'^total/', views.total, name='total'),
     #url(r'^remove/(\d+)', views.remove_from_cart, name='remove_from_cart'),
     #url(r'^cart/', views.cart, name='cart'),
     #url(r'^shopping-cart/', include('shopping.urls')),

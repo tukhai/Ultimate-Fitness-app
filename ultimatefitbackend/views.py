@@ -79,6 +79,37 @@ def index(request):
     return render(request, 'base.html', context)
 
 
+def total(request):
+    if request.user.is_authenticated():
+        cart = Cart.objects.get(
+            user=request.user,
+            active=True
+        );
+    else:
+        if 'cart' in request.session:
+            print "cart is exist in session"
+            cart = Cart.objects.get(id=request.session['cart'])
+        else:
+            print "cart id is not in session"
+            cart = None
+
+    orders = FoodOrder.objects.filter(cart=cart)
+    print orders
+    total = 0
+    count = 0
+
+    for order in orders:
+        total += (order.food.price * order.quantity) 
+        count += order.quantity
+
+    #seror = serializers.serialize('python',orders); 
+
+    o = {
+        'total': total
+    }
+    return JsonResponse(o, safe=False)
+
+
 def contact(request):
     return render(request, 'ultimatefitbackend/contact.html')
 def about(request):
@@ -99,9 +130,39 @@ def shop(request):
 
     foods = Food.objects.all()
     context_object_name = 'latest_food_list'
+
+    if request.user.is_authenticated():
+        cart = Cart.objects.get(
+            user=request.user,
+            active=True
+        );
+    else:
+        if 'cart' in request.session:
+            print "cart is exist in session"
+            cart = Cart.objects.get(id=request.session['cart'])
+        else:
+            print "cart id is not in session"
+            cart = None
+
+    orders = FoodOrder.objects.filter(cart=cart)
+    print orders
+    total = 0
+    count = 0
+    for order in orders:
+        total += (order.food.price * order.quantity) 
+        count += order.quantity
+        print order.food.id,order.food.name,": $",order.food.price," * ",order.quantity
+
     context = {
-        'foods': foods,
+        'cart': orders,
+        'total': total,
+        'count': count,
+        'foods': foods
     }
+
+    '''context = {
+        'foods': foods,
+    }'''
     
     '''if request.user.is_authenticated():
         request.session['location'] = "Earth"
@@ -143,9 +204,19 @@ def food(request, food_id):
         
         print quantityInCart
 
+
+    # get the current total value of the cart
+    orders_total = FoodOrder.objects.filter(cart=cart)
+    #print orders
+    total = 0
+    for order_total in orders_total:
+        total += (order_total.food.price * order_total.quantity)
+
+
     context = {
         'food': Food.objects.get(pk=food_id),
-        'quantityInThisCart': quantityInCart
+        'quantityInThisCart': quantityInCart,
+        'total': total
     }
     return HttpResponse(template.render(context, request))
 
