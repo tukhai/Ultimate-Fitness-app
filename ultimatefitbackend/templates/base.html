@@ -112,6 +112,32 @@
 					display: none;
 				}
 			}
+
+			.internet-connection-error {
+				border-style: solid;
+				border-color: #eaeaea;
+				border-radius: 10px;
+				border-width: 1px;
+				background-color: black;
+				color: white;
+				opacity: 0.8;
+				width: 220px;
+				padding-top: 7px;
+				display: none;
+				z-index: 100000;		
+			}
+
+			.internet-connection-error p {
+				margin-left: 17px;
+				line-height: 1.15;
+				margin-bottom: 10px;
+				margin-top: 3px;
+			}
+			.internet-connection-error h7 {
+				margin-left: 17px;
+				margin-top: 10px;				
+				font-weight: 600;
+			}
 		</style>
 
 		<link rel='stylesheet' href="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.css' %}" />
@@ -121,6 +147,12 @@
 
 	<body>
 		<div class="main_page">
+			<div style="position: fixed; margin-top: 55px; margin-left: 50vw; z-index: 10000;">
+				<div class="internet-connection-error">
+					<h7>You seem to be offline &nbsp;<i style="color: red;" class="fa fa-wifi" aria-hidden="true"></i></h7>
+					<p>Please check your internet connection and try again</p>
+				</div>	
+			</div>
 			<div id="test" style="position: fixed; margin-top: 55px; margin-left: 50vw; z-index: 10000;">
 				
 			</div>
@@ -1737,6 +1769,12 @@
 			    });
 			};
 
+			function popUpInternetConnectionError() {
+				console.log("NO INTERNET");
+				$('.internet-connection-error').fadeIn(200);
+			    $('.internet-connection-error').delay(1500).fadeOut(200);
+			};
+
 			//$(".add-to-cart-list").click(function(){
 			$(document).on("click", ".add-to-cart-list", function(){
 				var idOfFood = $(this).data('id-food'); 
@@ -1753,19 +1791,22 @@
 			        function(data,status){
 			            console.log("Status: " + status);
 
-			            //Consider moving this out of post function, so the number change faster, and do the check if status success or false, if false show error box/page 404
-				        quantityOfFoodArray[idOfFood] += 1;
-				        
-			            console.log("Current quantity of food id " + idOfFood + " in database: " + quantityOfFoodArray[idOfFood]);
+			            if (status == "success") {
+				            //Consider moving this out of post function, so the number change faster, and do the check if status success or false, if false show error box/page 404
+					        quantityOfFoodArray[idOfFood] += 1;
+					        
+				            console.log("Current quantity of food id " + idOfFood + " in database: " + quantityOfFoodArray[idOfFood]);
 
-			            $("span#quantity-for-food-id-" + idOfFood).html(quantityOfFoodArray[idOfFood]);
-			            $("span#total-price-for-food-id-" + idOfFood).html(priceOfFood*quantityOfFoodArray[idOfFood]);
+				            $("span#quantity-for-food-id-" + idOfFood).html(quantityOfFoodArray[idOfFood]);
+				            $("span#total-price-for-food-id-" + idOfFood).html(priceOfFood*quantityOfFoodArray[idOfFood]);
 
-					    if (status == "success") {
-						    getTotalToPayFromDB();
+						    
+							getTotalToPayFromDB();
 						};
 			        }
-		        );
+		        ).fail(function(){
+				    popUpInternetConnectionError();
+				});
 			});
 
 			//$(".remove-from-cart-list").click(function(){
@@ -1784,24 +1825,26 @@
 			        function(data,status){
 			            console.log("Status: " + status);
 
-			            //Consider moving this out of post function, so the number change faster, and do the check if status success or false, if false show error box/page 404
-				        quantityOfFoodArray[idOfFoodToBeRemoved] -= 1;
-				        
-			            console.log("Current quantity of food id " + idOfFoodToBeRemoved + " in database: " + quantityOfFoodArray[idOfFoodToBeRemoved]);
+			            if (status == "success") {
+				            //Consider moving this out of post function, so the number change faster, and do the check if status success or false, if false show error box/page 404
+					        quantityOfFoodArray[idOfFoodToBeRemoved] -= 1;
+					        
+				            console.log("Current quantity of food id " + idOfFoodToBeRemoved + " in database: " + quantityOfFoodArray[idOfFoodToBeRemoved]);
 
-			            // when quantity = 0, just remove the item from the list
-			            if (quantityOfFoodArray[idOfFoodToBeRemoved] > 0) {
-			            	$("span#quantity-for-food-id-" + idOfFoodToBeRemoved).html(quantityOfFoodArray[idOfFoodToBeRemoved]);
-			            	$("span#total-price-for-food-id-" + idOfFoodToBeRemoved).html(priceOfFoodToBeRemoved*quantityOfFoodArray[idOfFoodToBeRemoved]);
-			        	} else {
-			        		$("li#list-item-" + idOfFoodToBeRemoved).remove();
-			        	};
-
-			        	if (status == "success") {
+				            // when quantity = 0, just remove the item from the list
+				            if (quantityOfFoodArray[idOfFoodToBeRemoved] > 0) {
+				            	$("span#quantity-for-food-id-" + idOfFoodToBeRemoved).html(quantityOfFoodArray[idOfFoodToBeRemoved]);
+				            	$("span#total-price-for-food-id-" + idOfFoodToBeRemoved).html(priceOfFoodToBeRemoved*quantityOfFoodArray[idOfFoodToBeRemoved]);
+				        	} else {
+				        		$("li#list-item-" + idOfFoodToBeRemoved).remove();
+				        	};
+			        	
 						    getTotalToPayFromDB();
 						};
 			        }
-		        );
+		        ).fail(function(){
+				    popUpInternetConnectionError();
+				});
 			});
 
 			//$(".close-list-cart").click(function(){
@@ -1823,16 +1866,15 @@
 
 			            if (status == "success") {
 						    getTotalToPayFromDB();
+						    //$(this).parent('li').fadeOut(300);
+						    quantityOfFoodArray[idOfDeleteFood] = 0;
+						    $("li#list-item-" + idOfDeleteFood).fadeOut(150);
+						    //$("li#list-item-" + idOfDeleteFood).css("display", "none");
 						};
 			        }
-		        );
-
-				// When close, make quantity of that food id become 0
-				//Acutally don't need this line because this only affect front-end, but this keep it because of front-end logically correct
-				quantityOfFoodArray[idOfDeleteFood] = 0;
-
-				// Close the list in front-end, not put it inside post function, so it's faster
-				$(this).parent('li').fadeOut(300);
+		        ).fail(function(){
+				    popUpInternetConnectionError();				    
+				});
 			});
 		</script>
 
