@@ -1737,6 +1737,21 @@
 			    $(this).stop(true, true).delay(50).fadeOut(200);
 			});
 
+
+			// Only pull data and render when hover to the button (try this first)
+			$('#cartDropdown-hover').hover(function() {
+			    console.log("Pulling data for dropdown cart when hover");
+			    $.get("/list", function(data, status){
+			        //console.log("Data: " + data)
+			        //console.log(typeof(data));
+			        console.log("Status: " + status);
+			        $(".cart_list ul").html(data);
+			    }).fail(function(){
+				    popUpInternetConnectionError();
+				});
+			    getTotalToPayFromDB();
+			});
+
 			
 			// This part is the javascript front-end for language change
 			$(document).on("click", "li.english-language", function(){

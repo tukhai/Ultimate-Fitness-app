@@ -110,6 +110,38 @@ def total(request):
     return JsonResponse(o, safe=False)
 
 
+def list(request):
+    if request.user.is_authenticated():
+        cart = Cart.objects.get(
+            user=request.user,
+            active=True
+        );
+    else:
+        if 'cart' in request.session:
+            print "cart is exist in session"
+            cart = Cart.objects.get(id=request.session['cart'])
+        else:
+            print "cart id is not in session"
+            cart = None
+
+    orders = FoodOrder.objects.filter(cart=cart)
+    print orders
+    total = 0
+    count = 0
+    for order in orders:
+        total += (order.food.price * order.quantity) 
+        count += order.quantity
+        print order.food.id,order.food.name,": $",order.food.price," * ",order.quantity
+
+    context = {
+        'cart': orders,
+        'total': total,
+        'count': count,
+    }
+
+    return render(request, 'ultimatefitbackend/list.html', context)
+
+
 def contact(request):
     return render(request, 'ultimatefitbackend/contact.html')
 def about(request):

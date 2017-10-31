@@ -603,23 +603,23 @@
 
 				<div class="item_deatils float_left">
 					<h6>{{ food.name }}</h6>
-				<div style="margin-top: 9px;">
-					<span class="font_fix">$ {{ food.price }}</span> 
-					<span style="float: right; margin-left: 90px;">
-						$ <span id="total-price-for-food-id-{{food.id}}">{{food.price}}</span>
-					</span>
-				</div>
-				<div> 
-					<a class="remove-from-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.price}}">
-						<i class="fa fa-minus-circle" aria-hidden="true"></i>
-					</a>
-					&nbsp;
-					<span id="quantity-for-food-id-{{food.id}}">1</span>
-					&nbsp;
-					<a class="add-to-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.price}}">
-						<i class="fa fa-plus-circle" aria-hidden="true"></i>
-					</a>
-				</div>
+					<div style="margin-top: 9px;">
+						<span class="font_fix">$ {{ food.price }}</span> 
+						<span style="float: right; margin-left: 90px;">
+							$ <span id="total-price-for-food-id-{{food.id}}">{{food.price}}</span>
+						</span>
+					</div>
+					<div> 
+						<a class="remove-from-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.price}}">
+							<i class="fa fa-minus-circle" aria-hidden="true"></i>
+						</a>
+						&nbsp;
+						<span id="quantity-for-food-id-{{food.id}}">1</span>
+						&nbsp;
+						<a class="add-to-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.price}}">
+							<i class="fa fa-plus-circle" aria-hidden="true"></i>
+						</a>
+					</div>
 				</div> <!-- End of .item_deatils -->
 			</div> <!-- End of .cart_item_wrapper -->
 			<i class="fa fa-times-circle-o close-list-cart" data-id-food="{{food.id}}" data-price-food="{{food.price}}" aria-hidden="true"></i>
