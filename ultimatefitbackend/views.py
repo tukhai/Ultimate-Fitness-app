@@ -81,11 +81,13 @@ def index(request):
 
 def total(request):
     if request.user.is_authenticated():
+        check_authentication = True
         cart = Cart.objects.get(
             user=request.user,
             active=True
         );
     else:
+        check_authentication = False
         if 'cart' in request.session:
             print "cart is exist in session"
             cart = Cart.objects.get(id=request.session['cart'])
@@ -105,7 +107,8 @@ def total(request):
     #seror = serializers.serialize('python',orders); 
 
     o = {
-        'total': total
+        'total': total,
+        'check_authentication': check_authentication
     }
     return JsonResponse(o, safe=False)
 
