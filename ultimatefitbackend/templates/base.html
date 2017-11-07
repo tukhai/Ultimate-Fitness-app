@@ -142,6 +142,39 @@
 				margin-top: 10px;				
 				font-weight: 600;
 			}
+
+			#activation-email-message {
+				position: fixed; 
+				top: 50%; 
+				left: 50%; 
+				margin-top: -80px; 
+				margin-left: -150px; 
+				width: 300px; 
+				height: 160px;
+				z-index: 10000;
+				text-align: center;
+				border-style: solid;
+				border-color: #eaeaea;
+				border-radius: 10px;
+				border-width: 1px;
+				background-color: white;
+				box-shadow: 2px 2px 1px #d8d8d8;
+				padding-top: 10px;
+				display: none;
+			}
+
+			#confirm-activation-email-button {
+				width: 90px; 
+				height: 30px;
+				border-radius: 4px;
+				background-color: #1E90FF;
+				color: white;
+				margin-left: 105px;
+				padding-top: 5px;
+				margin-top: 15px;
+				cursor: pointer;
+				user-select: none;
+			}
 		</style>
 
 		<link rel='stylesheet' href="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.css' %}" />
@@ -151,6 +184,11 @@
 
 	<body>
 		<div class="main_page">
+			<div id="activation-email-message">
+				<span>Thanks for registering with UltimateFit! An activation email will be sent to you shortly. Please check your email and activate your account.</span><br>
+				<div id="confirm-activation-email-button">OK</div>
+			</div>
+
 			<div style="position: fixed; margin-top: 55px; margin-left: 50vw; z-index: 10000;">
 				<div class="internet-connection-error">
 					<h7>You seem to be offline &nbsp;<i style="color: red;" class="fa fa-wifi" aria-hidden="true"></i></h7>
@@ -246,8 +284,9 @@
 						        </a>
 						        <ul class="dropdown">
 						            <!--<li><a href="{% url 'auth_login' %}">Sign In</a></li>-->
-						            <li><a href="#signin_modal" data-toggle="modal">Sign In</a></li>
-						            <li><a href="{% url 'registration_register' %}">Register Here</a></li>
+						            <li><a class="button-for-authenticate" href="#signin_modal" data-toggle="modal" data-authentication-button="sign-in-button">Sign In</a></li>
+						            <!--<li><a href="{% url 'registration_register' %}">Register Here</a></li>-->
+						            <li><a class="button-for-authenticate" href="#signin_modal" data-toggle="modal" data-authentication-button="register-button">Register Here</a></li>
 						        </ul>
 					        {% endif %}
 					      </li>
@@ -1681,10 +1720,14 @@
 				    <div class="modal-content">
 				        <div class="modal-header">
 				            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-				            <h4 class="modal-title">Modal header</h4>
+				            <h7 class="modal-title" style="cursor: pointer;">
+				            	<span id="login-button-on-modal" class="button-for-authenticate" data-authentication-button="sign-in-button">Log in</span>
+				            	&nbsp;&nbsp;
+				            	<span id="register-button-on-modal" class="button-for-authenticate" data-authentication-button="register-button">Register</span>
+				            </h7>
 				        </div>				        
 
-					        <div class="panel panel-info">
+					        <div class="panel panel-info" id="sign-in-page">
 								<div class="panel-heading">
 									<div class="panel-title">
 										Log In
@@ -1735,8 +1778,85 @@
 									</div>
 								</div>
 							</div>
-						
 
+							<!--*************************************************************-->
+
+						    <div class="panel panel-info" id="register-page">
+								<div class="panel-heading">
+									<div class="panel-title">
+										Creat a Book Store Account
+									</div>
+								</div>
+								<div class="panel-body">
+									
+									<form class="form-horizontal" method="post" action=".">
+										{% csrf_token %}
+										
+										
+										<p class="required">
+											<label class="required" for="id_username">Username:</label> 
+											<input type="text" name="username" autofocus required id="id_username" maxlength="150" /> 
+											<span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+										</p>
+										<p class="required">
+											<label class="required" for="id_email">E-mail:</label> 
+											<input type="email" name="email" required id="id_email" />
+										</p>
+										<p class="required">
+											<label class="required" for="id_password1">Password:</label> 
+											<input type="password" name="password1" required id="id_password1" /> 
+											<span class="helptext">
+												<ul>
+													<li>Your password can&#39;t be too similar to your other personal information.</li>
+													<li>Your password must contain at least 8 characters.</li>
+													<li>Your password can&#39;t be a commonly used password.</li>
+													<li>Your password can&#39;t be entirely numeric.</li>
+												</ul>
+											</span>
+										</p>
+										<p class="required">
+											<label class="required" for="id_password2">Password confirmation:</label> 
+											<input type="password" name="password2" required id="id_password2" /> 
+											<span class="helptext">Enter the same password as before, for verification.</span>
+										</p>
+
+
+										<!--<input type="submit" value="{% trans 'Submit' %}" class="btn btn-info"/>-->
+										<input type="" id="btn-registration" value="Submit" class="btn btn-info"/>
+										
+										<!--<div class="form-group" style="z-index:1;backgroud-color:#fff;">
+											<div class="col-md-offset-3 col-md-1" style="backgroud-color:#fff;">
+												<span style="margin-left:15px;">or</span>
+											</div>
+										</div>
+										
+										<div class="form-group" style="border-top: 1px solid #999; padding-top:20px; margin-top:-25px; z-index:0;">
+											<div class="col-md-offset-3 col-md-6" >
+												<a class="btn btn-block btn-social btn-facebook" href="" ><i class="fa fa-facebook"></i>Log In with Facebook</a>
+											</div>
+										</div>
+										
+										<div class="form-group" style="padding-top:0px;">
+											<div class="col-md-offset-3 col-md-6" >
+												<a class="btn btn-block btn-social btn-google" href="" ><i class="fa fa-google"></i>Log In with Google</a>
+											</div>
+										</div>
+										
+										<div class="form-group" style="padding-top:0px;">
+											<div class="col-md-offset-3 col-md-6" >
+												<a class="btn btn-block btn-social btn-twitter" href="" ><i class="fa fa-twitter"></i>Log In with Twitter</a>
+											</div>
+										</div>-->
+										
+									</form>
+
+									<div id="registration-error-message" class="input-group">
+																						
+									</div>
+									
+								</div>
+							</div>
+						
 				        <!--<div class="modal-footer">
 				            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				        </div>-->
@@ -1826,7 +1946,7 @@
 			
 			// This part is the javascript front-end for language change
 			$(document).on("click", "li.english-language", function(){
-				$("span#flag-icon-language").html('<span class="flag-icon-size"><img src="http://www.postkrieg.info/_assets/img/en_icon.png"/></span>&nbsp;English');
+				$("span#flag-icon-language").html('<span class="flag-icon-size"><img src="https://us.123rf.com/450wm/nicemonkey/nicemonkey1002/nicemonkey100200046/6416327-aged-great-british-flag-icon-with-red-white-and-blue-colours.jpg?ver=6"/></span>&nbsp;English');
 			});
 			$(document).on("click", "li.vietnam-language", function(){
 				$("span#flag-icon-language").html('<span class="flag-icon-size"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png"/></span>&nbsp;Tiếng Việt');
@@ -1965,8 +2085,24 @@
 
 
 			/***Modal box for sign in/register***/
+			$(document).on("click", ".button-for-authenticate", function(){
+		        var buttonType = $(this).data('authentication-button');
+		        console.log("button: " + buttonType);
+		        if (buttonType == "sign-in-button") {
+		        	$("#sign-in-page").show();
+		        	$("#register-page").hide();
+		        	$("span#login-button-on-modal").css({"color": "red", "text-decoration": "underline"});
+		        	$("span#register-button-on-modal").css({"color": "#939393", "text-decoration": "none"});
+		        } else {
+		        	$("#sign-in-page").hide();
+		        	$("#register-page").show();
+		        	$("span#login-button-on-modal").css({"color": "#939393", "text-decoration": "none"});
+		        	$("span#register-button-on-modal").css({"color": "red", "text-decoration": "underline"});
+		        }
+	        });
+
 			$(document).on('show.bs.modal', '#signin_modal', function(e) {
-		        console.log("open sign in modal box");
+		        console.log("open sign in modal box");		     
 		    });
 		    $(document).on('hidden.bs.modal', '#signin_modal', function (e) {
 			    console.log("close sign in modal box");
@@ -1990,7 +2126,6 @@
 			            console.log("Status: " + status);
 			            if (status == "success") {
 				            //refresh the page after login success, so the login would redirect to current page
-				            //location.reload();
 				            $.get("/total", function(data, status){
 						        //console.log("Data: " + data.check_authentication + "\nStatus: " + status);
 						        //console.log(typeof(data.check_authentication));
@@ -2012,6 +2147,89 @@
 			/*Handle log in error message*/
 			$(document).on("click", "input.form-control", function(){
 				$("#login-error-message label").remove();
+			});
+
+			/*****************************************************************/
+
+			/***Ajax registration***/
+			$(document).on("click", "input#btn-registration", function(){
+				console.log("posting to registion...");
+				var inputRegistrationUsername = $("input#id_username").val();
+				var inputRegistrationEmail = $("input#id_email").val();
+				var inputRegistrationPassword = $("input#id_password1").val();
+				var inputRegistrationPasswordConfirm = $("input#id_password2").val();
+
+				console.log("Registering in with username: '" + inputRegistrationUsername +"'");
+
+				/*Check registration validation*/
+				$.post(
+			    	"/registration_validation/",
+			        { 
+			          csrfmiddlewaretoken: "{{ csrf_token }}",
+			          name: inputRegistrationUsername
+			        },
+			        function(data,status){
+			            console.log("Status: " + status);
+			            if (status == "success") {
+						    console.log("Data: " + data.registration_validator);
+						    if (data.registration_validator) {
+					        	console.log("Valid registration name, sending activation email..");
+					        	$.post(
+							    	"/accounts/register/",
+							        { 
+							          csrfmiddlewaretoken: "{{ csrf_token }}",
+							          username: inputRegistrationUsername,
+							          email: inputRegistrationEmail,
+							          password1: inputRegistrationPassword,
+							          password2: inputRegistrationPasswordConfirm
+							        },
+							        function(data,status){
+							            console.log("Status: " + status);
+							            if (status == "success") {
+								            //data callback here is the whole activation email sent to you shortly html page
+								            console.log("Successfully sent activation email");
+								            $("#activation-email-message").show();
+								        };
+							        }
+						        );
+					        } else {
+					        	console.log("That username has already been taken");
+					        	$("#registration-error-message").append('<label style="color: red;">That email has already been used, please use another email!</label>');
+					        }
+				        };
+			        }
+		        ).fail(function(){
+				    popUpInternetConnectionError();				    
+				});
+
+				/*$.post(
+			    	"/accounts/register/",
+			        { 
+			          csrfmiddlewaretoken: "{{ csrf_token }}",
+			          username: inputRegistrationUsername,
+			          email: inputRegistrationEmail,
+			          password1: inputRegistrationPassword,
+			          password2: inputRegistrationPasswordConfirm
+			        },
+			        function(data,status){
+			            console.log("Status: " + status);
+			            if (status == "success") {
+				            //refresh the page after login success, so the login would redirect to current page
+				            console.log(data);
+				        };
+			        }
+		        ).fail(function(){
+				    popUpInternetConnectionError();				    
+				});*/
+			});
+			/*Handle registration error message*/
+			$(document).on("click", "p.required input", function(){
+				$("#registration-error-message label").remove();
+			});
+
+			/*Close activation email message*/
+			$(document).on("click", "#confirm-activation-email-button", function(){
+				$("#activation-email-message").hide();
 			});
 		</script>
 

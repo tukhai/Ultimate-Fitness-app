@@ -46,6 +46,7 @@ urlpatterns = [
 
     url(r'^total/', views.total, name='total'),
     url(r'^list/', views.list, name='list'),
+    url(r'^registration_validation/', views.registration_validation, name='registration_validation'),
     #url(r'^remove/(\d+)', views.remove_from_cart, name='remove_from_cart'),
     #url(r'^cart/', views.cart, name='cart'),
     #url(r'^shopping-cart/', include('shopping.urls')),
