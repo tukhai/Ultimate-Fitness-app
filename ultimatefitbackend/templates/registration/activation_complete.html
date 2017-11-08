@@ -1,6 +1,28 @@
+<!doctype html>
+<html lang="en">
 
-<p>Your account is now activated. You can log in.</p>
+<head></head>
 
+<body>
+	<p>
+		Your account is now activated. Redirecting to home page to login in 
+		<span id="countdowntimer">5 </span> Seconds.
+	</p>
+
+    <script>
+		var timeleft = 5;
+	    var downloadTimer = setInterval(function(){
+		    timeleft--;
+		    document.getElementById("countdowntimer").textContent = timeleft;
+		    if(timeleft <= 0) {
+		        clearInterval(downloadTimer);
+		        window.location = "/";
+		    }
+	    },500);
+    </script>
+</body>
+
+</html>
 
 {% comment %}
 **registration/activation_complete.html**

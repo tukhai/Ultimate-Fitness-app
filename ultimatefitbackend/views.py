@@ -202,6 +202,11 @@ def index(request):
     else:
         request.session.set_expiry(300)
 
+        # Track previous url        
+        previous_url = request.META.get('HTTP_REFERER')
+        print "Previous url is: ", previous_url, type(previous_url)
+
+
         if 'cart' in request.session:
             print "cart is exist in session"
             cart = Cart.objects.get(id=request.session['cart'])
@@ -220,6 +225,7 @@ def index(request):
             'cart': orders,
             'total': total,
             'count': count,
+            'previous_url': previous_url
         }
         return render(request, 'base.html', context)
 

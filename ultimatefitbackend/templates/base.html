@@ -175,6 +175,30 @@
 				cursor: pointer;
 				user-select: none;
 			}
+
+			#submit-registration-message {
+				position: fixed; 
+				top: 50%; 
+				left: 50%; 
+				margin-top: -80px; 
+				margin-left: -150px; 
+				width: 300px; 
+				height: 50px;
+				z-index: 10000;
+				text-align: center;
+				border-style: solid;
+				border-color: #eaeaea;
+				border-radius: 10px;
+				border-width: 1px;
+				background-color: white;
+				box-shadow: 2px 2px 1px #d8d8d8;
+				padding-top: 10px;
+				display: none;
+			}
+
+			p.required input {
+				width: 100%;
+			}
 		</style>
 
 		<link rel='stylesheet' href="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.css' %}" />
@@ -184,6 +208,10 @@
 
 	<body>
 		<div class="main_page">
+			<div id="submit-registration-message">
+				<span>SUBMITTING YOUR REGISTRATION ...</span>
+			</div>
+
 			<div id="activation-email-message">
 				<span>Thanks for registering with UltimateFit! An activation email will be sent to you shortly. Please check your email and activate your account.</span><br>
 				<div id="confirm-activation-email-button">OK</div>
@@ -251,38 +279,30 @@
 						      	</button>						      	
 					        </a>
 					      </li>
-					      <li>
+					      <li style="overflow: hidden; width: 190px; white-space:nowrap; text-align: center;">
 					      	{% if request.user.is_authenticated %}
 						      	<a>
 						      		<span style="text-transform: lowercase; cursor: pointer;">
 						      			<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i> 
-						      			{% if request.user.first_name %}!
-										{{ request.user.first_name }}
-										{% else %}
-										{{ request.user.username }}
-										{% endif %}
+						      			<span id="display-username-navbar">
+						      				{% if request.user.first_name %}!
+											{{ request.user.first_name }}
+											{% else %}
+											{{ request.user.username }}
+											{% endif %}
+										</span>
 									</span>
 						        </a>
-						        <ul class="dropdown">
+						        <ul class="dropdown" style="text-align: left;">
 						            <li><a href="{% url 'auth_logout' %}">Log Out</a></li>
 						         </ul>
 					        {% else %}
-					        	<!--<a>
-						      		<button>
-							      		<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i>
-							      		<span>Sign In</span>							      		
-						      		</button>
-						      		<span><ul class="dropdown">
-							            <li><a href="{% url 'auth_login' %}">Sign In</a></li>
-							            <li><a href="{% url 'registration_register' %}">Register Here</a></li>
-							        </ul></span>
-						        </a>-->
 						        <a>
 						        	<span style="text-transform: capitalize; cursor: pointer;">
 						        		<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i> Sign In
 						        	</span>
 						        </a>
-						        <ul class="dropdown">
+						        <ul class="dropdown" style="text-align: left;">
 						            <!--<li><a href="{% url 'auth_login' %}">Sign In</a></li>-->
 						            <li><a class="button-for-authenticate" href="#signin_modal" data-toggle="modal" data-authentication-button="sign-in-button">Sign In</a></li>
 						            <!--<li><a href="{% url 'registration_register' %}">Register Here</a></li>-->
@@ -1739,7 +1759,7 @@
 										<form class="form-horizontal" method="post" action="">
 											{% csrf_token %}
 											<div style="margin-bottom: 25px" class="input-group">
-												<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+												<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
 												<input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">
 											</div>
 											<div style="margin-bottom: 10px" class="input-group">
@@ -1783,8 +1803,8 @@
 
 						    <div class="panel panel-info" id="register-page">
 								<div class="panel-heading">
-									<div class="panel-title">
-										Creat a Book Store Account
+									<div class="panel-title" style="text-align: center;">
+										Creat your Ultimate Fit Account
 									</div>
 								</div>
 								<div class="panel-body">
@@ -1793,11 +1813,11 @@
 										{% csrf_token %}
 										
 										
-										<p class="required">
+										<!--<p class="required">
 											<label class="required" for="id_username">Username:</label> 
 											<input type="text" name="username" autofocus required id="id_username" maxlength="150" /> 
 											<span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
-										</p>
+										</p>-->
 										<p class="required">
 											<label class="required" for="id_email">E-mail:</label> 
 											<input type="email" name="email" required id="id_email" />
@@ -1805,24 +1825,24 @@
 										<p class="required">
 											<label class="required" for="id_password1">Password:</label> 
 											<input type="password" name="password1" required id="id_password1" /> 
-											<span class="helptext">
+											<!--<span class="helptext">
 												<ul>
 													<li>Your password can&#39;t be too similar to your other personal information.</li>
 													<li>Your password must contain at least 8 characters.</li>
 													<li>Your password can&#39;t be a commonly used password.</li>
 													<li>Your password can&#39;t be entirely numeric.</li>
 												</ul>
-											</span>
+											</span>-->
 										</p>
 										<p class="required">
 											<label class="required" for="id_password2">Password confirmation:</label> 
 											<input type="password" name="password2" required id="id_password2" /> 
-											<span class="helptext">Enter the same password as before, for verification.</span>
+											<!--<span class="helptext">Enter the same password as before, for verification.</span>-->
 										</p>
-
+										<br>
 
 										<!--<input type="submit" value="{% trans 'Submit' %}" class="btn btn-info"/>-->
-										<input type="" id="btn-registration" value="Submit" class="btn btn-info"/>
+										<input style="width: 100%" type="" id="btn-registration" value="Submit" class="btn btn-info"/>
 										
 										<!--<div class="form-group" style="z-index:1;backgroud-color:#fff;">
 											<div class="col-md-offset-3 col-md-1" style="backgroud-color:#fff;">
@@ -1849,7 +1869,7 @@
 										</div>-->
 										
 									</form>
-
+									<br>
 									<div id="registration-error-message" class="input-group">
 																						
 									</div>
@@ -1916,6 +1936,28 @@
 		<script src="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.js' %}"></script>
 
 		<script>
+			/*RENDER USERNAME WITH ONLY 15 CHARS, just take 14 first chars, so it display more properly*/
+			{% if request.user.is_authenticated %}
+				usernameDisplayNavbar = "{{ request.user.username }}";
+				console.log("JJJJJJJ " + usernameDisplayNavbar);
+				console.log(typeof(usernameDisplayNavbar));
+
+				emailWithoutDomain = usernameDisplayNavbar.split("@")[0];
+				console.log("KKKK " + emailWithoutDomain);
+
+				if (emailWithoutDomain.length > 14) {
+					finalDisplay = emailWithoutDomain.substring(0, 14);
+				} else {
+					finalDisplay = emailWithoutDomain;
+				};
+				$("span#display-username-navbar").html(finalDisplay);
+			{% endif %}
+
+
+			/*TRACK PREVIOUS URL TO DISPLAY PROPERLY MESSAGE*/
+			//console.log("{{previous_url}}");
+
+
 			$('#cartDropdown-hover').hover(function() {
 			    $(document).find('.cart_list').stop(true, true).delay(50).fadeIn(200);
 			}, function() {
@@ -2151,57 +2193,112 @@
 
 			/*****************************************************************/
 
-			/***Ajax registration***/
-			$(document).on("click", "input#btn-registration", function(){
-				console.log("posting to registion...");
-				var inputRegistrationUsername = $("input#id_username").val();
+
+			/**Front-end registration validation**/
+			function ValidateEmail(mail) {  
+				var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+				if (re.test(mail)) {
+				    return true;
+				} else {
+				    return false;
+				}  
+			};
+
+			function registrationValidation() {
+			    console.log("validating registration form...");
+				
 				var inputRegistrationEmail = $("input#id_email").val();
 				var inputRegistrationPassword = $("input#id_password1").val();
 				var inputRegistrationPasswordConfirm = $("input#id_password2").val();
 
-				console.log("Registering in with username: '" + inputRegistrationUsername +"'");
+				if (!ValidateEmail(inputRegistrationEmail)) {
+					$("#registration-error-message").append('<label style="color: red;">Invalid email! Please try to re-enter your email.</label>');
+					return false;
+				}
 
-				/*Check registration validation*/
-				$.post(
-			    	"/registration_validation/",
-			        { 
-			          csrfmiddlewaretoken: "{{ csrf_token }}",
-			          name: inputRegistrationUsername
-			        },
-			        function(data,status){
-			            console.log("Status: " + status);
-			            if (status == "success") {
-						    console.log("Data: " + data.registration_validator);
-						    if (data.registration_validator) {
-					        	console.log("Valid registration name, sending activation email..");
-					        	$.post(
-							    	"/accounts/register/",
-							        { 
-							          csrfmiddlewaretoken: "{{ csrf_token }}",
-							          username: inputRegistrationUsername,
-							          email: inputRegistrationEmail,
-							          password1: inputRegistrationPassword,
-							          password2: inputRegistrationPasswordConfirm
-							        },
-							        function(data,status){
-							            console.log("Status: " + status);
-							            if (status == "success") {
-								            //data callback here is the whole activation email sent to you shortly html page
-								            console.log("Successfully sent activation email");
-								            $("#activation-email-message").show();
-								        };
-							        }
-						        );
-					        } else {
-					        	console.log("That username has already been taken");
-					        	$("#registration-error-message").append('<label style="color: red;">That email has already been used, please use another email!</label>');
-					        }
-				        };
-			        }
-		        ).fail(function(){
-				    popUpInternetConnectionError();				    
-				});
+				if (inputRegistrationPassword.length < 8) {
+					$("#registration-error-message").append('<label style="color: red;">Your password must have at least 8 characters.</label>');
+					return false;
+				}
 
+				if (inputRegistrationPassword != inputRegistrationPasswordConfirm) {
+					$("#registration-error-message").append('<label style="color: red;">Password confirmation does not match!</label>');
+					return false;
+				}
+
+				return true;
+			};
+
+
+			/***Ajax registration***/
+			$(document).on("click", "input#btn-registration", function(){				
+
+				$("#registration-error-message label").remove();
+				console.log("posting to registion...");
+				//var inputRegistrationUsername = $("input#id_username").val();
+				var inputRegistrationEmail = $("input#id_email").val();
+				var inputRegistrationPassword = $("input#id_password1").val();
+				var inputRegistrationPasswordConfirm = $("input#id_password2").val();
+
+				if (registrationValidation()) {
+
+					//console.log("Registering in with username: '" + inputRegistrationUsername +"'");
+					console.log("Registering in with email: '" + inputRegistrationEmail +"'");
+
+
+					/*Check registration validation*/
+					$.post(
+				    	"/registration_validation/",
+				        { 
+				          csrfmiddlewaretoken: "{{ csrf_token }}",
+				          name: inputRegistrationEmail
+				        },
+				        function(data,status){
+				            console.log("Status: " + status);
+				            if (status == "success") {
+							    console.log("Data: " + data.registration_validator);
+							    if (data.registration_validator) {
+							    	/*IF THE EMAIL IS NEW, THEN CLOSE MODAL BOX AND PROCESS TO POST REGISTRATION FORM TO BACKEND*/
+									// Clear input text in registration form
+									$("p.required input").val("");
+									// Close modal box
+									$('#signin_modal button.close').click();
+									//$('.modal-backdrop').remove(); // Close the backdrop
+									$('#submit-registration-message').show();
+
+						        	console.log("Valid registration name, sending activation email..");
+
+						        	$.post(
+								    	"/accounts/register/",
+								        { 
+								          csrfmiddlewaretoken: "{{ csrf_token }}",
+								          //username: inputRegistrationUsername,
+								          username: inputRegistrationEmail,
+								          email: inputRegistrationEmail,
+								          password1: inputRegistrationPassword,
+								          password2: inputRegistrationPasswordConfirm
+								        },
+								        function(data,status){
+								            console.log("Status: " + status);
+								            if (status == "success") {
+									            //data callback here is the whole activation email sent to you shortly html page
+									            console.log("Successfully sent activation email");
+									            $('.modal-backdrop').remove(); // Close the backdrop
+									            $('#submit-registration-message').hide();
+									            $("#activation-email-message").show();
+									        };
+								        }
+							        );
+						        } else {
+						        	console.log("That username has already been taken");
+						        	$("#registration-error-message").append('<label style="color: red;">That email has already been used, please use another email!</label>');
+						        }
+					        };
+				        }
+			        ).fail(function(){
+					    popUpInternetConnectionError();				    
+					});
+		    	}
 				/*$.post(
 			    	"/accounts/register/",
 			        { 
