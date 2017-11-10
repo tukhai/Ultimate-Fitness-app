@@ -339,6 +339,8 @@ def error(request):
     return render(request, 'ultimatefitbackend/404.html')
 def faq(request):
     return render(request, 'ultimatefitbackend/faq.html')
+def start_page(request):
+    return render(request, 'ultimatefitbackend/start_page.html')    
 
 
 def shop(request):

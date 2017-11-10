@@ -32,6 +32,8 @@ urlpatterns = [
 
     url(r'^checkout.html/$', views.CheckoutView.as_view(), name='checkout'),
 
+    url(r'^start_page/$', views.start_page, name='start_page'),
+
     # URL FOR RETURN JSON
     url(r'^foods-list/$', views.foods_list, name='foods_list'),
     

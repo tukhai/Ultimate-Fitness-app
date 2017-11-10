@@ -1,0 +1,512 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<!-- For IE -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- For Resposive Device -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>Organic Store | Responsive HTML5 Template</title>
+		<!-- Favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-57x57.png' %}">
+		<link rel="apple-touch-icon" sizes="60x60" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-60x60.png' %}">
+		<link rel="apple-touch-icon" sizes="72x72" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-72x72.png' %}">
+		<link rel="apple-touch-icon" sizes="76x76" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-76x76.png' %}">
+		<link rel="apple-touch-icon" sizes="114x114" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-114x114.png' %}">
+		<link rel="apple-touch-icon" sizes="120x120" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-120x120.png' %}">
+		<link rel="apple-touch-icon" sizes="144x144" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-144x144.png' %}">
+		<link rel="apple-touch-icon" sizes="152x152" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-152x152.png' %}">
+		<link rel="apple-touch-icon" sizes="180x180" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-180x180.png' %}">
+		<link rel="icon" type="image/png" sizes="192x192"  href="{% static 'ultimatefitbackend/images/fav-icon/android-icon-192x192.png' %}">
+		<link rel="icon" type="image/png" sizes="32x32" href="{% static 'ultimatefitbackend/images/fav-icon/favicon-32x32.png' %}">
+		<link rel="icon" type="image/png" sizes="96x96" href="{% static 'ultimatefitbackend/images/fav-icon/favicon-96x96.png' %}">
+		<link rel="icon" type="image/png" sizes="16x16" href="{% static 'ultimatefitbackend/images/fav-icon/favicon-16x16.png' %}">
+
+
+		<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+		<!-- Custom Css -->
+		<link rel="stylesheet" type="text/css" href="{% static 'ultimatefitbackend/css/style.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'ultimatefitbackend/css/responsive.css' %}">
+
+
+		<!-- Fixing Internet Explorer ______________________________________-->
+
+		<!--[if lt IE 9]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+			<script src="vendor/html5shiv.js"></script>
+		<![endif]-->
+		<style>
+			html {
+				overflow: hidden;
+			}
+
+			.four-column {
+				position: fixed;
+				z-index: 100;
+				top: 10%;
+			}
+
+			.square-area {
+				border-style: solid;
+    			border-width: 1px;
+    			border-color: lightgrey;
+    			border-radius: 15px;
+    			padding-top: 10%;
+    			background-color: white;
+
+    			cursor: pointer;
+    			user-select: none;		
+			}
+
+			/*Add color to 5 buttons #62C500*/
+			.square-area:hover {
+			    -webkit-box-shadow:inset 0px 0px 0px 4px #53a800;
+			    -moz-box-shadow:inset 0px 0px 0px 4px #53a800;
+			    box-shadow:inset 0px 0px 0px 4px #53a800;
+			}
+
+			.rev_slider_wrapper, .rev_slider, .tp-fullwidth-forcer, .rev_slider .tp-bgimg.defaultimg {
+			    height: 100% !important;
+			}
+
+			/*#x-content-band-3 .x-container.width{
+				height: 100%;
+			}
+
+			div#rev_slider_4_1_wrapper {
+			    max-height: 1960px !important;
+			}*/
+
+			/*.tp-bgimg.defaultimg {
+			    background-size: 100% 100% !important;
+			}*/
+
+			#button-background {
+				position: fixed; /*KEY THING TO DO THIS*/
+				height: 100vh;
+				width: 100vw;
+				opacity: 0.5;
+				background-color: black;
+				z-index: 99;
+			}
+		</style>
+
+		<!--<link rel='stylesheet' href="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.css' %}" />-->
+	</head>
+
+
+
+	<body>
+				
+		<section class="four-column">
+			<div class="container text-center">
+				<div class="row">
+					<div style="" id="two-buttons">
+						<div class="col-md-4 col-sm-6 col-xs-12 text-center square-area-outer">
+							<div class="single-item square-area" id="order-today">
+								<div class="inner-box">
+									<div class="icon"><i class="icon-business"></i></div>
+								</div>
+								<h5>Order for today</h5>
+								<p>
+								Organicstore.com’s customers order is <br>captured by warehouse API..<br><br>
+								</p>
+								
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6 col-xs-12 text-center square-area-outer">
+							<div class="single-item square-area" id="order-future-day">
+								<div class="inner-box">
+									<div class="icon"><i class="rot icon-check"></i></div>
+								</div>
+								<h5>Order for future days</h5>
+								<p>
+								Organicstore.com’s customers order is <br>captured by warehouse API..<br><br>
+								</p>
+								
+							</div>
+						</div>
+					</div>
+
+					<div id="three-buttons" style="display: none;">
+						<div class="col-md-4 col-sm-6 col-xs-12 text-center square-area-outer">
+							<div class="single-item square-area">
+								<div class="inner-box">
+									<div class="icon">
+										<!--<i class="icon-business"></i>-->
+										<i class="fa fa-male" aria-hidden="true"></i>
+									</div>
+								</div>
+								<h5>Lean on me</h5>
+								<p>
+								Organicstore.com’s customers order is <br>captured by warehouse API..<br><br>
+								</p>
+								
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6 col-xs-12 text-center square-area-outer">
+							<div class="single-item square-area">
+								<div class="inner-box">
+									<div class="icon">
+										<!--<i class="rot icon-nature-1"></i>-->
+										<i class="fa fa-arrows-h" aria-hidden="true"></i>
+									</div>
+								</div>
+								<h5>Maintain</h5>
+								<p>
+								Organicstore.com’s customers order is <br>captured by warehouse API..<br><br>
+								</p>
+								
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6 col-xs-12 text-center square-area-outer">
+							<div class="single-item square-area">
+								<div class="inner-box">
+									<div class="icon">
+										<!--<i class="rot icon-check"></i>-->
+										<i class="fa fa-line-chart" aria-hidden="true"></i>
+									</div>
+								</div>
+								<h5>Heavy Duty</h5>
+								<p>
+								Organicstore.com’s customers order is <br>captured by warehouse API..<br><br>
+								</p>
+								
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+		<div id="button-background"></div>
+
+		<div class="main_page">
+			
+			<!-- Banner ____________________________________ -->
+	        <div id="banner" style="height: 100%;">
+	        	<div class="rev_slider_wrapper">
+					<!-- START REVOLUTION SLIDER 5.0 auto mode -->
+						<div id="main_slider" class="rev_slider" data-version="5.0">
+							<ul>
+								
+								<!-- SLIDE1  -->
+								<li data-index='rs-377' data-transition='curtain-1' data-slotamount='1' data-easein='default' data-easeout='default' data-masterspeed='default' data-thumb="{% static 'ultimatefitbackend/images/home/slide-1.jpg' %}" data-rotate='0' data-saveperformance='off' data-title='Business Solutions' data-description='' >
+									<!-- MAIN IMAGE -->
+									<img src="{% static 'ultimatefitbackend/images/home/slide-1.jpg' %}" alt="image" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg">
+									<!-- LAYERS -->
+
+									<!-- LAYER NR. 1 -->
+									<div class="tp-caption tp-resizeme rs-parallaxlevel-3"
+										data-x="['center','center','center','center']" data-hoffset="['0','0','35','0']" 
+										data-y="['middle','middle','middle','middle']" data-voffset="['-120','-120','-120','-120']"
+										data-width="none"
+										data-height="none"
+										data-transform_idle="o:1;"
+										data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;" 
+										data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
+										data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" 
+										data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" 
+										data-start="1000"
+										data-splitout="none" 
+										data-responsive_offset="on" 
+										data-elementdelay="0.05" 
+										style="z-index: 5;">
+										<img src="{% static 'ultimatefitbackend/images/home/1.png' %}" alt="">
+									</div>
+
+									<!-- LAYER NR. 2 -->
+									<div class="tp-caption tp-resizeme rs-parallaxlevel-3" 
+										data-x="['center','center','center','center']" data-hoffset="['0','0','35','0']" 
+										data-y="['middle','middle','middle','middle']" data-voffset="['50','50','50','50']"
+										data-width="none"
+										data-height="none"
+										data-transform_idle="o:1;"
+										data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;" 
+										data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
+										data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" 
+										data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" 
+										data-start="1500"
+										data-splitout="none" 
+										data-responsive_offset="on" 
+										data-elementdelay="0.05" 
+										style="z-index: 5;">
+										<h1>Organic Store</h1>
+									</div>
+
+
+									<!-- LAYER NR. 3 -->
+									<div class="tp-caption tp-resizeme rs-parallaxlevel-2" 
+										data-x="['center','center','center','center']" data-hoffset="['0','0','35','0']" 
+										data-y="['middle','middle','middle','middle']" data-voffset="['110','110','110','110']" 
+										data-width="none"
+										data-height="none"
+										data-whitespace="nowrap"
+										data-transform_idle="o:1;"
+							 
+										data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;" 
+										data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
+										data-mask_in="x:0px;y:[100%];" 
+										data-mask_out="x:inherit;y:inherit;" 
+										data-start="2000" 
+										data-splitin="none" 
+										data-splitout="none" 
+										data-responsive_offset="on" 
+										style="z-index: 6; white-space: nowrap;">
+										<h5 class="cp-title">Fruits ~ Vegetables ~ Foods ~ Cosmetics </h5>
+									</div>
+
+									<!-- LAYER NR. 4 -->
+									<div class="tp-caption tp-resizeme rs-parallaxlevel-2" 
+										data-x="['center','center','center','center']" data-hoffset="['0','0','35','0']" 
+										data-y="['middle','middle','middle','middle']" data-voffset="['160','160','160','160']" 
+										data-width="none"
+										data-height="none"
+										data-whitespace="nowrap"
+										data-transform_idle="o:1;"
+							 
+										data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;" 
+										data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
+										data-mask_in="x:0px;y:[100%];" 
+										data-mask_out="x:inherit;y:inherit;" 
+										data-start="2500" 
+										data-splitin="none" 
+										data-splitout="none" 
+										data-responsive_offset="on" 
+										style="z-index: 6; white-space: nowrap;">
+										<h5 class="cp-title-2">We are providing highest quality Organics Products for USA almo</h5>
+									</div>
+
+
+
+			
+								
+								</li>
+
+
+
+								<!-- SLIDE2  -->
+								<li data-index="rs-18" data-transition="zoomin" data-slotamount="7" data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="2000" data-thumb="{% static 'ultimatefitbackend/images/home/slide-2.jpg' %}" data-rotate="0" data-saveperformance="off" data-title="Successful Careers" data-description="">
+									<!-- MAIN IMAGE -->
+									<img src="{% static 'ultimatefitbackend/images/home/slide-2.jpg' %}" alt="" data-bgposition="top center" class="rev-slidebg" data-no-retina>
+									<!-- LAYERS -->
+									<div class="tp-caption tp-resizeme" 
+										data-x="['center','center','center','center']" data-hoffset="['80','80','80','80']" 
+										data-y="['middle','middle','middle','middle']" data-voffset="['-160','-160','-160','-160']"
+										data-width="none"
+										data-height="none"
+										data-transform_idle="o:1;"
+										data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;" 
+										data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
+										data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" 
+										data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" 
+										data-start="1000"
+										data-splitout="none" 
+										data-responsive_offset="on" 
+										data-elementdelay="0.05" 
+										style="z-index: 5;">
+										<img src="{% static 'ultimatefitbackend/images/home/4.png' %}" alt="">
+									</div>
+									<div class="tp-caption tp-resizeme banner-caption-box"
+					                    data-x="right" data-hoffset="0" 
+					                    data-y="top" data-voffset="260"
+					                    data-transform_idle="o:1;"         
+					                    data-transform_in="x:[-175%];y:0px;z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0.01;s:3000;e:Power3.easeOut;" 
+					                    data-transform_out="s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;" 
+					                    data-mask_in="x:[100%];y:0;s:inherit;e:inherit;" 
+					                    data-splitin="none" 
+					                    data-splitout="none"                         
+					                    data-start="1000">
+					                    <div class="banner-caption-h1">Get Blackberry <br>Pack With 50% Off</div>
+					                    <div class="banner-caption-p"><p>Great explorer of the truth, the master-builder of human happiness no sed one rejects <br>dislikes, or avoids pleasure itself, because it is pleasure.</p></div>
+					                    <a href="#" class="thm-btn contuct-us">shop now</a>
+					                </div>
+								</li>
+
+
+
+							
+								<!-- SLIDE3  -->
+								<li data-index="rs-20" data-transition="zoomin" data-slotamount="7" data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="2000" data-thumb="{% static 'ultimatefitbackend/images/home/slide-3.jpg' %}" data-rotate="0" data-saveperformance="off" data-title="Your Success" data-description="">
+									<!-- MAIN IMAGE -->
+									<img src="{% static 'ultimatefitbackend/images/home/slide-3.jpg' %}" alt="" data-bgposition="top center" class="rev-slidebg" data-no-retina>
+									<!-- LAYERS -->
+									
+
+									<!-- LAYER NR. 1 -->
+									<div class="tp-caption tp-resizeme" 
+										data-x="['center','center','center','center']" data-hoffset="['0','0','35','0']" 
+										data-y="['middle','middle','middle','middle']" data-voffset="['-120','-120','-120','-120']"
+										data-width="none"
+										data-height="none"
+										data-transform_idle="o:1;"
+										data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;" 
+										data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
+										data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" 
+										data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" 
+										data-start="1000"
+										data-splitout="none" 
+										data-responsive_offset="on" 
+										data-elementdelay="0.05" 
+										style="z-index: 5;">
+										<img src="{% static 'ultimatefitbackend/images/home/3.png' %}" alt="">
+									</div>
+
+
+									<!-- LAYER NR. 1 -->
+									<div class="tp-caption tp-resizeme text-center"
+					                    data-x="center" data-hoffset="0" 
+					                    data-y="center" data-voffset="-40"
+					                    data-transform_idle="o:1;"         
+					                    data-transform_in="x:[-175%];y:0px;z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0.01;s:3000;e:Power3.easeOut;" 
+					                    data-transform_out="s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;" 
+					                    data-mask_in="x:[100%];y:0;s:inherit;e:inherit;" 
+					                    data-splitin="none" 
+					                    data-splitout="none"                         
+					                    data-start="500">
+					                    <div class="banner-caption-h2">Natural Healthy Foods</div>                    
+					                </div>
+					                <div class="tp-caption tp-resizeme text-center"
+					                    data-x="center" data-hoffset="0" 
+					                    data-y="top" data-voffset="360"
+					                    data-transform_idle="o:1;"                         
+					                    data-transform_in="x:[175%];y:0px;z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0.01;s:3000;e:Power3.easeOut;" 
+					                    data-transform_out="s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;" 
+					                    data-mask_in="x:[-100%];y:0;s:inherit;e:inherit;" 
+					                    data-splitin="none" 
+					                    data-splitout="none" 
+					                    data-responsive_offset="on"                         
+					                    data-start="1400">  
+					                    <div class="banner-caption-h3">With Your Affortable</div>                  
+					                    <div class="banner-caption-p"><p>Great explorer of the truth, the master-builder of human happin</p></div>                  
+					                    <a href="#" class="color1-bg contuct-us">shop now</a>
+					                </div>
+								</li>
+							</ul>	
+						</div>
+				</div><!-- END REVOLUTION SLIDER -->
+	        </div> <!-- End of #banner -->
+	    	
+
+
+			<!-- Scroll Top Button -->
+			<!--<button class="scroll-top tran3s color2_bg">
+				<span class="fa fa-angle-up"></span>
+			</button>-->
+
+			<!-- pre loader SHOULD NOT DELETE THIS BECAUSE HAVE TO LET'S IT DOWNLOAD ALL PICTURES FIRST -->
+		 	<div id="loader-wrapper">
+				<div id="loader"></div>
+			</div>
+
+
+			<!-- Js File_________________________________ -->
+
+			<!-- j Query -->
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery-2.1.4.js' %}"></script>
+			<!-- Bootstrap JS -->
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/js/bootstrap.min.js' %}"></script>
+
+			<!-- Vendor js _________ -->
+			<!-- Google map js -->
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRvBPo3-t31YFk588DpMYS6EqKf-oGBSI"></script> <!-- Gmap Helper -->
+			<script src="{% static 'ultimatefitbackend/js/gmap.js' %}"></script>
+			<!-- owl.carousel -->
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/js/owl.carousel.min.js' %}"></script>
+			<!-- ui js -->
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery-ui.min.js' %}"></script>
+			<!-- Responsive menu-->
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/js/menuzord.js' %}"></script>
+			<!-- revolution -->
+			<script src="{% static 'ultimatefitbackend/vendor/revolution/jquery.themepunch.tools.min.js' %}"></script>
+			<script src="{% static 'ultimatefitbackend/vendor/revolution/jquery.themepunch.revolution.min.js' %}"></script>
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.slideanims.min.js' %}"></script>
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.layeranimation.min.js' %}"></script>
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.navigation.min.js' %}"></script>
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.kenburn.min.js' %}"></script>
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.actions.min.js' %}"></script>
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.parallax.min.js' %}"></script>
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.migration.min.js' %}"></script>
+
+			<!-- landguage switcher js -->
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.polyglot.language.switcher.js' %}"></script>
+			<!-- Fancybox js -->
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.fancybox.pack.js' %}"></script>
+			<!-- js count to -->
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.appear.js' %}"></script>
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.countTo.js' %}"></script>
+			<!-- WOW js -->
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/js/wow.min.js' %}"></script>
+
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/js/SmoothScroll.js' %}"></script>
+
+			<script src="{% static 'ultimatefitbackend/js/bootstrap-select.min.js' %}"></script>
+			<script src="{% static 'ultimatefitbackend/js/jquery.mixitup.min.js' %}"></script>
+			<!-- Theme js -->
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/js/theme.js' %}"></script>
+			<script type="text/javascript" src="{% static 'ultimatefitbackend/js/google-map.js' %}"></script>
+
+			<!--<script src="{% static 'ultimatefitbackend/fullcalendar/lib/jquery.min.js' %}"></script>-->
+			<script src="{% static 'ultimatefitbackend/fullcalendar/lib/moment.min.js' %}"></script>
+			<!--<script src="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.js' %}"></script>-->
+
+			<script>
+				function centerButtons() {
+					var windowHeight = $(window).height();
+					console.log(windowHeight);
+
+					var widthOfSquareAreaOuter = $(".square-area-outer").width();
+					var marginLeftFourColumn = ($(window).width() - widthOfSquareAreaOuter*2)/2;
+					$(".four-column").css("left", marginLeftFourColumn);
+
+					var heightOfSquareAreaOuter = $(".square-area-outer").height();
+					var marginTopFourColumn = ($(window).height() - heightOfSquareAreaOuter*1.5)/2;
+					$(".four-column").css("top", marginTopFourColumn);
+
+
+					$(".main_page").css("height", $(window).height());
+
+					$(".rev_slider").revolution({
+						responsiveLevels: [1240, 1024, 778, 480],
+					    autoHeight: "on",
+					    gridheight: windowHeight
+					});
+				};
+
+				centerButtons();
+
+				$(window).resize(function() {
+					centerButtons();
+					//location.reload();
+					var marginLeftFourColumn = ($(window).width() - 400*3)/2;
+					$(".four-column").css("left", marginLeftFourColumn);
+				});
+
+				//Click buttons to navigate
+				$(document).on("click", "#order-future-day", function(){
+					window.location='/shop';
+				});
+
+				$(document).on("click", "#order-today", function(){
+					$('#two-buttons').css("display", "none");
+
+					var marginLeftFourColumn = ($(window).width() - 400*3)/2;
+					$(".four-column").css("left", marginLeftFourColumn);
+
+					$('#three-buttons').css("display", "initial");
+				});
+				
+			</script>
+
+		</div> <!-- End of .main_page -->
+	</body>
+</html>
