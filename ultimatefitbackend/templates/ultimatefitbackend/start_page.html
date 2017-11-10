@@ -44,14 +44,16 @@
 			<script src="vendor/html5shiv.js"></script>
 		<![endif]-->
 		<style>
-			html {
+			/*html {
 				overflow: hidden;
-			}
+			}*/
 
 			.four-column {
 				position: fixed;
 				z-index: 100;
-				top: 10%;
+				left: 50%;
+				top: 50%;
+    			transform: translate(-50%, -50%); /*translate(width, height)*/
 			}
 
 			.square-area {
@@ -63,7 +65,7 @@
     			background-color: white;
 
     			cursor: pointer;
-    			user-select: none;		
+    			user-select: none;	
 			}
 
 			/*Add color to 5 buttons #62C500*/
@@ -110,6 +112,9 @@
 			<div class="container text-center">
 				<div class="row">
 					<div style="" id="two-buttons">
+						<div class="col-md-2 col-sm-6 col-xs-12 text-center square-area-outer">
+							
+						</div>
 						<div class="col-md-4 col-sm-6 col-xs-12 text-center square-area-outer">
 							<div class="single-item square-area" id="order-today">
 								<div class="inner-box">
@@ -130,9 +135,11 @@
 								<h5>Order for future days</h5>
 								<p>
 								Organicstore.com’s customers order is <br>captured by warehouse API..<br><br>
-								</p>
-								
+								</p>	
 							</div>
+						</div>
+						<div class="col-md-2 col-sm-6 col-xs-12 text-center square-area-outer">
+							
 						</div>
 					</div>
 
@@ -464,15 +471,6 @@
 					var windowHeight = $(window).height();
 					console.log(windowHeight);
 
-					var widthOfSquareAreaOuter = $(".square-area-outer").width();
-					var marginLeftFourColumn = ($(window).width() - widthOfSquareAreaOuter*2)/2;
-					$(".four-column").css("left", marginLeftFourColumn);
-
-					var heightOfSquareAreaOuter = $(".square-area-outer").height();
-					var marginTopFourColumn = ($(window).height() - heightOfSquareAreaOuter*1.5)/2;
-					$(".four-column").css("top", marginTopFourColumn);
-
-
 					$(".main_page").css("height", $(window).height());
 
 					$(".rev_slider").revolution({
@@ -487,8 +485,6 @@
 				$(window).resize(function() {
 					centerButtons();
 					//location.reload();
-					var marginLeftFourColumn = ($(window).width() - 400*3)/2;
-					$(".four-column").css("left", marginLeftFourColumn);
 				});
 
 				//Click buttons to navigate
@@ -498,9 +494,6 @@
 
 				$(document).on("click", "#order-today", function(){
 					$('#two-buttons').css("display", "none");
-
-					var marginLeftFourColumn = ($(window).width() - 400*3)/2;
-					$(".four-column").css("left", marginLeftFourColumn);
 
 					$('#three-buttons').css("display", "initial");
 				});
