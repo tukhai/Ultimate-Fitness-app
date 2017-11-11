@@ -94,18 +94,30 @@
 				}				
 			}
 
+			h5 i {
+				display: none;
+			}
+
 			@media (max-width: 767px) {
 				.four-column {
 					position: absolute;
-					margin-top: 200px;
+					/*margin-top: 200px;*/
 				}
 				/*#three-buttons {
 					margin-top: 100px !important;
 				}*/
 				#distance {
-					height: 300px;
+					height: 150px;
 				}
 				#banner {
+					display: none;
+				}
+				h5 i {
+					display: initial;
+					color: #53a800;
+					font-size: 150%;
+				}
+				.inner-box {
 					display: none;
 				}
 			}
@@ -130,7 +142,7 @@
 								<div class="inner-box">
 									<div class="icon"><i class="icon-business"></i></div>
 								</div>
-								<h5>Order for today</h5>
+								<h5><i class="icon-business"></i> Order for today</h5>
 								<p>
 								Organicstore.com’s customers order is <br>captured by warehouse API..<br><br>
 								</p>
@@ -142,7 +154,7 @@
 								<div class="inner-box">
 									<div class="icon"><i class="rot icon-check"></i></div>
 								</div>
-								<h5>Order for future days</h5>
+								<h5><i class="rot icon-check"></i> Order for future days</h5>
 								<p>
 								Organicstore.com’s customers order is <br>captured by warehouse API..<br><br>
 								</p>	
@@ -163,7 +175,7 @@
 										<i class="fa fa-male" aria-hidden="true"></i>
 									</div>
 								</div>
-								<h5>Lean on me</h5>
+								<h5><i class="fa fa-male" aria-hidden="true"></i> Lean on me</h5>
 								<p>
 								Organicstore.com’s customers order is <br>captured by warehouse API..<br><br>
 								</p>
@@ -178,7 +190,7 @@
 										<i class="fa fa-arrows-h" aria-hidden="true"></i>
 									</div>
 								</div>
-								<h5>Maintain</h5>
+								<h5><i class="fa fa-arrows-h" aria-hidden="true"></i> Maintain</h5>
 								<p>
 								Organicstore.com’s customers order is <br>captured by warehouse API..<br><br>
 								</p>
@@ -193,7 +205,7 @@
 										<i class="fa fa-line-chart" aria-hidden="true"></i>
 									</div>
 								</div>
-								<h5>Heavy Duty</h5>
+								<h5><i class="fa fa-line-chart" aria-hidden="true"></i> Heavy Duty</h5>
 								<p>
 								Organicstore.com’s customers order is <br>captured by warehouse API..<br><br>
 								</p>
