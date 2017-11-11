@@ -79,18 +79,6 @@
 			    height: 100% !important;
 			}
 
-			/*#x-content-band-3 .x-container.width{
-				height: 100%;
-			}
-
-			div#rev_slider_4_1_wrapper {
-			    max-height: 1960px !important;
-			}*/
-
-			/*.tp-bgimg.defaultimg {
-			    background-size: 100% 100% !important;
-			}*/
-
 			#button-background {
 				position: fixed; /*KEY THING TO DO THIS*/
 				height: 100vh;
@@ -98,6 +86,28 @@
 				opacity: 0.5;
 				background-color: black;
 				z-index: 99;
+			}
+
+			@media (max-width: 600px) {				
+				.four-column {
+					width: 100%;					
+				}				
+			}
+
+			@media (max-width: 767px) {
+				.four-column {
+					position: absolute;
+					margin-top: 200px;
+				}
+				/*#three-buttons {
+					margin-top: 100px !important;
+				}*/
+				#distance {
+					height: 300px;
+				}
+				#banner {
+					display: none;
+				}
 			}
 		</style>
 
@@ -144,6 +154,7 @@
 					</div>
 
 					<div id="three-buttons" style="display: none;">
+						<div id="distance"></div>
 						<div class="col-md-4 col-sm-6 col-xs-12 text-center square-area-outer">
 							<div class="single-item square-area">
 								<div class="inner-box">
