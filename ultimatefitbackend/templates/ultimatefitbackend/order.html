@@ -1,0 +1,1423 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<!-- For IE -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- For Resposive Device -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>Organic Store | Responsive HTML5 Template</title>
+		<!-- Favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-57x57.png' %}">
+		<link rel="apple-touch-icon" sizes="60x60" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-60x60.png' %}">
+		<link rel="apple-touch-icon" sizes="72x72" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-72x72.png' %}">
+		<link rel="apple-touch-icon" sizes="76x76" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-76x76.png' %}">
+		<link rel="apple-touch-icon" sizes="114x114" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-114x114.png' %}">
+		<link rel="apple-touch-icon" sizes="120x120" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-120x120.png' %}">
+		<link rel="apple-touch-icon" sizes="144x144" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-144x144.png' %}">
+		<link rel="apple-touch-icon" sizes="152x152" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-152x152.png' %}">
+		<link rel="apple-touch-icon" sizes="180x180" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-180x180.png' %}">
+		<link rel="icon" type="image/png" sizes="192x192"  href="{% static 'ultimatefitbackend/images/fav-icon/android-icon-192x192.png' %}">
+		<link rel="icon" type="image/png" sizes="32x32" href="{% static 'ultimatefitbackend/images/fav-icon/favicon-32x32.png' %}">
+		<link rel="icon" type="image/png" sizes="96x96" href="{% static 'ultimatefitbackend/images/fav-icon/favicon-96x96.png' %}">
+		<link rel="icon" type="image/png" sizes="16x16" href="{% static 'ultimatefitbackend/images/fav-icon/favicon-16x16.png' %}">
+
+
+		<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+		<!-- Custom Css -->
+		<link rel="stylesheet" type="text/css" href="{% static 'ultimatefitbackend/css/style.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'ultimatefitbackend/css/responsive.css' %}">
+
+
+		<!-- Fixing Internet Explorer ______________________________________-->
+
+		<!--[if lt IE 9]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+			<script src="vendor/html5shiv.js"></script>
+		<![endif]-->
+		<style>
+			body ::-webkit-scrollbar {
+			    width: 0px !important;
+			}
+			.distance-between-left-right {
+				margin-right: 175px;
+			}
+			.main-navbar {
+				position: fixed; 
+				width: 100%; 
+				z-index: 10;
+				zoom: 0.8; /* Old IE only */
+			    /*-moz-transform: scale(0.8);
+			    -webkit-transform: scale(0.8);
+			    transform: scale(0.8);*/
+			    /*Text in navbar unselectable*/
+			    -webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;			    
+			}
+			.list-news {
+				display: none !important;
+			}
+			@media (min-width: 992px) and (max-width: 1199px) {				
+				.distance-between-left-right {
+					margin-right: 0px;
+				}
+			}
+
+			.my-cart-preview {
+				position: fixed; 
+				z-index: 999; 
+				margin-top: -205px; 
+				margin-left: 50vw;
+			}
+			@media (min-width: 992px) and (max-width: 1024px) {				
+				.my-cart-preview {
+					margin-top: -182px;
+				}
+			}
+
+			.cart_list>ul>li .fa-times-circle {
+				display: none !important;
+			}
+
+			.close-list-cart {
+				position: absolute; 
+				top: 57px; 
+				right: 25px; 
+				font-size: 18px; 
+				color:#aaaaaa; 
+				cursor: pointer;
+			}
+
+			@media (min-width: 992px) {
+				.flag-icon-size {
+					width: 19px; 
+					height: 13px; 
+					position: absolute; 
+					margin-top: 26px; 
+					margin-left: -22px; 
+					background-color: white;
+				}
+			}
+
+			@media (max-width: 992px) {
+				.flag-icon-size {
+					display: none;
+				}
+			}
+
+			.internet-connection-error {
+				border-style: solid;
+				border-color: #eaeaea;
+				border-radius: 10px;
+				border-width: 1px;
+				background-color: black;
+				color: white;
+				opacity: 0.8;
+				width: 220px;
+				padding-top: 7px;
+				display: none;
+				z-index: 100000;		
+			}
+
+			.internet-connection-error p {
+				margin-left: 17px;
+				line-height: 1.15;
+				margin-bottom: 10px;
+				margin-top: 3px;
+			}
+			.internet-connection-error h7 {
+				margin-left: 17px;
+				margin-top: 10px;				
+				font-weight: 600;
+			}
+
+			#activation-email-message {
+				position: fixed; 
+				top: 50%; 
+				left: 50%; 
+				margin-top: -80px; 
+				margin-left: -150px; 
+				width: 300px; 
+				height: 160px;
+				z-index: 10000;
+				text-align: center;
+				border-style: solid;
+				border-color: #eaeaea;
+				border-radius: 10px;
+				border-width: 1px;
+				background-color: white;
+				box-shadow: 2px 2px 1px #d8d8d8;
+				padding-top: 10px;
+				display: none;
+			}
+
+			#confirm-activation-email-button {
+				width: 90px; 
+				height: 30px;
+				border-radius: 4px;
+				background-color: #1E90FF;
+				color: white;
+				margin-left: 105px;
+				padding-top: 5px;
+				margin-top: 15px;
+				cursor: pointer;
+				user-select: none;
+			}
+
+			#submit-registration-message {
+				position: fixed; 
+				top: 50%; 
+				left: 50%; 
+				margin-top: -80px; 
+				margin-left: -150px; 
+				width: 300px; 
+				height: 50px;
+				z-index: 10000;
+				text-align: center;
+				border-style: solid;
+				border-color: #eaeaea;
+				border-radius: 10px;
+				border-width: 1px;
+				background-color: white;
+				box-shadow: 2px 2px 1px #d8d8d8;
+				padding-top: 10px;
+				display: none;
+			}
+
+			p.required input {
+				width: 100%;
+			}
+
+
+			/*CSS for start_page*/
+			.four-column {
+				position: fixed;
+				z-index: 100;
+				left: 50%;
+				top: 50%;
+    			transform: translate(-50%, -50%); /*translate(width, height)*/
+			}
+
+			.square-area {
+				border-style: solid;
+    			border-width: 1px;
+    			border-color: lightgrey;
+    			border-radius: 15px;
+    			padding-top: 10%;
+    			background-color: white;
+
+    			cursor: pointer;
+    			user-select: none;	
+			}
+
+			/*Add color to 5 buttons #62C500*/
+			.square-area:hover {
+			    -webkit-box-shadow:inset 0px 0px 0px 4px #53a800;
+			    -moz-box-shadow:inset 0px 0px 0px 4px #53a800;
+			    box-shadow:inset 0px 0px 0px 4px #53a800;
+			}
+
+			.rev_slider_wrapper, .rev_slider, .tp-fullwidth-forcer, .rev_slider .tp-bgimg.defaultimg {
+			    height: 100% !important;
+			}
+
+			#button-background {
+				position: fixed; /*KEY THING TO DO THIS*/
+				height: 100vh;
+				width: 100vw;
+				opacity: 0.5;
+				background-color: black;
+				z-index: 99;
+			}
+
+			@media (max-width: 600px) {				
+				.four-column {
+					width: 100%;					
+				}				
+			}
+
+			@media (min-width: 768px) {
+				h5 i {
+					display: none !important;
+				}
+			}
+
+			@media (max-width: 767px) {
+				.four-column {
+					position: absolute;
+					margin-top: 40px;
+				}
+				/*#three-buttons {
+					margin-top: 100px !important;
+				}*/
+				#distance {
+					height: 150px;
+				}
+				#banner {
+					display: none;
+				}
+				h5 i {
+					display: initial;
+					color: #53a800;
+					font-size: 150%;
+				}
+				.inner-box {
+					display: none;
+				}
+			}
+		</style>
+
+		<link rel='stylesheet' href="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.css' %}" />
+	</head>
+
+
+
+	<body>
+		<section class="four-column">
+			<div class="container text-center">
+				<div class="row">
+					<div style="" id="two-buttons">
+						<div class="col-md-2 col-sm-6 col-xs-12 text-center square-area-outer">
+							
+						</div>
+						<div class="col-md-4 col-sm-6 col-xs-12 text-center square-area-outer">
+							<div class="single-item square-area" id="order-today">
+								<div class="inner-box">
+									<div class="icon"><i class="icon-business"></i></div>
+								</div>
+								<h5><i class="icon-business"></i> Order for today</h5>
+								<p>
+								Organicstore.com’s customers order is <br>captured by warehouse API..<br><br>
+								</p>
+								
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6 col-xs-12 text-center square-area-outer">
+							<div class="single-item square-area" id="order-future-day">
+								<div class="inner-box">
+									<div class="icon"><i class="rot icon-check"></i></div>
+								</div>
+								<h5><i class="rot icon-check"></i> Order for future days</h5>
+								<p>
+								Organicstore.com’s customers order is <br>captured by warehouse API..<br><br>
+								</p>	
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-6 col-xs-12 text-center square-area-outer">
+							
+						</div>
+					</div>
+
+					<div id="three-buttons" style="display: none;">
+						<div id="distance"></div>
+						<div class="col-md-4 col-sm-6 col-xs-12 text-center square-area-outer">
+							<div class="single-item square-area">
+								<div class="inner-box">
+									<div class="icon">
+										<!--<i class="icon-business"></i>-->
+										<i class="fa fa-male" aria-hidden="true"></i>
+									</div>
+								</div>
+								<h5><i class="fa fa-male" aria-hidden="true"></i> Lean on me</h5>
+								<p>
+								Organicstore.com’s customers order is <br>captured by warehouse API..<br><br>
+								</p>
+								
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6 col-xs-12 text-center square-area-outer">
+							<div class="single-item square-area">
+								<div class="inner-box">
+									<div class="icon">
+										<!--<i class="rot icon-nature-1"></i>-->
+										<i class="fa fa-arrows-h" aria-hidden="true"></i>
+									</div>
+								</div>
+								<h5><i class="fa fa-arrows-h" aria-hidden="true"></i> Maintain</h5>
+								<p>
+								Organicstore.com’s customers order is <br>captured by warehouse API..<br><br>
+								</p>
+								
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6 col-xs-12 text-center square-area-outer">
+							<div class="single-item square-area">
+								<div class="inner-box">
+									<div class="icon">
+										<!--<i class="rot icon-check"></i>-->
+										<i class="fa fa-line-chart" aria-hidden="true"></i>
+									</div>
+								</div>
+								<h5><i class="fa fa-line-chart" aria-hidden="true"></i> Heavy Duty</h5>
+								<p>
+								Organicstore.com’s customers order is <br>captured by warehouse API..<br><br>
+								</p>
+								
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+		<div id="button-background"></div>
+
+
+		<div class="main_page">
+			<div id="submit-registration-message">
+				<span>SUBMITTING YOUR REGISTRATION ...</span>
+			</div>
+
+			<div id="activation-email-message">
+				<span>Thanks for registering with UltimateFit! An activation email will be sent to you shortly. Please check your email and activate your account.</span><br>
+				<div id="confirm-activation-email-button">OK</div>
+			</div>
+
+			<div style="position: fixed; margin-top: 55px; margin-left: 50vw; z-index: 10000;">
+				<div class="internet-connection-error">
+					<h7>You seem to be offline &nbsp;<i style="color: red;" class="fa fa-wifi" aria-hidden="true"></i></h7>
+					<p>Please check your internet connection and try again</p>
+				</div>	
+			</div>
+			<div id="test" style="position: fixed; margin-top: 55px; margin-left: 50vw; z-index: 10000;">
+				
+			</div>
+
+			<!-- Menu ******************************* -->
+			<div class="theme_menu color1_bg main-navbar" style="z-index: 8000;">
+				<div class="container">
+					<nav class="menuzord pull-left" id="main_menu">
+					   <ul class="menuzord-menu">
+					      <li class="current_page"><a href="{% url 'ultimatefitbackend:index' %}">Home</a></li>
+					      <li><a href="{% url 'ultimatefitbackend:about' %}">About us</a></li>
+					      <li><a href="#">store</a>
+					      	<ul class="dropdown">
+					            <li><a href="{% url 'ultimatefitbackend:shop' %}">Shop With Sidebar</a></li>
+					            <li><a href="shop-single.html">Product Detail</a></li>
+					            <li><a href="{% url 'ultimatefitbackend:cart' %}">Cart Page</a></li>
+					            <li><a href="checkout.html">Checkout Page</a></li>
+					            <li><a href="account.html">My Account</a></li>
+					         </ul>
+					      </li>
+					      <li class="list-news"><a href="#">News</a>
+					      	<ul class="dropdown">
+					            <li><a href="blog-Standard.html">News Standard</a></li>
+					            <li><a href="blog-list-sidebar.html">News With Sidebar</a></li>
+					            <li><a href="blog-grid.html">News Masonary</a></li>
+					            <li><a href="blog-details.html">News Single</a></li>
+					         </ul>
+					      </li>
+					      <li><a href="#">gallery</a>
+					      	<ul class="dropdown">
+					            <li><a href="gallery-grid.html">Gallery Grid</a></li>
+                                <li><a href="gallery-masonry.html">Gallery Masonary</a></li>
+                                <li><a href="gallery-single.html">Gallery Single</a></li>
+					         </ul>
+					      </li>
+
+					      <!--<li><a href="#">Pages</a>
+					      	<ul class="dropdown">
+					            <li><a href="{% url 'ultimatefitbackend:testimonials' %}">Testimonials</a></li>
+					            <li><a href="{% url 'ultimatefitbackend:error' %}">404v page</a></li>
+					            <li><a href="{% url 'ultimatefitbackend:faq' %}">FAQ</a></li>
+					         </ul>
+					      </li>-->
+					      
+					      <li class="distance-between-left-right">
+					      	<a href="{% url 'ultimatefitbackend:contact' %}">Contact us</a>
+					      </li>
+					      <li>
+					      	<a href="{% url 'ultimatefitbackend:cart' %}">
+						      	<button class="cart tran3s dropdown-toggle" id="cartDropdown-hover">
+						      		<i class="fa icon-icon-32846" aria-hidden="true" style="font-size: 130%;"></i>
+						      		<!--<span class="s_color_bg p_color" style="font-size: 80%; margin-bottom: -50px !important; position: auto;">2</span>-->
+						      		<span>My Cart</span>
+						      	</button>						      	
+					        </a>
+					      </li>
+					      <li style="overflow: hidden; width: 190px; white-space:nowrap; text-align: center;">
+					      	{% if request.user.is_authenticated %}
+						      	<a>
+						      		<span style="text-transform: lowercase; cursor: pointer;">
+						      			<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i> 
+						      			<span id="display-username-navbar">
+						      				{% if request.user.first_name %}!
+											{{ request.user.first_name }}
+											{% else %}
+											{{ request.user.username }}
+											{% endif %}
+										</span>
+									</span>
+						        </a>
+						        <ul class="dropdown" style="text-align: left;">
+						            <li><a href="{% url 'auth_logout' %}">Log Out</a></li>
+						         </ul>
+					        {% else %}
+						        <a>
+						        	<span style="text-transform: capitalize; cursor: pointer;">
+						        		<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i> Sign In
+						        	</span>
+						        </a>
+						        <ul class="dropdown" style="text-align: left;">
+						            <!--<li><a href="{% url 'auth_login' %}">Sign In</a></li>-->
+						            <li><a class="button-for-authenticate" href="#signin_modal" data-toggle="modal" data-authentication-button="sign-in-button">Sign In</a></li>
+						            <!--<li><a href="{% url 'registration_register' %}">Register Here</a></li>-->
+						            <li><a class="button-for-authenticate" href="#signin_modal" data-toggle="modal" data-authentication-button="register-button">Register Here</a></li>
+						        </ul>
+					        {% endif %}
+					      </li>
+					      <li>
+					      	<a style="text-transform: capitalize; cursor: pointer;">
+				      			<span id="flag-icon-language">
+				      				<span class="flag-icon-size">
+				      					<img src="http://www.postkrieg.info/_assets/img/en_icon.png"/>
+				      				</span>
+				      				&nbsp;English
+				      			</span>				      		
+					        </a>
+					        <ul class="dropdown">
+					            <li class="english-language"><a>English</a></li>
+					            <li class="vietnam-language"><a>Tiếng Việt</a></li>
+					        </ul>
+					      </li>
+					   </ul> <!-- End of .menuzord-menu -->
+				   </nav> <!-- End of #main_menu -->
+				     
+			   </div> <!-- End of .conatiner -->
+			</div> <!-- End of .theme_menu -->
+
+			<!-- Header *******************************  -->
+			<header style="margin-top: 56px;">
+				<div class="bottom_header my-cart-preview">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-4 col-sm-7 col-xs-6 pdt-14">
+							    <div class="cart_option float_right">
+								   		
+							   		<div class="cart_list color2_bg" aria-labelledby="cartDropdown">
+							   			<ul>
+							   				{% for item in cart %}
+								   				<li id="list-item-{{ item.food.id }}">
+								   					<div class="cart_item_wrapper clear_fix">
+								   						<!--<div class="img_holder float_left"><img src="{% static 'ultimatefitbackend/images/shop/9.png' %}" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
+
+								   						<div class="img_holder float_left">
+								   							<img src="{{item.food.description}}" alt="Cart Image" class="img-responsive" style="width:70px;height:80px;float:left;">
+								   						</div>
+
+								   						<div class="item_deatils float_left">
+								   							<h6>{{ item.food.name }}</h6>
+								   							<!--<ul>
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>								
+															</ul>-->
+															<div style="margin-top: 9px;">
+																<span class="font_fix">$ {{ item.food.price }}</span> 
+																<span style="float: right; margin-left: 90px;">
+																	$ <span id="total-price-for-food-id-{{item.food.id}}">{% widthratio item.food.price 1 item.quantity %}</span>
+																</span>
+															</div>
+															<div> 
+																<a class="remove-from-cart-list" data-id-food="{{item.food.id}}" data-price-food="{{item.food.price}}">
+																	<i class="fa fa-minus-circle" aria-hidden="true"></i>
+																</a>
+																&nbsp;
+																<span id="quantity-for-food-id-{{item.food.id}}">{{item.quantity}}</span>
+																&nbsp;
+																<a class="add-to-cart-list" data-id-food="{{item.food.id}}" data-price-food="{{item.food.price}}">
+																	<i class="fa fa-plus-circle" aria-hidden="true"></i>
+																</a>
+															</div>
+								   						</div> <!-- End of .item_deatils -->
+								   					</div> <!-- End of .cart_item_wrapper -->
+								   					<i class="fa fa-times-circle-o close-list-cart" data-id-food="{{item.food.id}}" data-price-food="{{item.food.price}}" aria-hidden="true"></i>
+								   				</li>
+							   				{% empty %}
+							   					<!--<p style="text-align: center; margin-top: 3%; color: white;">There is no item in your cart</p>-->
+							   				{% endfor %}
+							   			</ul>
+
+							   			<div class="cart_total clear_fix">
+
+							   				<span class="total font_fix float_left">Total - <text id="total-to-pay">{{ total }}</text> $</span>
+							   				<a href="#" class="s_color_bg float_right tran3s">Checkout</a>
+							   			</div>
+							   		</div> <!-- End of .cart_list -->
+							    </div>
+
+							</div>
+
+						</div>
+
+					</div>
+				</div> <!-- End of .bottom_header -->
+
+				
+			</header>
+
+
+			<!-- Banner ____________________________________ -->
+	        <div id="banner" style="height: 100%;">
+	        	<div class="rev_slider_wrapper">
+					<!-- START REVOLUTION SLIDER 5.0 auto mode -->
+						<div id="main_slider" class="rev_slider" data-version="5.0">
+							<ul>
+								
+								<!-- SLIDE1  -->
+								<li data-index='rs-377' data-transition='curtain-1' data-slotamount='1' data-easein='default' data-easeout='default' data-masterspeed='default' data-thumb="{% static 'ultimatefitbackend/images/home/slide-1.jpg' %}" data-rotate='0' data-saveperformance='off' data-title='Business Solutions' data-description='' >
+									<!-- MAIN IMAGE -->
+									<img src="{% static 'ultimatefitbackend/images/home/slide-1.jpg' %}" alt="image" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg">
+									<!-- LAYERS -->
+
+									<!-- LAYER NR. 1 -->
+									<div class="tp-caption tp-resizeme rs-parallaxlevel-3"
+										data-x="['center','center','center','center']" data-hoffset="['0','0','35','0']" 
+										data-y="['middle','middle','middle','middle']" data-voffset="['-120','-120','-120','-120']"
+										data-width="none"
+										data-height="none"
+										data-transform_idle="o:1;"
+										data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;" 
+										data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
+										data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" 
+										data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" 
+										data-start="1000"
+										data-splitout="none" 
+										data-responsive_offset="on" 
+										data-elementdelay="0.05" 
+										style="z-index: 5;">
+										<img src="{% static 'ultimatefitbackend/images/home/1.png' %}" alt="">
+									</div>
+
+									<!-- LAYER NR. 2 -->
+									<div class="tp-caption tp-resizeme rs-parallaxlevel-3" 
+										data-x="['center','center','center','center']" data-hoffset="['0','0','35','0']" 
+										data-y="['middle','middle','middle','middle']" data-voffset="['50','50','50','50']"
+										data-width="none"
+										data-height="none"
+										data-transform_idle="o:1;"
+										data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;" 
+										data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
+										data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" 
+										data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" 
+										data-start="1500"
+										data-splitout="none" 
+										data-responsive_offset="on" 
+										data-elementdelay="0.05" 
+										style="z-index: 5;">
+										<h1>Organic Store</h1>
+									</div>
+
+
+									<!-- LAYER NR. 3 -->
+									<div class="tp-caption tp-resizeme rs-parallaxlevel-2" 
+										data-x="['center','center','center','center']" data-hoffset="['0','0','35','0']" 
+										data-y="['middle','middle','middle','middle']" data-voffset="['110','110','110','110']" 
+										data-width="none"
+										data-height="none"
+										data-whitespace="nowrap"
+										data-transform_idle="o:1;"
+							 
+										data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;" 
+										data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
+										data-mask_in="x:0px;y:[100%];" 
+										data-mask_out="x:inherit;y:inherit;" 
+										data-start="2000" 
+										data-splitin="none" 
+										data-splitout="none" 
+										data-responsive_offset="on" 
+										style="z-index: 6; white-space: nowrap;">
+										<h5 class="cp-title">Fruits ~ Vegetables ~ Foods ~ Cosmetics </h5>
+									</div>
+
+									<!-- LAYER NR. 4 -->
+									<div class="tp-caption tp-resizeme rs-parallaxlevel-2" 
+										data-x="['center','center','center','center']" data-hoffset="['0','0','35','0']" 
+										data-y="['middle','middle','middle','middle']" data-voffset="['160','160','160','160']" 
+										data-width="none"
+										data-height="none"
+										data-whitespace="nowrap"
+										data-transform_idle="o:1;"
+							 
+										data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;" 
+										data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
+										data-mask_in="x:0px;y:[100%];" 
+										data-mask_out="x:inherit;y:inherit;" 
+										data-start="2500" 
+										data-splitin="none" 
+										data-splitout="none" 
+										data-responsive_offset="on" 
+										style="z-index: 6; white-space: nowrap;">
+										<h5 class="cp-title-2">We are providing highest quality Organics Products for USA almo</h5>
+									</div>
+
+
+
+			
+								
+								</li>
+
+
+
+								<!-- SLIDE2  -->
+								<li data-index="rs-18" data-transition="zoomin" data-slotamount="7" data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="2000" data-thumb="{% static 'ultimatefitbackend/images/home/slide-2.jpg' %}" data-rotate="0" data-saveperformance="off" data-title="Successful Careers" data-description="">
+									<!-- MAIN IMAGE -->
+									<img src="{% static 'ultimatefitbackend/images/home/slide-2.jpg' %}" alt="" data-bgposition="top center" class="rev-slidebg" data-no-retina>
+									<!-- LAYERS -->
+									<div class="tp-caption tp-resizeme" 
+										data-x="['center','center','center','center']" data-hoffset="['80','80','80','80']" 
+										data-y="['middle','middle','middle','middle']" data-voffset="['-160','-160','-160','-160']"
+										data-width="none"
+										data-height="none"
+										data-transform_idle="o:1;"
+										data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;" 
+										data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
+										data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" 
+										data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" 
+										data-start="1000"
+										data-splitout="none" 
+										data-responsive_offset="on" 
+										data-elementdelay="0.05" 
+										style="z-index: 5;">
+										<img src="{% static 'ultimatefitbackend/images/home/4.png' %}" alt="">
+									</div>
+									<div class="tp-caption tp-resizeme banner-caption-box"
+					                    data-x="right" data-hoffset="0" 
+					                    data-y="top" data-voffset="260"
+					                    data-transform_idle="o:1;"         
+					                    data-transform_in="x:[-175%];y:0px;z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0.01;s:3000;e:Power3.easeOut;" 
+					                    data-transform_out="s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;" 
+					                    data-mask_in="x:[100%];y:0;s:inherit;e:inherit;" 
+					                    data-splitin="none" 
+					                    data-splitout="none"                         
+					                    data-start="1000">
+					                    <div class="banner-caption-h1">Get Blackberry <br>Pack With 50% Off</div>
+					                    <div class="banner-caption-p"><p>Great explorer of the truth, the master-builder of human happiness no sed one rejects <br>dislikes, or avoids pleasure itself, because it is pleasure.</p></div>
+					                    <a href="#" class="thm-btn contuct-us">shop now</a>
+					                </div>
+								</li>
+
+
+
+							
+								<!-- SLIDE3  -->
+								<li data-index="rs-20" data-transition="zoomin" data-slotamount="7" data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="2000" data-thumb="{% static 'ultimatefitbackend/images/home/slide-3.jpg' %}" data-rotate="0" data-saveperformance="off" data-title="Your Success" data-description="">
+									<!-- MAIN IMAGE -->
+									<img src="{% static 'ultimatefitbackend/images/home/slide-3.jpg' %}" alt="" data-bgposition="top center" class="rev-slidebg" data-no-retina>
+									<!-- LAYERS -->
+									
+
+									<!-- LAYER NR. 1 -->
+									<div class="tp-caption tp-resizeme" 
+										data-x="['center','center','center','center']" data-hoffset="['0','0','35','0']" 
+										data-y="['middle','middle','middle','middle']" data-voffset="['-120','-120','-120','-120']"
+										data-width="none"
+										data-height="none"
+										data-transform_idle="o:1;"
+										data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;" 
+										data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
+										data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" 
+										data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" 
+										data-start="1000"
+										data-splitout="none" 
+										data-responsive_offset="on" 
+										data-elementdelay="0.05" 
+										style="z-index: 5;">
+										<img src="{% static 'ultimatefitbackend/images/home/3.png' %}" alt="">
+									</div>
+
+
+									<!-- LAYER NR. 1 -->
+									<div class="tp-caption tp-resizeme text-center"
+					                    data-x="center" data-hoffset="0" 
+					                    data-y="center" data-voffset="-40"
+					                    data-transform_idle="o:1;"         
+					                    data-transform_in="x:[-175%];y:0px;z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0.01;s:3000;e:Power3.easeOut;" 
+					                    data-transform_out="s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;" 
+					                    data-mask_in="x:[100%];y:0;s:inherit;e:inherit;" 
+					                    data-splitin="none" 
+					                    data-splitout="none"                         
+					                    data-start="500">
+					                    <div class="banner-caption-h2">Natural Healthy Foods</div>                    
+					                </div>
+					                <div class="tp-caption tp-resizeme text-center"
+					                    data-x="center" data-hoffset="0" 
+					                    data-y="top" data-voffset="360"
+					                    data-transform_idle="o:1;"                         
+					                    data-transform_in="x:[175%];y:0px;z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0.01;s:3000;e:Power3.easeOut;" 
+					                    data-transform_out="s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;" 
+					                    data-mask_in="x:[-100%];y:0;s:inherit;e:inherit;" 
+					                    data-splitin="none" 
+					                    data-splitout="none" 
+					                    data-responsive_offset="on"                         
+					                    data-start="1400">  
+					                    <div class="banner-caption-h3">With Your Affortable</div>                  
+					                    <div class="banner-caption-p"><p>Great explorer of the truth, the master-builder of human happin</p></div>                  
+					                    <a href="#" class="color1-bg contuct-us">shop now</a>
+					                </div>
+								</li>
+							</ul>	
+						</div>
+				</div><!-- END REVOLUTION SLIDER -->
+	        </div> <!-- End of #banner -->
+			
+
+
+			<!-- Scroll Top Button -->
+			<button class="scroll-top tran3s color2_bg">
+				<span class="fa fa-angle-up"></span>
+			</button>
+			<!-- pre loader  -->
+		 	<div id="loader-wrapper">
+				<div id="loader"></div>
+			</div>
+	
+			<div class="modal" id="signin_modal" style="padding-top: 35px;">
+			    <div class="modal-dialog modal-box-size">		    	
+				    <div class="modal-content">
+				        <div class="modal-header">
+				            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				            <h7 class="modal-title" style="cursor: pointer;">
+				            	<span id="login-button-on-modal" class="button-for-authenticate" data-authentication-button="sign-in-button">Log in</span>
+				            	&nbsp;&nbsp;
+				            	<span id="register-button-on-modal" class="button-for-authenticate" data-authentication-button="register-button">Register</span>
+				            </h7>
+				        </div>				        
+
+					        <div class="panel panel-info" id="sign-in-page">
+								<div class="panel-heading">
+									<div class="panel-title">
+										Log In
+									</div>
+									<div style="padding-top:30px" class="panel-body">
+										
+										<div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+										
+										<form class="form-horizontal" method="post" action="">
+											{% csrf_token %}
+											<div style="margin-bottom: 25px" class="input-group">
+												<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+												<input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">
+											</div>
+											<div style="margin-bottom: 10px" class="input-group">
+												<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+												<input id="login-password" type="password" class="form-control" name="password" value="" placeholder="password">
+											</div>
+											
+											<div class="input-group">
+												<div class="checkbox">
+													<label>
+														<input id="login-remember" type="checkbox" name="remember" value="1">Remember me
+													</label>
+												</div>
+											</div>
+											
+											<div style="margin-top:10px" class="form-group">
+												<div class="col-sm-12 controls">
+													<!--<input type="submit" id="btn-login" class="btn btn-success" value="Login">-->
+													<input type="" id="btn-login" class="btn btn-success" value="Login">
+												</div>
+											</div>
+											
+											<div class="form-group">
+												<div class="col-md-12 control">
+													<div style="font-size: 80%;"><a href="{% url 'auth_password_reset' %}">Forgot password?</a></div>
+												</div>
+											</div>
+											<input type='hidden' name='next' value='{{next}}'/>
+											
+										</form>
+
+										<div id="login-error-message" class="input-group">
+																						
+										</div>
+										
+									</div>
+								</div>
+							</div>
+
+							<!--*************************************************************-->
+
+						    <div class="panel panel-info" id="register-page">
+								<div class="panel-heading">
+									<div class="panel-title" style="text-align: center;">
+										Creat your Ultimate Fit Account
+									</div>
+								</div>
+								<div class="panel-body">
+									
+									<form class="form-horizontal" method="post" action=".">
+										{% csrf_token %}
+										
+										
+										<!--<p class="required">
+											<label class="required" for="id_username">Username:</label> 
+											<input type="text" name="username" autofocus required id="id_username" maxlength="150" /> 
+											<span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+										</p>-->
+										<p class="required">
+											<label class="required" for="id_email">E-mail:</label> 
+											<input type="email" name="email" required id="id_email" />
+										</p>
+										<p class="required">
+											<label class="required" for="id_password1">Password:</label> 
+											<input type="password" name="password1" required id="id_password1" /> 
+											<!--<span class="helptext">
+												<ul>
+													<li>Your password can&#39;t be too similar to your other personal information.</li>
+													<li>Your password must contain at least 8 characters.</li>
+													<li>Your password can&#39;t be a commonly used password.</li>
+													<li>Your password can&#39;t be entirely numeric.</li>
+												</ul>
+											</span>-->
+										</p>
+										<p class="required">
+											<label class="required" for="id_password2">Password confirmation:</label> 
+											<input type="password" name="password2" required id="id_password2" /> 
+											<!--<span class="helptext">Enter the same password as before, for verification.</span>-->
+										</p>
+										<br>
+
+										<!--<input type="submit" value="{% trans 'Submit' %}" class="btn btn-info"/>-->
+										<input style="width: 100%" type="" id="btn-registration" value="Submit" class="btn btn-info"/>
+										
+										<!--<div class="form-group" style="z-index:1;backgroud-color:#fff;">
+											<div class="col-md-offset-3 col-md-1" style="backgroud-color:#fff;">
+												<span style="margin-left:15px;">or</span>
+											</div>
+										</div>
+										
+										<div class="form-group" style="border-top: 1px solid #999; padding-top:20px; margin-top:-25px; z-index:0;">
+											<div class="col-md-offset-3 col-md-6" >
+												<a class="btn btn-block btn-social btn-facebook" href="" ><i class="fa fa-facebook"></i>Log In with Facebook</a>
+											</div>
+										</div>
+										
+										<div class="form-group" style="padding-top:0px;">
+											<div class="col-md-offset-3 col-md-6" >
+												<a class="btn btn-block btn-social btn-google" href="" ><i class="fa fa-google"></i>Log In with Google</a>
+											</div>
+										</div>
+										
+										<div class="form-group" style="padding-top:0px;">
+											<div class="col-md-offset-3 col-md-6" >
+												<a class="btn btn-block btn-social btn-twitter" href="" ><i class="fa fa-twitter"></i>Log In with Twitter</a>
+											</div>
+										</div>-->
+										
+									</form>
+									<br>
+									<div id="registration-error-message" class="input-group">
+																						
+									</div>
+									
+								</div>
+							</div>
+						
+				        <!--<div class="modal-footer">
+				            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        </div>-->
+				    </div>
+			    </div>
+			</div>
+
+
+		<!-- Js File_________________________________ -->
+
+		<!-- j Query -->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery-2.1.4.js' %}"></script>
+		<!-- Bootstrap JS -->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/bootstrap.min.js' %}"></script>
+
+		<!-- Vendor js _________ -->
+		<!-- Google map js -->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRvBPo3-t31YFk588DpMYS6EqKf-oGBSI"></script> <!-- Gmap Helper -->
+		<script src="{% static 'ultimatefitbackend/js/gmap.js' %}"></script>
+		<!-- owl.carousel -->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/owl.carousel.min.js' %}"></script>
+		<!-- ui js -->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery-ui.min.js' %}"></script>
+		<!-- Responsive menu-->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/menuzord.js' %}"></script>
+		<!-- revolution -->
+		<script src="{% static 'ultimatefitbackend/vendor/revolution/jquery.themepunch.tools.min.js' %}"></script>
+		<script src="{% static 'ultimatefitbackend/vendor/revolution/jquery.themepunch.revolution.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.slideanims.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.layeranimation.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.navigation.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.kenburn.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.actions.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.parallax.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/vendor/revolution/revolution.extension.migration.min.js' %}"></script>
+
+		<!-- landguage switcher js -->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.polyglot.language.switcher.js' %}"></script>
+		<!-- Fancybox js -->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.fancybox.pack.js' %}"></script>
+		<!-- js count to -->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.appear.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.countTo.js' %}"></script>
+		<!-- WOW js -->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/wow.min.js' %}"></script>
+
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/SmoothScroll.js' %}"></script>
+
+		<script src="{% static 'ultimatefitbackend/js/bootstrap-select.min.js' %}"></script>
+		<script src="{% static 'ultimatefitbackend/js/jquery.mixitup.min.js' %}"></script>
+		<!-- Theme js -->
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/theme.js' %}"></script>
+		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/google-map.js' %}"></script>
+
+		<!--<script src="{% static 'ultimatefitbackend/fullcalendar/lib/jquery.min.js' %}"></script>-->
+		<script src="{% static 'ultimatefitbackend/fullcalendar/lib/moment.min.js' %}"></script>
+		<script src="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.js' %}"></script>
+
+		<script>
+			/*RENDER USERNAME WITH ONLY 15 CHARS, just take 14 first chars, so it display more properly*/
+			{% if request.user.is_authenticated %}
+				usernameDisplayNavbar = "{{ request.user.username }}";
+				console.log("JJJJJJJ " + usernameDisplayNavbar);
+				console.log(typeof(usernameDisplayNavbar));
+
+				emailWithoutDomain = usernameDisplayNavbar.split("@")[0];
+				console.log("KKKK " + emailWithoutDomain);
+
+				if (emailWithoutDomain.length > 14) {
+					finalDisplay = emailWithoutDomain.substring(0, 14);
+				} else {
+					finalDisplay = emailWithoutDomain;
+				};
+				$("span#display-username-navbar").html(finalDisplay);
+			{% endif %}
+
+
+			/*TRACK PREVIOUS URL TO DISPLAY PROPERLY MESSAGE*/
+			//console.log("{{previous_url}}");
+
+
+			$('#cartDropdown-hover').hover(function() {
+			    $(document).find('.cart_list').stop(true, true).delay(50).fadeIn(200);
+			}, function() {
+			    $(document).find('.cart_list').stop(true, true).delay(50).fadeOut(200);
+			});
+
+			$('.cart_list').hover(function() {
+			    $(this).stop(true, true).delay(50).fadeIn(200);
+			}, function() {
+			    $(this).stop(true, true).delay(50).fadeOut(200);
+			});
+
+
+			// Only pull data and render when hover to the button (try this first)
+			$('#cartDropdown-hover').hover(function() {
+			    console.log("Pulling data for dropdown cart when hover");
+			    $.get("/list", function(data, status){
+			        //console.log("Data: " + data)
+			        //console.log(typeof(data));
+			        console.log("Status: " + status);
+			        $(".cart_list ul").html(data);
+			    }).fail(function(){
+				    popUpInternetConnectionError();
+				});
+			    getTotalToPayFromDB();
+			});
+
+			
+			// This part is the javascript front-end for language change
+			$(document).on("click", "li.english-language", function(){
+				$("span#flag-icon-language").html('<span class="flag-icon-size"><img src="https://us.123rf.com/450wm/nicemonkey/nicemonkey1002/nicemonkey100200046/6416327-aged-great-british-flag-icon-with-red-white-and-blue-colours.jpg?ver=6"/></span>&nbsp;English');
+			});
+			$(document).on("click", "li.vietnam-language", function(){
+				$("span#flag-icon-language").html('<span class="flag-icon-size"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png"/></span>&nbsp;T . Việt');
+			});
+
+
+			// When the page is freshly loaded, we would get the current quantity of each food in db
+			// Can't define varible within click function, because the varible would get its value reset whenever we click
+			var quantityOfFoodArray = [];
+			{% for item in cart %}
+				quantityOfFoodArray[{{item.food.id}}] = {{item.quantity}};
+				console.log("Quantity of " + {{item.food.id}} + ".{{item.food.name}}" + " when the page is freshly loaded: " + {{item.quantity}});
+			{% endfor %}
+			// since food id start from 1, this loop array is from 1 to n
+
+			var totalToPay = {{total}};
+			//console.log("total money to be paid when the page is freshly loaded: $" + totalToPay);
+
+			function getTotalToPayFromDB() {
+				$.get("/total", function(data, status){
+			        console.log("Data: " + data.total + "\nStatus: " + status);
+			        console.log(typeof(data.total));
+			        totalToPay = data.total;
+			        console.log("TOTAL TO PAY FROM DB: " + totalToPay);
+	            	$("text#total-to-pay").html(totalToPay);
+			    });
+			};
+
+			function popUpInternetConnectionError() {
+				console.log("NO INTERNET");
+				$('.internet-connection-error').fadeIn(200);
+			    $('.internet-connection-error').delay(1500).fadeOut(200);
+			};
+
+			//$(".add-to-cart-list").click(function(){
+			$(document).on("click", ".add-to-cart-list", function(){
+				var idOfFood = $(this).data('id-food'); 
+			    console.log("Adding food of id: " + idOfFood);
+
+			    var priceOfFood = $(this).data('price-food');
+			    console.log("Price of this food: " + priceOfFood);
+
+			    $.post(
+			    	"/add/" + idOfFood,
+			        { 
+			          csrfmiddlewaretoken: "{{ csrf_token }}"
+			        },
+			        function(data,status){
+			            console.log("Status: " + status);
+
+			            if (status == "success") {
+				            //Consider moving this out of post function, so the number change faster, and do the check if status success or false, if false show error box/page 404
+					        quantityOfFoodArray[idOfFood] += 1;
+					        
+				            console.log("Current quantity of food id " + idOfFood + " in database: " + quantityOfFoodArray[idOfFood]);
+
+				            $("span#quantity-for-food-id-" + idOfFood).html(quantityOfFoodArray[idOfFood]);
+				            $("span#total-price-for-food-id-" + idOfFood).html(priceOfFood*quantityOfFoodArray[idOfFood]);
+
+						    
+							getTotalToPayFromDB();
+						};
+			        }
+		        ).fail(function(){
+				    popUpInternetConnectionError();
+				});
+			});
+
+			//$(".remove-from-cart-list").click(function(){
+			$(document).on("click", ".remove-from-cart-list", function(){
+				var idOfFoodToBeRemoved = $(this).data('id-food'); 
+			    console.log("Removing food of id: " + idOfFoodToBeRemoved);
+
+			    var priceOfFoodToBeRemoved = $(this).data('price-food');
+			    console.log("Price of the food to be removed: " + priceOfFoodToBeRemoved);
+
+			    $.post(
+			    	"/remove/" + idOfFoodToBeRemoved,
+			        { 
+			          csrfmiddlewaretoken: "{{ csrf_token }}"
+			        },
+			        function(data,status){
+			            console.log("Status: " + status);
+
+			            if (status == "success") {
+				            //Consider moving this out of post function, so the number change faster, and do the check if status success or false, if false show error box/page 404
+					        quantityOfFoodArray[idOfFoodToBeRemoved] -= 1;
+					        
+				            console.log("Current quantity of food id " + idOfFoodToBeRemoved + " in database: " + quantityOfFoodArray[idOfFoodToBeRemoved]);
+
+				            // when quantity = 0, just remove the item from the list
+				            if (quantityOfFoodArray[idOfFoodToBeRemoved] > 0) {
+				            	$("span#quantity-for-food-id-" + idOfFoodToBeRemoved).html(quantityOfFoodArray[idOfFoodToBeRemoved]);
+				            	$("span#total-price-for-food-id-" + idOfFoodToBeRemoved).html(priceOfFoodToBeRemoved*quantityOfFoodArray[idOfFoodToBeRemoved]);
+				        	} else {
+				        		$("li#list-item-" + idOfFoodToBeRemoved).remove();
+				        	};
+			        	
+						    getTotalToPayFromDB();
+						};
+			        }
+		        ).fail(function(){
+				    popUpInternetConnectionError();
+				});
+			});
+
+			//$(".close-list-cart").click(function(){
+			$(document).on("click", ".close-list-cart", function(){
+				var idOfDeleteFood = $(this).data('id-food');
+				console.log("deleting all items type of food id: " + idOfDeleteFood);
+
+				var priceOfDeleteFood = $(this).data('price-food');
+				console.log("price of 1 item of this type of food: " + priceOfDeleteFood);
+
+				$.post(
+			    	"/removeall/" + idOfDeleteFood,
+			        { 
+			          csrfmiddlewaretoken: "{{ csrf_token }}"
+			        },
+			        function(data,status){
+			            console.log("Status: " + status);
+			            console.log("Successfully delete all food type of id: " + idOfDeleteFood);
+
+			            if (status == "success") {
+						    getTotalToPayFromDB();
+						    //$(this).parent('li').fadeOut(300);
+						    quantityOfFoodArray[idOfDeleteFood] = 0;
+						    $("li#list-item-" + idOfDeleteFood).fadeOut(150);
+						    //$("li#list-item-" + idOfDeleteFood).css("display", "none");
+						};
+			        }
+		        ).fail(function(){
+				    popUpInternetConnectionError();				    
+				});
+			});
+
+
+			/***Modal box for sign in/register***/
+			$(document).on("click", ".button-for-authenticate", function(){
+		        var buttonType = $(this).data('authentication-button');
+		        console.log("button: " + buttonType);
+		        if (buttonType == "sign-in-button") {
+		        	$("#sign-in-page").show();
+		        	$("#register-page").hide();
+		        	$("span#login-button-on-modal").css({"color": "red", "text-decoration": "underline"});
+		        	$("span#register-button-on-modal").css({"color": "#939393", "text-decoration": "none"});
+		        } else {
+		        	$("#sign-in-page").hide();
+		        	$("#register-page").show();
+		        	$("span#login-button-on-modal").css({"color": "#939393", "text-decoration": "none"});
+		        	$("span#register-button-on-modal").css({"color": "red", "text-decoration": "underline"});
+		        }
+	        });
+
+			$(document).on('show.bs.modal', '#signin_modal', function(e) {
+		        console.log("open sign in modal box");		     
+		    });
+		    $(document).on('hidden.bs.modal', '#signin_modal', function (e) {
+			    console.log("close sign in modal box");
+			});
+			/***Ajax login***/
+			$(document).on("click", "input#btn-login", function(){
+				console.log("posting to login...");
+				var inputUsername = $("input#login-username").val();
+				var inputPassword = $("input#login-password").val();
+
+				console.log("Logging in with username: '" + inputUsername +"'");
+
+				$.post(
+			    	"/accounts/login/",
+			        { 
+			          csrfmiddlewaretoken: "{{ csrf_token }}",
+			          username: inputUsername,
+			          password: inputPassword
+			        },
+			        function(data,status){
+			            console.log("Status: " + status);
+			            if (status == "success") {
+				            //refresh the page after login success, so the login would redirect to current page
+				            $.get("/total", function(data, status){
+						        //console.log("Data: " + data.check_authentication + "\nStatus: " + status);
+						        //console.log(typeof(data.check_authentication));
+						        //isAuthenticated = data.check_authentication;
+						        //console.log("Have user loged in? - " + isAuthenticated);
+						        if (data.check_authentication) {
+						        	location.reload();
+						        } else {
+						        	console.log("Wrong username or password");
+						        	$("#login-error-message").append('<label style="color: red;">Username and password do not match!</label>');
+						        }
+						    });
+				        };
+			        }
+		        ).fail(function(){
+				    popUpInternetConnectionError();				    
+				});
+			});
+			/*Handle log in error message*/
+			$(document).on("click", "input.form-control", function(){
+				$("#login-error-message label").remove();
+			});
+
+			/*****************************************************************/
+
+
+			/**Front-end registration validation**/
+			function ValidateEmail(mail) {  
+				var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+				if (re.test(mail)) {
+				    return true;
+				} else {
+				    return false;
+				}  
+			};
+
+			function registrationValidation() {
+			    console.log("validating registration form...");
+				
+				var inputRegistrationEmail = $("input#id_email").val();
+				var inputRegistrationPassword = $("input#id_password1").val();
+				var inputRegistrationPasswordConfirm = $("input#id_password2").val();
+
+				if (!ValidateEmail(inputRegistrationEmail)) {
+					$("#registration-error-message").append('<label style="color: red;">Invalid email! Please try to re-enter your email.</label>');
+					return false;
+				}
+
+				if (inputRegistrationPassword.length < 8) {
+					$("#registration-error-message").append('<label style="color: red;">Your password must have at least 8 characters.</label>');
+					return false;
+				}
+
+				if (inputRegistrationPassword != inputRegistrationPasswordConfirm) {
+					$("#registration-error-message").append('<label style="color: red;">Password confirmation does not match!</label>');
+					return false;
+				}
+
+				return true;
+			};
+
+
+			/***Ajax registration***/
+			$(document).on("click", "input#btn-registration", function(){				
+
+				$("#registration-error-message label").remove();
+				console.log("posting to registion...");
+				//var inputRegistrationUsername = $("input#id_username").val();
+				var inputRegistrationEmail = $("input#id_email").val();
+				var inputRegistrationPassword = $("input#id_password1").val();
+				var inputRegistrationPasswordConfirm = $("input#id_password2").val();
+
+				if (registrationValidation()) {
+
+					//console.log("Registering in with username: '" + inputRegistrationUsername +"'");
+					console.log("Registering in with email: '" + inputRegistrationEmail +"'");
+
+
+					/*Check registration validation*/
+					$.post(
+				    	"/registration_validation/",
+				        { 
+				          csrfmiddlewaretoken: "{{ csrf_token }}",
+				          name: inputRegistrationEmail
+				        },
+				        function(data,status){
+				            console.log("Status: " + status);
+				            if (status == "success") {
+							    console.log("Data: " + data.registration_validator);
+							    if (data.registration_validator) {
+							    	/*IF THE EMAIL IS NEW, THEN CLOSE MODAL BOX AND PROCESS TO POST REGISTRATION FORM TO BACKEND*/
+									// Clear input text in registration form
+									$("p.required input").val("");
+									// Close modal box
+									$('#signin_modal button.close').click();
+									//$('.modal-backdrop').remove(); // Close the backdrop
+									$('#submit-registration-message').show();
+
+						        	console.log("Valid registration name, sending activation email..");
+
+						        	$.post(
+								    	"/accounts/register/",
+								        { 
+								          csrfmiddlewaretoken: "{{ csrf_token }}",
+								          //username: inputRegistrationUsername,
+								          username: inputRegistrationEmail,
+								          email: inputRegistrationEmail,
+								          password1: inputRegistrationPassword,
+								          password2: inputRegistrationPasswordConfirm
+								        },
+								        function(data,status){
+								            console.log("Status: " + status);
+								            if (status == "success") {
+									            //data callback here is the whole activation email sent to you shortly html page
+									            console.log("Successfully sent activation email");
+									            $('.modal-backdrop').remove(); // Close the backdrop
+									            $('#submit-registration-message').hide();
+									            $("#activation-email-message").show();
+									        };
+								        }
+							        );
+						        } else {
+						        	console.log("That username has already been taken");
+						        	$("#registration-error-message").append('<label style="color: red;">That email has already been used, please use another email!</label>');
+						        }
+					        };
+				        }
+			        ).fail(function(){
+					    popUpInternetConnectionError();				    
+					});
+		    	}
+				/*$.post(
+			    	"/accounts/register/",
+			        { 
+			          csrfmiddlewaretoken: "{{ csrf_token }}",
+			          username: inputRegistrationUsername,
+			          email: inputRegistrationEmail,
+			          password1: inputRegistrationPassword,
+			          password2: inputRegistrationPasswordConfirm
+			        },
+			        function(data,status){
+			            console.log("Status: " + status);
+			            if (status == "success") {
+				            //refresh the page after login success, so the login would redirect to current page
+				            console.log(data);
+				        };
+			        }
+		        ).fail(function(){
+				    popUpInternetConnectionError();				    
+				});*/
+			});
+			/*Handle registration error message*/
+			$(document).on("click", "p.required input", function(){
+				$("#registration-error-message label").remove();
+			});
+
+			/*Close activation email message*/
+			$(document).on("click", "#confirm-activation-email-button", function(){
+				$("#activation-email-message").hide();
+			});
+
+
+			/***FUNCTION IN START_PAGE***/
+			function centerButtons() {
+				var windowHeight = $(window).height();
+				//console.log(windowHeight);
+
+				$(".main_page").css("height", $(window).height());
+
+				$(".rev_slider").revolution({
+					responsiveLevels: [1240, 1024, 778, 480],
+				    autoHeight: "on",
+				    gridheight: windowHeight
+				});
+			};
+
+			centerButtons();
+
+			$(window).resize(function() {
+				centerButtons();
+				//location.reload();
+			});
+
+			//Click buttons to navigate
+			$(document).on("click", "#order-future-day", function(){
+				window.location='/shop';
+			});
+
+			$(document).on("click", "#order-today", function(){
+				//$('#two-buttons').css("display", "none");
+				$('#two-buttons').hide();
+
+				//$('#three-buttons').css("display", "initial");
+				$('#three-buttons').show();
+			});
+				
+		</script>
+
+		</div> <!-- End of .main_page -->
+	</body>
+</html>

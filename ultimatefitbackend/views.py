@@ -197,7 +197,8 @@ def index(request):
             # delete the session to free the session, prevent redundant stuff
             del request.session['cart']
 
-        return render(request, 'base.html', context)
+        #return render(request, 'base.html', context)
+        return render(request, 'ultimatefitbackend/order.html', context)
     
     else:
         request.session.set_expiry(300)
@@ -227,7 +228,8 @@ def index(request):
             'count': count,
             'previous_url': previous_url
         }
-        return render(request, 'base.html', context)
+        #return render(request, 'base.html', context)
+        return render(request, 'ultimatefitbackend/order.html', context)
 
 
 def total(request):
