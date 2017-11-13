@@ -232,6 +232,138 @@ def index(request):
         return render(request, 'ultimatefitbackend/order.html', context)
 
 
+def meal(request):
+
+    if request.user.is_authenticated():
+        if 'cart' in request.session:
+            print "cart is exist in session"
+            print request.session            
+            cart_ano = Cart.objects.get(id=request.session['cart'])
+            try:
+                cart = Cart.objects.get(
+                    user=request.user,
+                    active=True
+                )
+            except ObjectDoesNotExist:
+                cart = Cart.objects.create(
+                    user=request.user
+                )
+                cart.save()
+            print 'finish create new cart object for user'
+            print cart                        
+        else:
+            print "cart id is not in session"
+            cart_ano = None
+        ###########################################################
+
+        orders_ano = FoodOrder.objects.filter(cart=cart_ano)
+        total_ano = 0
+        count_ano = 0
+        for order_ano in orders_ano:
+            total_ano += (order_ano.food.price * order_ano.quantity)
+            count_ano += order_ano.quantity
+        print 'count_ano is: '
+        print count_ano
+        print 'End'
+
+        cart = Cart.objects.filter(
+            user=request.user.id,
+            active=True
+        )        
+
+        orders = FoodOrder.objects.filter(cart=cart)
+        print 'orders 1 are ...'
+        print orders        
+
+        foodnames_ano = []
+        for order_ano in orders_ano:
+            foodnames_ano.append(order_ano.food.name)
+        print 'AAAAAAAA'
+        print foodnames_ano
+        print 'AAAAAAAA'
+        
+        foodnames = []
+        for order in orders:
+            foodnames.append(order.food.name)
+        print 'BBBBBBB'
+        print foodnames
+        print 'BBBBBBB'                
+
+        # Add the quantity to the existing object in user cart
+        for order in orders:
+            if order.food.name in foodnames_ano:
+                order.quantity += order_ano.quantity
+                order.save()                
+
+        # When the object exist in anonymous cart, but not in user cart, so have to create the foodorder object first
+        for order_ano in orders_ano:
+            if not order_ano.food.name in foodnames:
+                order = FoodOrder.objects.create(
+                    cart = Cart.objects.get(
+                        user=request.user.id,
+                        active=True
+                    ),
+                    food = Food.objects.get(name = order_ano.food.name),
+                    quantity = order_ano.quantity
+                )
+                order.save()                        
+    
+        orders.update() # Just update orders, no need to do the 2nd query
+        # Pull data from db again to have the most updated orders
+        # orders = FoodOrder.objects.filter(cart=cart)        
+
+        total = 0
+        count = 0
+        for order in orders:
+            total += ((order.food.price * order.quantity) + total_ano) 
+            count += (order.quantity + count_ano)
+        print 'orders 2 are ...'
+        print orders
+        context = {
+            'cart': orders,
+            'total': total,
+            'count': count,
+        }
+
+        # When logged in and go to cart page, after add anonymous cart into user's cart,
+        # we should delete the redundant anonymous cart in the db and the cart id in session
+        if 'cart' in request.session:
+
+            print 'anonymous cart id is:'
+            print request.session['cart']
+
+            # delete the anonymous cart in the db based on the cart.id value saved in session
+            Cart.objects.filter(id=request.session['cart']).delete()
+
+            # delete the session to free the session, prevent redundant stuff
+            del request.session['cart']
+
+        return render(request, 'ultimatefitbackend/meal.html', context)
+    
+    else:
+        request.session.set_expiry(300)
+
+        if 'cart' in request.session:
+            print "cart is exist in session"
+            cart = Cart.objects.get(id=request.session['cart'])
+        else:
+            print "cart id is not in session"
+            cart = None
+
+        orders = FoodOrder.objects.filter(cart=cart)
+        print orders
+        total = 0
+        count = 0
+        for order in orders:
+            total += (order.food.price * order.quantity) 
+            count += order.quantity
+        context = {
+            'cart': orders,
+            'total': total,
+            'count': count
+        }
+        return render(request, 'ultimatefitbackend/meal.html', context)
+
 def total(request):
     if request.user.is_authenticated():
         check_authentication = True

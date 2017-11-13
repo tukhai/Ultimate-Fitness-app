@@ -1,0 +1,683 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+			
+
+			{% block content %}
+			<style>
+				body ::-webkit-scrollbar {
+				    width: 0px !important;
+				}				
+
+				/*CUSTOMIZE MMM YYYY TEXT*/
+				.fc-center h2 {
+					font-size: 120%;
+				}
+
+				.fc-left button {
+					height: 50%;
+				}
+				.fc-left span {
+					font-size: 10px;
+				}
+
+				.fc-right button {
+					height: 50%;
+				}
+				.fc-right span {
+					font-size: 10px;
+				}
+
+
+				span.fc-time {
+					display:none;
+				}
+
+				.fc-content {
+					border-style: solid;
+					border-top-width: 10px;					
+					z-index: -1000 !important;
+					/*2 box-shadow as fake complete (rectangle top border)*/
+					box-shadow: 2px -26px 0px 0px #DCDCDC, -2px -26px 0px 0px #DCDCDC;
+				}
+
+				.fc-widget-content {
+					min-height: 30px !important;
+					height: 40px;
+				}
+
+			</style>
+			<section class="breadcrumb-area" style="background-image:url({% static 'ultimatefitbackend/images/background/2.jpg' %});">
+			    <div class="container">
+			        <div class="row">
+			            <div class="col-md-12">
+			                <div class="breadcrumbs text-center">
+			                    <h1>our store</h1>
+			                    <h4>Welcome to certified online organic products suppliersr</h4>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+				<div class="breadcrumb-bottom-area">
+				    <div class="container">
+				        <div class="row">
+				            <div class="col-lg-8 col-md-5 col-sm-5">
+				                <ul>
+				                    <li><a href="#">Home</a></li>
+				                    <li><a href=""><i class="fa fa-angle-right"></i></a></li>
+				                    <li><a href="#">Gallery</a></li>
+				                    <li><a href=""><i class="fa fa-angle-right"></i></a></li>
+				                    <li>our store</li> 
+				                </ul>
+				            </div>
+				            <div class="col-lg-4 col-md-7 col-sm-7">
+				                <p>We provide <span>100% organic</span> products</p>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+			    
+			</section>
+
+
+			<!-- Shop Page Content************************ -->
+	        <div class="shop_page featured-product">
+	        	<div class="container">
+	        		<div class="row">
+	        			<div class="col-lg-9 col-md-8 col-sm-12 col-sx-12">
+	        					        			
+		        			<div class="theme_title center">
+				                <h3>FEATURED PRODUCTS</h3>
+				            </div>
+
+		        			<!--Filter-->
+				            <div class="filters text-center">
+				                <ul class="filter-tabs filter-btns clearfix">
+				                    <li class="filter active" data-role="button" data-filter="all"><span class="txt">All Products (12)</span></li>
+				                    <li class="filter" data-role="button" data-filter=".lean"><span class="txt">lean on me (4)</span></li>
+				                    <li class="filter" data-role="button" data-filter=".maintain"><span class="txt">maintain (3)</span></li>
+				                    <li class="filter" data-role="button" data-filter=".heavy"><span class="txt">heavy duty (5)</span></li>
+				                    <!--<li class="filter" data-role="button" data-filter=".others"><span class="txt">others</span></li>-->
+				                </ul>
+				            </div>
+
+		        			<div class="row filter-list clearfix" id="MixItUp717B05">
+							
+								<!--THIS DIV IS TO DISPLAY CALENDAR-->
+								<!--<div id='calendar'></div>-->
+								
+								<!--Default Item-->
+					            <div class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all lean" style="display: inline-block;">
+					                <div class="inner-box">
+					                    <div class="single-item center">
+					                        <figure class="image-box"><img src="{% static 'ultimatefitbackend/images/shop/1.png' %}" alt=""><div class="product-model new">New</div></figure>
+					                        <div class="content">
+					                        	<h3><a href="shop-single.html">Turmeric Powder</a></h3>
+					                            <div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>
+					                            <div class="price">$12.99 <span class="prev-rate">$14.99</span></div>
+					                        </div>
+					                        <div class="overlay-box">
+					                        	<div class="inner">
+						                        	<div class="top-content">
+						                        		<ul>
+						                        			<li><a href="#"><span class="fa fa-eye"></span></a></li>
+						                        			<li class="tultip-op"><span class="tultip"><i class="fa fa-sort-desc"></i>ADD TO CART</span><a href="#"><span class="icon-icon-32846"></span></a>
+																
+															</li>
+						                        			<li><a href="#"><span class="fa fa-heart-o"></span></a></li>
+						                        		</ul>
+						                        	</div>
+						                        	<div class="bottom-content">
+						                        		<h4><a href="#">It Contains:</a></h4>
+						                        		<p>35% of organic raisins 55% of oats and 10% of butter. </p>
+						                        	</div>
+					                        	</div>
+					                        </div>
+						                </div>
+					                </div>
+					            </div>
+					            
+					            <!--Default Item-->
+					            <div class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all lean" style="display: inline-block;">
+					                <div class="inner-box">
+					                    <div class="single-item center">
+					                        <figure class="image-box"><img src="{% static 'ultimatefitbackend/images/shop/2.png' %}" alt=""></figure>
+					                        <div class="content">
+					                        	<h3><a href="shop-single.html">Turmeric Powder</a></h3>
+					                            <div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>
+					                            <div class="price">$12.99 <span class="prev-rate">$14.99</span></div>
+					                        </div>
+					                        <div class="overlay-box">
+					                        	<div class="inner">
+						                        	<div class="top-content">
+						                        		<ul>
+						                        			<li><a href="#"><span class="fa fa-eye"></span></a></li>
+						                        			<li class="tultip-op"><span class="tultip"><i class="fa fa-sort-desc"></i>ADD TO CART</span><a href="#"><span class="icon-icon-32846"></span></a>
+																
+															</li>
+						                        			<li><a href="#"><span class="fa fa-heart-o"></span></a></li>
+						                        		</ul>
+						                        	</div>
+						                        	<div class="bottom-content">
+						                        		<h4><a href="#">It Contains:</a></h4>
+						                        		<p>35% of organic raisins 55% of oats and 10% of butter. </p>
+						                        	</div>
+					                        	</div>
+					                        </div>
+						                </div>
+					                </div>
+					            </div>
+					            
+					            <!--Default Item-->
+					            <div class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all lean" style="display: inline-block;">
+					                <div class="inner-box">
+					                    <div class="single-item center">
+					                        <figure class="image-box"><img src="{% static 'ultimatefitbackend/images/shop/3.png' %}" alt=""><div class="product-model hot">Hot</div></figure>
+					                        <div class="content">
+					                        	<h3><a href="shop-single.html">Turmeric Powder</a></h3>
+					                            <div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>
+					                            <div class="price">$12.99 <span class="prev-rate">$14.99</span></div>
+					                        </div>
+					                        <div class="overlay-box">
+					                        	<div class="inner">
+						                        	<div class="top-content">
+						                        		<ul>
+						                        			<li><a href="#"><span class="fa fa-eye"></span></a></li>
+						                        			<li class="tultip-op"><span class="tultip"><i class="fa fa-sort-desc"></i>ADD TO CART</span><a href="#"><span class="icon-icon-32846"></span></a>
+																
+															</li>
+						                        			<li><a href="#"><span class="fa fa-heart-o"></span></a></li>
+						                        		</ul>
+						                        	</div>
+						                        	<div class="bottom-content">
+						                        		<h4><a href="#">It Contains:</a></h4>
+						                        		<p>35% of organic raisins 55% of oats and 10% of butter. </p>
+						                        	</div>
+					                        	</div>
+					                        </div>
+						                </div>
+					                </div>
+					            </div>
+					            
+					            <!--Default Item-->
+					            <div class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all lean" style="display: inline-block;">
+					                <div class="inner-box">
+					                    <div class="single-item center">
+					                        <figure class="image-box"><img src="{% static 'ultimatefitbackend/images/shop/4.png' %}" alt=""></figure>
+					                        <div class="content">
+					                        	<h3><a href="shop-single.html">Turmeric Powder</a></h3>
+					                            <div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>
+					                            <div class="price">$12.99 <span class="prev-rate">$14.99</span></div>
+					                        </div>
+					                        <div class="overlay-box">
+					                        	<div class="inner">
+						                        	<div class="top-content">
+						                        		<ul>
+						                        			<li><a href="#"><span class="fa fa-eye"></span></a></li>
+						                        			<li class="tultip-op"><span class="tultip"><i class="fa fa-sort-desc"></i>ADD TO CART</span><a href="#"><span class="icon-icon-32846"></span></a>
+																
+															</li>
+						                        			<li><a href="#"><span class="fa fa-heart-o"></span></a></li>
+						                        		</ul>
+						                        	</div>
+						                        	<div class="bottom-content">
+						                        		<h4><a href="#">It Contains:</a></h4>
+						                        		<p>35% of organic raisins 55% of oats and 10% of butter. </p>
+						                        	</div>
+					                        	</div>
+					                        </div>
+						                </div>
+					                </div>
+					            </div>
+					            
+					            <!--Default Item-->
+					            <div class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all maintain" style="display: inline-block;">
+					                <div class="inner-box">
+					                    <div class="single-item center">
+					                        <figure class="image-box"><img src="{% static 'ultimatefitbackend/images/shop/5.png' %}" alt=""></figure>
+					                        <div class="content">
+					                        	<h3><a href="shop-single.html">Turmeric Powder</a></h3>
+					                            <div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>
+					                            <div class="price">$12.99 <span class="prev-rate">$14.99</span></div>
+					                        </div>
+					                        <div class="overlay-box">
+					                        	<div class="inner">
+						                        	<div class="top-content">
+						                        		<ul>
+						                        			<li><a href="#"><span class="fa fa-eye"></span></a></li>
+						                        			<li class="tultip-op"><span class="tultip"><i class="fa fa-sort-desc"></i>ADD TO CART</span><a href="#"><span class="icon-icon-32846"></span></a>
+																
+															</li>
+						                        			<li><a href="#"><span class="fa fa-heart-o"></span></a></li>
+						                        		</ul>
+						                        	</div>
+						                        	<div class="bottom-content">
+						                        		<h4><a href="#">It Contains:</a></h4>
+						                        		<p>35% of organic raisins 55% of oats and 10% of butter. </p>
+						                        	</div>
+					                        	</div>
+					                        </div>
+						                </div>
+					                </div>
+					            </div>
+					            
+					            <!--Default Item-->
+					            <div class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all maintain" style="display: inline-block;">
+					                <div class="inner-box">
+					                    <div class="single-item center">
+					                        <figure class="image-box"><img src="{% static 'ultimatefitbackend/images/shop/6.png' %}" alt=""><div class="product-model new">New</div></figure>
+					                        <div class="content">
+					                        	<h3><a href="shop-single.html">Turmeric Powder</a></h3>
+					                            <div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>
+					                            <div class="price">$12.99 <span class="prev-rate">$14.99</span></div>
+					                        </div>
+					                        <div class="overlay-box">
+					                        	<div class="inner">
+						                        	<div class="top-content">
+						                        		<ul>
+						                        			<li><a href="#"><span class="fa fa-eye"></span></a></li>
+						                        			<li class="tultip-op"><span class="tultip"><i class="fa fa-sort-desc"></i>ADD TO CART</span><a href="#"><span class="icon-icon-32846"></span></a>
+																
+															</li>
+						                        			
+						                        			<li><a href="#"><span class="fa fa-heart-o"></span></a></li>
+						                        		</ul>
+						                        	</div>
+						                        	<div class="bottom-content">
+						                        		<h4><a href="#">It Contains:</a></h4>
+						                        		<p>35% of organic raisins 55% of oats and 10% of butter. </p>
+						                        	</div>
+					                        	</div>
+					                        </div>
+						                </div>
+					                </div>
+					            </div>
+					            
+					            <!--Default Item-->
+					            <div class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all maintain" style="display: inline-block;">
+					                <div class="inner-box">
+					                   <div class="single-item center">
+					                        <figure class="image-box"><img src="{% static 'ultimatefitbackend/images/shop/7.png' %}" alt=""></figure>
+					                        <div class="content">
+					                        	<h3><a href="shop-single.html">Turmeric Powder</a></h3>
+					                            <div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>
+					                            <div class="price">$12.99 <span class="prev-rate">$14.99</span></div>
+					                        </div>
+					                        <div class="overlay-box">
+					                        	<div class="inner">
+						                        	<div class="top-content">
+						                        		<ul>
+						                        			<li><a href="#"><span class="fa fa-eye"></span></a></li>
+						                        			<li class="tultip-op"><span class="tultip"><i class="fa fa-sort-desc"></i>ADD TO CART</span><a href="#"><span class="icon-icon-32846"></span></a>
+																
+															</li>
+						                        			<li><a href="#"><span class="fa fa-heart-o"></span></a></li>
+						                        		</ul>
+						                        	</div>
+						                        	<div class="bottom-content">
+						                        		<h4><a href="#">It Contains:</a></h4>
+						                        		<p>35% of organic raisins 55% of oats and 10% of butter. </p>
+						                        	</div>
+					                        	</div>
+					                        </div>
+						                </div>
+					                </div>
+					            </div>
+					            
+					            <!--Default Item-->
+					            <div class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all heavy" style="display: inline-block;">
+					                <div class="inner-box">
+					                   <div class="single-item center">
+					                        <figure class="image-box"><img src="{% static 'ultimatefitbackend/images/shop/8.png' %}" alt=""><div class="product-model hot">Hot</div></figure>
+					                        <div class="content">
+					                        	<h3><a href="shop-single.html">Turmeric Powder</a></h3>
+					                            <div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>
+					                            <div class="price">$12.99 <span class="prev-rate">$14.99</span></div>
+					                        </div>
+					                        <div class="overlay-box">
+					                        	<div class="inner">
+						                        	<div class="top-content">
+						                        		<ul>
+						                        			<li><a href="#"><span class="fa fa-eye"></span></a></li>
+						                        			<li class="tultip-op"><span class="tultip"><i class="fa fa-sort-desc"></i>ADD TO CART</span><a href="#"><span class="icon-icon-32846"></span></a>
+																
+															</li>
+						                        			
+						                        			<li><a href="#"><span class="fa fa-heart-o"></span></a></li>
+						                        		</ul>
+						                        	</div>
+						                        	<div class="bottom-content">
+						                        		<h4><a href="#">It Contains:</a></h4>
+						                        		<p>35% of organic raisins 55% of oats and 10% of butter. </p>
+						                        	</div>
+					                        	</div>
+					                        </div>
+						                </div>
+					                </div>
+					            </div>
+					            <!--Default Item-->
+					            <div class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all heavy" style="display: inline-block;">
+					                <div class="inner-box">
+					                   <div class="single-item center">
+					                        <figure class="image-box"><img src="{% static 'ultimatefitbackend/images/shop/12.png' %}" alt=""></figure>
+					                        <div class="content">
+					                        	<h3><a href="shop-single.html">Turmeric Powder</a></h3>
+					                            <div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>
+					                            <div class="price">$12.99 <span class="prev-rate">$14.99</span></div>
+					                        </div>
+					                        <div class="overlay-box">
+					                        	<div class="inner">
+						                        	<div class="top-content">
+						                        		<ul>
+						                        			<li><a href="#"><span class="fa fa-eye"></span></a></li>
+						                        			<li class="tultip-op"><span class="tultip"><i class="fa fa-sort-desc"></i>ADD TO CART</span><a href="#"><span class="icon-icon-32846"></span></a>
+																
+															</li>
+						                        			
+						                        			<li><a href="#"><span class="fa fa-heart-o"></span></a></li>
+						                        		</ul>
+						                        	</div>
+						                        	<div class="bottom-content">
+						                        		<h4><a href="#">It Contains:</a></h4>
+						                        		<p>35% of organic raisins 55% of oats and 10% of butter. </p>
+						                        	</div>
+					                        	</div>
+					                        </div>
+						                </div>
+					                </div>
+					            </div>
+					            <!--Default Item-->
+					            <div class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all heavy" style="display: inline-block;">
+					                <div class="inner-box">
+					                   <div class="single-item center">
+					                        <figure class="image-box"><img src="{% static 'ultimatefitbackend/images/shop/13.png' %}" alt=""></figure>
+					                        <div class="content">
+					                        	<h3><a href="shop-single.html">Turmeric Powder</a></h3>
+					                            <div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>
+					                            <div class="price">$12.99 <span class="prev-rate">$14.99</span></div>
+					                        </div>
+					                        <div class="overlay-box">
+					                        	<div class="inner">
+						                        	<div class="top-content">
+						                        		<ul>
+						                        			<li><a href="#"><span class="fa fa-eye"></span></a></li>
+						                        			<li class="tultip-op"><span class="tultip"><i class="fa fa-sort-desc"></i>ADD TO CART</span><a href="#"><span class="icon-icon-32846"></span></a>
+																
+															</li>
+						                        			
+						                        			<li><a href="#"><span class="fa fa-heart-o"></span></a></li>
+						                        		</ul>
+						                        	</div>
+						                        	<div class="bottom-content">
+						                        		<h4><a href="#">It Contains:</a></h4>
+						                        		<p>35% of organic raisins 55% of oats and 10% of butter. </p>
+						                        	</div>
+					                        	</div>
+					                        </div>
+						                </div>
+					                </div>
+					            </div>
+					            <!--Default Item-->
+					            <div class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all heavy" style="display: inline-block;">
+					                <div class="inner-box">
+					                   <div class="single-item center">
+					                        <figure class="image-box"><img src="{% static 'ultimatefitbackend/images/shop/14.png' %}" alt=""></figure>
+					                        <div class="content">
+					                        	<h3><a href="shop-single.html">Turmeric Powder</a></h3>
+					                            <div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>
+					                            <div class="price">$12.99 <span class="prev-rate">$14.99</span></div>
+					                        </div>
+					                        <div class="overlay-box">
+					                        	<div class="inner">
+						                        	<div class="top-content">
+						                        		<ul>
+						                        			<li><a href="#"><span class="fa fa-eye"></span></a></li>
+						                        			<li class="tultip-op"><span class="tultip"><i class="fa fa-sort-desc"></i>ADD TO CART</span><a href="#"><span class="icon-icon-32846"></span></a>
+																
+															</li>
+						                        			
+						                        			<li><a href="#"><span class="fa fa-heart-o"></span></a></li>
+						                        		</ul>
+						                        	</div>
+						                        	<div class="bottom-content">
+						                        		<h4><a href="#">It Contains:</a></h4>
+						                        		<p>35% of organic raisins 55% of oats and 10% of butter. </p>
+						                        	</div>
+					                        	</div>
+					                        </div>
+						                </div>
+					                </div>
+					            </div>
+					            <!--Default Item-->
+					            <div class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all heavy" style="display: inline-block;">
+					                <div class="inner-box">
+					                   <div class="single-item center">
+					                        <figure class="image-box"><img src="{% static 'ultimatefitbackend/images/shop/15.png' %}" alt=""></figure>
+					                        <div class="content">
+					                        	<h3><a href="shop-single.html">Turmeric Powder</a></h3>
+					                            <div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>
+					                            <div class="price">$12.99 <span class="prev-rate">$14.99</span></div>
+					                        </div>
+					                        <div class="overlay-box">
+					                        	<div class="inner">
+						                        	<div class="top-content">
+						                        		<ul>
+						                        			<li><a href="#"><span class="fa fa-eye"></span></a></li>
+						                        			<li class="tultip-op"><span class="tultip"><i class="fa fa-sort-desc"></i>ADD TO CART</span><a href="#"><span class="icon-icon-32846"></span></a>
+																
+															</li>
+						                        			
+						                        			<li><a href="#"><span class="fa fa-heart-o"></span></a></li>
+						                        		</ul>
+						                        	</div>
+						                        	<div class="bottom-content">
+						                        		<h4><a href="#">It Contains:</a></h4>
+						                        		<p>35% of organic raisins 55% of oats and 10% of butter. </p>
+						                        	</div>
+					                        	</div>
+					                        </div>
+						                </div>
+					                </div>
+					            </div>
+					            
+			        		</div>
+			        	</div>
+
+						<!-- _______________________ SIDEBAR ____________________ -->
+	        			<div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 sidebar_styleTwo">
+	        				<div class="wrapper">
+	        					<div class="sidebar_search">
+	        						<form action="#">
+	        							<input type="text">
+	        							<button class="tran3s color1_bg"><i class="fa fa-search" aria-hidden="true"></i></button>
+	        						</form>
+	        					</div> <!-- End of .sidebar_styleOne -->
+
+	        					<div class="sidebar_categories">
+	        						<div class="theme_inner_title">
+										<h4>Categories</h4>
+									</div>
+									<ul>
+										<li><a href="" class="tran3s">Vegetables   (15)</a></li>
+										<li><a href="" class="tran3s">Fruits & Drinks   (06)</a></li>
+										<li><a href="" class="tran3s">Fresh Meat   (12)</a></li>
+										<li><a href="" class="tran3s">Beauty Care   (14)</a></li>
+									</ul>
+	        					</div> <!-- End of .sidebar_categories -->
+	        					<div id='calendar'></div>
+	        					<br><br>
+	        					<div class="price_filter wow fadeInUp">
+									<div class="theme_inner_title">
+										<h4>Filter By Price</h4>
+									</div>
+									<div class="single-sidebar price-ranger">
+										<div id="slider-range"></div>
+										<div class="ranger-min-max-block">
+											<input type="submit" value="Filter">
+											<span>Price:</span>
+											<input type="text" readonly class="min"> 
+											<span>-</span>
+											<input type="text" readonly class="max">
+										</div>
+									</div> <!-- /price-ranger -->
+								</div> <!-- /price_filter -->
+
+								<div class="best_sellers clear_fix wow fadeInUp">
+									<div class="theme_inner_title">
+										<h4>popular products</h4>
+									</div>
+
+									<div class="best_selling_item clear_fix border">
+										<div class="img_holder float_left">
+											<img src="{% static 'ultimatefitbackend/images/shop/9.png' %}" alt="image">
+										</div> <!-- End of .img_holder -->
+
+										<div class="text float_left">
+											<a href="shop-single.html"><h6>Turmeric Powder</h6></a>
+											<ul>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+											</ul>
+											<span>$ 15.00</span>
+										</div> <!-- End of .text -->
+									</div> <!-- End of .best_selling_item -->
+
+									<div class="best_selling_item clear_fix border">
+										<div class="img_holder float_left">
+											<img src="{% static 'ultimatefitbackend/images/shop/10.png' %}" alt="image">
+										</div> <!-- End of .img_holder -->
+
+										<div class="text float_left">
+											<a href="shop-single.html"><h6>Pure Jeans Coffee</h6></a>
+											<ul>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+											</ul>
+											<span>$ 34.00</span>
+										</div> <!-- End of .text -->
+									</div> <!-- End of .best_selling_item -->
+
+									<div class="best_selling_item clear_fix">
+										<div class="img_holder float_left">
+											<img src="{% static 'ultimatefitbackend/images/shop/11.png' %}" alt="image">
+										</div> <!-- End of .img_holder -->
+
+										<div class="text float_left">
+											<a href="shop-single.html"><h6>Columbia Chocolate</h6></a>
+											<ul>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+											</ul>
+											<span>$ 34.99</span>
+										</div> <!-- End of .text -->
+									</div> <!-- End of .best_selling_item -->
+								</div> <!-- End of .best_sellers -->
+
+
+								<div class="sidebar_tags wow fadeInUp">
+	   								<div class="theme_inner_title">
+										<h4>product Tags</h4>
+									</div>
+
+									<ul>
+										<li><a href="#" class="tran3s">fruits</a></li>
+										<li><a href="#" class="tran3s">Cosmetics</a></li>
+										<li><a href="#" class="tran3s">Farmers</a></li>
+										<li><a href="#" class="tran3s">Healthy</a></li>
+										<li><a href="#" class="tran3s">Catering</a>  </li>
+										<li><a href="#" class="tran3s">Chemical</a></li>
+										<li><a href="#" class="tran3s">Post Format</a> </li>
+										<li><a href="#" class="tran3s">Industry</a></li>
+										<li><a href="#" class="tran3s">Research</a></li>
+									</ul>
+	   							</div> <!-- End of .sidebar_tags -->
+
+	        				</div> <!-- End of .wrapper -->
+	        			</div> <!-- End of .sidebar_styleTwo -->
+	        		</div> <!-- End of .row -->
+	        	</div> <!-- End of .container -->
+	        </div> <!-- End of .shop_page -->
+
+	        <!--<script src="{% static 'ultimatefitbackend/fullcalendar/lib/jquery.min.js' %}"></script>-->
+			<script src="{% static 'ultimatefitbackend/fullcalendar/lib/moment.min.js' %}"></script>
+			<script src="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.js' %}"></script>
+
+			<script type="text/javascript">
+				
+				$(document).ready(function() {
+
+					// page is now ready, initialize the calendar...
+
+					$('#calendar').fullCalendar({
+						// put your options and callbacks here
+						
+						header: {
+						    left: 'prev',
+						    center: 'title',
+						    right: 'next'
+						}, // buttons for switching between views
+						
+						contentHeight: "auto",
+						aspectRatio: 1,
+						editable: true,
+						titleFormat: 'MMM YYYY',
+						
+						/*navLinks: true,
+						navLinkDayClick: function(date, jsEvent) {
+							console.log('day', date.format()); // date is a moment
+							console.log('coords', jsEvent.pageX, jsEvent.pageY);
+						},*/
+							
+						events: 
+							[								
+								{% autoescape off %}
+								{
+									title: '',
+									start: moment().toISOString(),
+									color: '#DCDCDC',
+									editable: true,
+									//description: 
+								}
+								{% endautoescape %}
+							],
+							
+						eventRender: function(event, element, view) { 
+							element.append(event.description);
+						},
+
+						dayRender: function(date, cell) {
+							cell.css("background-color", "silver");
+							
+							cell.css("height", "10px");
+						},
+
+						dayClick: function(date, jsEvent, view) {
+
+					        colorEventJsonObject = [{
+					        	title: '',
+								start: date.toISOString(),
+								color: '#DCDCDC',
+								editable: true,
+					        }];
+
+					        console.log("clicked day is: " + date.toISOString());
+					        $("#calendar").fullCalendar('removeEvents');
+					        $("#calendar").fullCalendar('addEventSource', colorEventJsonObject); 
+					    },
+					})								
+				});
+
+				// DON'T NEED TO GET THAT EVENT AND UPDATE, JUST REMOVE ALL EVENTS, AND ADD NEW SIMPLE ONE
+				//console.log($("#calendar").fullCalendar( 'clientEvents', ' ' ));
+			</script>
+	        {% endblock %}
