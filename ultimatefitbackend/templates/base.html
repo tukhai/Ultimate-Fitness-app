@@ -47,6 +47,28 @@
 			body ::-webkit-scrollbar {
 			    width: 0px !important;
 			}
+			.popUpMessage {
+				border-style: solid;
+				border-color: #eaeaea;
+				border-radius: 3px;
+				border-width: 1px;
+				background-color: white;
+				width: 400px;
+				box-shadow: 2px 2px 1px #d8d8d8;
+				margin-bottom: 10px;
+			}
+			.popUpMessage p {
+				margin-left: 10px;
+			}
+			.unselectable {
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				cursor: pointer;
+			}
 			.distance-between-left-right {
 				margin-right: 175px;
 			}
@@ -2001,6 +2023,13 @@
 			{% for item in cart %}
 				quantityOfFoodArray[{{item.food.id}}] = {{item.quantity}};
 				console.log("Quantity of " + {{item.food.id}} + ".{{item.food.name}}" + " when the page is freshly loaded: " + {{item.quantity}});
+
+				if (quantityOfFoodArray[{{item.food.id}}] > 0) {
+					$("div#food-" + {{item.food.id}} + "-quantity-on-meal").html(quantityOfFoodArray[{{item.food.id}}]);
+
+					$("#meal-none-zero-button-" + {{item.food.id}}).show();
+					$("#meal-zero-button-" + {{item.food.id}}).hide();
+				}
 			{% endfor %}
 			// since food id start from 1, this loop array is from 1 to n
 
@@ -2031,6 +2060,8 @@
 			    var priceOfFood = $(this).data('price-food');
 			    console.log("Price of this food: " + priceOfFood);
 
+			    var isFromMeal = $(this).data('is-from-meal');
+
 			    $.post(
 			    	"/add/" + idOfFood,
 			        { 
@@ -2041,8 +2072,33 @@
 
 			            if (status == "success") {
 				            //Consider moving this out of post function, so the number change faster, and do the check if status success or false, if false show error box/page 404
-					        quantityOfFoodArray[idOfFood] += 1;
 					        
+				            // IF ITEM NOT EXIST OR EQUAL 0, FIRST TIME ADD BECOME 1
+					        if (!quantityOfFoodArray[idOfFood] || quantityOfFoodArray[idOfFood] == 0) {
+						        quantityOfFoodArray[idOfFood] = 1;
+						        $("div#food-" + idOfFood + "-quantity-on-meal").html(quantityOfFoodArray[idOfFood]);
+
+						        console.log("#meal-none-zero-button-" + idOfFood);
+
+								$("#meal-none-zero-button-" + idOfFood).show();
+								$("#meal-zero-button-" + idOfFood).hide();
+
+
+								//$("#test").append("<div class='popUpMessage'><p>Food of ID " + idOfFood + " is added to your cart</p><p>You currently have " + quantityOfFoodArray[idOfFood] + " ID " + idOfFood + " in your cart</p></div>");
+
+						    } else {
+						    	quantityOfFoodArray[idOfFood] += 1;
+						    	$("div#food-" + idOfFood + "-quantity-on-meal").html(quantityOfFoodArray[idOfFood]);
+						    };
+					        
+					        // Only display pop up message if click add from meal
+					        if (isFromMeal == "from-meal") {
+							    $("#test").append("<div class='popUpMessage'><p style='text-align: center; padding-top: 10px; padding-bottom: 7px;'><span style='font-weight: bold; font-size:200%;'>1</span>&nbsp; item added to your cart</p></div>");
+							    setTimeout(function() {     
+							        $("#test").html(""); 
+							    },1500);
+							}
+
 				            console.log("Current quantity of food id " + idOfFood + " in database: " + quantityOfFoodArray[idOfFood]);
 
 				            $("span#quantity-for-food-id-" + idOfFood).html(quantityOfFoodArray[idOfFood]);
@@ -2065,6 +2121,8 @@
 			    var priceOfFoodToBeRemoved = $(this).data('price-food');
 			    console.log("Price of the food to be removed: " + priceOfFoodToBeRemoved);
 
+			    var isFromMealToBeRemoved = $(this).data('is-from-meal');
+
 			    $.post(
 			    	"/remove/" + idOfFoodToBeRemoved,
 			        { 
@@ -2075,7 +2133,22 @@
 
 			            if (status == "success") {
 				            //Consider moving this out of post function, so the number change faster, and do the check if status success or false, if false show error box/page 404
-					        quantityOfFoodArray[idOfFoodToBeRemoved] -= 1;
+					        if (quantityOfFoodArray[idOfFoodToBeRemoved] > 1) {
+						        quantityOfFoodArray[idOfFoodToBeRemoved] -= 1;
+						        $("div#food-" + idOfFoodToBeRemoved + "-quantity-on-meal").html(quantityOfFoodArray[idOfFoodToBeRemoved]);
+						        
+						    } else {
+						    	quantityOfFoodArray[idOfFoodToBeRemoved] = 0;
+						    	$("#meal-none-zero-button-" + idOfFoodToBeRemoved).hide();
+								$("#meal-zero-button-" + idOfFoodToBeRemoved).show();								
+						    };
+
+						    if (isFromMealToBeRemoved == "from-meal") {
+							    $("#test").append("<div class='popUpMessage'><p style='text-align: center; padding-top: 10px; padding-bottom: 7px;'><span style='font-weight: bold; font-size:200%;'>1</span>&nbsp; item removed from your cart</p></div>");
+							    setTimeout(function() {     
+							        $("#test").html(""); 
+							    },1500);
+							}
 					        
 				            console.log("Current quantity of food id " + idOfFoodToBeRemoved + " in database: " + quantityOfFoodArray[idOfFoodToBeRemoved]);
 
@@ -2118,6 +2191,8 @@
 						    quantityOfFoodArray[idOfDeleteFood] = 0;
 						    $("li#list-item-" + idOfDeleteFood).fadeOut(150);
 						    //$("li#list-item-" + idOfDeleteFood).css("display", "none");
+						    $("#meal-none-zero-button-" + idOfDeleteFood).hide();
+							$("#meal-zero-button-" + idOfDeleteFood).show();
 						};
 			        }
 		        ).fail(function(){

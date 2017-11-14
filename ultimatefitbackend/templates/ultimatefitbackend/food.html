@@ -531,6 +531,8 @@
 
 			console.log("This is the quantity of {{food.name}} when the food/{{food.id}} page finishes being rendered: " + {{quantityInThisCart}});
 			//var currentQuantityInThisCart = {{quantityInThisCart}};
+
+			//THIS LINE IS TO  CREATE FOOD ITEM IN FRONT-END IF IT NOT EXIST, CAUSE WHEN THE FOOD TYPE NOT EXIST, {{quantityInThisCart}} = 0 but not NaN
 			window.parent.parent.quantityOfFoodArray[{{food.id}}] = {{quantityInThisCart}};
 
 			if ({{quantityInThisCart}} > 0) {
