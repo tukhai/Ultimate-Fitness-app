@@ -545,53 +545,57 @@
 			    //alert("The paragraph was clicked.");
 			    console.log("Clicking to food of id: ");
 			    console.log({{food.id}});
-			    $.post(
-			    	"/add/{{food.id}}",
-			        { 
-			          csrfmiddlewaretoken: "{{ csrf_token }}"
-			        },
-			        function(data,status){
-			            console.log("Status: " + status);
-			            console.log("Display cart change on the top right of the screen follow Redmart");			            			            
-			            if (status == "success") {
-				            // Each click add 1 more, but this is to print to front-end only, because after click this button, the page is not reloaded
-				            //currentQuantityInThisCart += 1;
-				            window.parent.parent.quantityOfFoodArray[{{food.id}}] += 1;
-				            $("input#display-quantity-modalbox").attr("value", window.parent.parent.quantityOfFoodArray[{{food.id}}]);
-				            if (window.parent.parent.quantityOfFoodArray[{{food.id}}] > 0) {
-								$("input#display-quantity-modalbox").css("display", "initial");
+
+			    if (navigator.onLine) {
+				    // Each click add 1 more, but this is to print to front-end only, because after click this button, the page is not reloaded
+		            //currentQuantityInThisCart += 1;
+		            window.parent.parent.quantityOfFoodArray[{{food.id}}] += 1;
+		            $("input#display-quantity-modalbox").attr("value", window.parent.parent.quantityOfFoodArray[{{food.id}}]);
+		            if (window.parent.parent.quantityOfFoodArray[{{food.id}}] > 0) {
+						$("input#display-quantity-modalbox").css("display", "initial");
+					};
+		            
+		            console.log("Current quantity of {{food.name}} in database: " + window.parent.parent.quantityOfFoodArray[{{food.id}}]);	            
+
+				    //window.parent.parent.quantityOfFoodArray[{{food.id}}] += 1;
+
+		            if (window.parent.parent.quantityOfFoodArray[{{food.id}}] == 1) {
+			            window.parent.parent.$(".cart_list ul").append($(".display-none"));
+			        };
+
+		            window.parent.parent.$("span#quantity-for-food-id-" + {{food.id}}).html(window.parent.parent.quantityOfFoodArray[{{food.id}}]);
+		            window.parent.parent.$("span#total-price-for-food-id-" + {{food.id}}).html({{food.price}}*window.parent.parent.quantityOfFoodArray[{{food.id}}]);
+
+				    $.post(
+				    	"/add/{{food.id}}",
+				        { 
+				          csrfmiddlewaretoken: "{{ csrf_token }}"
+				        },
+				        function(data,status){
+				            console.log("Status: " + status);
+				            console.log("Display cart change on the top right of the screen follow Redmart");			            			            
+				            if (status == "success") {
+				            	window.parent.parent.$("#test").append("<div class='popUpMessage'><p>{{food.name}} is added to your cart</p><p>You currently have " + window.parent.parent.quantityOfFoodArray[{{food.id}}] + " {{food.name}} in your cart</p></div>");
+							    setTimeout(function() {     
+							        window.parent.parent.$("#test").html(""); 
+							    },1500);
+
+					            $.get("/total", function(data, status){
+							        console.log("Data: " + data.total + "\nStatus: " + status);
+							        totalToPay = data.total;
+							        console.log("TOTAL TO PAY FROM DB: " + totalToPay);
+							        window.parent.parent.$("text#total-to-pay").html(totalToPay);
+							    });
 							};
-				            
-				            console.log("Current quantity of {{food.name}} in database: " + window.parent.parent.quantityOfFoodArray[{{food.id}}]);
-
-				            window.parent.parent.$("#test").append("<div class='popUpMessage'><p>{{food.name}} is added to your cart</p><p>You currently have " + window.parent.parent.quantityOfFoodArray[{{food.id}}] + " {{food.name}} in your cart</p></div>");
-						    setTimeout(function() {     
-						        window.parent.parent.$("#test").html(""); 
-						    },1500);
-
-						    //window.parent.parent.quantityOfFoodArray[{{food.id}}] += 1;
-
-				            if (window.parent.parent.quantityOfFoodArray[{{food.id}}] == 1) {
-					            window.parent.parent.$(".cart_list ul").append($(".display-none"));
-					        };
-
-				            window.parent.parent.$("span#quantity-for-food-id-" + {{food.id}}).html(window.parent.parent.quantityOfFoodArray[{{food.id}}]);
-				            window.parent.parent.$("span#total-price-for-food-id-" + {{food.id}}).html({{food.price}}*window.parent.parent.quantityOfFoodArray[{{food.id}}]);
-
-			            
-				            $.get("/total", function(data, status){
-						        console.log("Data: " + data.total + "\nStatus: " + status);
-						        totalToPay = data.total;
-						        console.log("TOTAL TO PAY FROM DB: " + totalToPay);
-						        window.parent.parent.$("text#total-to-pay").html(totalToPay);
-						    });
-						};
-			        }
-		        ).fail(function(){
-				    console.log("NO INTERNET");
-					window.parent.parent.$('.internet-connection-error').fadeIn(200);
+				        }
+			        ).fail(function(){
+						window.parent.parent.$('.internet-connection-error').fadeIn(200);
+					    window.parent.parent.$('.internet-connection-error').delay(1500).fadeOut(200);
+					});
+			    } else {
+			    	window.parent.parent.$('.internet-connection-error').fadeIn(200);
 				    window.parent.parent.$('.internet-connection-error').delay(1500).fadeOut(200);
-				});
+			    }
 			});
 		</script>
 

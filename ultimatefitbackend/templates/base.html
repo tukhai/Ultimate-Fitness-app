@@ -241,8 +241,8 @@
 
 			<div style="position: fixed; margin-top: 55px; margin-left: 50vw; z-index: 10000;">
 				<div class="internet-connection-error">
-					<h7>You seem to be offline &nbsp;<i style="color: red;" class="fa fa-wifi" aria-hidden="true"></i></h7>
-					<p>Please check your internet connection and try again</p>
+					<h7>Connection Error &nbsp;<i style="color: red;" class="fa fa-wifi" aria-hidden="true"></i></h7>
+					<p>Please check your internet connection or try to refresh the page.</p>
 				</div>	
 			</div>
 			<div id="test" style="position: fixed; margin-top: 55px; margin-left: 50vw; z-index: 10000;">
@@ -2062,55 +2062,61 @@
 
 			    var isFromMeal = $(this).data('is-from-meal');
 
-			    $.post(
-			    	"/add/" + idOfFood,
-			        { 
-			          csrfmiddlewaretoken: "{{ csrf_token }}"
-			        },
-			        function(data,status){
-			            console.log("Status: " + status);
+			    if (navigator.onLine) {
+				    /*FAKE DISPLAY AT FRONT-END FOR FAST DISPLAY*/
+				    // IF ITEM NOT EXIST OR EQUAL 0, FIRST TIME ADD BECOME 1
+			        if (!quantityOfFoodArray[idOfFood] || quantityOfFoodArray[idOfFood] == 0) {
+				        quantityOfFoodArray[idOfFood] = 1;
+				        $("div#food-" + idOfFood + "-quantity-on-meal").html(quantityOfFoodArray[idOfFood]);
 
-			            if (status == "success") {
-				            //Consider moving this out of post function, so the number change faster, and do the check if status success or false, if false show error box/page 404
-					        
-				            // IF ITEM NOT EXIST OR EQUAL 0, FIRST TIME ADD BECOME 1
-					        if (!quantityOfFoodArray[idOfFood] || quantityOfFoodArray[idOfFood] == 0) {
-						        quantityOfFoodArray[idOfFood] = 1;
-						        $("div#food-" + idOfFood + "-quantity-on-meal").html(quantityOfFoodArray[idOfFood]);
+				        console.log("#meal-none-zero-button-" + idOfFood);
 
-						        console.log("#meal-none-zero-button-" + idOfFood);
+						$("#meal-none-zero-button-" + idOfFood).show();
+						$("#meal-zero-button-" + idOfFood).hide();						
 
-								$("#meal-none-zero-button-" + idOfFood).show();
-								$("#meal-zero-button-" + idOfFood).hide();
+				    } else {
+				    	quantityOfFoodArray[idOfFood] += 1;
+				    	$("div#food-" + idOfFood + "-quantity-on-meal").html(quantityOfFoodArray[idOfFood]);
+				    };
 
+		            console.log("Current quantity of food id " + idOfFood + " in database: " + quantityOfFoodArray[idOfFood]);
 
-								//$("#test").append("<div class='popUpMessage'><p>Food of ID " + idOfFood + " is added to your cart</p><p>You currently have " + quantityOfFoodArray[idOfFood] + " ID " + idOfFood + " in your cart</p></div>");
+		            $("span#quantity-for-food-id-" + idOfFood).html(quantityOfFoodArray[idOfFood]);
+		            $("span#total-price-for-food-id-" + idOfFood).html(priceOfFood*quantityOfFoodArray[idOfFood]);
+				    /*FAKE DISPLAY AT FRONT-END FOR FAST DISPLAY*/
 
-						    } else {
-						    	quantityOfFoodArray[idOfFood] += 1;
-						    	$("div#food-" + idOfFood + "-quantity-on-meal").html(quantityOfFoodArray[idOfFood]);
-						    };
-					        
-					        // Only display pop up message if click add from meal
-					        if (isFromMeal == "from-meal") {
-							    $("#test").append("<div class='popUpMessage'><p style='text-align: center; padding-top: 10px; padding-bottom: 7px;'><span style='font-weight: bold; font-size:200%;'>1</span>&nbsp; item added to your cart</p></div>");
-							    setTimeout(function() {     
-							        $("#test").html(""); 
-							    },1500);
-							}
+				    $.post(
+				    	"/add/" + idOfFood,
+				        { 
+				          csrfmiddlewaretoken: "{{ csrf_token }}"
+				        },
+				        function(data,status){
+				            console.log("Status: " + status);
 
-				            console.log("Current quantity of food id " + idOfFood + " in database: " + quantityOfFoodArray[idOfFood]);
+				            if (status == "success") {
+					            //Consider moving this out of post function, so the number change faster, and do the check if status success or false, if false show error box/page 404
 
-				            $("span#quantity-for-food-id-" + idOfFood).html(quantityOfFoodArray[idOfFood]);
-				            $("span#total-price-for-food-id-" + idOfFood).html(priceOfFood*quantityOfFoodArray[idOfFood]);
+					            // Only display pop up message if click add from meal
+					            // Display this message only if the adding is success
+					            //$("#test").append("<div class='popUpMessage'><p>Food of ID " + idOfFood + " is added to your cart</p><p>You currently have " + quantityOfFoodArray[idOfFood] + " ID " + idOfFood + " in your cart</p></div>");
 
-						    
-							getTotalToPayFromDB();
-						};
-			        }
-		        ).fail(function(){
-				    popUpInternetConnectionError();
-				});
+						        if (isFromMeal == "from-meal") {
+								    $("#test").append("<div class='popUpMessage'><p style='text-align: center; padding-top: 10px; padding-bottom: 7px;'><span style='font-weight: bold; font-size:200%;'>1</span>&nbsp; item added to your cart</p></div>");
+								    setTimeout(function() {     
+								        $("#test").html(""); 
+								    },1500);
+								}
+							    
+								getTotalToPayFromDB();
+							};
+				        }
+			        ).fail(function(){
+			        	// IF INTERNET OK, BUT SERVER DOWN, WHEN USER ADD, NUMBER WILL JUMP BUT IMMEDIATELY DISPLAY ERROR MESSAGE, WHICH STILL GOOD
+					    popUpInternetConnectionError();
+					});
+			    } else {
+			    	popUpInternetConnectionError();
+			    }
 			});
 
 			//$(".remove-from-cart-list").click(function(){
@@ -2123,49 +2129,54 @@
 
 			    var isFromMealToBeRemoved = $(this).data('is-from-meal');
 
-			    $.post(
-			    	"/remove/" + idOfFoodToBeRemoved,
-			        { 
-			          csrfmiddlewaretoken: "{{ csrf_token }}"
-			        },
-			        function(data,status){
-			            console.log("Status: " + status);
 
-			            if (status == "success") {
-				            //Consider moving this out of post function, so the number change faster, and do the check if status success or false, if false show error box/page 404
-					        if (quantityOfFoodArray[idOfFoodToBeRemoved] > 1) {
-						        quantityOfFoodArray[idOfFoodToBeRemoved] -= 1;
-						        $("div#food-" + idOfFoodToBeRemoved + "-quantity-on-meal").html(quantityOfFoodArray[idOfFoodToBeRemoved]);
-						        
-						    } else {
-						    	quantityOfFoodArray[idOfFoodToBeRemoved] = 0;
-						    	$("#meal-none-zero-button-" + idOfFoodToBeRemoved).hide();
-								$("#meal-zero-button-" + idOfFoodToBeRemoved).show();								
-						    };
+			    if (navigator.onLine) {
+				    if (quantityOfFoodArray[idOfFoodToBeRemoved] > 1) {
+				        quantityOfFoodArray[idOfFoodToBeRemoved] -= 1;
+				        $("div#food-" + idOfFoodToBeRemoved + "-quantity-on-meal").html(quantityOfFoodArray[idOfFoodToBeRemoved]);
+				        
+				    } else {
+				    	quantityOfFoodArray[idOfFoodToBeRemoved] = 0;
+				    	$("#meal-none-zero-button-" + idOfFoodToBeRemoved).hide();
+						$("#meal-zero-button-" + idOfFoodToBeRemoved).show();								
+				    };			    
+			        
+		            console.log("Current quantity of food id " + idOfFoodToBeRemoved + " in database: " + quantityOfFoodArray[idOfFoodToBeRemoved]);
 
-						    if (isFromMealToBeRemoved == "from-meal") {
-							    $("#test").append("<div class='popUpMessage'><p style='text-align: center; padding-top: 10px; padding-bottom: 7px;'><span style='font-weight: bold; font-size:200%;'>1</span>&nbsp; item removed from your cart</p></div>");
-							    setTimeout(function() {     
-							        $("#test").html(""); 
-							    },1500);
-							}
-					        
-				            console.log("Current quantity of food id " + idOfFoodToBeRemoved + " in database: " + quantityOfFoodArray[idOfFoodToBeRemoved]);
+		            // when quantity = 0, just remove the item from the list
+		            if (quantityOfFoodArray[idOfFoodToBeRemoved] > 0) {
+		            	$("span#quantity-for-food-id-" + idOfFoodToBeRemoved).html(quantityOfFoodArray[idOfFoodToBeRemoved]);
+		            	$("span#total-price-for-food-id-" + idOfFoodToBeRemoved).html(priceOfFoodToBeRemoved*quantityOfFoodArray[idOfFoodToBeRemoved]);
+		        	} else {
+		        		$("li#list-item-" + idOfFoodToBeRemoved).remove();
+		        	};
 
-				            // when quantity = 0, just remove the item from the list
-				            if (quantityOfFoodArray[idOfFoodToBeRemoved] > 0) {
-				            	$("span#quantity-for-food-id-" + idOfFoodToBeRemoved).html(quantityOfFoodArray[idOfFoodToBeRemoved]);
-				            	$("span#total-price-for-food-id-" + idOfFoodToBeRemoved).html(priceOfFoodToBeRemoved*quantityOfFoodArray[idOfFoodToBeRemoved]);
-				        	} else {
-				        		$("li#list-item-" + idOfFoodToBeRemoved).remove();
-				        	};
-			        	
-						    getTotalToPayFromDB();
-						};
-			        }
-		        ).fail(function(){
-				    popUpInternetConnectionError();
-				});
+				    $.post(
+				    	"/remove/" + idOfFoodToBeRemoved,
+				        { 
+				          csrfmiddlewaretoken: "{{ csrf_token }}"
+				        },
+				        function(data,status){
+				            console.log("Status: " + status);
+
+				            if (status == "success") {
+					            //Consider moving this out of post function, so the number change faster, and do the check if status success or false, if false show error box/page 404
+						        if (isFromMealToBeRemoved == "from-meal") {
+								    $("#test").append("<div class='popUpMessage'><p style='text-align: center; padding-top: 10px; padding-bottom: 7px;'><span style='font-weight: bold; font-size:200%;'>1</span>&nbsp; item removed from your cart</p></div>");
+								    setTimeout(function() {     
+								        $("#test").html(""); 
+								    },1500);
+								};
+				        	
+							    getTotalToPayFromDB();
+							};
+				        }
+			        ).fail(function(){
+					    popUpInternetConnectionError();
+					});
+			    } else {
+			    	popUpInternetConnectionError();
+			    }
 			});
 
 			//$(".close-list-cart").click(function(){
@@ -2176,28 +2187,34 @@
 				var priceOfDeleteFood = $(this).data('price-food');
 				console.log("price of 1 item of this type of food: " + priceOfDeleteFood);
 
-				$.post(
-			    	"/removeall/" + idOfDeleteFood,
-			        { 
-			          csrfmiddlewaretoken: "{{ csrf_token }}"
-			        },
-			        function(data,status){
-			            console.log("Status: " + status);
-			            console.log("Successfully delete all food type of id: " + idOfDeleteFood);
+				
+				if (navigator.onLine) {
+					quantityOfFoodArray[idOfDeleteFood] = 0;
+				    $("li#list-item-" + idOfDeleteFood).fadeOut(150);
+				    //$("li#list-item-" + idOfDeleteFood).css("display", "none");
+				    $("#meal-none-zero-button-" + idOfDeleteFood).hide();
+					$("#meal-zero-button-" + idOfDeleteFood).show();
 
-			            if (status == "success") {
-						    getTotalToPayFromDB();
-						    //$(this).parent('li').fadeOut(300);
-						    quantityOfFoodArray[idOfDeleteFood] = 0;
-						    $("li#list-item-" + idOfDeleteFood).fadeOut(150);
-						    //$("li#list-item-" + idOfDeleteFood).css("display", "none");
-						    $("#meal-none-zero-button-" + idOfDeleteFood).hide();
-							$("#meal-zero-button-" + idOfDeleteFood).show();
-						};
-			        }
-		        ).fail(function(){
-				    popUpInternetConnectionError();				    
-				});
+					$.post(
+				    	"/removeall/" + idOfDeleteFood,
+				        { 
+				          csrfmiddlewaretoken: "{{ csrf_token }}"
+				        },
+				        function(data,status){
+				            console.log("Status: " + status);
+				            console.log("Successfully delete all food type of id: " + idOfDeleteFood);
+
+				            if (status == "success") {
+							    getTotalToPayFromDB();
+							    //$(this).parent('li').fadeOut(300);						    
+							};
+				        }
+			        ).fail(function(){
+					    popUpInternetConnectionError();				    
+					});
+			    } else {
+			    	popUpInternetConnectionError();	
+			    }
 			});
 
 
