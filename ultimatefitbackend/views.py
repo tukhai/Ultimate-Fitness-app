@@ -201,7 +201,7 @@ def index(request):
         return render(request, 'ultimatefitbackend/order.html', context)
     
     else:
-        request.session.set_expiry(300)
+        #request.session.set_expiry(300)
 
         # Track previous url        
         previous_url = request.META.get('HTTP_REFERER')
@@ -742,7 +742,7 @@ def cart(request):
         return render(request, 'ultimatefitbackend/shop-cart.html', context)
     
     else:
-        request.session.set_expiry(300)
+        #request.session.set_expiry(300)
 
         if 'cart' in request.session:
             print "cart is exist in session"

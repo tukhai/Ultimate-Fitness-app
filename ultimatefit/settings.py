@@ -157,4 +157,4 @@ DEFAULT_FROM_EMAIL = "twohourbinhyen@gmail.com"
 
 # Session expire
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-SESSION_COOKIE_AGE = 5 * 60
+SESSION_COOKIE_AGE = 4 * 7 * 24 * 60 * 60
