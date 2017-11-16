@@ -108,7 +108,13 @@
 					margin-top: -182px;
 				}
 			}
-
+			
+			.cart_list {
+				background-color: transparent !important;
+			}
+			.cart_list_extension_for_hover {
+				height: 50vh;
+			}
 			.cart_list>ul>li .fa-times-circle {
 				display: none !important;
 			}
@@ -361,7 +367,8 @@
 							    <div class="cart_option float_right">
 								   		
 							   		<div class="cart_list color2_bg" aria-labelledby="cartDropdown">
-							   			<ul>
+							   			
+							   			<ul style="background-color: #272727 !important;">
 							   				{% for item in cart %}
 								   				<li id="list-item-{{ item.food.id }}">
 								   					<div class="cart_item_wrapper clear_fix">
@@ -406,11 +413,13 @@
 							   				{% endfor %}
 							   			</ul>
 
-							   			<div class="cart_total clear_fix">
+							   			<div class="cart_total clear_fix" style="background-color: #272727 !important;">
 
 							   				<span class="total font_fix float_left">Total - <text id="total-to-pay">{{ total }}</text> $</span>
 							   				<a href="#" class="s_color_bg float_right tran3s">Checkout</a>
 							   			</div>
+								   		
+							   			<div class="cart_list_extension_for_hover"></div>
 							   		</div> <!-- End of .cart_list -->
 							    </div>
 
@@ -1990,6 +1999,11 @@
 			    $(this).stop(true, true).delay(50).fadeIn(200);
 			}, function() {
 			    $(this).stop(true, true).delay(50).fadeOut(200);
+			});
+
+			//When click to add/remove button at meal hide the dropdown
+			$(document).on("click", '.meal-bottom-button', function(){
+				$(document).find('.cart_list').stop(true, true).delay(50).fadeOut(200);
 			});
 
 
