@@ -2004,6 +2004,17 @@
 			    }).fail(function(){
 				    popUpInternetConnectionError();
 				});
+
+			    /*UPDATE MEAL DISPLAY NUMBER*/
+			    $.get("/meal_food_list_update", function(data, status){
+			        console.log("Data-meal: " + data.total)
+			        console.log(typeof(data.total));
+			        console.log("Status-meal: " + status);
+			        $("#MixItUp717B05").html(data);
+			    }).fail(function(){
+				    popUpInternetConnectionError();
+				});
+
 			    getTotalToPayFromDB();
 			});
 
@@ -2030,7 +2041,7 @@
 					$("#meal-none-zero-button-" + {{item.food.id}}).show();
 					$("#meal-zero-button-" + {{item.food.id}}).hide();
 				}
-			{% endfor %}
+			{% endfor %};
 			// since food id start from 1, this loop array is from 1 to n
 
 			var totalToPay = {{total}};

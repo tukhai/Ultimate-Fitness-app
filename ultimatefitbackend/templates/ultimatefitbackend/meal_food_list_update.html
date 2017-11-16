@@ -1,0 +1,74 @@
+{% for food in foods %}
+<!--Default Item-->
+<div class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all lean" style="display: inline-block;">
+    <div class="inner-box">
+        <div class="single-item center">
+            <figure class="image-box">
+            	<img src="{{food.description}}" alt="">
+            	<div class="product-model new">New</div>
+            	<div class="overlay-box">
+                	<div class="inner">
+                    	<div class="top-content" style="color: #7fb401; font-size: 120%; padding-bottom: 0;">
+    						<span data-toggle="tooltip" data-placement="top" title="View" class="fa fa-eye"></span>
+            				&nbsp;&nbsp;&nbsp;&nbsp;  	
+                    		<span data-toggle="tooltip" data-placement="top" title="Like" class="fa fa-heart-o"></span>
+                    		
+                    		<div class="distance-content"></div>
+
+                    		<div class="bottom-content">
+                        		<p>88% Protein, 88% Fat, 88% Carbs</p>
+                        	</div>
+                    	</div>                        	
+                	</div>
+                </div>
+            </figure>
+            <div class="content">
+            	<h3>
+            		<a href="shop-single.html">{{food.name}}</a>
+            	</h3>
+            	<p>500kcal</p>
+
+            	<!--THIS IS FOR RATING STARS-->
+                <!--<div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>-->                            
+                <div class="price">
+                	${{food.price}} 
+                	<span class="prev-rate">$14.99</span>
+                </div>
+
+                <div class="tran3s color1_bg unselectable meal-bottom-button add-to-cart-list" id="meal-zero-button-{{food.id}}" data-id-food="{{food.id}}" data-price-food="{{food.price}}" data-is-from-meal="from-meal">
+                	<span>ADD TO CART</span>
+                </div>
+
+                <div class="tran3s color1_bg unselectable meal-bottom-button" id="meal-none-zero-button-{{food.id}}" style="display: none;">
+                	
+            		<div style="width: 25%; float: left;" class="remove-from-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.price}}" data-is-from-meal="from-meal">
+            			&nbsp;&nbsp;&minus;&nbsp;&nbsp;
+            		</div>
+            		<div style="width: 50%; float: left;" id="food-{{food.id}}-quantity-on-meal">
+            			1
+            		</div>
+            		<div style="width: 25%; float: left;" class="add-to-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.price}}" data-is-from-meal="from-meal">
+            			&nbsp;&nbsp;+&nbsp;&nbsp;
+            		</div>
+                	
+                </div>
+            </div>
+        </div>               
+    </div>
+</div>
+{% endfor %}
+
+<script>
+	var quantityOfFoodArray = [];
+	{% for item in cart %}
+		quantityOfFoodArray[{{item.food.id}}] = {{item.quantity}};
+		console.log("Quantity of " + {{item.food.id}} + ".{{item.food.name}}" + " when the page is freshly loaded: " + {{item.quantity}});
+
+		if (quantityOfFoodArray[{{item.food.id}}] > 0) {
+			$("div#food-" + {{item.food.id}} + "-quantity-on-meal").html(quantityOfFoodArray[{{item.food.id}}]);
+
+			$("#meal-none-zero-button-" + {{item.food.id}}).show();
+			$("#meal-zero-button-" + {{item.food.id}}).hide();
+		}
+	{% endfor %};
+</script>
