@@ -9,9 +9,11 @@
             	<div class="overlay-box">
                 	<div class="inner">
                     	<div class="top-content" style="color: #7fb401; font-size: 120%; padding-bottom: 0;">
-    						<span data-toggle="tooltip" data-placement="top" title="View" class="fa fa-eye"></span>
-            				&nbsp;&nbsp;&nbsp;&nbsp;  	
-                    		<span data-toggle="tooltip" data-placement="top" title="Like" class="fa fa-heart-o"></span>
+    						<a href="#my_modal" data-toggle="modal" data-food-id="{{food.name}}" data-modal-id="{% url 'ultimatefitbackend:food' food.id %}" class="btnAdd-{{food.name}}">
+                                <span data-toggle="tooltip" data-placement="top" title="View" class="fa fa-eye"></span>
+                            </a>
+            				<!--&nbsp;&nbsp;&nbsp;&nbsp;  	
+                    		<span data-toggle="tooltip" data-placement="top" title="Like" class="fa fa-heart-o"></span>-->
                     		
                     		<div class="distance-content"></div>
 

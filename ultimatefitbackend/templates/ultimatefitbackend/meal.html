@@ -10,6 +10,11 @@
 				    width: 0px !important;
 				}				
 
+				.top-content a:visited {
+				    text-decoration: none !important; 
+				    decoration: none;   
+				}
+
 				/*CUSTOMIZE MMM YYYY TEXT*/
 				.fc-center h2 {
 					font-size: 120%;
@@ -172,9 +177,11 @@
 					                        	<div class="overlay-box">
 						                        	<div class="inner">
 							                        	<div class="top-content" style="color: #7fb401; font-size: 120%; padding-bottom: 0;">
-			                        						<span data-toggle="tooltip" data-placement="top" title="View" class="fa fa-eye"></span>
-					                        				&nbsp;&nbsp;&nbsp;&nbsp;  	
-							                        		<span data-toggle="tooltip" data-placement="top" title="Like" class="fa fa-heart-o"></span>
+			                        						<a href="#my_modal" data-toggle="modal" data-food-id="{{food.name}}" data-modal-id="{% url 'ultimatefitbackend:food' food.id %}" class="btnAdd-{{food.name}}">
+			                        							<span data-toggle="tooltip" data-placement="top" title="View" class="fa fa-eye"></span>
+			                        						</a>
+					                        				<!--&nbsp;&nbsp;&nbsp;&nbsp;  	
+							                        		<span data-toggle="tooltip" data-placement="top" title="Like" class="fa fa-heart-o"></span>-->
 							                        		
 							                        		<div class="distance-content"></div>
 
@@ -723,11 +730,49 @@
 	        	</div> <!-- End of .container -->
 	        </div> <!-- End of .shop_page -->
 
+	        <div class="modal" id="my_modal" style="padding-top: 35px;">
+			    <div class="modal-dialog modal-box-size">		    	
+				    <div class="modal-content">
+				        <div class="modal-header">
+				            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				            <h4 class="modal-title">Modal header</h4>
+
+				            <div>			        	
+								<iframe width="100%" scrolling="no" frameborder="0" src="" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>					
+							</div>
+				        </div>			        				
+				        <!--<div class="modal-footer">
+				            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        </div>-->
+				    </div>
+			    </div>
+			</div>
+
 	        <!--<script src="{% static 'ultimatefitbackend/fullcalendar/lib/jquery.min.js' %}"></script>-->
 			<script src="{% static 'ultimatefitbackend/fullcalendar/lib/moment.min.js' %}"></script>
 			<script src="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.js' %}"></script>
 
 			<script type="text/javascript">
+				$(document).on('show.bs.modal', '#my_modal', function(e) {
+			        console.log("HII");
+			        var foodId = $(e.relatedTarget).data('food-id');		        
+			        $(e.currentTarget).find('h4[class="modal-title"]').html(foodId);
+			        console.log(foodId);
+			        console.log(typeof(foodId.toString()));
+
+			        var modalId = $(e.relatedTarget).data('modal-id');
+			        $(e.currentTarget).find('iframe').attr("src", modalId);
+			    });
+
+			    //WHEN CLOSE MODAL BOX, REFRESH THE MEAL LIST FOOD TO DISPLAY CORRECTLY
+				$(document).on('hidden.bs.modal', '#my_modal', function (e) {
+				    $.get("/meal_food_list_update", function(data, status){
+				        $("#MixItUp717B05").html(data);
+				    }).fail(function(){
+					    popUpInternetConnectionError();
+					});
+				});
+
 				$('span.fa-eye').tooltip({show: {effect:"none", delay:0}});
 				$('span.fa-heart-o').tooltip({show: {effect:"none", delay:0}});
 
