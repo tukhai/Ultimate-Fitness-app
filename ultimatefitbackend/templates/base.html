@@ -2052,6 +2052,29 @@
 			    $('.internet-connection-error').delay(1500).fadeOut(200);
 			};
 
+			function addFakeDataArray(idOfFood, priceOfFood) {
+				if (!quantityOfFoodArray[idOfFood] || quantityOfFoodArray[idOfFood] == 0) {
+			        quantityOfFoodArray[idOfFood] = 1;
+
+			        //FOR MEAL LIST
+			        $("div#food-" + idOfFood + "-quantity-on-meal").html(quantityOfFoodArray[idOfFood]);
+
+			        console.log("#meal-none-zero-button-" + idOfFood);
+
+					$("#meal-none-zero-button-" + idOfFood).show();
+					$("#meal-zero-button-" + idOfFood).hide();						
+
+			    } else {
+			    	quantityOfFoodArray[idOfFood] += 1;
+			    	$("div#food-" + idOfFood + "-quantity-on-meal").html(quantityOfFoodArray[idOfFood]);
+			    };
+
+	            console.log("Current quantity of food id " + idOfFood + " in database: " + quantityOfFoodArray[idOfFood]);
+
+	            $("span#quantity-for-food-id-" + idOfFood).html(quantityOfFoodArray[idOfFood]);
+	            $("span#total-price-for-food-id-" + idOfFood).html(priceOfFood*quantityOfFoodArray[idOfFood]);
+			};
+
 			//$(".add-to-cart-list").click(function(){
 			$(document).on("click", ".add-to-cart-list", function(){
 				var idOfFood = $(this).data('id-food'); 
@@ -2065,24 +2088,7 @@
 			    if (navigator.onLine) {
 				    /*FAKE DISPLAY AT FRONT-END FOR FAST DISPLAY*/
 				    // IF ITEM NOT EXIST OR EQUAL 0, FIRST TIME ADD BECOME 1
-			        if (!quantityOfFoodArray[idOfFood] || quantityOfFoodArray[idOfFood] == 0) {
-				        quantityOfFoodArray[idOfFood] = 1;
-				        $("div#food-" + idOfFood + "-quantity-on-meal").html(quantityOfFoodArray[idOfFood]);
-
-				        console.log("#meal-none-zero-button-" + idOfFood);
-
-						$("#meal-none-zero-button-" + idOfFood).show();
-						$("#meal-zero-button-" + idOfFood).hide();						
-
-				    } else {
-				    	quantityOfFoodArray[idOfFood] += 1;
-				    	$("div#food-" + idOfFood + "-quantity-on-meal").html(quantityOfFoodArray[idOfFood]);
-				    };
-
-		            console.log("Current quantity of food id " + idOfFood + " in database: " + quantityOfFoodArray[idOfFood]);
-
-		            $("span#quantity-for-food-id-" + idOfFood).html(quantityOfFoodArray[idOfFood]);
-		            $("span#total-price-for-food-id-" + idOfFood).html(priceOfFood*quantityOfFoodArray[idOfFood]);
+		            addFakeDataArray(idOfFood, priceOfFood);
 				    /*FAKE DISPLAY AT FRONT-END FOR FAST DISPLAY*/
 
 				    $.post(
@@ -2113,11 +2119,34 @@
 			        ).fail(function(){
 			        	// IF INTERNET OK, BUT SERVER DOWN, WHEN USER ADD, NUMBER WILL JUMP BUT IMMEDIATELY DISPLAY ERROR MESSAGE, WHICH STILL GOOD
 					    popUpInternetConnectionError();
+					    removeFakeDataArray(idOfFood, priceOfFood);
 					});
 			    } else {
 			    	popUpInternetConnectionError();
 			    }
 			});
+
+			function removeFakeDataArray(idOfFoodToBeRemoved, priceOfFoodToBeRemoved) {
+				if (quantityOfFoodArray[idOfFoodToBeRemoved] > 1) {
+			        quantityOfFoodArray[idOfFoodToBeRemoved] -= 1;
+			        $("div#food-" + idOfFoodToBeRemoved + "-quantity-on-meal").html(quantityOfFoodArray[idOfFoodToBeRemoved]);
+			        
+			    } else {
+			    	quantityOfFoodArray[idOfFoodToBeRemoved] = 0;
+			    	$("#meal-none-zero-button-" + idOfFoodToBeRemoved).hide();
+					$("#meal-zero-button-" + idOfFoodToBeRemoved).show();								
+			    };			    
+		        
+	            console.log("Current quantity of food id " + idOfFoodToBeRemoved + " in database: " + quantityOfFoodArray[idOfFoodToBeRemoved]);
+
+	            // when quantity = 0, just remove the item from the list
+	            if (quantityOfFoodArray[idOfFoodToBeRemoved] > 0) {
+	            	$("span#quantity-for-food-id-" + idOfFoodToBeRemoved).html(quantityOfFoodArray[idOfFoodToBeRemoved]);
+	            	$("span#total-price-for-food-id-" + idOfFoodToBeRemoved).html(priceOfFoodToBeRemoved*quantityOfFoodArray[idOfFoodToBeRemoved]);
+	        	} else {
+	        		$("li#list-item-" + idOfFoodToBeRemoved).remove();
+	        	};
+			};
 
 			//$(".remove-from-cart-list").click(function(){
 			$(document).on("click", ".remove-from-cart-list", function(){
@@ -2131,25 +2160,7 @@
 
 
 			    if (navigator.onLine) {
-				    if (quantityOfFoodArray[idOfFoodToBeRemoved] > 1) {
-				        quantityOfFoodArray[idOfFoodToBeRemoved] -= 1;
-				        $("div#food-" + idOfFoodToBeRemoved + "-quantity-on-meal").html(quantityOfFoodArray[idOfFoodToBeRemoved]);
-				        
-				    } else {
-				    	quantityOfFoodArray[idOfFoodToBeRemoved] = 0;
-				    	$("#meal-none-zero-button-" + idOfFoodToBeRemoved).hide();
-						$("#meal-zero-button-" + idOfFoodToBeRemoved).show();								
-				    };			    
-			        
-		            console.log("Current quantity of food id " + idOfFoodToBeRemoved + " in database: " + quantityOfFoodArray[idOfFoodToBeRemoved]);
-
-		            // when quantity = 0, just remove the item from the list
-		            if (quantityOfFoodArray[idOfFoodToBeRemoved] > 0) {
-		            	$("span#quantity-for-food-id-" + idOfFoodToBeRemoved).html(quantityOfFoodArray[idOfFoodToBeRemoved]);
-		            	$("span#total-price-for-food-id-" + idOfFoodToBeRemoved).html(priceOfFoodToBeRemoved*quantityOfFoodArray[idOfFoodToBeRemoved]);
-		        	} else {
-		        		$("li#list-item-" + idOfFoodToBeRemoved).remove();
-		        	};
+				    removeFakeDataArray(idOfFoodToBeRemoved, priceOfFoodToBeRemoved);
 
 				    $.post(
 				    	"/remove/" + idOfFoodToBeRemoved,
@@ -2173,6 +2184,7 @@
 				        }
 			        ).fail(function(){
 					    popUpInternetConnectionError();
+					    addFakeDataArray(idOfFoodToBeRemoved, priceOfFoodToBeRemoved);
 					});
 			    } else {
 			    	popUpInternetConnectionError();
