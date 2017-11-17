@@ -32,6 +32,8 @@ from .models import Food, FoodCategory, Order, Customer, Menu, MenuCategory, Foo
 
 from django.contrib.auth.models import User
 
+import celery
+
 class IndexView(generic.ListView):
     template_name = 'ultimatefitbackend/base.html'
     context_object_name = 'latest_question_list'
@@ -783,6 +785,11 @@ class ShopsingleView(generic.ListView):
         ).order_by('description')[:5]
 
 
+'''@task
+def printHello():
+    print "Hello from Celery!!"'''
+
+
 class CheckoutView(generic.ListView):
     template_name = 'ultimatefitbackend/checkout.html'
     context_object_name = 'latest_question_list'
@@ -798,6 +805,8 @@ class CheckoutView(generic.ListView):
         return Food.objects.filter(
             description__lte=timezone.now()
         ).order_by('description')[:5]
+
+    #printHello.apply_async(countdown=3)
 
 
 '''class DetailView(generic.DetailView):

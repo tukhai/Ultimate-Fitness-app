@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ['ultimatefitapp.azurewebsites.net', 'localhost']
 
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS = [    
     'ultimatefitbackend',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'registration',
+    #'django_crontab',
+    "django_cron",
 ]
 
 MIDDLEWARE = [
@@ -158,3 +160,14 @@ DEFAULT_FROM_EMAIL = "twohourbinhyen@gmail.com"
 # Session expire
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_AGE = 4 * 7 * 24 * 60 * 60
+
+'''CRONJOBS = [
+    ('*/1 * * * *', 'ultimatefitbackend.cron.my_scheduled_job')
+    #('*/1 * * * *', 'ultimatefitbackend.cron.my_scheduled_job', '> cron.log')
+]
+CRONTAB_COMMAND_SUFFIX = "2>&1"'''
+
+CRON_CLASSES = [
+    "ultimatefitbackend.cron.MyCronJob",
+    # ...
+]
