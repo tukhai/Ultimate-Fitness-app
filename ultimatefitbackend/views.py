@@ -33,8 +33,6 @@ from .models import Food, FoodCategory, Order, Customer, Menu, MenuCategory, Foo
 
 from django.contrib.auth.models import User
 
-from celery import Celery
-
 class IndexView(generic.ListView):
     template_name = 'ultimatefitbackend/base.html'
     context_object_name = 'latest_question_list'
