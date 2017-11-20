@@ -2041,12 +2041,27 @@
 				});
 
 			    /*UPDATE MEAL DISPLAY NUMBER*/
-			    $.get("/meal_food_list_update", function(data, status){
+			    /*$.get("/meal_food_list_update", function(data, status){
 			        console.log("Data-meal: " + data.total)
 			        console.log(typeof(data.total));
 			        console.log("Status-meal: " + status);
 			        $("#MixItUp717B05").html(data);
 			    }).fail(function(){
+				    popUpInternetConnectionError();
+				});*/
+				$.post(
+			    	"/meal_food_list_update_query_by_date/",
+			        { 
+			          csrfmiddlewaretoken: "{{ csrf_token }}",
+			          queryDate: JSON.stringify(clickedDateObject)
+			        },
+			        function(data,status){
+			            console.log("Status: " + status);
+			            if (status == "success") {
+						    $("#MixItUp717B05").html(data);
+				        };
+			        }
+		        ).fail(function(){
 				    popUpInternetConnectionError();
 				});
 

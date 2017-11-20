@@ -14,6 +14,7 @@ import json
 import time
 
 from time import strftime
+import datetime
 
 from django.utils.timezone import utc
 from django.core.serializers.json import DjangoJSONEncoder
@@ -32,7 +33,7 @@ from .models import Food, FoodCategory, Order, Customer, Menu, MenuCategory, Foo
 
 from django.contrib.auth.models import User
 
-import celery
+from celery import Celery
 
 class IndexView(generic.ListView):
     template_name = 'ultimatefitbackend/base.html'
@@ -235,8 +236,16 @@ def index(request):
 
 
 def meal(request):
-
-    foods = Food.objects.all()
+    # WHEN THE PAGE IS FRESHLY LOADED, TODAY FOOD WOULD BE QUERIED AND DISPLAYED
+    #foods = Food.objects.all()
+    '''for food in foods:
+        #print food.name, food.convertdate, type(food.convertdate)
+        print food.name, food.pub_date.year, type(food.pub_date.year)
+    #foods = Food.objects.filter(convertdate="2017-11-08")'''
+    today = datetime.date.today()
+    foods = Food.objects.filter(pub_date__year=today.year,
+                                pub_date__month=today.month,
+                                pub_date__day=today.day)
     context_object_name = 'latest_food_list'
 
     if request.user.is_authenticated():
@@ -271,9 +280,64 @@ def meal(request):
     return render(request, 'ultimatefitbackend/meal.html', context)
 
 
-def meal_food_list_update(request):
+'''def meal_food_list_update(request):
+    # WHEN THE PAGE IS FRESHLY LOADED, TODAY FOOD WOULD BE QUERIED AND DISPLAYED
+    #foods = Food.objects.all()
+    today = datetime.date.today()
+    foods = Food.objects.filter(pub_date__year=today.year,
+                                pub_date__month=today.month,
+                                pub_date__day=today.day)
+    context_object_name = 'latest_food_list'
 
-    foods = Food.objects.all()
+    if request.user.is_authenticated():
+        cart = Cart.objects.get(
+            user=request.user,
+            active=True
+        );
+    else:
+        if 'cart' in request.session:
+            print "cart is exist in session"
+            cart = Cart.objects.get(id=request.session['cart'])
+        else:
+            print "cart id is not in session"
+            cart = None
+
+    orders = FoodOrder.objects.filter(cart=cart)
+    print orders
+    total = 0
+    count = 0
+    for order in orders:
+        total += (order.food.price * order.quantity) 
+        count += order.quantity
+        print order.food.id,order.food.name,": $",order.food.price," * ",order.quantity
+
+    context = {
+        'cart': orders,
+        'total': total,
+        'count': count,
+        'foods': foods
+    }
+        
+    return render(request, 'ultimatefitbackend/meal_food_list_update.html', context)'''
+
+
+def meal_food_list_update_query_by_date(request):
+    today = datetime.date.today()
+
+    if request.method == "POST":
+        '''query_year = request.POST.get("queryYear","")
+        query_month = request.POST.get("queryMonth","")
+        query_day = request.POST.get("queryDay","")
+        print "get date from front-end: ",query_year, query_month, query_day'''
+
+        query_date = json.loads(request.POST.get("queryDate"))
+        #print query_date, type(query_date)
+        #print "get date from front-end:",query_date['queryYear'], query_date['queryMonth'], query_date['queryDay']
+        foods = Food.objects.filter(pub_date__year=query_date['queryYear'],
+                                    pub_date__month=query_date['queryMonth'],
+                                    pub_date__day=query_date['queryDay'])
+        for food in foods:
+            print food.name
     context_object_name = 'latest_food_list'
 
     if request.user.is_authenticated():
@@ -785,11 +849,6 @@ class ShopsingleView(generic.ListView):
         ).order_by('description')[:5]
 
 
-'''@task
-def printHello():
-    print "Hello from Celery!!"'''
-
-
 class CheckoutView(generic.ListView):
     template_name = 'ultimatefitbackend/checkout.html'
     context_object_name = 'latest_question_list'
@@ -806,7 +865,7 @@ class CheckoutView(generic.ListView):
             description__lte=timezone.now()
         ).order_by('description')[:5]
 
-    #printHello.apply_async(countdown=3)
+    
 
 
 '''class DetailView(generic.DetailView):

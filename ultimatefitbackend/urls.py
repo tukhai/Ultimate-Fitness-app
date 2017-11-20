@@ -35,7 +35,8 @@ urlpatterns = [
     url(r'^start_page/$', views.start_page, name='start_page'),
 
     url(r'^meal/$', views.meal, name='meal'),
-    url(r'^meal_food_list_update/$', views.meal_food_list_update, name='meal_food_list_update'),    
+    #url(r'^meal_food_list_update/$', views.meal_food_list_update, name='meal_food_list_update'), 
+    url(r'^meal_food_list_update_query_by_date/$', views.meal_food_list_update_query_by_date, name='meal_food_list_update_query_by_date'),   
 
     # URL FOR RETURN JSON
     url(r'^foods-list/$', views.foods_list, name='foods_list'),
