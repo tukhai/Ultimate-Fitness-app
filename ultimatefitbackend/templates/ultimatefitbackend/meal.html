@@ -417,8 +417,13 @@
 				$('span.fa-heart-o').tooltip({show: {effect:"none", delay:0}});
 
 				
-				// DEFINE OBJECT VARIABLE FIRST, THEN IT WOULD BE USED COMMONLY FOR THE WHOLE /meal PAGE
-				var clickedDateObject;
+				// DEFINE OBJECT VARIABLE FIRST, THEN THE VARIABLE WOULD BE USED COMMONLY FOR THE WHOLE /meal PAGE 
+				// INITIALLY THE DATE OBJECT DATA IS TODAY FOR HOVERING AND CLOSE MODAL BOX TRIGGER
+				var clickedDateObject = {
+		        	"queryYear": moment().year(),
+			        "queryMonth": moment().month() + 1,
+			        "queryDay": moment().date()
+		        };
 
 
 				$(document).ready(function() {
