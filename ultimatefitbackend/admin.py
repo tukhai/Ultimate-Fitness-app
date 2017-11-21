@@ -33,13 +33,19 @@ class FoodOrderAdmin(admin.ModelAdmin):
 class CartAdmin(admin.ModelAdmin):
     list_display = ('user', 'active', 'order_date')
 
+
+class MenuAdmin(admin.ModelAdmin):
+    #model = Menu
+    filter_horizontal = ('food',)
+
     
 admin.site.register(Food, FoodAdmin)
 admin.site.register(FoodCategory)
 admin.site.register(Order)
 admin.site.register(Customer)
-admin.site.register(Menu)
+admin.site.register(Menu, MenuAdmin)
 admin.site.register(MenuCategory)
+#admin.site.register(MenuItem)
 
 admin.site.register(FoodOrder, FoodOrderAdmin)
 admin.site.register(Cart, CartAdmin)

@@ -241,9 +241,17 @@ def meal(request):
         print food.name, food.pub_date.year, type(food.pub_date.year)
     #foods = Food.objects.filter(convertdate="2017-11-08")'''
     today = datetime.date.today()
-    foods = Food.objects.filter(pub_date__year=today.year,
+    menu = Menu.objects.filter(pub_date__year=today.year,
                                 pub_date__month=today.month,
                                 pub_date__day=today.day)
+    try:
+        foods = menu[0].food.all()
+    except IndexError:
+        foods =  Food.objects.none()
+
+    '''foods = Food.objects.filter(pub_date__year=today.year,
+                                pub_date__month=today.month,
+                                pub_date__day=today.day)'''
     context_object_name = 'latest_food_list'
 
     if request.user.is_authenticated():
@@ -267,6 +275,11 @@ def meal(request):
         total += (order.food.price * order.quantity) 
         count += order.quantity
         print order.food.id,order.food.name,": $",order.food.price," * ",order.quantity
+
+    '''menu = Menu.objects.all()
+    print menu[0], type(menu[0])
+    food_item_in_selected_menu = menu[0].food.all()
+    print food_item_in_selected_menu[0].name'''
 
     context = {
         'cart': orders,
@@ -331,9 +344,18 @@ def meal_food_list_update_query_by_date(request):
         query_date = json.loads(request.POST.get("queryDate"))
         #print query_date, type(query_date)
         #print "get date from front-end:",query_date['queryYear'], query_date['queryMonth'], query_date['queryDay']
-        foods = Food.objects.filter(pub_date__year=query_date['queryYear'],
+        
+        menu = Menu.objects.filter(pub_date__year=query_date['queryYear'],
+                                pub_date__month=query_date['queryMonth'],
+                                pub_date__day=query_date['queryDay'])
+        try:
+            foods = menu[0].food.all()
+        except IndexError:
+            foods = Food.objects.none()
+
+        '''foods = Food.objects.filter(pub_date__year=query_date['queryYear'],
                                     pub_date__month=query_date['queryMonth'],
-                                    pub_date__day=query_date['queryDay'])
+                                    pub_date__day=query_date['queryDay'])'''
         for food in foods:
             print food.name
     context_object_name = 'latest_food_list'

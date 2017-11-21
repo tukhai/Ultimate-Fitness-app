@@ -18,15 +18,6 @@ class MenuCategory(models.Model):
     def __str__(self):
         return self.name
 
-class Menu(models.Model):
-    name = models.CharField(max_length=320)
-    description = models.TextField()
-    image = models.TextField()
-    menucategory = models.ForeignKey(MenuCategory)
-
-    def __str__(self):
-        return self.name
-
 class Customer(models.Model):
     name = models.CharField(max_length=320)
     address = models.TextField()
@@ -63,7 +54,8 @@ class Food(models.Model):
     #pub_date_string = date.strftime('%Y-%m-%dT%H:%M')
     description = models.TextField()
     image = models.TextField(null=True, blank=True)
-    menu = models.ForeignKey(Menu, null=True, blank=True)
+    #menu = models.ForeignKey(Menu, null=True, blank=True)
+    #foodgroup = models.ForeignKey(FoodGroup)
     order = models.ForeignKey(Order, null=True, blank=True)
     foodcategory = models.ForeignKey(FoodCategory, null=True, blank=True)
     price = models.IntegerField(default=0)
@@ -90,6 +82,26 @@ class Food(models.Model):
         pub_date_string = self.pub_date.date().strftime('%Y-%m-%d')
         return pub_date_string
 
+class Menu(models.Model):
+    name = models.CharField(max_length=320)
+    description = models.TextField(null=True, blank=True)
+    image = models.TextField(null=True, blank=True)
+    food = models.ManyToManyField(Food, blank=True)
+    pub_date = models.DateTimeField('date published', null=True, blank=True)
+    #menucategory = models.ForeignKey(MenuCategory, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    @property
+    def convertdate(self):
+        pub_date_string = self.pub_date.date().strftime('%Y-%m-%d')
+        return pub_date_string
+
+'''class MenuItem(models.Model):
+    food = models.ForeignKey(Food)
+    menu = models.ForeignKey(Menu)
+    quantity = models.IntegerField()'''
 
 class Cart(models.Model):
     user = models.ForeignKey(User, null=True, blank=True)
