@@ -27,7 +27,7 @@ from django.core.exceptions import MultipleObjectsReturned
 
 #from carton.cart import Cart
 
-from .models import Food, FoodCategory, Order, Customer, Menu, MenuCategory, FoodOrder, Cart
+from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart
 
 # from .utcisoformat import utcisoformat
 
@@ -120,7 +120,7 @@ def index(request):
         total_ano = 0
         count_ano = 0
         for order_ano in orders_ano:
-            total_ano += (order_ano.food.price * order_ano.quantity)
+            total_ano += (order_ano.food.food_type.price * order_ano.quantity)
             count_ano += order_ano.quantity
         print 'count_ano is: '
         print count_ano
@@ -137,33 +137,33 @@ def index(request):
 
         foodnames_ano = []
         for order_ano in orders_ano:
-            foodnames_ano.append(order_ano.food.name)
+            foodnames_ano.append(order_ano.food.food_type.name)
         print 'AAAAAAAA'
         print foodnames_ano
         print 'AAAAAAAA'
         
         foodnames = []
         for order in orders:
-            foodnames.append(order.food.name)
+            foodnames.append(order.food.food_type.name)
         print 'BBBBBBB'
         print foodnames
         print 'BBBBBBB'                
 
         # Add the quantity to the existing object in user cart
         for order in orders:
-            if order.food.name in foodnames_ano:
+            if order.food.food_type.name in foodnames_ano:
                 order.quantity += order_ano.quantity
                 order.save()                
 
         # When the object exist in anonymous cart, but not in user cart, so have to create the foodorder object first
         for order_ano in orders_ano:
-            if not order_ano.food.name in foodnames:
+            if not order_ano.food.food_type.name in foodnames:
                 order = FoodOrder.objects.create(
                     cart = Cart.objects.get(
                         user=request.user.id,
                         active=True
                     ),
-                    food = Food.objects.get(name = order_ano.food.name),
+                    food = Food.objects.get(name = order_ano.food.food_type.name),
                     quantity = order_ano.quantity
                 )
                 order.save()                        
@@ -175,7 +175,7 @@ def index(request):
         total = 0
         count = 0
         for order in orders:
-            total += ((order.food.price * order.quantity) + total_ano) 
+            total += ((order.food.food_type.price * order.quantity) + total_ano) 
             count += (order.quantity + count_ano)
         print 'orders 2 are ...'
         print orders
@@ -221,7 +221,7 @@ def index(request):
         total = 0
         count = 0
         for order in orders:
-            total += (order.food.price * order.quantity) 
+            total += (order.food.food_type.price * order.quantity) 
             count += order.quantity
         context = {
             'cart': orders,
@@ -244,8 +244,13 @@ def meal(request):
     menu = Menu.objects.filter(pub_date__year=today.year,
                                 pub_date__month=today.month,
                                 pub_date__day=today.day)
-    try:
+    '''try:
         foods = menu[0].food.all()
+    except IndexError:
+        foods =  Food.objects.none()'''
+
+    try:
+        foods = Food.objects.filter(menu=menu[0])
     except IndexError:
         foods =  Food.objects.none()
 
@@ -272,9 +277,9 @@ def meal(request):
     total = 0
     count = 0
     for order in orders:
-        total += (order.food.price * order.quantity) 
+        total += (order.food.food_type.price * order.quantity) 
         count += order.quantity
-        print order.food.id,order.food.name,": $",order.food.price," * ",order.quantity
+        print order.food.id,order.food.food_type.name,": $",order.food.food_type.price," * ",order.quantity
 
     '''menu = Menu.objects.all()
     print menu[0], type(menu[0])
@@ -349,7 +354,7 @@ def meal_food_list_update_query_by_date(request):
                                 pub_date__month=query_date['queryMonth'],
                                 pub_date__day=query_date['queryDay'])
         try:
-            foods = menu[0].food.all()
+            foods = Food.objects.filter(menu=menu[0])
         except IndexError:
             foods = Food.objects.none()
 
@@ -357,7 +362,7 @@ def meal_food_list_update_query_by_date(request):
                                     pub_date__month=query_date['queryMonth'],
                                     pub_date__day=query_date['queryDay'])'''
         for food in foods:
-            print food.name
+            print food.food_type.name
     context_object_name = 'latest_food_list'
 
     if request.user.is_authenticated():
@@ -378,9 +383,9 @@ def meal_food_list_update_query_by_date(request):
     total = 0
     count = 0
     for order in orders:
-        total += (order.food.price * order.quantity) 
+        total += (order.food.food_type.price * order.quantity) 
         count += order.quantity
-        print order.food.id,order.food.name,": $",order.food.price," * ",order.quantity
+        print order.food.id,order.food.food_type.name,": $",order.food.food_type.price," * ",order.quantity
 
     context = {
         'cart': orders,
@@ -420,7 +425,7 @@ def total(request):
     count = 0
 
     for order in orders:
-        total += (order.food.price * order.quantity) 
+        total += (order.food.food_type.price * order.quantity) 
         count += order.quantity
 
     #seror = serializers.serialize('python',orders); 
@@ -451,9 +456,9 @@ def list(request):
     total = 0
     count = 0
     for order in orders:
-        total += (order.food.price * order.quantity) 
+        total += (order.food.food_type.price * order.quantity) 
         count += order.quantity
-        print order.food.id,order.food.name,": $",order.food.price," * ",order.quantity
+        print order.food.id,order.food.food_type.name,": $",order.food.food_type.price," * ",order.quantity
 
     context = {
         'cart': orders,
@@ -514,6 +519,8 @@ def shop(request):
     foods = Food.objects.all()
     context_object_name = 'latest_food_list'
 
+    menus = Menu.objects.all()
+
     if request.user.is_authenticated():
         cart = Cart.objects.get(
             user=request.user,
@@ -532,15 +539,16 @@ def shop(request):
     total = 0
     count = 0
     for order in orders:
-        total += (order.food.price * order.quantity) 
+        total += (order.food.food_type.price * order.quantity) 
         count += order.quantity
-        print order.food.id,order.food.name,": $",order.food.price," * ",order.quantity
+        print order.food.id,order.food.food_type.name,": $",order.food.food_type.price," * ",order.quantity
 
     context = {
         'cart': orders,
         'total': total,
         'count': count,
-        'foods': foods
+        'foods': foods,
+        'menus': menus
     }
 
     '''context = {
@@ -593,7 +601,7 @@ def food(request, food_id):
     #print orders
     total = 0
     for order_total in orders_total:
-        total += (order_total.food.price * order_total.quantity)
+        total += (order_total.food.food_type.price * order_total.quantity)
 
 
     context = {
@@ -747,7 +755,7 @@ def cart(request):
         total_ano = 0
         count_ano = 0
         for order_ano in orders_ano:
-            total_ano += (order_ano.food.price * order_ano.quantity)
+            total_ano += (order_ano.food.food_type.price * order_ano.quantity)
             count_ano += order_ano.quantity
         print 'count_ano is: '
         print count_ano
@@ -764,33 +772,33 @@ def cart(request):
 
         foodnames_ano = []
         for order_ano in orders_ano:
-            foodnames_ano.append(order_ano.food.name)
+            foodnames_ano.append(order_ano.food.food_type.name)
         print 'AAAAAAAA'
         print foodnames_ano
         print 'AAAAAAAA'
         
         foodnames = []
         for order in orders:
-            foodnames.append(order.food.name)
+            foodnames.append(order.food.food_type.name)
         print 'BBBBBBB'
         print foodnames
         print 'BBBBBBB'                
 
         # Add the quantity to the existing object in user cart
         for order in orders:
-            if order.food.name in foodnames_ano:
+            if order.food.food_type.name in foodnames_ano:
                 order.quantity += order_ano.quantity
                 order.save()                
 
         # When the object exist in anonymous cart, but not in user cart, so have to create the foodorder object first
         for order_ano in orders_ano:
-            if not order_ano.food.name in foodnames:
+            if not order_ano.food.food_type.name in foodnames:
                 order = FoodOrder.objects.create(
                     cart = Cart.objects.get(
                         user=request.user.id,
                         active=True
                     ),
-                    food = Food.objects.get(name = order_ano.food.name),
+                    food = Food.objects.get(name = order_ano.food.food_type.name),
                     quantity = order_ano.quantity
                 )
                 order.save()                        
@@ -802,7 +810,7 @@ def cart(request):
         total = 0
         count = 0
         for order in orders:
-            total += ((order.food.price * order.quantity) + total_ano) 
+            total += ((order.food.food_type.price * order.quantity) + total_ano) 
             count += (order.quantity + count_ano)
         print 'orders 2 are ...'
         print orders
@@ -842,7 +850,7 @@ def cart(request):
         total = 0
         count = 0
         for order in orders:
-            total += (order.food.price * order.quantity) 
+            total += (order.food.food_type.price * order.quantity) 
             count += order.quantity
         context = {
             'cart': orders,

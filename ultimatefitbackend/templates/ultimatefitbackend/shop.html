@@ -706,8 +706,8 @@
 						navLinkDayClick: function(date, jsEvent) {
 							console.log('day', date.format()); // date is a moment
 							console.log('coords', jsEvent.pageX, jsEvent.pageY);
-						},
-							
+						},						
+
 						events: 
 							[
 								{   
@@ -728,11 +728,18 @@
 									description: '<a href="#openModal-{{food.name}}" class="btnAdd-{{food.name}}">{{food.description}}</a>'
 								},
 								{% endfor %}*/
-								{% for food in foods %}
+								/*{% for food in foods %}
 								{
 									title: '{{food.name}}',
 									start: '{{food.convertdate}}',
 									description: '<a href="#my_modal" data-toggle="modal" data-food-id="{{food.name}}" data-modal-id="{% url 'ultimatefitbackend:food' food.id %}" class="btnAdd-{{food.name}}"><img src="{{food.description}}"  style="width:130px;height:90px;float:left;"></a>'
+								},
+								{% endfor %}*/
+								{% for menu in menus %}
+								{
+									title: '{{menu.name}}',
+									start: '{{menu.convertdate}}',
+									description: '<a><img src="{{menu.image}}"  style="width:130px;height:90px;float:left;"></a>'
 								},
 								{% endfor %}
 								{% endautoescape %}
@@ -741,9 +748,41 @@
 						eventBackgroundColor: 'silver',
 						eventBorderColor: 'silver',
 							
-						eventRender: function(event, element) { 
-							element.append(event.description); 
+						eventRender: function(event, element, view) { 
+							element.append(event.description);
+							if(view.type == 'month') {
+								console.log("monthHi1");
+						        var monthEvent = [
+							        {% for menu in menus %}
+							        {
+						                title: '{{menu.name}}',
+										start: '{{menu.convertdate}}',
+										description: '<a><img src="{{menu.image}}"  style="width:130px;height:90px;float:left;"></a>'
+						            },
+						            {% endfor %}
+					            ];
+					            console.log("monthHi2");
+					            $('#calendar').fullCalendar( 'renderEvent', monthEvent);
+						    } else {						        
+					            console.log("week or day");
+						    };
 						},
+
+						/*viewRender: function(event, element, view) {
+							if(view.type == 'month') {
+								
+						        var monthEvent = {
+					                title: '{{menu.name}}',
+									start: '{{menu.convertdate}}',
+									description: '<a><img src="{{menu.image}}"  style="width:130px;height:90px;float:left;"></a>'
+					            };
+					            $('#calendar').fullCalendar( 'renderEvent', monthEvent);
+					            
+						    } else {
+						        
+					            console.log("week or day");
+						    };
+						},*/
 						
 						/*eventRender: function(event, eventElement) {
 							if (event.imageurl) {

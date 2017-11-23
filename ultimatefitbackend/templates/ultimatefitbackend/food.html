@@ -8,7 +8,7 @@
 		<!-- For Resposive Device -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>{{ food.name }}</title>
+		<title>{{ food.food_type.name }}</title>
 		<!-- Favicon -->
 		<link rel="apple-touch-icon" sizes="57x57" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-57x57.png' %}">
 		<link rel="apple-touch-icon" sizes="60x60" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-60x60.png' %}">
@@ -188,7 +188,7 @@
 	        							<img src="{% static 'ultimatefitbackend/images/shop/15.png' %}" alt="img" class="img-responsive">
 	        						</div> <!-- End of .img_holder -->
 	        						<div class="item_description float_left">
-	        							<h4>{{ food.name }}</h4>
+	        							<h4>{{ food.food_type.name }}</h4>
 	        							<ul>
 											<li><i class="fa fa-star" aria-hidden="true"></i></li>
 											<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -529,7 +529,7 @@
 		<script type="text/javascript">
 			// When this page (actually the modal box) is freshly loaded, currentQuantityInThisCart variable is freshly pulled from server
 
-			console.log("This is the quantity of {{food.name}} when the food/{{food.id}} page finishes being rendered: " + {{quantityInThisCart}});
+			console.log("This is the quantity of {{food.food_type.name}} when the food/{{food.id}} page finishes being rendered: " + {{quantityInThisCart}});
 			//var currentQuantityInThisCart = {{quantityInThisCart}};
 
 			//THIS LINE IS TO  CREATE FOOD ITEM IN FRONT-END IF IT NOT EXIST, CAUSE WHEN THE FOOD TYPE NOT EXIST, {{quantityInThisCart}} = 0 but not NaN
@@ -547,14 +547,14 @@
 					$("input#display-quantity-modalbox").css("display", "initial");
 				};
 	            
-	            console.log("Current quantity of {{food.name}} in database: " + window.parent.parent.quantityOfFoodArray[{{food.id}}]);
+	            console.log("Current quantity of {{food.food_type.name}} in database: " + window.parent.parent.quantityOfFoodArray[{{food.id}}]);
 
 	            if (window.parent.parent.quantityOfFoodArray[{{food.id}}] == 1) {
 		            window.parent.parent.$(".cart_list ul").append($(".display-none"));
 		        };
 
 	            window.parent.parent.$("span#quantity-for-food-id-" + {{food.id}}).html(window.parent.parent.quantityOfFoodArray[{{food.id}}]);
-	            window.parent.parent.$("span#total-price-for-food-id-" + {{food.id}}).html({{food.price}}*window.parent.parent.quantityOfFoodArray[{{food.id}}]);
+	            window.parent.parent.$("span#total-price-for-food-id-" + {{food.id}}).html({{food.food_type.price}}*window.parent.parent.quantityOfFoodArray[{{food.id}}]);
 			};
 
 			$("#add-cart-button").click(function(){
@@ -577,7 +577,7 @@
 				            console.log("Status: " + status);
 				            console.log("Display cart change on the top right of the screen follow Redmart");			            			            
 				            if (status == "success") {
-				            	window.parent.parent.$("#test").append("<div class='popUpMessage'><p>{{food.name}} is added to your cart</p><p>You currently have " + window.parent.parent.quantityOfFoodArray[{{food.id}}] + " {{food.name}} in your cart</p></div>");
+				            	window.parent.parent.$("#test").append("<div class='popUpMessage'><p>{{food.food_type.name}} is added to your cart</p><p>You currently have " + window.parent.parent.quantityOfFoodArray[{{food.id}}] + " {{food.food_type.name}} in your cart</p></div>");
 							    setTimeout(function() {     
 							        window.parent.parent.$("#test").html(""); 
 							    },1500);
@@ -614,27 +614,27 @@
 				</div>
 
 				<div class="item_deatils float_left">
-					<h6>{{ food.name }}</h6>
+					<h6>{{ food.food_type.name }}</h6>
 					<div style="margin-top: 9px;">
-						<span class="font_fix">$ {{ food.price }}</span> 
+						<span class="font_fix">$ {{ food.food_type.price }}</span> 
 						<span style="float: right; margin-left: 90px;">
-							$ <span id="total-price-for-food-id-{{food.id}}">{{food.price}}</span>
+							$ <span id="total-price-for-food-id-{{food.id}}">{{food.food_type.price}}</span>
 						</span>
 					</div>
 					<div> 
-						<a class="remove-from-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.price}}">
+						<a class="remove-from-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.food_type.price}}">
 							<i class="fa fa-minus-circle" aria-hidden="true"></i>
 						</a>
 						&nbsp;
 						<span id="quantity-for-food-id-{{food.id}}">1</span>
 						&nbsp;
-						<a class="add-to-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.price}}">
+						<a class="add-to-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.food_type.price}}">
 							<i class="fa fa-plus-circle" aria-hidden="true"></i>
 						</a>
 					</div>
 				</div> <!-- End of .item_deatils -->
 			</div> <!-- End of .cart_item_wrapper -->
-			<i class="fa fa-times-circle-o close-list-cart" data-id-food="{{food.id}}" data-price-food="{{food.price}}" aria-hidden="true"></i>
+			<i class="fa fa-times-circle-o close-list-cart" data-id-food="{{food.id}}" data-price-food="{{food.food_type.price}}" aria-hidden="true"></i>
 		</li>
 
 	</body>
