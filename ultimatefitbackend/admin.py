@@ -24,7 +24,7 @@ from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCat
 
 class FoodAdmin(admin.ModelAdmin):
     #list_display = ('name', 'price', 'stock')
-    list_display = ('food_type', 'menu', 'convertdate', 'stock')
+    list_display = ('food_type', 'menu', 'convertdate_from_menu', 'stock')
 
 
 class FoodTypeAdmin(admin.ModelAdmin):
@@ -41,6 +41,7 @@ class CartAdmin(admin.ModelAdmin):
 
 class MenuAdmin(admin.ModelAdmin):
     model = Menu
+    list_display = ('name', 'convertdate')
     #filter_horizontal = ('food_item',)
 
     

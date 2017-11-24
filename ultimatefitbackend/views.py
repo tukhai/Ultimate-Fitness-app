@@ -451,7 +451,11 @@ def list(request):
             print "cart id is not in session"
             cart = None
 
-    orders = FoodOrder.objects.filter(cart=cart)
+    # order_by('food') has helped to order by pub_date in Food
+    # 'food__pub_date' is the order by a field pub_date(include time of the day, not only convertdate) of food
+    
+    orders = FoodOrder.objects.filter(cart=cart).order_by('food__menu__pub_date')        
+    
     print orders
     total = 0
     count = 0
@@ -459,6 +463,22 @@ def list(request):
         total += (order.food.food_type.price * order.quantity) 
         count += order.quantity
         print order.food.id,order.food.food_type.name,": $",order.food.food_type.price," * ",order.quantity
+
+    # Find first of the day food object to display date
+    
+    '''# This would print i from 0 to 9
+    for i in range(0, 10):
+        print i'''
+
+    try:
+        print "The first earlies food in menu name: ", orders[0].food.food_type.name
+        orders[0].is_first_of_day = True
+        #print "DDDDDDDDD ", orders[0].is_first_of_day
+        for i in range(0, len(orders)-1):
+            if orders[i].food.menu.convertdate != orders[i+1].food.menu.convertdate:
+                orders[i+1].is_first_of_day = True
+    except IndexError:
+        print "NO ITEM IN ORDERS"
 
     context = {
         'cart': orders,

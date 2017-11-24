@@ -68,13 +68,16 @@ class Menu(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['pub_date']
+
     @property
     def convertdate(self):
         pub_date_string = self.pub_date.date().strftime('%Y-%m-%d')
         return pub_date_string
 
 class Food(models.Model):
-    pub_date = models.DateTimeField('date published', null=True, blank=True)
+    #pub_date = models.DateTimeField('date published', null=True, blank=True)
     #date = pub_date.date()
     #pub_date_string = models.CharField(max_length=320, null=True, blank=True)
     #pub_date_string = date.strftime('%Y-%m-%dT%H:%M')
@@ -91,10 +94,11 @@ class Food(models.Model):
 
     class Meta:
         verbose_name_plural = 'foods'
+        ordering = ['menu']
 
     def dump(self):
         return {"foodlist":{'name':self.name,
-                        #'pub_date':self.pub_date,          
+                        'pub_date':self.pub_date,          
                         'description':self.description,
                         'image':self.image,
                         'menu':self.menu.pk,
@@ -102,14 +106,9 @@ class Food(models.Model):
                         'foodcategory':self.foodcategory.pk}}
 
     @property
-    def convertdate(self):
-        pub_date_string = self.pub_date.date().strftime('%Y-%m-%d')
+    def convertdate_from_menu(self):
+        pub_date_string = self.menu.convertdate
         return pub_date_string
-
-'''class FoodItem(models.Model):
-    food = models.ForeignKey(Food)
-    menu = models.ForeignKey(Menu)
-    stock = models.IntegerField()'''
 
 class Cart(models.Model):
     user = models.ForeignKey(User, null=True, blank=True)

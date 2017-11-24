@@ -130,8 +130,30 @@
 				}
 			}
 			
+			.date-on-cart-list {
+				/*max-height: 1px !important;
+				height: 1px;*/
+				background-color: #505050;
+				color: white;
+				font-weight: bold;
+				text-align: center;
+				border-top-style: solid;
+				border-top-width: 1px;
+				border-top-color: #A9A9A9;
+			}
 			.cart_list {
 				background-color: transparent !important;
+			}
+			.cart_list>ul {				
+				max-height: 400px !important;
+				overflow-y: auto;
+			}
+			.cart_list>ul::-webkit-scrollbar {
+			    width: 4px !important;
+			    background-color: #272727;
+			}
+			.cart_list>ul::-webkit-scrollbar-thumb {
+			    background-color: grey;
 			}
 			.cart_list_extension_for_hover {
 				height: 50vh;
@@ -396,7 +418,7 @@
 								   						<!--<div class="img_holder float_left"><img src="{% static 'ultimatefitbackend/images/shop/9.png' %}" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
 
 								   						<div class="img_holder float_left">
-								   							<img src="{{item.food.description}}" alt="Cart Image" class="img-responsive" style="width:70px;height:80px;float:left;">
+								   							<img src="{{item.food.food_type.image}}" alt="Cart Image" class="img-responsive" style="width:70px;height:80px;float:left;">
 								   						</div>
 
 								   						<div class="item_deatils float_left">

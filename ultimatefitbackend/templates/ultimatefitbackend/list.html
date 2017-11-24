@@ -1,33 +1,37 @@
 {% for item in cart %}
-	<li id="list-item-{{ item.food.id }}">
+	{% if item.is_first_of_day %}
+	<div class="date-on-cart-list">{{ item.food.menu.convertdate }}</div>
+	{% endif %}
+	<li id="list-item-{{ item.food.id }}">		
 		<div class="cart_item_wrapper clear_fix">
 
 			<div class="img_holder float_left">
-				<img src="{{item.food.description}}" alt="Cart Image" class="img-responsive" style="width:70px;height:80px;float:left;">
+				<img src="{{item.food.food_type.image}}" alt="Cart Image" class="img-responsive" style="width:70px;height:80px;float:left;">
 			</div>
 
 			<div class="item_deatils float_left">
-				<h6>{{ item.food.name }}</h6>
+				<!--<h6>{{ item.food.convertdate }}</h6>-->
+				<h6>{{ item.food.food_type.name }}</h6>
 				<div style="margin-top: 9px;">
-					<span class="font_fix">$ {{ item.food.price }}</span> 
+					<span class="font_fix">$ {{ item.food.food_type.price }}</span> 
 					<span style="float: right; margin-left: 90px;">
-						$ <span id="total-price-for-food-id-{{item.food.id}}">{% widthratio item.food.price 1 item.quantity %}</span>
+						$ <span id="total-price-for-food-id-{{item.food.id}}">{% widthratio item.food.food_type.price 1 item.quantity %}</span>
 					</span>
 				</div>
 				<div> 
-					<a class="remove-from-cart-list" data-id-food="{{item.food.id}}" data-price-food="{{item.food.price}}">
+					<a class="remove-from-cart-list" data-id-food="{{item.food.id}}" data-price-food="{{item.food.food_type.price}}">
 						<i class="fa fa-minus-circle" aria-hidden="true"></i>
 					</a>
 					&nbsp;
 					<span id="quantity-for-food-id-{{item.food.id}}">{{item.quantity}}</span>
 					&nbsp;
-					<a class="add-to-cart-list" data-id-food="{{item.food.id}}" data-price-food="{{item.food.price}}">
+					<a class="add-to-cart-list" data-id-food="{{item.food.id}}" data-price-food="{{item.food.food_type.price}}">
 						<i class="fa fa-plus-circle" aria-hidden="true"></i>
 					</a>
 				</div>
 			</div> <!-- End of .item_deatils -->
 		</div> <!-- End of .cart_item_wrapper -->
-		<i class="fa fa-times-circle-o close-list-cart" data-id-food="{{item.food.id}}" data-price-food="{{item.food.price}}" aria-hidden="true"></i>
+		<i class="fa fa-times-circle-o close-list-cart" data-id-food="{{item.food.id}}" data-price-food="{{item.food.food_type.price}}" aria-hidden="true"></i>
 	</li>
 {% empty %}
 	
