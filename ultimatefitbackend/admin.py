@@ -4,6 +4,8 @@ from django.contrib import admin
 
 from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart
 
+from copy import deepcopy
+
 
 '''class ChoiceInline(admin.TabularInline):
     model = Food
@@ -27,6 +29,14 @@ class FoodAdmin(admin.ModelAdmin):
     list_display = ('food_type', 'menu', 'convertdate_from_menu', 'stock')
 
 
+class FoodInline(admin.TabularInline):
+    #list_display = ('food_type')
+    exclude = ['order', 'foodcategory']
+    model = Food
+    # Change to extra = 1 (without makemigrations to see it easier)
+    extra = 0
+
+
 class FoodTypeAdmin(admin.ModelAdmin):
     list_display = ('name', 'price')
 
@@ -39,10 +49,36 @@ class CartAdmin(admin.ModelAdmin):
     list_display = ('user', 'active', 'order_date')
 
 
+def duplicate_menu(modeladmin, request, queryset):
+    for menu in queryset:
+        new_obj = deepcopy(menu)
+        new_obj.id = None
+        new_obj.save()
+
+        # Copy each food object that belongs to this menu
+        for food in Food.objects.filter(menu=menu):
+            food_copy = deepcopy(food)
+            food_copy.id = None
+            food_copy.save()
+            new_obj.food_set.add(food_copy)
+
+            '''for choice in question.choices.all():
+                choice_copy = deepcopy(choice)
+                choice_copy.id = None
+                choice_copy.save()
+                question_copy.choices.add(choice_copy)'''
+
+        new_obj.save()
+
+duplicate_menu.short_description = "Duplicate Selected Menus"
+
+
 class MenuAdmin(admin.ModelAdmin):
     model = Menu
     list_display = ('name', 'convertdate')
     #filter_horizontal = ('food_item',)
+    inlines = (FoodInline,)
+    actions = [duplicate_menu]
 
     
 admin.site.register(Food, FoodAdmin)

@@ -47,7 +47,7 @@ class FoodCategory(models.Model):
         return self.name
 
 class FoodType(models.Model):
-    name = models.CharField(max_length=320)
+    name = models.CharField(max_length=320, unique=True)
     #description = models.TextField()
     image = models.TextField(null=True, blank=True)
     price = models.IntegerField(default=0)
@@ -64,6 +64,7 @@ class Menu(models.Model):
     #ordered_meal = models.OneToManyField(OrderedMeal, blank=True)
     pub_date = models.DateTimeField('date published', null=True, blank=True)
     #menucategory = models.ForeignKey(MenuCategory, null=True, blank=True)
+    food_type = models.ManyToManyField(FoodType, through='Food', blank=True)
 
     def __str__(self):
         return self.name
