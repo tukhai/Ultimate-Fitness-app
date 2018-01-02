@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'registration',
     #'django_crontab',
     "django_cron",
+    'multiselectfield',
 ]
 
 MIDDLEWARE = [

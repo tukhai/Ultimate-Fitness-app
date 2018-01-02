@@ -26,19 +26,27 @@ from copy import deepcopy
 
 class FoodAdmin(admin.ModelAdmin):
     #list_display = ('name', 'price', 'stock')
-    list_display = ('food_type', 'menu', 'convertdate_from_menu', 'stock')
+    list_display = ('food_type', 'menu', 'convertdate_from_menu', 'price_from_foodtype', 'stock')
+
+
+def add_multiple_food_object(modeladmin, request, queryset):
+    print "Hello Worlf"
+
+add_multiple_food_object.short_description = "Add multiple food object"
 
 
 class FoodInline(admin.TabularInline):
-    #list_display = ('food_type')
-    exclude = ['order', 'foodcategory']
+    #list_display = ('food_type', 'category', 'price_from_foodtype','stock')
+    readonly_fields = ('category', 'price_from_foodtype')
+    fields = ('food_type', readonly_fields, 'stock')
+    #exclude = ['order', 'foodcategory']
     model = Food
     # Change to extra = 1 (without makemigrations to see it easier)
     extra = 0
 
 
 class FoodTypeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price')
+    list_display = ('name', 'price_lean', 'price_maintain', 'price_heavy')
 
 
 class FoodOrderAdmin(admin.ModelAdmin):

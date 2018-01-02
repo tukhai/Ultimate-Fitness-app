@@ -750,7 +750,7 @@
 							
 						eventRender: function(event, element, view) { 
 							element.append(event.description);
-							if(view.type == 'month') {
+							/*if(view.type == 'month') {
 								console.log("monthHi1");
 						        var monthEvent = [
 							        {% for menu in menus %}
@@ -765,24 +765,25 @@
 					            $('#calendar').fullCalendar( 'renderEvent', monthEvent);
 						    } else {						        
 					            console.log("week or day");
-						    };
+						    };*/
 						},
 
-						/*viewRender: function(event, element, view) {
+						// viewRender is more accurate than enventRender to render month
+						viewRender: function(event, element, view) {
 							if(view.type == 'month') {
-								
-						        var monthEvent = {
+								console.log("month");
+						        /*var monthEvent = {
 					                title: '{{menu.name}}',
 									start: '{{menu.convertdate}}',
 									description: '<a><img src="{{menu.image}}"  style="width:130px;height:90px;float:left;"></a>'
 					            };
-					            $('#calendar').fullCalendar( 'renderEvent', monthEvent);
+					            $('#calendar').fullCalendar( 'renderEvent', monthEvent);*/
 					            
 						    } else {
 						        
 					            console.log("week or day");
 						    };
-						},*/
+						},
 						
 						/*eventRender: function(event, eventElement) {
 							if (event.imageurl) {

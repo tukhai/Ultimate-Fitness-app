@@ -33,6 +33,8 @@ from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCat
 
 from django.contrib.auth.models import User
 
+#from django import forms
+
 class IndexView(generic.ListView):
     template_name = 'ultimatefitbackend/base.html'
     context_object_name = 'latest_question_list'
@@ -240,6 +242,19 @@ def meal(request):
         #print food.name, food.convertdate, type(food.convertdate)
         print food.name, food.pub_date.year, type(food.pub_date.year)
     #foods = Food.objects.filter(convertdate="2017-11-08")'''
+    test_foods = FoodType.objects.all()
+    for food_type in test_foods:
+        print food_type.name, food_type.available_categories, type(food_type.available_categories.__len__())
+        #dir helps to print all available attributes
+        #print dir(food_type.available_categories)
+        for item in food_type.available_categories:
+            print item, type(item)
+
+    test_food_objects = Food.objects.all()
+    for food in test_food_objects:
+        print food.food_type.name, "price: ", food.convertdate_from_menu, "categories: "       
+        #print "item: ", item, type(item)
+
     today = datetime.date.today()
     menu = Menu.objects.filter(pub_date__year=today.year,
                                 pub_date__month=today.month,

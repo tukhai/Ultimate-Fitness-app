@@ -8,6 +8,11 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
 
+from django.db.models.signals import pre_save
+from django.db.models.signals import post_save
+
+from multiselectfield import MultiSelectField
+
 # Create your models here.
 
 class MenuCategory(models.Model):
@@ -50,7 +55,25 @@ class FoodType(models.Model):
     name = models.CharField(max_length=320, unique=True)
     #description = models.TextField()
     image = models.TextField(null=True, blank=True)
-    price = models.IntegerField(default=0)
+    #price = models.IntegerField(default=0)
+    price_lean = models.IntegerField(null=True, blank=True, default=0)
+    price_maintain = models.IntegerField(null=True, blank=True, default=0)
+    price_heavy = models.IntegerField(null=True, blank=True, default=0)
+    LEAN = 'LE'
+    MAINTAIN = 'MA'
+    HEAVY = 'HE'
+    ALL_CATEGORIES = (
+        (LEAN, 'Lean On Me'),
+        (MAINTAIN, 'Maintain'),
+        (HEAVY, 'Heavy Duty'),
+    )
+    '''available_categories = models.CharField(
+        max_length=2,
+        choices=AVAILABLE_CATEGORIES,
+        default=MAINTAIN,
+    )'''
+    # NOT set blank=True means have to have at least 1 choice
+    available_categories = MultiSelectField(choices=ALL_CATEGORIES)
 
     def __str__(self):
         return self.name
@@ -85,10 +108,21 @@ class Food(models.Model):
 
     order = models.ForeignKey(Order, null=True, blank=True)
     foodcategory = models.ForeignKey(FoodCategory, null=True, blank=True)
+
     food_type = models.ForeignKey(FoodType, null=True, blank=True)
+
+    LEAN = 'LE'
+    MAINTAIN = 'MA'
+    HEAVY = 'HE'
+    ALL_CATEGORIES = (
+        (LEAN, 'Lean On Me'),
+        (MAINTAIN, 'Maintain'),
+        (HEAVY, 'Heavy Duty'),
+    )
+    category = models.CharField(choices=ALL_CATEGORIES, blank=True, max_length=100)
     menu = models.ForeignKey(Menu, null=True, blank=True)
     stock = models.IntegerField(default=0)
-     
+
 
     def __str__(self):
         return self.food_type.name
@@ -106,10 +140,34 @@ class Food(models.Model):
                         'order':self.order.pk,
                         'foodcategory':self.foodcategory.pk}}
 
+    #def create_food_object_of_all_type(sender, instance, **kwargs):
+
+    @staticmethod
+    def post_save(sender, instance, **kwargs):
+        #print instance
+        #print instance.food_type.available_categories.__len__()
+        for i in range(instance.food_type.available_categories.__len__()):
+            #print i, instance.food_type.available_categories[i]
+            food = Food(food_type=instance.food_type, category=instance.food_type.available_categories[i], menu=instance.menu)
+            post_save.disconnect(Food.post_save, Food)
+            food.save()
+            post_save.connect(Food.post_save, Food)
+        instance.delete()
+
     @property
     def convertdate_from_menu(self):
-        pub_date_string = self.menu.convertdate
+        pub_date_string = self.menu
         return pub_date_string
+    def price_from_foodtype(self):
+        if self.category == 'LE':
+            return self.food_type.price_lean
+        elif self.category == 'MA':
+            return self.food_type.price_maintain
+        elif self.category == 'HE':
+            return self.food_type.price_heavy
+
+post_save.connect(Food.post_save, Food)
+
 
 class Cart(models.Model):
     user = models.ForeignKey(User, null=True, blank=True)
