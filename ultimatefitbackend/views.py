@@ -122,7 +122,7 @@ def index(request):
         total_ano = 0
         count_ano = 0
         for order_ano in orders_ano:
-            total_ano += (order_ano.food.food_type.price * order_ano.quantity)
+            total_ano += (order_ano.food.price_from_foodtype * order_ano.quantity)
             count_ano += order_ano.quantity
         print 'count_ano is: '
         print count_ano
@@ -177,7 +177,7 @@ def index(request):
         total = 0
         count = 0
         for order in orders:
-            total += ((order.food.food_type.price * order.quantity) + total_ano) 
+            total += ((order.food.price_from_foodtype * order.quantity) + total_ano) 
             count += (order.quantity + count_ano)
         print 'orders 2 are ...'
         print orders
@@ -223,7 +223,7 @@ def index(request):
         total = 0
         count = 0
         for order in orders:
-            total += (order.food.food_type.price * order.quantity) 
+            total += (order.food.price_from_foodtype * order.quantity) 
             count += order.quantity
         context = {
             'cart': orders,
@@ -292,9 +292,9 @@ def meal(request):
     total = 0
     count = 0
     for order in orders:
-        total += (order.food.food_type.price * order.quantity) 
+        total += (order.food.price_from_foodtype * order.quantity) 
         count += order.quantity
-        print order.food.id,order.food.food_type.name,": $",order.food.food_type.price," * ",order.quantity
+        print order.food.id,order.food.food_type.name,": $",order.food.price_from_foodtype," * ",order.quantity
 
     '''menu = Menu.objects.all()
     print menu[0], type(menu[0])
@@ -398,9 +398,9 @@ def meal_food_list_update_query_by_date(request):
     total = 0
     count = 0
     for order in orders:
-        total += (order.food.food_type.price * order.quantity) 
+        total += (order.food.price_from_foodtype * order.quantity) 
         count += order.quantity
-        print order.food.id,order.food.food_type.name,": $",order.food.food_type.price," * ",order.quantity
+        print order.food.id,order.food.food_type.name,": $",order.food.price_from_foodtype," * ",order.quantity
 
     context = {
         'cart': orders,
@@ -440,7 +440,7 @@ def total(request):
     count = 0
 
     for order in orders:
-        total += (order.food.food_type.price * order.quantity) 
+        total += (order.food.price_from_foodtype * order.quantity) 
         count += order.quantity
 
     #seror = serializers.serialize('python',orders); 
@@ -475,9 +475,9 @@ def list(request):
     total = 0
     count = 0
     for order in orders:
-        total += (order.food.food_type.price * order.quantity) 
+        total += (order.food.price_from_foodtype * order.quantity) 
         count += order.quantity
-        print order.food.id,order.food.food_type.name,": $",order.food.food_type.price," * ",order.quantity
+        print order.food.id,order.food.food_type.name,": $",order.food.price_from_foodtype," * ",order.quantity
 
     # Find first of the day food object to display date
     
@@ -574,9 +574,9 @@ def shop(request):
     total = 0
     count = 0
     for order in orders:
-        total += (order.food.food_type.price * order.quantity) 
+        total += (order.food.price_from_foodtype * order.quantity) 
         count += order.quantity
-        print order.food.id,order.food.food_type.name,": $",order.food.food_type.price," * ",order.quantity
+        print order.food.id,order.food.food_type.name,": $",order.food.price_from_foodtype," * ",order.quantity
 
     context = {
         'cart': orders,
@@ -636,7 +636,7 @@ def food(request, food_id):
     #print orders
     total = 0
     for order_total in orders_total:
-        total += (order_total.food.food_type.price * order_total.quantity)
+        total += (order_total.food.price_from_foodtype * order_total.quantity)
 
 
     context = {
@@ -790,7 +790,7 @@ def cart(request):
         total_ano = 0
         count_ano = 0
         for order_ano in orders_ano:
-            total_ano += (order_ano.food.food_type.price * order_ano.quantity)
+            total_ano += (order_ano.food.price_from_foodtype * order_ano.quantity)
             count_ano += order_ano.quantity
         print 'count_ano is: '
         print count_ano
@@ -845,7 +845,7 @@ def cart(request):
         total = 0
         count = 0
         for order in orders:
-            total += ((order.food.food_type.price * order.quantity) + total_ano) 
+            total += ((order.food.price_from_foodtype * order.quantity) + total_ano) 
             count += (order.quantity + count_ano)
         print 'orders 2 are ...'
         print orders
@@ -885,7 +885,7 @@ def cart(request):
         total = 0
         count = 0
         for order in orders:
-            total += (order.food.food_type.price * order.quantity) 
+            total += (order.food.price_from_foodtype * order.quantity) 
             count += order.quantity
         context = {
             'cart': orders,
