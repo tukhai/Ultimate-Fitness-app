@@ -201,23 +201,23 @@
 					                        	<!--THIS IS FOR RATING STARS-->
 					                            <!--<div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>-->                            
 					                            <div class="price">
-					                            	${{food.food_type.price}} 
+					                            	${{food.price_from_foodtype}} 
 					                            	<span class="prev-rate">$14.99</span>
 					                            </div>
 
-					                            <div class="tran3s color1_bg unselectable meal-bottom-button add-to-cart-list" id="meal-zero-button-{{food.id}}" data-id-food="{{food.id}}" data-price-food="{{food.food_type.price}}" data-is-from-meal="from-meal">
+					                            <div class="tran3s color1_bg unselectable meal-bottom-button add-to-cart-list" id="meal-zero-button-{{food.id}}" data-id-food="{{food.id}}" data-price-food="{{food.price_from_foodtype}}" data-is-from-meal="from-meal">
 					                            	<span>ADD TO CART</span>
 					                            </div>
 
 					                            <div class="tran3s color1_bg unselectable meal-bottom-button" id="meal-none-zero-button-{{food.id}}" style="display: none;">
 					                            	
-				                            		<div style="width: 25%; float: left;" class="remove-from-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.food_type.price}}" data-is-from-meal="from-meal">
+				                            		<div style="width: 25%; float: left;" class="remove-from-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.price_from_foodtype}}" data-is-from-meal="from-meal">
 				                            			&nbsp;&nbsp;&minus;&nbsp;&nbsp;
 				                            		</div>
 				                            		<div style="width: 50%; float: left;" id="food-{{food.id}}-quantity-on-meal">
 				                            			1
 				                            		</div>
-				                            		<div style="width: 25%; float: left;" class="add-to-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.food_type.price}}" data-is-from-meal="from-meal">
+				                            		<div style="width: 25%; float: left;" class="add-to-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.price_from_foodtype}}" data-is-from-meal="from-meal">
 				                            			&nbsp;&nbsp;+&nbsp;&nbsp;
 				                            		</div>
 					                            	
@@ -378,6 +378,7 @@
 			<script src="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.js' %}"></script>
 
 			<script type="text/javascript">
+				
 				$(document).on('show.bs.modal', '#my_modal', function(e) {
 			        console.log("HII");
 			        var foodId = $(e.relatedTarget).data('food-id');		        

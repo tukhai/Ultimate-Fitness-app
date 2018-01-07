@@ -554,7 +554,7 @@
 		        };
 
 	            window.parent.parent.$("span#quantity-for-food-id-" + {{food.id}}).html(window.parent.parent.quantityOfFoodArray[{{food.id}}]);
-	            window.parent.parent.$("span#total-price-for-food-id-" + {{food.id}}).html({{food.food_type.price}}*window.parent.parent.quantityOfFoodArray[{{food.id}}]);
+	            window.parent.parent.$("span#total-price-for-food-id-" + {{food.id}}).html({{food.price_from_foodtype}}*window.parent.parent.quantityOfFoodArray[{{food.id}}]);
 			};
 
 			$("#add-cart-button").click(function(){
@@ -616,25 +616,25 @@
 				<div class="item_deatils float_left">
 					<h6>{{ food.food_type.name }}</h6>
 					<div style="margin-top: 9px;">
-						<span class="font_fix">$ {{ food.food_type.price }}</span> 
+						<span class="font_fix">$ {{ food.price_from_foodtype }}</span> 
 						<span style="float: right; margin-left: 90px;">
-							$ <span id="total-price-for-food-id-{{food.id}}">{{food.food_type.price}}</span>
+							$ <span id="total-price-for-food-id-{{food.id}}">{{food.price_from_foodtype}}</span>
 						</span>
 					</div>
 					<div> 
-						<a class="remove-from-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.food_type.price}}">
+						<a class="remove-from-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.price_from_foodtype}}">
 							<i class="fa fa-minus-circle" aria-hidden="true"></i>
 						</a>
 						&nbsp;
 						<span id="quantity-for-food-id-{{food.id}}">1</span>
 						&nbsp;
-						<a class="add-to-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.food_type.price}}">
+						<a class="add-to-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.price_from_foodtype}}">
 							<i class="fa fa-plus-circle" aria-hidden="true"></i>
 						</a>
 					</div>
 				</div> <!-- End of .item_deatils -->
 			</div> <!-- End of .cart_item_wrapper -->
-			<i class="fa fa-times-circle-o close-list-cart" data-id-food="{{food.id}}" data-price-food="{{food.food_type.price}}" aria-hidden="true"></i>
+			<i class="fa fa-times-circle-o close-list-cart" data-id-food="{{food.id}}" data-price-food="{{food.price_from_foodtype}}" aria-hidden="true"></i>
 		</li>
 
 	</body>

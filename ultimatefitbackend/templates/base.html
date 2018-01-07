@@ -431,9 +431,9 @@
 																<li><i class="fa fa-star" aria-hidden="true"></i></li>								
 															</ul>-->
 															<div style="margin-top: 9px;">
-																<span class="font_fix">$ {{ item.food.food_type.price }}</span> 
+																<span class="font_fix">$ {{ item.food.price_from_foodtype }}</span> 
 																<span style="float: right; margin-left: 90px;">
-																	$ <span id="total-price-for-food-id-{{item.food.id}}">{% widthratio item.food.food_type.price 1 item.quantity %}</span>
+																	$ <span id="total-price-for-food-id-{{item.food.id}}">{% widthratio item.food.price_from_foodtype 1 item.quantity %}</span>
 																</span>
 															</div>
 															<div> 

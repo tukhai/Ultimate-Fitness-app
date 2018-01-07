@@ -158,6 +158,8 @@ class Food(models.Model):
     def convertdate_from_menu(self):
         pub_date_string = self.menu.convertdate
         return pub_date_string
+
+    @property
     def price_from_foodtype(self):
         if self.category == 'LE':
             return self.food_type.price_lean

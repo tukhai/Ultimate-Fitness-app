@@ -252,7 +252,7 @@ def meal(request):
 
     test_food_objects = Food.objects.all()
     for food in test_food_objects:
-        print food.food_type.name, "price: ", food.convertdate_from_menu, "categories: "       
+        print food.food_type.name, "price: ", food.price_from_foodtype, food.convertdate_from_menu, "categories: ", food.category     
         #print "item: ", item, type(item)
 
     today = datetime.date.today()
