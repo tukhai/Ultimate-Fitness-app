@@ -706,82 +706,43 @@
 						navLinkDayClick: function(date, jsEvent) {
 							console.log('day', date.format()); // date is a moment
 							console.log('coords', jsEvent.pageX, jsEvent.pageY);
-						},						
-
-						events: 
-							[
-								{   
-									title: 'Curry Chicken Wrap',
-									start: '2017-10-03',
-									description: '<img src="http://static.foodmatters.me/images/food/131126-379z%20Curry%20Chicken%20Wrap.jpg" style="width:130px;height:90px;float:left;">'
-								},
-								/*{   
-									title: 'Curry Chicken Wrap',
-									start: '2017-03-10',
-									imageurl: 'http://www.athenaspizzaamherst.com/wp-content/uploads/2013/05/front-1-1008x500.jpg'
-								},*/
-								{% autoescape off %}
-								/*{% for food in foods %}
-								{
-									title: '{{food.name}}',
-									start: '{{food.convertdate}}',
-									description: '<a href="#openModal-{{food.name}}" class="btnAdd-{{food.name}}">{{food.description}}</a>'
-								},
-								{% endfor %}*/
-								/*{% for food in foods %}
-								{
-									title: '{{food.name}}',
-									start: '{{food.convertdate}}',
-									description: '<a href="#my_modal" data-toggle="modal" data-food-id="{{food.name}}" data-modal-id="{% url 'ultimatefitbackend:food' food.id %}" class="btnAdd-{{food.name}}"><img src="{{food.description}}"  style="width:130px;height:90px;float:left;"></a>'
-								},
-								{% endfor %}*/
-								{% for menu in menus %}
-								{
-									title: '{{menu.name}}',
-									start: '{{menu.convertdate}}',
-									description: '<a><img src="{{menu.image}}"  style="width:130px;height:90px;float:left;"></a>'
-								},
-								{% endfor %}
-								{% endautoescape %}
-							],
+						},
 
 						eventBackgroundColor: 'silver',
 						eventBorderColor: 'silver',
 							
-						eventRender: function(event, element, view) { 
+						eventRender: function(event, element, view) {
 							element.append(event.description);
-							/*if(view.type == 'month') {
-								console.log("monthHi1");
-						        var monthEvent = [
-							        {% for menu in menus %}
-							        {
-						                title: '{{menu.name}}',
-										start: '{{menu.convertdate}}',
-										description: '<a><img src="{{menu.image}}"  style="width:130px;height:90px;float:left;"></a>'
-						            },
-						            {% endfor %}
-					            ];
-					            console.log("monthHi2");
-					            $('#calendar').fullCalendar( 'renderEvent', monthEvent);
-						    } else {						        
-					            console.log("week or day");
-						    };*/
 						},
 
 						// viewRender is more accurate than enventRender to render month
 						viewRender: function(event, element, view) {
 							if(view.type == 'month') {
-								console.log("month");
-						        /*var monthEvent = {
+								//console.log("month");
+								//First remove event in week-day, then append event from month
+								$("#calendar").fullCalendar('removeEvents');
+								{% for menu in menus %}
+								//console.log('{{menu.name}}');
+						        var monthEvent = {
 					                title: '{{menu.name}}',
 									start: '{{menu.convertdate}}',
 									description: '<a><img src="{{menu.image}}"  style="width:130px;height:90px;float:left;"></a>'
 					            };
-					            $('#calendar').fullCalendar( 'renderEvent', monthEvent);*/
-					            
-						    } else {
-						        
-					            console.log("week or day");
+					            $('#calendar').fullCalendar('renderEvent', monthEvent, 'stick');
+					            {% endfor %}
+						    } else { 
+					            //console.log("week or day");
+					            //First remove event inmonth, then append event from week-day
+					            $("#calendar").fullCalendar('removeEvents');
+					            {% for food in foods %}
+					            //console.log('{{food.convertdate_from_menu}}');
+					            var weekEvent = {
+					                title: '{{food.food_type.name}}',
+									start: '{{food.convertdate_from_menu}}',
+									description: '<a><img src="{{food.food_type.image}}"  style="width:130px;height:90px;float:left;"></a>'
+					            };
+					            $('#calendar').fullCalendar('renderEvent', weekEvent, 'stick');
+					            {% endfor %}
 						    };
 						},
 						
@@ -794,8 +755,7 @@
 						dayRender: function(date, cell) {
 							cell.css("background-color", "silver");
 						}
-					})			
-					
+					});
 				});
 			</script>
 			
