@@ -437,19 +437,19 @@
 																</span>
 															</div>
 															<div> 
-																<a class="remove-from-cart-list" data-id-food="{{item.food.id}}" data-price-food="{{item.food.food_type.price}}">
+																<a class="remove-from-cart-list" data-id-food="{{item.food.id}}" data-price-food="{{item.food.price_from_foodtype}}">
 																	<i class="fa fa-minus-circle" aria-hidden="true"></i>
 																</a>
 																&nbsp;
 																<span id="quantity-for-food-id-{{item.food.id}}">{{item.quantity}}</span>
 																&nbsp;
-																<a class="add-to-cart-list" data-id-food="{{item.food.id}}" data-price-food="{{item.food.food_type.price}}">
+																<a class="add-to-cart-list" data-id-food="{{item.food.id}}" data-price-food="{{item.food.price_from_foodtype}}">
 																	<i class="fa fa-plus-circle" aria-hidden="true"></i>
 																</a>
 															</div>
 								   						</div> <!-- End of .item_deatils -->
 								   					</div> <!-- End of .cart_item_wrapper -->
-								   					<i class="fa fa-times-circle-o close-list-cart" data-id-food="{{item.food.id}}" data-price-food="{{item.food.food_type.price}}" aria-hidden="true"></i>
+								   					<i class="fa fa-times-circle-o close-list-cart" data-id-food="{{item.food.id}}" data-price-food="{{item.food.price_from_foodtype}}" aria-hidden="true"></i>
 								   				</li>
 							   				{% empty %}
 							   					<!--<p style="text-align: center; margin-top: 3%; color: white;">There is no item in your cart</p>-->
@@ -2061,7 +2061,7 @@
 			    }).fail(function(){
 				    popUpInternetConnectionError();
 				});
-
+			    
 			    /*UPDATE MEAL DISPLAY NUMBER*/
 			    /*$.get("/meal_food_list_update", function(data, status){
 			        console.log("Data-meal: " + data.total)
@@ -2071,21 +2071,23 @@
 			    }).fail(function(){
 				    popUpInternetConnectionError();
 				});*/
-				$.post(
-			    	"/meal_food_list_update_query_by_date/",
-			        { 
-			          csrfmiddlewaretoken: "{{ csrf_token }}",
-			          queryDate: JSON.stringify(clickedDateObject)
-			        },
-			        function(data,status){
-			            console.log("Status: " + status);
-			            if (status == "success") {
-						    $("#MixItUp717B05").html(data);
-				        };
-			        }
-		        ).fail(function(){
-				    popUpInternetConnectionError();
-				});
+				if (window.location.pathname != "/shop/") {
+					$.post(
+				    	"/meal_food_list_update_query_by_date/",
+				        { 
+				          csrfmiddlewaretoken: "{{ csrf_token }}",
+				          queryDate: JSON.stringify(clickedDateObject)
+				        },
+				        function(data,status){
+				            console.log("Status12: " + status);
+				            if (status == "success") {
+							    $("#MixItUp717B05").html(data);
+					        };
+				        }
+			        ).fail(function(){
+					    popUpInternetConnectionError();
+					});
+			    }
 
 			    getTotalToPayFromDB();
 			});

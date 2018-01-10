@@ -754,7 +754,14 @@
 
 						dayRender: function(date, cell) {
 							cell.css("background-color", "silver");
-						}
+						},
+						eventClick: function(event, jsEvent, view) {
+							if (view.type == 'month') {
+								console.log(event.start._i);
+							}
+							$('#calendar').fullCalendar('changeView', 'basicDay')
+							$('#calendar').fullCalendar('gotoDate', event.start._i);
+						},
 					});
 				});
 			</script>
@@ -812,6 +819,10 @@
 			    });
 			    $(document).on('hidden.bs.modal', '#my_modal', function (e) {
 				    
+				});
+				$(document).on("click", ".menu-month-event", function(){
+					var dateMenu = $(this).data('date-menu'); 
+				    console.log("Date Menu: " + dateMenu);
 				});
 			</script>
 			{% endautoescape %}
