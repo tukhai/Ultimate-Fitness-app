@@ -153,10 +153,10 @@
 		        			<!--Filter-->
 				            <div class="filters text-center">
 				                <ul class="filter-tabs filter-btns clearfix">
-				                    <li class="filter active" data-role="button" data-filter="all"><span class="txt">All Products (12)</span></li>
-				                    <li class="filter" data-role="button" data-filter=".lean"><span class="txt">lean on me (4)</span></li>
-				                    <li class="filter" data-role="button" data-filter=".maintain"><span class="txt">maintain (3)</span></li>
-				                    <li class="filter" data-role="button" data-filter=".heavy"><span class="txt">heavy duty (5)</span></li>
+				                    <li class="filter active" data-role="button" data-filter="all"><span class="txt">All Products (<span id="total_count">{{total_count}}</span>)</span></li>
+				                    <li class="filter" data-role="button" data-filter=".LEAN"><span class="txt">lean on me (<span id="lean_count">{{lean_count}}</span>)</span></li>
+				                    <li class="filter" data-role="button" data-filter=".MAINTAIN"><span class="txt">maintain (<span id="maintain_count">{{maintain_count}}</span>)</span></li>
+				                    <li class="filter" data-role="button" data-filter=".HEAVY"><span class="txt">heavy duty (<span id="heavy_count">{{heavy_count}}</span>)</span></li>
 				                    <!--<li class="filter" data-role="button" data-filter=".others"><span class="txt">others</span></li>-->
 				                </ul>
 				            </div>
@@ -167,13 +167,13 @@
 
 								{% for food in foods %}
 								<!--Default Item-->
-					            <div class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all lean" style="display: inline-block;">
+					            <div class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all {{food.category}}" style="display: inline-block;">
 					                <div class="inner-box">
 					                    <div class="single-item center">
 					                        <figure class="image-box">
 					                        	<!--<img src="{% static 'ultimatefitbackend/images/shop/1.png' %}" alt="">-->
 					                        	<img src="{{food.food_type.image}}" alt="">
-					                        	<div class="product-model new">New</div>
+					                        	<div class="product-model new">{{food.category}}</div>
 					                        	<div class="overlay-box">
 						                        	<div class="inner">
 							                        	<div class="top-content" style="color: #7fb401; font-size: 120%; padding-bottom: 0;">
@@ -186,7 +186,7 @@
 							                        		<div class="distance-content"></div>
 
 							                        		<div class="bottom-content">
-								                        		<p>88% Protein, 88% Fat, 88% Carbs</p>
+								                        		<p>{{food.protein_from_foodtype}}% Protein, {{food.fat_from_foodtype}}% Fat, {{food.carb_from_foodtype}}% Carbs</p>
 								                        	</div>
 							                        	</div>                        	
 						                        	</div>
@@ -196,7 +196,7 @@
 					                        	<h3>
 					                        		<a href="shop-single.html">{{food.food_type.name}}</a>
 					                        	</h3>
-					                        	<p>500kcal</p>
+					                        	<p>{{food.cal_from_foodtype}}kcal</p>
 
 					                        	<!--THIS IS FOR RATING STARS-->
 					                            <!--<div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>-->                            
@@ -508,6 +508,25 @@
 						            console.log("Status: " + status);
 						            if (status == "success") {
 									    $("#MixItUp717B05").html(data);
+							        };
+						        }
+					        ).fail(function(){
+							    popUpInternetConnectionError();				    
+							});
+
+							$.post(
+						    	"/count_number_of_food/",
+						        { 
+						          csrfmiddlewaretoken: "{{ csrf_token }}",
+						          queryDate: JSON.stringify(clickedDateObject)
+						        },
+						        function(data,status){
+						            console.log("Status: " + status);
+						            if (status == "success") {
+									    $("#total_count").html(data.total_count);
+									    $("#lean_count").html(data.lean_count);
+									    $("#maintain_count").html(data.maintain_count);
+									    $("#heavy_count").html(data.heavy_count);
 							        };
 						        }
 					        ).fail(function(){

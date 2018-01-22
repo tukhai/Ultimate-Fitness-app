@@ -1,11 +1,11 @@
 {% for food in foods %}
 <!--Default Item-->
-<div class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all lean" style="display: inline-block;">
+<div class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all {{food.category}}" style="display: inline-block;">
     <div class="inner-box">
         <div class="single-item center">
             <figure class="image-box">
             	<img src="{{food.food_type.image}}" alt="">
-            	<div class="product-model new">New</div>
+            	<div class="product-model new">{{food.category}}</div>
             	<div class="overlay-box">
                 	<div class="inner">
                     	<div class="top-content" style="color: #7fb401; font-size: 120%; padding-bottom: 0;">
@@ -18,7 +18,7 @@
                     		<div class="distance-content"></div>
 
                     		<div class="bottom-content">
-                        		<p>88% Protein, 88% Fat, 88% Carbs</p>
+                        		<p>{{food.protein_from_foodtype}}% Protein, {{food.fat_from_foodtype}}% Fat, {{food.carb_from_foodtype}}% Carbs</p>
                         	</div>
                     	</div>                        	
                 	</div>
@@ -28,7 +28,7 @@
             	<h3>
             		<a href="shop-single.html">{{food.food_type.name}}</a>
             	</h3>
-            	<p>500kcal</p>
+            	<p>{{food.cal_from_foodtype}}kcal</p>
 
             	<!--THIS IS FOR RATING STARS-->
                 <!--<div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>-->                            

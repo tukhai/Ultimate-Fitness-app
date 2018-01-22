@@ -57,11 +57,23 @@ class FoodType(models.Model):
     image = models.TextField(null=True, blank=True)
     #price = models.IntegerField(default=0)
     price_lean = models.IntegerField(null=True, blank=True, default=0)
+    cal_lean = models.IntegerField(null=True, blank=True, default=0)
+    protein_lean = models.IntegerField(null=True, blank=True, default=0)
+    carb_lean = models.IntegerField(null=True, blank=True, default=0)
+    fat_lean = models.IntegerField(null=True, blank=True, default=0)
     price_maintain = models.IntegerField(null=True, blank=True, default=0)
+    cal_maintain = models.IntegerField(null=True, blank=True, default=0)
+    protein_maintain = models.IntegerField(null=True, blank=True, default=0)
+    carb_maintain = models.IntegerField(null=True, blank=True, default=0)
+    fat_maintain = models.IntegerField(null=True, blank=True, default=0)
     price_heavy = models.IntegerField(null=True, blank=True, default=0)
-    LEAN = 'LE'
-    MAINTAIN = 'MA'
-    HEAVY = 'HE'
+    cal_heavy = models.IntegerField(null=True, blank=True, default=0)
+    protein_heavy = models.IntegerField(null=True, blank=True, default=0)
+    carb_heavy = models.IntegerField(null=True, blank=True, default=0)
+    fat_heavy = models.IntegerField(null=True, blank=True, default=0)
+    LEAN = 'LEAN'
+    MAINTAIN = 'MAINTAIN'
+    HEAVY = 'HEAVY'
     ALL_CATEGORIES = (
         (LEAN, 'Lean On Me'),
         (MAINTAIN, 'Maintain'),
@@ -111,9 +123,9 @@ class Food(models.Model):
 
     food_type = models.ForeignKey(FoodType, null=True, blank=True)
 
-    LEAN = 'LE'
-    MAINTAIN = 'MA'
-    HEAVY = 'HE'
+    LEAN = 'LEAN'
+    MAINTAIN = 'MAINTAIN'
+    HEAVY = 'HEAVY'
     ALL_CATEGORIES = (
         (LEAN, 'Lean On Me'),
         (MAINTAIN, 'Maintain'),
@@ -161,12 +173,48 @@ class Food(models.Model):
 
     @property
     def price_from_foodtype(self):
-        if self.category == 'LE':
+        if self.category == 'LEAN':
             return self.food_type.price_lean
-        elif self.category == 'MA':
+        elif self.category == 'MAINTAIN':
             return self.food_type.price_maintain
-        elif self.category == 'HE':
+        elif self.category == 'HEAVY':
             return self.food_type.price_heavy
+
+    @property
+    def cal_from_foodtype(self):
+        if self.category == 'LEAN':
+            return self.food_type.cal_lean
+        elif self.category == 'MAINTAIN':
+            return self.food_type.cal_maintain
+        elif self.category == 'HEAVY':
+            return self.food_type.cal_heavy
+
+    @property
+    def protein_from_foodtype(self):
+        if self.category == 'LEAN':
+            return self.food_type.protein_lean
+        elif self.category == 'MAINTAIN':
+            return self.food_type.protein_maintain
+        elif self.category == 'HEAVY':
+            return self.food_type.protein_heavy
+
+    @property
+    def carb_from_foodtype(self):
+        if self.category == 'LEAN':
+            return self.food_type.carb_lean
+        elif self.category == 'MAINTAIN':
+            return self.food_type.carb_maintain
+        elif self.category == 'HEAVY':
+            return self.food_type.carb_heavy
+
+    @property
+    def fat_from_foodtype(self):
+        if self.category == 'LEAN':
+            return self.food_type.fat_lean
+        elif self.category == 'MAINTAIN':
+            return self.food_type.fat_maintain
+        elif self.category == 'HEAVY':
+            return self.food_type.fat_heavy
 
 post_save.connect(Food.post_save, Food)
 

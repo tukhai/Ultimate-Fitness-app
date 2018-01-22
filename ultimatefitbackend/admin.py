@@ -46,7 +46,23 @@ class FoodInline(admin.TabularInline):
 
 
 class FoodTypeAdmin(admin.ModelAdmin):
+    class Media:
+        css = {
+            'cols': '5',
+        }
+
     list_display = ('name', 'price_lean', 'price_maintain', 'price_heavy')
+    fields = (
+        'name',
+        'image',
+        'price_lean', 
+        'price_maintain', 
+        'price_heavy', 
+        ('cal_lean', 'protein_lean', 'carb_lean', 'fat_lean'),
+        ('cal_maintain', 'protein_maintain', 'carb_maintain', 'fat_maintain'),
+        ('cal_heavy', 'protein_heavy', 'carb_heavy', 'fat_heavy'),
+        'available_categories'
+    )
 
 
 class FoodOrderAdmin(admin.ModelAdmin):

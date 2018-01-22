@@ -272,6 +272,10 @@ def meal(request):
     '''foods = Food.objects.filter(pub_date__year=today.year,
                                 pub_date__month=today.month,
                                 pub_date__day=today.day)'''
+    lean_count = foods.filter(category="LEAN").count()
+    maintain_count = foods.filter(category="MAINTAIN").count()
+    heavy_count = foods.filter(category="HEAVY").count()
+    print "lean_count, maintain_count, heavy_count", foods.count()
     context_object_name = 'latest_food_list'
 
     if request.user.is_authenticated():
@@ -305,7 +309,11 @@ def meal(request):
         'cart': orders,
         'total': total,
         'count': count,
-        'foods': foods
+        'foods': foods,
+        'total_count': foods.count(),
+        'lean_count': lean_count,
+        'maintain_count': maintain_count,
+        'heavy_count': heavy_count
     }
         
     return render(request, 'ultimatefitbackend/meal.html', context)
@@ -350,6 +358,34 @@ def meal(request):
     }
         
     return render(request, 'ultimatefitbackend/meal_food_list_update.html', context)'''
+
+
+def count_number_of_food(request):
+    if request.method == "POST":
+
+        query_date = json.loads(request.POST.get("queryDate"))
+        
+        menu = Menu.objects.filter(pub_date__year=query_date['queryYear'],
+                                pub_date__month=query_date['queryMonth'],
+                                pub_date__day=query_date['queryDay'])
+        try:
+            foods = Food.objects.filter(menu=menu[0])
+        except IndexError:
+            foods = Food.objects.none()
+
+        lean_count = foods.filter(category="LEAN").count()
+        maintain_count = foods.filter(category="MAINTAIN").count()
+        heavy_count = foods.filter(category="HEAVY").count()
+        print "lean_count, maintain_count, heavy_count", lean_count, maintain_count, heavy_count
+    context = {
+        'total_count': foods.count(),
+        'lean_count': lean_count,
+        'maintain_count': maintain_count,
+        'heavy_count': heavy_count
+    }
+        
+    return JsonResponse(context, safe=False)
+        
 
 
 def meal_food_list_update_query_by_date(request):
