@@ -322,7 +322,7 @@
 
 					<div id="three-buttons" style="display: none;">
 						<div id="distance"></div>
-						<div class="col-md-4 col-sm-6 col-xs-12 text-center square-area-outer">
+						<div class="col-md-4 col-sm-6 col-xs-12 text-center square-area-outer LEAN-ORDER">
 							<div class="single-item square-area">
 								<div class="inner-box">
 									<div class="icon">
@@ -337,7 +337,7 @@
 								
 							</div>
 						</div>
-						<div class="col-md-4 col-sm-6 col-xs-12 text-center square-area-outer">
+						<div class="col-md-4 col-sm-6 col-xs-12 text-center square-area-outer MAINTAIN-ORDER">
 							<div class="single-item square-area">
 								<div class="inner-box">
 									<div class="icon">
@@ -352,7 +352,7 @@
 								
 							</div>
 						</div>
-						<div class="col-md-4 col-sm-6 col-xs-12 text-center square-area-outer">
+						<div class="col-md-4 col-sm-6 col-xs-12 text-center square-area-outer HEAVY-ORDER">
 							<div class="single-item square-area">
 								<div class="inner-box">
 									<div class="icon">
@@ -1414,6 +1414,16 @@
 
 				//$('#three-buttons').css("display", "initial");
 				$('#three-buttons').show();
+			});
+
+			$(document).on("click", ".LEAN-ORDER", function(){
+				window.location.href = "/meal/#lean";
+			});
+			$(document).on("click", ".MAINTAIN-ORDER", function(){
+				window.location.href = "/meal/#maintain";
+			});
+			$(document).on("click", ".HEAVY-ORDER", function(){
+				window.location.href = "/meal/#heavy";
 			});
 				
 		</script>

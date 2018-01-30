@@ -2517,6 +2517,20 @@
 			$(document).on("click", "#confirm-activation-email-button", function(){
 				$("#activation-email-message").hide();
 			});
+
+			if (location.hash == "#lean") {
+				setTimeout(function(){
+				    $(".LEAN").click();
+				}, 1);
+			} else if (location.hash == "#maintain") {
+				setTimeout(function(){
+				    $(".MAINTAIN").click();
+				}, 1);
+			} else if (location.hash == "#heavy") {
+				setTimeout(function(){
+				    $(".HEAVY").click();
+				}, 1);
+			}
 		</script>
 
 		</div> <!-- End of .main_page -->

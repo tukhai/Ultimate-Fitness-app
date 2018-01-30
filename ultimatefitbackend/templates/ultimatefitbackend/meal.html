@@ -153,10 +153,10 @@
 		        			<!--Filter-->
 				            <div class="filters text-center">
 				                <ul class="filter-tabs filter-btns clearfix">
-				                    <li class="filter active" data-role="button" data-filter="all"><span class="txt">All Products (<span id="total_count">{{total_count}}</span>)</span></li>
-				                    <li class="filter" data-role="button" data-filter=".LEAN"><span class="txt">lean on me (<span id="lean_count">{{lean_count}}</span>)</span></li>
-				                    <li class="filter" data-role="button" data-filter=".MAINTAIN"><span class="txt">maintain (<span id="maintain_count">{{maintain_count}}</span>)</span></li>
-				                    <li class="filter" data-role="button" data-filter=".HEAVY"><span class="txt">heavy duty (<span id="heavy_count">{{heavy_count}}</span>)</span></li>
+				                    <li class="ALL filter active" data-role="button" data-filter="all"><span class="txt">All Products (<span id="total_count">{{total_count}}</span>)</span></li>
+				                    <li class="LEAN filter" data-role="button" data-filter=".LEAN"><span class="txt">lean on me (<span id="lean_count">{{lean_count}}</span>)</span></li>
+				                    <li class="MAINTAIN filter" data-role="button" data-filter=".MAINTAIN"><span class="txt">maintain (<span id="maintain_count">{{maintain_count}}</span>)</span></li>
+				                    <li class="HEAVY filter" data-role="button" data-filter=".HEAVY"><span class="txt">heavy duty (<span id="heavy_count">{{heavy_count}}</span>)</span></li>
 				                    <!--<li class="filter" data-role="button" data-filter=".others"><span class="txt">others</span></li>-->
 				                </ul>
 				            </div>
@@ -378,6 +378,19 @@
 			<script src="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.js' %}"></script>
 
 			<script type="text/javascript">
+
+				$(document).on("click", ".ALL", function(){
+					location.hash = "";
+				});
+				$(document).on("click", ".LEAN", function(){
+					location.hash = "lean";
+				});
+				$(document).on("click", ".MAINTAIN", function(){
+					location.hash = "maintain";
+				});
+				$(document).on("click", ".HEAVY", function(){
+					location.hash = "heavy";
+				});
 				
 				$(document).on('show.bs.modal', '#my_modal', function(e) {
 			        console.log("HII");
