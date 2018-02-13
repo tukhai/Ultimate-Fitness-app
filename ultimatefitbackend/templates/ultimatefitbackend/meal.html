@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
-
-			
+{% load i18n %}			
 
 			{% block content %}
 			<style>
@@ -194,7 +193,13 @@
 					                        </figure>
 					                        <div class="content">
 					                        	<h3>
-					                        		<a href="shop-single.html">{{food.food_type.name}}</a>
+					                        		<a href="shop-single.html">
+								                        {% if request.LANGUAGE_CODE == "en" %}
+								                        {{food.food_type.name}}
+								                        {% elif request.LANGUAGE_CODE == "vn" %}
+								                        {{food.food_type.name_vn}}
+								                        {% endif %}
+					                        		</a>
 					                        	</h3>
 					                        	<p>{{food.cal_from_foodtype}}kcal</p>
 
@@ -378,7 +383,8 @@
 			<script src="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.js' %}"></script>
 
 			<script type="text/javascript">
-
+				{% get_current_language as LANGUAGE_CODE %}
+				console.log("current language from meal: {{ LANGUAGE_CODE }}");
 				$(document).on("click", ".ALL", function(){
 					location.hash = "";
 				});
@@ -411,7 +417,7 @@
 					    popUpInternetConnectionError();
 					});*/
 					$.post(
-				    	"/meal_food_list_update_query_by_date/",
+				    	"/{{ LANGUAGE_CODE }}/meal_food_list_update_query_by_date/",
 				        { 
 				          csrfmiddlewaretoken: "{{ csrf_token }}",
 				          queryDate: JSON.stringify(clickedDateObject)
@@ -512,7 +518,7 @@
 					        console.log(clickedDateObject["queryYear"]);*/
 
 					        $.post(
-						    	"/meal_food_list_update_query_by_date/",
+						    	"/{{ LANGUAGE_CODE }}/meal_food_list_update_query_by_date/",
 						        { 
 						          csrfmiddlewaretoken: "{{ csrf_token }}",
 						          queryDate: JSON.stringify(clickedDateObject)

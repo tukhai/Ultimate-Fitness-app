@@ -54,6 +54,7 @@ class FoodTypeAdmin(admin.ModelAdmin):
     list_display = ('name', 'price_lean', 'price_maintain', 'price_heavy')
     fields = (
         'name',
+        'name_vn',
         'image',
         'price_lean', 
         'price_maintain', 

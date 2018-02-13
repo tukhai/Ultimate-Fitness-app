@@ -1,6 +1,16 @@
 {% load static %}
 {% load i18n %}
 
+{% get_current_language as LANGUAGE_CODE %}
+<!-- Current language: {{ LANGUAGE_CODE }} -->
+<!--<p>{% trans "Welcome to our page" %}</p>
+
+{% language 'vn' %}
+    {% get_current_language as LANGUAGE_CODE %}-->
+    <!-- Current language: {{ LANGUAGE_CODE }} -->
+    <!--<p>{% trans "Welcome to our page" %}</p>
+{% endlanguage %} -->
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -10,7 +20,7 @@
 		<!-- For Resposive Device -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>Organic Store | Responsive HTML5 Template</title>
+		<title>{% trans 'Ultimate Food' %}</title>
 		<!-- Favicon -->
 		<link rel="apple-touch-icon" sizes="57x57" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-57x57.png' %}">
 		<link rel="apple-touch-icon" sizes="60x60" href="{% static 'ultimatefitbackend/images/fav-icon/apple-icon-60x60.png' %}">
@@ -2011,6 +2021,8 @@
 
 		<script>
 			/*RENDER USERNAME WITH ONLY 15 CHARS, just take 14 first chars, so it display more properly*/
+			{% get_current_language as LANGUAGE_CODE %}
+			console.log("current language: {{ LANGUAGE_CODE }}");
 			{% if request.user.is_authenticated %}
 				usernameDisplayNavbar = "{{ request.user.username }}";
 				console.log("JJJJJJJ " + usernameDisplayNavbar);
@@ -2073,7 +2085,7 @@
 				});*/
 				if (window.location.pathname != "/shop/") {
 					$.post(
-				    	"/meal_food_list_update_query_by_date/",
+				    	"/{{ LANGUAGE_CODE }}/meal_food_list_update_query_by_date/",
 				        { 
 				          csrfmiddlewaretoken: "{{ csrf_token }}",
 				          queryDate: JSON.stringify(clickedDateObject)

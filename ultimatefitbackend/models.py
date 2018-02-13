@@ -13,6 +13,8 @@ from django.db.models.signals import post_save
 
 from multiselectfield import MultiSelectField
 
+from django.utils.translation import ugettext_lazy as _
+
 # Create your models here.
 
 class MenuCategory(models.Model):
@@ -52,7 +54,8 @@ class FoodCategory(models.Model):
         return self.name
 
 class FoodType(models.Model):
-    name = models.CharField(max_length=320, unique=True)
+    name = models.CharField(max_length=320, unique=True, help_text=_('This is the help text'))
+    name_vn = models.CharField(max_length=320, null=True, blank=True)
     #description = models.TextField()
     image = models.TextField(null=True, blank=True)
     #price = models.IntegerField(default=0)

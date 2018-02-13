@@ -16,9 +16,20 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from django.conf.urls.i18n import i18n_patterns
+from django.utils.translation import gettext_lazy as _
+
 urlpatterns = [
     url(r'^', include('ultimatefitbackend.urls')),
     url(r'^accounts/', include('registration.backends.default.urls')),
     #url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ]
+
+urlpatterns += i18n_patterns(
+    url(r'^', include('ultimatefitbackend.urls')),
+    url(r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^admin/', include(admin.site.urls)),
+)
+# Adding url(r'^', include('ultimatefitbackend.urls')), to urlpatterns += i18n_patterns
+# would provide localhost:8000/vn/meal/ urls for all front-end pages
