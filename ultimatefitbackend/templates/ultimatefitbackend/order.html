@@ -69,7 +69,7 @@
 			.list-news {
 				display: none !important;
 			}
-			@media (min-width: 992px) and (max-width: 1199px) {				
+			@media (min-width: 992px) {				
 				.distance-between-left-right {
 					margin-right: 0px;
 				}
@@ -277,6 +277,13 @@
 					display: none;
 				}
 			}
+
+			.vn {
+				display: inline;
+			}
+			.en {
+				display: none;
+			}
 		</style>
 
 		<link rel='stylesheet' href="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.css' %}" />
@@ -297,7 +304,9 @@
 								<div class="inner-box">
 									<div class="icon"><i class="icon-business"></i></div>
 								</div>
-								<h5><i class="icon-business"></i> Order for today</h5>
+								<h5>
+									<i class="icon-business"></i> <text class="vn">Đặt hàng hôm nay</text><text class="en">Order for today</text>
+								</h5>
 								<p>
 								Organicstore.com’s customers order is <br>captured by warehouse API..<br><br>
 								</p>
@@ -309,7 +318,9 @@
 								<div class="inner-box">
 									<div class="icon"><i class="rot icon-check"></i></div>
 								</div>
-								<h5><i class="rot icon-check"></i> Order for future days</h5>
+								<h5>
+									<i class="rot icon-check"></i> <text class="vn">Đặt hàng theo lịch</text><text class="en">Order for future days</text>
+								</h5>
 								<p>
 								Organicstore.com’s customers order is <br>captured by warehouse API..<br><br>
 								</p>	
@@ -401,11 +412,31 @@
 				<div class="container">
 					<nav class="menuzord pull-left" id="main_menu">
 					   <ul class="menuzord-menu">
-					      <li class="current_page"><a href="{% url 'ultimatefitbackend:index' %}">Home</a></li>
-					      <li><a href="{% url 'ultimatefitbackend:about' %}">About us</a></li>
-					      <li><a href="#">store</a>
+					      <li class="current_page">
+					      	<a href="{% url 'ultimatefitbackend:index' %}">
+					      		<span class="vn">Trang chủ</span>
+					      		<span class="en">Home</span>					      			
+					      	</a>
+					      </li>
+					      <li>
+					      	<a href="{% url 'ultimatefitbackend:about' %}">
+					      		<span class="vn">Giới thiệu</span>
+					      		<span class="en">About us</span>					      			
+					      	</a>
+					      </li>
+					      <li>
+					      	<a href="#">
+					      		<span class="vn">cửa hàng</span>
+					      		<span class="en">Shop</span>
+					      	</a>
+					      	<!-- <a></a> -->
 					      	<ul class="dropdown">
-					            <li><a href="{% url 'ultimatefitbackend:shop' %}">Shop With Sidebar</a></li>
+					            <li>
+					            	<a href="{% url 'ultimatefitbackend:shop' %}">
+					            		<span class="vn">Lịch Đặt Hàng</span>
+					            		<span class="en">Shop By Calendar</span>
+					            	</a>
+					            </li>
 					            <li><a href="shop-single.html">Product Detail</a></li>
 					            <li><a href="{% url 'ultimatefitbackend:cart' %}">Cart Page</a></li>
 					            <li><a href="checkout.html">Checkout Page</a></li>
@@ -437,14 +468,18 @@
 					      </li>-->
 					      
 					      <li class="distance-between-left-right">
-					      	<a href="{% url 'ultimatefitbackend:contact' %}">Contact us</a>
+					      	<a href="{% url 'ultimatefitbackend:contact' %}">
+					      		<span class="vn">Liên Hệ</span>
+					      		<span class="en">Contact us</span>
+					      	</a>
 					      </li>
 					      <li>
 					      	<a href="{% url 'ultimatefitbackend:cart' %}">
 						      	<button class="cart tran3s dropdown-toggle" id="cartDropdown-hover">
 						      		<i class="fa icon-icon-32846" aria-hidden="true" style="font-size: 130%;"></i>
 						      		<!--<span class="s_color_bg p_color" style="font-size: 80%; margin-bottom: -50px !important; position: auto;">2</span>-->
-						      		<span>My Cart</span>
+						      		<span class="vn">Giỏ Hàng</span>
+						      		<span class="en">My Cart</span>
 						      	</button>						      	
 					        </a>
 					      </li>
@@ -463,19 +498,36 @@
 									</span>
 						        </a>
 						        <ul class="dropdown" style="text-align: left;">
-						            <li><a href="{% url 'auth_logout' %}">Log Out</a></li>
+						            <li>
+						            	<a href="{% url 'auth_logout' %}">
+						            		<span class="vn">Đăng Xuất</span>
+						            		<span class="en">Log Out</span>
+						            	</a>
+						            </li>
 						         </ul>
 					        {% else %}
 						        <a>
 						        	<span style="text-transform: capitalize; cursor: pointer;">
-						        		<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i> Sign In
+						        		<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i> 
+						        		<span class="vn">Đăng Nhập</span>
+					            		<span class="en">Sign In</span>
 						        	</span>
 						        </a>
 						        <ul class="dropdown" style="text-align: left;">
 						            <!--<li><a href="{% url 'auth_login' %}">Sign In</a></li>-->
-						            <li><a class="button-for-authenticate" href="#signin_modal" data-toggle="modal" data-authentication-button="sign-in-button">Sign In</a></li>
+						            <li>
+						            	<a class="button-for-authenticate" href="#signin_modal" data-toggle="modal" data-authentication-button="sign-in-button">
+						            		<span class="vn">Đăng Nhập</span>
+					            			<span class="en">Sign In</span>
+						            	</a>
+						            </li>
 						            <!--<li><a href="{% url 'registration_register' %}">Register Here</a></li>-->
-						            <li><a class="button-for-authenticate" href="#signin_modal" data-toggle="modal" data-authentication-button="register-button">Register Here</a></li>
+						            <li>
+						            	<a class="button-for-authenticate" href="#signin_modal" data-toggle="modal" data-authentication-button="register-button">
+						            		<span class="vn">Đăng Ký</span>
+					            			<span class="en">Register Here</span>
+						            	</a>
+						            </li>
 						        </ul>
 					        {% endif %}
 					      </li>
@@ -483,9 +535,9 @@
 					      	<a style="text-transform: capitalize; cursor: pointer;">
 				      			<span id="flag-icon-language">
 				      				<span class="flag-icon-size">
-				      					<img src="http://www.postkrieg.info/_assets/img/en_icon.png"/>
+				      					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png"/>
 				      				</span>
-				      				&nbsp;English
+				      				&nbsp;T . Việt
 				      			</span>				      		
 					        </a>
 					        <ul class="dropdown">
@@ -1040,10 +1092,16 @@
 			
 			// This part is the javascript front-end for language change
 			$(document).on("click", "li.english-language", function(){
-				$("span#flag-icon-language").html('<span class="flag-icon-size"><img src="https://us.123rf.com/450wm/nicemonkey/nicemonkey1002/nicemonkey100200046/6416327-aged-great-british-flag-icon-with-red-white-and-blue-colours.jpg?ver=6"/></span>&nbsp;English');
+				$("span#flag-icon-language").html('<span class="flag-icon-size"><img src="http://www.postkrieg.info/_assets/img/en_icon.png"/></span>&nbsp;English');
+				console.log("en");
+				$(".en").css("display", "inline");
+				$(".vn").css("display", "none");
 			});
 			$(document).on("click", "li.vietnam-language", function(){
 				$("span#flag-icon-language").html('<span class="flag-icon-size"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png"/></span>&nbsp;T . Việt');
+				console.log("vn");
+				$(".en").css("display", "none");
+				$(".vn").css("display", "inline");
 			});
 
 
