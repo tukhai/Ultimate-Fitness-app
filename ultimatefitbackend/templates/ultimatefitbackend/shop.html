@@ -668,6 +668,7 @@
 	        <!--<script src="{% static 'ultimatefitbackend/fullcalendar/lib/jquery.min.js' %}"></script>-->
 			<script src="{% static 'ultimatefitbackend/fullcalendar/lib/moment.min.js' %}"></script>
 			<script src="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.js' %}"></script>
+			<script src="{% static 'ultimatefitbackend/fullcalendar/locale-all.js' %}"></script>
 
 			<!--<script>
 				$('#cartDropdown-hover').hover(function() {
@@ -691,7 +692,7 @@
 
 					$('#calendar').fullCalendar({
 						// put your options and callbacks here
-						
+						locale: 'vi',
 						header: { 
 							left: 'prev,next today',
 							center: 'title',

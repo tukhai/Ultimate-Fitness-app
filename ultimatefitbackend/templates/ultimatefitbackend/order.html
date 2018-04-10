@@ -1038,6 +1038,7 @@
 		<!--<script src="{% static 'ultimatefitbackend/fullcalendar/lib/jquery.min.js' %}"></script>-->
 		<script src="{% static 'ultimatefitbackend/fullcalendar/lib/moment.min.js' %}"></script>
 		<script src="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.js' %}"></script>
+		<script src="{% static 'ultimatefitbackend/fullcalendar/locale-all.js' %}"></script>
 
 		<script>
 			/*RENDER USERNAME WITH ONLY 15 CHARS, just take 14 first chars, so it display more properly*/
@@ -1096,12 +1097,14 @@
 				console.log("en");
 				$(".en").css("display", "inline");
 				$(".vn").css("display", "none");
+				$('#calendar').fullCalendar('option', 'locale', 'en');
 			});
 			$(document).on("click", "li.vietnam-language", function(){
 				$("span#flag-icon-language").html('<span class="flag-icon-size"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png"/></span>&nbsp;T . Việt');
 				console.log("vn");
 				$(".en").css("display", "none");
 				$(".vn").css("display", "inline");
+				$('#calendar').fullCalendar('option', 'locale', 'vi');
 			});
 
 

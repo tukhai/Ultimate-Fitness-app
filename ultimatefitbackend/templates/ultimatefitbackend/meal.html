@@ -381,6 +381,7 @@
 	        <!--<script src="{% static 'ultimatefitbackend/fullcalendar/lib/jquery.min.js' %}"></script>-->
 			<script src="{% static 'ultimatefitbackend/fullcalendar/lib/moment.min.js' %}"></script>
 			<script src="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.js' %}"></script>
+			<script src="{% static 'ultimatefitbackend/fullcalendar/locale-all.js' %}"></script>
 
 			<script type="text/javascript">
 				{% get_current_language as LANGUAGE_CODE %}
@@ -451,7 +452,7 @@
 					// page is now ready, initialize the calendar...
 					$('#calendar').fullCalendar({
 						// put your options and callbacks here
-						
+						locale: 'vi',
 						header: {
 						    left: 'prev',
 						    center: 'title',
