@@ -11,7 +11,10 @@
 
 			<div class="item_deatils float_left">
 				<!--<h6>{{ item.food.convertdate }}</h6>-->
-				<h6>{{ item.food.food_type.name }}</h6>
+				<h6>
+					<span class="vn">{{ item.food.food_type.name_vn }}</span>
+					<span class="en">{{ item.food.food_type.name }}</span>
+				</h6>
 				<div style="margin-top: 9px;">
 					<span class="font_fix">$ {{ item.food.price_from_foodtype }}</span> 
 					<span style="float: right; margin-left: 90px;">

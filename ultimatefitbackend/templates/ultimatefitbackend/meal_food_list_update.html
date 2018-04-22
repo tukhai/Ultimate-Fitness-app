@@ -27,11 +27,13 @@
             <div class="content">
             	<h3>
             		<a href="shop-single.html">
-                        {% if request.LANGUAGE_CODE == "en" %}
+                        <!-- {% if request.LANGUAGE_CODE == "en" %}
                         {{food.food_type.name}}
                         {% elif request.LANGUAGE_CODE == "vn" %}
                         {{food.food_type.name_vn}}
-                        {% endif %}
+                        {% endif %} -->
+                        <span class="vn">{{food.food_type.name_vn}}</span>
+                        <span class="en">{{food.food_type.name}}</span>
                     </a>
             	</h3>
             	<p>{{food.cal_from_foodtype}}kcal</p>
@@ -44,7 +46,8 @@
                 </div>
 
                 <div class="tran3s color1_bg unselectable meal-bottom-button add-to-cart-list" id="meal-zero-button-{{food.id}}" data-id-food="{{food.id}}" data-price-food="{{food.price_from_foodtype}}" data-is-from-meal="from-meal">
-                	<span>ADD TO CART</span>
+                	<span class="vn">THÊM VÀO GIỎ</span>
+                    <span class="en">ADD TO CART</span>
                 </div>
 
                 <div class="tran3s color1_bg unselectable meal-bottom-button" id="meal-none-zero-button-{{food.id}}" style="display: none;">

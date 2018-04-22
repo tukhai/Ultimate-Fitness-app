@@ -469,7 +469,10 @@
 								   						</div>
 
 								   						<div class="item_deatils float_left">
-								   							<h6>{{ item.food.food_type.name }}</h6>
+								   							<h6>
+								   								<span class="vn">{{ item.food.food_type.name_vn }}</span>
+								   								<span class="en">{{ item.food.food_type.name }}</span>
+								   							</h6>
 								   							<!--<ul>
 																<li><i class="fa fa-star" aria-hidden="true"></i></li>
 																<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -505,7 +508,11 @@
 
 							   			<div class="cart_total clear_fix" style="background-color: #272727 !important;">
 
-							   				<span class="total font_fix float_left">Total - <text id="total-to-pay">{{ total }}</text> $</span>
+							   				<span class="total font_fix float_left">
+							   					<text class="vn">Tổng</text>
+							   					<text class="en">Total</text>
+							   					 - <text id="total-to-pay">{{ total }}</text> $
+							   				</span>
 							   				<a href="#" class="s_color_bg float_right tran3s">Checkout</a>
 							   			</div>
 								   		
