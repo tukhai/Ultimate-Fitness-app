@@ -738,7 +738,7 @@
 					            {% for food in foods %}
 					            //console.log('{{food.convertdate_from_menu}}');
 					            var weekEvent = {
-					                title: '{{food.food_type.name}}',
+					                title: window.currentLanguage=="en" ? '{{food.food_type.name}}' : '{{food.food_type.name_vn}}',
 									start: '{{food.convertdate_from_menu}}',
 									description: '<a><img src="{{food.food_type.image}}"  style="width:130px;height:90px;float:left;"></a>'
 					            };

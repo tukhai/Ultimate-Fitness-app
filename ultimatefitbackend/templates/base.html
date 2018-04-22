@@ -2151,9 +2151,12 @@
 
 			
 			// This part is the javascript front-end for language change
+			var currentLanguage ="vn";
+
 			$(document).on("click", "li.english-language", function(){
 				$("span#flag-icon-language").html('<span class="flag-icon-size"><img src="http://www.postkrieg.info/_assets/img/en_icon.png"/></span>&nbsp;English');
 				console.log("en");
+				currentLanguage = "en";
 				$(".en").css("display", "inline");
 				$(".vn").css("display", "none");
 				$('#calendar').fullCalendar('option', 'locale', 'en');
@@ -2161,6 +2164,7 @@
 			$(document).on("click", "li.vietnam-language", function(){
 				$("span#flag-icon-language").html('<span class="flag-icon-size"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png"/></span>&nbsp;T . Việt');
 				console.log("vn");
+				currentLanguage = "vn";
 				$(".en").css("display", "none");
 				$(".vn").css("display", "inline");
 				$('#calendar').fullCalendar('option', 'locale', 'vi');

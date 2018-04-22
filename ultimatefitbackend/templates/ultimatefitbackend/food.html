@@ -49,6 +49,12 @@
 				user-select: none;
 				cursor: pointer;
 			}
+			.vn {
+				display: inline;
+			}
+			.en {
+				display: none;
+			}
 		</style>
 	</head>
 
@@ -188,7 +194,10 @@
 	        							<img src="{% static 'ultimatefitbackend/images/shop/15.png' %}" alt="img" class="img-responsive">
 	        						</div> <!-- End of .img_holder -->
 	        						<div class="item_description float_left">
-	        							<h4>{{ food.food_type.name }}</h4>
+	        							<h4>
+	        								<span class="vn">{{ food.food_type.name_vn }}</span>
+	        								<span class="en">{{ food.food_type.name }}</span>
+	        							</h4>
 	        							<ul>
 											<li><i class="fa fa-star" aria-hidden="true"></i></li>
 											<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -207,7 +216,10 @@
 										</div>
 										<input id="display-quantity-modalbox" style="display: none;" type="number" value="{{quantityInThisCart}}" min="0" disabled>
 										<!--<a href="{% url 'ultimatefitbackend:add_to_cart' food.id %}" class="tran3s color1_bg" id="add-cart-button">Add to Cart</a>-->
-										<a class="tran3s color1_bg unselectable" id="add-cart-button">Add to Cart</a>
+										<a class="tran3s color1_bg unselectable" id="add-cart-button">
+											<span class="vn">Thêm vào Giỏ</span>
+											<span class="en">Add to Cart</span>
+										</a>
 										<!--<a class="tran3s color1_bg unselectable" id="add-cart-button">
 											<span>&mdash;&nbsp;&nbsp;</span>
 											&nbsp;Add to Cart&nbsp;
