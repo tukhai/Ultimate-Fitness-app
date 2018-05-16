@@ -172,7 +172,7 @@
 					                        <figure class="image-box">
 					                        	<!--<img src="{% static 'ultimatefitbackend/images/shop/1.png' %}" alt="">-->
 					                        	<img src="{{food.food_type.image}}" alt="">
-					                        	<div class="product-model new" style="font-size: 10px">
+					                        	<div class="product-model new" id="{{food.category}}" style="font-size: 10px">
 					                        		{{food.category}}
 					                        	</div>
 					                        	<div class="overlay-box">
@@ -564,5 +564,7 @@
 				// DON'T NEED TO GET THAT EVENT AND UPDATE, JUST REMOVE ALL EVENTS, AND ADD NEW SIMPLE ONE
 				//console.log($("#calendar").fullCalendar( 'clientEvents', ' ' ));
 				
+				$("div#MAINTAIN").css({"background-color": "#964B00"});
+    			$("div#HEAVY").css({"background-color": "red"});
 			</script>
 	        {% endblock %}

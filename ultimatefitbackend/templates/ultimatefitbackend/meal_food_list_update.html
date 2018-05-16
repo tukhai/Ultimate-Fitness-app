@@ -5,7 +5,7 @@
         <div class="single-item center">
             <figure class="image-box">
             	<img src="{{food.food_type.image}}" alt="">
-            	<div class="product-model new" style="font-size: 10px">{{food.category}}</div>
+            	<div class="product-model new" id="{{food.category}}" style="font-size: 10px">{{food.category}}</div>
             	<div class="overlay-box">
                 	<div class="inner">
                     	<div class="top-content" style="color: #7fb401; font-size: 120%; padding-bottom: 0;">
@@ -82,4 +82,7 @@
 			$("#meal-zero-button-" + {{item.food.id}}).hide();
 		}
 	{% endfor %};
+
+    $("div#MAINTAIN").css({"background-color": "#964B00"});
+    $("div#HEAVY").css({"background-color": "red"});
 </script>
