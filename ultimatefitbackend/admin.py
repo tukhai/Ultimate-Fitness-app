@@ -62,7 +62,8 @@ class FoodTypeAdmin(admin.ModelAdmin):
         ('cal_lean', 'protein_lean', 'carb_lean', 'fat_lean'),
         ('cal_maintain', 'protein_maintain', 'carb_maintain', 'fat_maintain'),
         ('cal_heavy', 'protein_heavy', 'carb_heavy', 'fat_heavy'),
-        'available_categories'
+        'available_categories',
+        'discount_price'
     )
 
 

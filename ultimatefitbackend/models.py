@@ -74,6 +74,7 @@ class FoodType(models.Model):
     protein_heavy = models.IntegerField(null=True, blank=True, default=0)
     carb_heavy = models.IntegerField(null=True, blank=True, default=0)
     fat_heavy = models.IntegerField(null=True, blank=True, default=0)
+    discount_price = models.IntegerField(null=True, blank=True, default=0)
     LEAN = 'LEAN'
     MAINTAIN = 'MAINTAIN'
     HEAVY = 'HEAVY'

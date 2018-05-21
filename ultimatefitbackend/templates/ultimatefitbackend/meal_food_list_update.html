@@ -41,8 +41,12 @@
             	<!--THIS IS FOR RATING STARS-->
                 <!--<div class="rating"><span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></div>-->                            
                 <div class="price">
-                	${{food.price_from_foodtype}} 
-                	<span class="prev-rate">$14.99</span>
+                    {% if food.food_type.discount_price == 0 %}
+                	${{food.price_from_foodtype}}
+                    {% else %}
+                    ${{food.food_type.discount_price}}
+                	<span class="prev-rate">${{food.price_from_foodtype}}</span>
+                    {% endif %}
                 </div>
 
                 <div class="tran3s color1_bg unselectable meal-bottom-button add-to-cart-list" id="meal-zero-button-{{food.id}}" data-id-food="{{food.id}}" data-price-food="{{food.price_from_foodtype}}" data-is-from-meal="from-meal">
