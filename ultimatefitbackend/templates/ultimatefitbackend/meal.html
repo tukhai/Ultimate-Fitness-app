@@ -504,6 +504,9 @@
 
 						dayClick: function(date, jsEvent, view) {
 
+							// Smaller loading animation when change day
+							$("#MixItUp717B05").html('<div id="loader-wrapper" style="position: relative; width: 100px; height: 100px; left: 50%; transform: translateX(-50%); margin-top: 100px;"><div id="loader"></div></div>');
+
 					        colorEventJsonObject = [{
 					        	title: '',
 								start: date.toISOString(),
