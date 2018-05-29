@@ -396,7 +396,7 @@
 				{% get_current_language as LANGUAGE_CODE %}
 				console.log("current language from meal: {{ LANGUAGE_CODE }}");
 				$(document).on("click", ".ALL", function(){
-					location.hash = "";
+					location.hash = "all";
 				});
 				$(document).on("click", ".LEAN", function(){
 					location.hash = "lean";
@@ -510,6 +510,9 @@
 								color: '#DCDCDC',
 								editable: true,
 					        }];
+
+					        // When change day, have to click to all
+					        $(".ALL.filter").click();
 
 					        console.log("clicked day is: " + date.toISOString());
 					        $("#calendar").fullCalendar('removeEvents');
