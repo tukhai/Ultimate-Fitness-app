@@ -27,7 +27,7 @@ from django.core.exceptions import MultipleObjectsReturned
 
 #from carton.cart import Cart
 
-from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart
+from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion
 
 # from .utcisoformat import utcisoformat
 
@@ -1034,6 +1034,12 @@ def vote(request, question_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse('ultimatefitbackend:results', args=(question.id,)))
 
+
 def foods_list(request):
-    response_data = serializers.serialize('python',Food.objects.all())
+    response_data = serializers.serialize('python', Food.objects.all())
+    return JsonResponse(response_data, safe=False)
+
+
+def general_promotion_list(request):
+    response_data = serializers.serialize('python', GeneralPromotion.objects.all())
     return JsonResponse(response_data, safe=False)

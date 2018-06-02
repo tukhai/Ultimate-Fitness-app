@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart
+from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion
 
 from copy import deepcopy
 
@@ -106,7 +106,20 @@ class MenuAdmin(admin.ModelAdmin):
     inlines = (FoodInline,)
     actions = [duplicate_menu]
 
-    
+
+class GeneralPromotionAdmin(admin.ModelAdmin):
+    class Media:
+        # Have to put jquery before all js file in order to use jquery in the following js files
+        js = (
+            'ultimatefitbackend/js/jquery-2.1.4.js',
+            'ultimatefitbackend/js/jquery-ui.min.js',
+            'ultimatefitbackend/fullcalendar/lib/moment.min.js', 
+            'ultimatefitbackend/js/admin_general_promotion.js',
+        )
+
+    list_display = ('name', 'percentage', 'startDate', 'endDate')
+
+
 admin.site.register(Food, FoodAdmin)
 admin.site.register(FoodType, FoodTypeAdmin)
 admin.site.register(FoodCategory)
@@ -117,5 +130,7 @@ admin.site.register(MenuCategory)
 
 admin.site.register(FoodOrder, FoodOrderAdmin)
 admin.site.register(Cart, CartAdmin)
+
+admin.site.register(GeneralPromotion, GeneralPromotionAdmin)
 
 

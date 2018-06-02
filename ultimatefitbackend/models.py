@@ -15,7 +15,22 @@ from multiselectfield import MultiSelectField
 
 from django.utils.translation import ugettext_lazy as _
 
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 # Create your models here.
+
+class GeneralPromotion(models.Model):
+    name = models.CharField(max_length=500)
+    percentage = models.FloatField(null=True, blank=True, validators=[MinValueValidator(0), MaxValueValidator(100)])
+    startDate = models.DateField("Start Date", unique="true")
+    endDate = models.DateField("End Date")
+
+    # def save(self, *args, **kwargs):
+    #     try:
+    #         GeneralPromotion.objects.get(Q(startDate__range=(self.startDate,self.endDate))|Q(endDate__range=(self.sartDate,self.endDate))|Q(startDate__lt=self.startDate,endDate__gt=self.endDate))
+    #         #raise some save error
+    #     except GeneralPromotion.DoesNotExist:
+    #         super(GeneralPromotion,self).save(*args,**kwargs)
 
 class MenuCategory(models.Model):
     name = models.CharField(max_length=320)
