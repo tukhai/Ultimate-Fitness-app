@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion
+from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion, GroupPromotion
 
 from copy import deepcopy
 
@@ -120,6 +120,18 @@ class GeneralPromotionAdmin(admin.ModelAdmin):
     list_display = ('name', 'percentage', 'startDate', 'endDate')
 
 
+class GroupPromotionAdmin(admin.ModelAdmin):
+    # class Media:
+    #     js = (
+    #         'ultimatefitbackend/js/jquery-2.1.4.js',
+    #         'ultimatefitbackend/js/jquery-ui.min.js',
+    #         'ultimatefitbackend/fullcalendar/lib/moment.min.js', 
+    #         'ultimatefitbackend/js/admin_general_promotion.js',
+    #     )
+
+    list_display = ('name', 'percentage', 'startDate', 'endDate')
+
+
 admin.site.register(Food, FoodAdmin)
 admin.site.register(FoodType, FoodTypeAdmin)
 admin.site.register(FoodCategory)
@@ -132,5 +144,6 @@ admin.site.register(FoodOrder, FoodOrderAdmin)
 admin.site.register(Cart, CartAdmin)
 
 admin.site.register(GeneralPromotion, GeneralPromotionAdmin)
+admin.site.register(GroupPromotion, GroupPromotionAdmin)
 
 

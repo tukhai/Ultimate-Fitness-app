@@ -109,6 +109,13 @@ class FoodType(models.Model):
     def __str__(self):
         return self.name
 
+class GroupPromotion(models.Model):
+    name = models.CharField(max_length=500)
+    percentage = models.FloatField(null=True, blank=True, validators=[MinValueValidator(0), MaxValueValidator(100)])
+    startDate = models.DateField("Start Date", unique="true")
+    endDate = models.DateField("End Date")
+    food_type = models.ManyToManyField(FoodType, null=True, blank=True)
+
 class Menu(models.Model):
     name = models.CharField(max_length=320)
     description = models.TextField(null=True, blank=True)
