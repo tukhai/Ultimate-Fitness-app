@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion, GroupPromotion
+from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion, GroupPromotion, GroupPromotionFoodTypes
 
 from copy import deepcopy
 
@@ -120,6 +120,16 @@ class GeneralPromotionAdmin(admin.ModelAdmin):
     list_display = ('name', 'percentage', 'startDate', 'endDate')
 
 
+class GroupPromotionFoodTypesAdmin(admin.ModelAdmin):
+    list_display = ('food_type', 'group_promotion')
+
+
+class GroupPromotionFoodTypesInline(admin.TabularInline):
+    fields = ('food_type',)
+    model = GroupPromotionFoodTypes
+    extra = 0
+
+
 class GroupPromotionAdmin(admin.ModelAdmin):
     # class Media:
     #     js = (
@@ -130,6 +140,7 @@ class GroupPromotionAdmin(admin.ModelAdmin):
     #     )
 
     list_display = ('name', 'percentage', 'startDate', 'endDate')
+    inlines = (GroupPromotionFoodTypesInline,)
 
 
 admin.site.register(Food, FoodAdmin)
@@ -145,5 +156,6 @@ admin.site.register(Cart, CartAdmin)
 
 admin.site.register(GeneralPromotion, GeneralPromotionAdmin)
 admin.site.register(GroupPromotion, GroupPromotionAdmin)
+admin.site.register(GroupPromotionFoodTypes, GroupPromotionFoodTypesAdmin)
 
 

@@ -27,7 +27,7 @@ from django.core.exceptions import MultipleObjectsReturned
 
 #from carton.cart import Cart
 
-from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion
+from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion, GroupPromotion
 
 # from .utcisoformat import utcisoformat
 
@@ -1042,4 +1042,16 @@ def foods_list(request):
 
 def general_promotion_list(request):
     response_data = serializers.serialize('python', GeneralPromotion.objects.all())
+    return JsonResponse(response_data, safe=False)
+
+
+def group_promotion_list(request):
+    response_data = serializers.serialize('python', GroupPromotion.objects.all())
+
+    group_promotion_list = GroupPromotion.objects.all()
+    for item in group_promotion_list:
+        print item.name
+        for each_food_type in item.food_type.all():
+            print each_food_type.name
+
     return JsonResponse(response_data, safe=False)

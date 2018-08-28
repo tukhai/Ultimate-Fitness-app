@@ -42,6 +42,7 @@ urlpatterns = [
     # URL FOR RETURN JSON
     url(r'^foods-list/$', views.foods_list, name='foods_list'),
     url(r'^general-promotion-list/$', views.general_promotion_list, name='general_promotion_list'),
+    url(r'^group-promotion-list/$', views.group_promotion_list, name='group_promotion_list'),
     
     url(r'^food/(\d+)', views.food, name='food'),
     # URL FOR ADD TO CART

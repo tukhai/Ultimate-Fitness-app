@@ -16,6 +16,7 @@ from multiselectfield import MultiSelectField
 from django.utils.translation import ugettext_lazy as _
 
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -112,9 +113,32 @@ class FoodType(models.Model):
 class GroupPromotion(models.Model):
     name = models.CharField(max_length=500)
     percentage = models.FloatField(null=True, blank=True, validators=[MinValueValidator(0), MaxValueValidator(100)])
-    startDate = models.DateField("Start Date", unique="true")
+    startDate = models.DateField("Start Date")
     endDate = models.DateField("End Date")
-    food_type = models.ManyToManyField(FoodType, null=True, blank=True)
+    # food_type = models.ManyToManyField(FoodType, through='GroupPromotionFoodTypes', null=True, blank=True)
+
+
+class GroupPromotionFoodTypes(models.Model):
+    group_promotion = models.ForeignKey(GroupPromotion)
+    food_type = models.ForeignKey(FoodType)
+
+    class Meta:
+        unique_together = ('group_promotion', 'food_type',)
+
+    def validate_unique(self, *args, **kwargs):
+        all_group_promo_food_types = GroupPromotionFoodTypes.objects.all()
+        for each_item in all_group_promo_food_types:
+            if (each_item.food_type.name == self.food_type.name and each_item.id != self.id):
+                StartDate1 = each_item.group_promotion.startDate
+                EndDate1 = each_item.group_promotion.endDate
+                StartDate2 = self.group_promotion.startDate
+                EndDate2 = self.group_promotion.endDate
+
+                if (((StartDate1 <= EndDate2) and (EndDate1 >= StartDate2)) or ((StartDate2 <= EndDate1) and (EndDate2 >= StartDate1))):
+                    # print "______________________"
+                    # print "OVERLAP", each_item.food_type.name, self.food_type.name
+                    raise ValidationError(self.food_type.name + ' has already been discounted on that period')
+
 
 class Menu(models.Model):
     name = models.CharField(max_length=320)
