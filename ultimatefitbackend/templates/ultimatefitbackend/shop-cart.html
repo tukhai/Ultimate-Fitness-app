@@ -442,9 +442,11 @@
 						</div> <!-- /table-responsive -->
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-						<input type="text" placeholder="Enter Coupon Code..." class="coupon">
-						<button class="cart_btn1 tran3s color1_bg">Apply Coupon</button>
+						<input type="text" placeholder="Enter Coupon Code..." class="coupon" id="coupon-text-box">
+						<button class="cart_btn1 tran3s color1_bg" id="apply-coupon">Apply Coupon</button>
+						<div id="coupon-error-message" style="margin-left: 17px;"></div>
 					</div>
+
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cart_update" style="text-align:right;">
 						<button class="cart_btn3 tran3s">Update Cart</button>
 						<button class="cart_btn2 tran3s color1_bg">Proceed to Checkout</button>
@@ -659,6 +661,48 @@
 			    $(this).stop(true, true).delay(50).fadeIn(200);
 			}, function() {
 			    $(this).stop(true, true).delay(50).fadeOut(200);
+			});
+
+			function popUpInternetConnectionError() {
+				$('.internet-connection-error').fadeIn(200);
+			    $('.internet-connection-error').delay(1500).fadeOut(200);
+			};
+
+			$('button#apply-coupon').click(function() {
+				$("#coupon-error-message p").remove();
+
+				var couponCodeToCheck = $('input#coupon-text-box').val().toUpperCase();
+				$.post(
+			    	"/coupon_code_validation/",
+			        { 
+			          csrfmiddlewaretoken: "{{ csrf_token }}",
+			          couponCode: couponCodeToCheck
+			        },
+			        function(data,status) {
+			            if (status == "success") {
+						    if (data.coupon_validator) {
+						    	var correctCouponMsg = "Correct coupon code";
+						    	if (data.type == "PERCENTAGE") {
+						    		correctCouponMsg = `<p style="color: green;">Applying coupon code ${data.coupon_code} (${data.name}), reduce ${data.percentage}% price</p>`;
+						    	} else if (data.type == "PERCENTAGEWITHCAP") {
+						    		correctCouponMsg = `<p style="color: green;">Applying coupon code ${data.coupon_code} (${data.name}), reduce ${data.percentage_with_cap}% price capped at $${data.cap_percentage}</p>`;
+						    	} else if (data.type == "ABSOLUTEWITHMIN") {
+						    		correctCouponMsg = `<p style="color: green;">Applying coupon code ${data.coupon_code} (${data.name}), reduce $${data.absolute_with_min} with min purchse of $${data.min_absolute}</p>`;
+						    	}
+
+						    	$("#coupon-error-message").append(correctCouponMsg);
+						    } else {
+				        		$("#coupon-error-message").append('<p style="color: red;">Coupon code does not exist</p>');
+						    }
+				        }
+			        }
+		        ).fail(function(){
+					popUpInternetConnectionError();
+				});
+			});
+			/*To remove coupon error message*/
+			$(document).on("click", "input#coupon-text-box", function(){
+				$("#coupon-error-message p").remove();
 			});
 		</script>
 

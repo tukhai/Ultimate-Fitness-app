@@ -33,6 +33,25 @@ class GeneralPromotion(models.Model):
     #     except GeneralPromotion.DoesNotExist:
     #         super(GeneralPromotion,self).save(*args,**kwargs)
 
+class CouponPromotion(models.Model):
+    name = models.CharField(max_length=500)
+    coupon_code = models.CharField(max_length=10, unique="true")
+    startDate = models.DateField("Start Date")
+    endDate = models.DateField("End Date")
+
+    ALL_CATEGORIES = (
+        ('PERCENTAGE', 'Percentage (x%)'),
+        ('PERCENTAGEWITHCAP', 'Percentage with cap (x%, capped at $y)'),
+        ('ABSOLUTEWITHMIN', 'Absolute with min ($x, min $y)'),
+    )
+    available_categories = MultiSelectField(choices=ALL_CATEGORIES, max_choices=1)
+
+    percentage = models.FloatField("Percentage (%)", null=True, blank=True, validators=[MinValueValidator(0), MaxValueValidator(100)])
+    percentage_with_cap = models.FloatField("Percentage with cap (%)", null=True, blank=True, validators=[MinValueValidator(0), MaxValueValidator(100)])
+    cap_percentage = models.IntegerField("Cap percentage ($)", null=True, blank=True)
+    absolute_with_min = models.IntegerField("Absolute with min ($)", null=True, blank=True)
+    min_absolute = models.IntegerField("Min absolute ($)", null=True, blank=True)
+
 class MenuCategory(models.Model):
     name = models.CharField(max_length=320)
     description = models.TextField()

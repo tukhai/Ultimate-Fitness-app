@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion, GroupPromotion, GroupPromotionFoodTypes
+from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion, GroupPromotion, GroupPromotionFoodTypes, CouponPromotion
 
 from copy import deepcopy
 
@@ -143,6 +143,29 @@ class GroupPromotionAdmin(admin.ModelAdmin):
     inlines = (GroupPromotionFoodTypesInline,)
 
 
+class CouponPromotionAdmin(admin.ModelAdmin):
+    class Media:
+        js = (
+            'ultimatefitbackend/js/jquery-2.1.4.js',
+            'ultimatefitbackend/js/jquery-ui.min.js',
+            'ultimatefitbackend/fullcalendar/lib/moment.min.js',
+            'ultimatefitbackend/js/admin_coupon_promotion.js',
+        )
+
+    list_display = ('name', 'coupon_code', 'startDate', 'endDate', 'available_categories', 'percentage', 'percentage_with_cap', 'cap_percentage', 'absolute_with_min', 'min_absolute')
+    fields = (
+        'name',
+        'coupon_code',
+        'startDate',
+        'endDate', 
+        'available_categories',
+        'percentage',
+        ('percentage_with_cap', 'cap_percentage'),
+        ('absolute_with_min', 'min_absolute')
+    )
+
+
+
 admin.site.register(Food, FoodAdmin)
 admin.site.register(FoodType, FoodTypeAdmin)
 admin.site.register(FoodCategory)
@@ -157,5 +180,4 @@ admin.site.register(Cart, CartAdmin)
 admin.site.register(GeneralPromotion, GeneralPromotionAdmin)
 admin.site.register(GroupPromotion, GroupPromotionAdmin)
 admin.site.register(GroupPromotionFoodTypes, GroupPromotionFoodTypesAdmin)
-
-
+admin.site.register(CouponPromotion, CouponPromotionAdmin)

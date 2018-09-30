@@ -43,6 +43,7 @@ urlpatterns = [
     url(r'^foods-list/$', views.foods_list, name='foods_list'),
     url(r'^general-promotion-list/$', views.general_promotion_list, name='general_promotion_list'),
     url(r'^group-promotion-list/$', views.group_promotion_list, name='group_promotion_list'),
+    url(r'^coupon_code_validation/', views.coupon_code_validation, name='coupon_code_validation'),
     
     url(r'^food/(\d+)', views.food, name='food'),
     # URL FOR ADD TO CART

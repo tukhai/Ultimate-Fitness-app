@@ -27,7 +27,7 @@ from django.core.exceptions import MultipleObjectsReturned
 
 #from carton.cart import Cart
 
-from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion, GroupPromotion
+from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion, GroupPromotion, CouponPromotion
 
 # from .utcisoformat import utcisoformat
 
@@ -571,6 +571,38 @@ def registration_validation(request):
             }
             return JsonResponse(e, safe=False)
         return redirect('/')
+
+
+def coupon_code_validation(request):
+    if request.method == "POST":
+        coupon_code_from_client = request.POST.get("couponCode","")
+        
+        all_coupon_objects = CouponPromotion.objects.all()
+
+        returnedObj = {
+            'coupon_validator': False
+        }
+        for coupon_object in all_coupon_objects:
+            if coupon_code_from_client == coupon_object.coupon_code:
+                returnedObj = {
+                    'coupon_validator': True,
+                    'coupon_code': coupon_object.coupon_code,
+                    'name': coupon_object.name,
+                    'type': coupon_object.available_categories[0]
+                }
+                if coupon_object.available_categories[0] == "PERCENTAGE":
+                    returnedObj['percentage'] = coupon_object.percentage
+                elif coupon_object.available_categories[0] == "PERCENTAGEWITHCAP":
+                    returnedObj['percentage_with_cap'] = coupon_object.percentage_with_cap
+                    returnedObj['cap_percentage'] = coupon_object.cap_percentage
+                elif coupon_object.available_categories[0] == "ABSOLUTEWITHMIN":
+                    returnedObj['absolute_with_min'] = coupon_object.absolute_with_min
+                    returnedObj['min_absolute'] = coupon_object.min_absolute
+                break
+
+        e = returnedObj
+        return JsonResponse(e, safe=False)
+    return redirect('/')
 
 
 def contact(request):
