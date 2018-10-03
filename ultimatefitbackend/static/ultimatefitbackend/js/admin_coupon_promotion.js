@@ -25,6 +25,16 @@ setTimeout(function() {
 	$('.form-row.field-percentage_with_cap.field-cap_percentage').hide();
 	$('.form-row.field-absolute_with_min.field-min_absolute').hide();
 
+	if ($('input:checkbox[value="PERCENTAGE"]').is(":checked")) {
+		$('.form-row.field-percentage').show();
+	}
+	if ($('input:checkbox[value="PERCENTAGEWITHCAP"]').is(":checked")) {
+		$('.form-row.field-percentage_with_cap.field-cap_percentage').show();
+	}
+	if ($('input:checkbox[value="ABSOLUTEWITHMIN"]').is(":checked")) {
+		$('.form-row.field-absolute_with_min.field-min_absolute').show();
+	}
+
 	$("input:checkbox").on('click', function() {
 		var $box = $(this);
 	    if ($box.is(":checked")) {

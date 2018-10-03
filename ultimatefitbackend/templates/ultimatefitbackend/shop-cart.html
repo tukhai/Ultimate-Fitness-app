@@ -683,16 +683,16 @@
 						    if (data.coupon_validator) {
 						    	var correctCouponMsg = "Correct coupon code";
 						    	if (data.type == "PERCENTAGE") {
-						    		correctCouponMsg = `<p style="color: green;">Applying coupon code ${data.coupon_code} (${data.name}), reduce ${data.percentage}% price</p>`;
+						    		correctCouponMsg = `<p style="color: green;">Applying coupon code ${data.coupon_code} (${data.name}), reduce ${data.percentage}% price.</p>`;
 						    	} else if (data.type == "PERCENTAGEWITHCAP") {
-						    		correctCouponMsg = `<p style="color: green;">Applying coupon code ${data.coupon_code} (${data.name}), reduce ${data.percentage_with_cap}% price capped at $${data.cap_percentage}</p>`;
+						    		correctCouponMsg = `<p style="color: green;">Applying coupon code ${data.coupon_code} (${data.name}), reduce ${data.percentage_with_cap}% price capped at $${data.cap_percentage}.</p>`;
 						    	} else if (data.type == "ABSOLUTEWITHMIN") {
-						    		correctCouponMsg = `<p style="color: green;">Applying coupon code ${data.coupon_code} (${data.name}), reduce $${data.absolute_with_min} with min purchse of $${data.min_absolute}</p>`;
+						    		correctCouponMsg = `<p style="color: green;">Applying coupon code ${data.coupon_code} (${data.name}), reduce $${data.absolute_with_min} with min purchase of $${data.min_absolute}.</p>`;
 						    	}
 
 						    	$("#coupon-error-message").append(correctCouponMsg);
 						    } else {
-				        		$("#coupon-error-message").append('<p style="color: red;">Coupon code does not exist</p>');
+				        		$("#coupon-error-message").append('<p style="color: red;">Coupon code does not exist or has been expired.</p>');
 						    }
 				        }
 			        }

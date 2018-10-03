@@ -573,6 +573,13 @@ def registration_validation(request):
         return redirect('/')
 
 
+def isNowInTimePeriod(startTime, endTime, nowTime):
+    if startTime < endTime:
+        return nowTime >= startTime and nowTime <= endTime
+    else: #Over midnight
+        return nowTime >= startTime or nowTime <= endTime
+
+
 def coupon_code_validation(request):
     if request.method == "POST":
         coupon_code_from_client = request.POST.get("couponCode","")
@@ -583,7 +590,7 @@ def coupon_code_validation(request):
             'coupon_validator': False
         }
         for coupon_object in all_coupon_objects:
-            if coupon_code_from_client == coupon_object.coupon_code:
+            if coupon_code_from_client == coupon_object.coupon_code and isNowInTimePeriod(coupon_object.startDate, coupon_object.endDate, datetime.date.today()):
                 returnedObj = {
                     'coupon_validator': True,
                     'coupon_code': coupon_object.coupon_code,
