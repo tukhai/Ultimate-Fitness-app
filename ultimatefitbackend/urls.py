@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^shop-single.html/$', views.ShopsingleView.as_view(), name='shopsingle'),
 
     url(r'^checkout.html/$', views.CheckoutView.as_view(), name='checkout'),
+    url(r'^account.html/$', views.AccountView.as_view(), name='account'),
 
     url(r'^start_page/$', views.start_page, name='start_page'),
 

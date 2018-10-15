@@ -37,6 +37,264 @@
 			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 			<script src="vendor/html5shiv.js"></script>
 		<![endif]-->
+
+		<style>
+			body ::-webkit-scrollbar {
+			    width: 0px !important;
+			}
+			.popUpMessage {
+				border-style: solid;
+				border-color: #eaeaea;
+				border-radius: 3px;
+				border-width: 1px;
+				background-color: white;
+				width: 400px;
+				box-shadow: 2px 2px 1px #d8d8d8;
+				margin-bottom: 10px;
+			}
+			.popUpMessage p {
+				margin-left: 10px;
+			}
+
+			.modal-box-size {
+				width: 76%;
+			}
+
+			@media (min-width: 1500px) {
+				.modal-box-size {
+					width: 66%;
+				}
+			}
+			@media (min-width: 2000px) {
+				.modal-box-size {
+					width: 56%;
+				}
+			}
+			@media (min-width: 2500px) {
+				.modal-box-size {
+					width: 46%;
+				}
+			}
+			
+			.unselectable {
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				cursor: pointer;
+			}
+			.distance-between-left-right {
+				margin-right: 175px;
+			}
+			.main-navbar {
+				position: fixed; 
+				width: 100%; 
+				z-index: 10;
+				zoom: 0.8; /* Old IE only */
+			    /*-moz-transform: scale(0.8);
+			    -webkit-transform: scale(0.8);
+			    transform: scale(0.8);*/
+			    /*Text in navbar unselectable*/
+			    -webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;			    
+			}
+			.list-news {
+				display: none !important;
+			}
+			@media (min-width: 992px) {				
+				.distance-between-left-right {
+					margin-right: 0px;
+				}
+			}
+
+			.my-cart-preview {
+				position: fixed; 
+				z-index: 999; 
+				margin-top: -205px; 
+				margin-left: 50vw;
+			}
+			@media (min-width: 992px) and (max-width: 1024px) {				
+				.my-cart-preview {
+					margin-top: -182px;
+				}
+			}
+			
+			.date-on-cart-list {
+				/*max-height: 1px !important;
+				height: 1px;*/
+				background-color: #505050;
+				color: white;
+				font-weight: bold;
+				text-align: center;
+				border-top-style: solid;
+				border-top-width: 1px;
+				border-top-color: #A9A9A9;
+			}
+			.cart_list {
+				background-color: transparent !important;
+			}
+			.cart_list>ul {				
+				max-height: 400px !important;
+				overflow-y: auto;
+			}
+			.cart_list>ul::-webkit-scrollbar {
+			    width: 4px !important;
+			    background-color: #272727;
+			}
+			.cart_list>ul::-webkit-scrollbar-thumb {
+			    background-color: grey;
+			}
+			.cart_list_extension_for_hover {
+				height: 50vh;
+			}
+			.cart_list>ul>li .fa-times-circle {
+				display: none !important;
+			}
+
+			.close-list-cart {
+				position: absolute; 
+				top: 57px; 
+				right: 25px; 
+				font-size: 18px; 
+				color:#aaaaaa; 
+				cursor: pointer;
+			}
+
+			@media (min-width: 992px) {
+				.flag-icon-size {
+					width: 19px; 
+					height: 13px; 
+					position: absolute; 
+					margin-top: 26px; 
+					margin-left: -22px; 
+					background-color: white;
+				}
+			}
+
+			@media (max-width: 992px) {
+				.flag-icon-size {
+					display: none;
+				}
+			}
+
+			.internet-connection-error {
+				border-style: solid;
+				border-color: #eaeaea;
+				border-radius: 10px;
+				border-width: 1px;
+				background-color: black;
+				color: white;
+				opacity: 0.8;
+				width: 220px;
+				padding-top: 7px;
+				display: none;
+				z-index: 100000;		
+			}
+
+			.internet-connection-error p {
+				margin-left: 17px;
+				line-height: 1.15;
+				margin-bottom: 10px;
+				margin-top: 3px;
+			}
+			.internet-connection-error h7 {
+				margin-left: 17px;
+				margin-top: 10px;				
+				font-weight: 600;
+			}
+
+			#activation-email-message {
+				position: fixed; 
+				top: 50%; 
+				left: 50%; 
+				margin-top: -80px; 
+				margin-left: -150px; 
+				width: 300px; 
+				height: 160px;
+				z-index: 10000;
+				text-align: center;
+				border-style: solid;
+				border-color: #eaeaea;
+				border-radius: 10px;
+				border-width: 1px;
+				background-color: white;
+				box-shadow: 2px 2px 1px #d8d8d8;
+				padding-top: 10px;
+				display: none;
+			}
+
+			#confirm-activation-email-button {
+				width: 90px; 
+				height: 30px;
+				border-radius: 4px;
+				background-color: #1E90FF;
+				color: white;
+				margin-left: 105px;
+				padding-top: 5px;
+				margin-top: 15px;
+				cursor: pointer;
+				user-select: none;
+			}
+
+			#submit-registration-message {
+				position: fixed; 
+				top: 50%; 
+				left: 50%; 
+				margin-top: -80px; 
+				margin-left: -150px; 
+				width: 300px; 
+				height: 50px;
+				z-index: 10000;
+				text-align: center;
+				border-style: solid;
+				border-color: #eaeaea;
+				border-radius: 10px;
+				border-width: 1px;
+				background-color: white;
+				box-shadow: 2px 2px 1px #d8d8d8;
+				padding-top: 10px;
+				display: none;
+			}
+
+			p.required input {
+				width: 100%;
+			}
+
+			.vn {
+				display: inline;
+			}
+			.en {
+				display: none;
+			}
+
+			.numberCircle {
+			  border-radius: 50%;
+			  behavior: url(PIE.htc);
+			  /* remove if you don't care about IE8 */
+			  width: 30px;
+			  height: 30px;
+			  padding: 4px;
+			  margin-right: 7px;
+			  background: #75a501;
+			  /*background: #7fb401;*/
+			  border: 1px solid #fff;
+			  color: #fff;
+			  text-align: center;
+			  font: 18px Arial, sans-serif;
+			  font-weight: 700;
+			  display: inline-block;
+			}
+
+			#step-1-button, #step-2-button, #step-3-button {
+				cursor: pointer;
+			}
+		</style>
 	</head>
 
 
@@ -44,260 +302,46 @@
 	<body>
 		<div class="main_page">
 
-
-			<!-- Header *******************************  -->
-			<header>
-				<div class="top_header">
-					<div class="container">
-						<div class="pull-left header_left">
-							<ul>
-		        				<li><a href="#">Order On Phone: <span>+321 453 68 739</span></a></li>
-		        				<li><i class="fa fa-envelope-o s_color" aria-hidden="true"></i><a href="#">organicstore@gmail.com</a></li>
-		        			</ul>
-						</div>
-
-						<div class="pull-right header_right">
-							<div class="state" id="value1">
-								<ul>
-			        				<li><i class="fa fa-user s_color" aria-hidden="true"></i><a href="#">Account</a></li>
-			        				<li><i class="fa fa-heart s_color" aria-hidden="true"></i><a href="#">Whishlist </a></li>
-			        				<li><i class="fa fa-truck s_color" aria-hidden="true"></i><a href="#">Whishlist</a></li>
-			        			</ul>
-			        			<div id="polyglotLanguageSwitcher">
-									<form action="#">
-										<select id="polyglot-language-options">
-											<option id="en" value="en" selected>English</option>
-											<option id="fr" value="fr">French</option>
-											<option id="de" value="de">German</option>
-											<option id="it" value="it">Italian</option>
-											<option id="es" value="es">Spanish</option>
-										</select>
-									</form>
-								</div>
-							</div>
-
-								
-						</div>
-					</div> <!-- End of .container -->
-				</div> <!-- End of .top_header -->
-
-				<div class="bottom_header">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-4 col-sm-12 col-xs-12">
-								<div class="search-box">
-									<form action="#" class="clearfix">
-										<input type="text" placeholder="Search...">
-										<button><i class="fa fa-search"></i></button>
-									</form>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-5 col-xs-6 logo-responsive">
-								<div class="logo-area">
-									<a href="index.html" class="pull-left logo"><img src="{% static 'ultimatefitbackend/images/logo/logo.png' %}" alt="LOGO"></a>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-7 col-xs-6 pdt-14">
-								<div class="login_option float_left">
-							   		<div class="login_form">
-							   			<div class="user">
-							   				<i class="icon-photo"></i>
-							   			</div>
-							   			<div class="login-info">
-								   			<div class="welcome">Welcome!</div>
-									   		<!-- select menu -->
-									            <form action="#" class="select-form">
-							                        <div class="g-input f1 mb-30">
-							                            <select class="text-capitalize selectpicker" data-style="g-select" data-width="100%">
-							                                <option value="0" selected="">Sign In</option>
-							                                <option value="1">Sign In</option>
-							                                <option value="2">Register Here</option>
-							                            </select>
-							                        </div>
-							                    </form>
-								   		</div>
-							   		</div> <!-- End of .cart_list -->
-							    </div>
-							    <div class="cart_option float_left">
-							   		<button class="cart tran3s dropdown-toggle" id="cartDropdown"><i class="fa icon-icon-32846" aria-hidden="true"></i><span class="s_color_bg p_color">2</span></button>
-							   		<div class="cart-info">
-							   			<div>My Cart</div>
-								   		<div class="doller">84.00$</div>
-							   		</div>
-								   		
-							   		<div class="cart_list color2_bg" aria-labelledby="cartDropdown">
-							   			<ul>
-							   				<li>
-							   					<div class="cart_item_wrapper clear_fix">
-							   						<div class="img_holder float_left"><img src="{% static 'ultimatefitbackend/images/shop/9.png' %}" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
-
-							   						<div class="item_deatils float_left">
-							   							<h6>Turmeric Powde</h6>
-							   							<ul>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														</ul>
-														<span class="font_fix">$ 34.99</span>
-							   						</div> <!-- End of .item_deatils -->
-							   					</div> <!-- End of .cart_item_wrapper -->
-							   				</li>
-
-							   				<li>
-							   					<div class="cart_item_wrapper clear_fix">
-							   						<div class="img_holder float_left"><img src="{% static 'ultimatefitbackend/images/shop/10.png' %}" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
-							   						
-							   						<div class="item_deatils float_left">
-							   							<h6>Pure Jeans Coffee</h6>
-							   							<ul>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														</ul>
-														<span class="font_fix">$ 26.99</span>
-							   						</div> <!-- End of .item_deatils -->
-							   					</div> <!-- End of .cart_item_wrapper -->
-							   				</li>
-
-							   				<li>
-							   					<div class="cart_item_wrapper clear_fix">
-							   						<div class="img_holder float_left"><img src="{% static 'ultimatefitbackend/images/shop/11.png' %}" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
-							   						
-							   						<div class="item_deatils float_left">
-							   							<h6>Columbia Chocolate</h6>
-							   							<ul>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														</ul>
-														<span class="font_fix">$ 26.99</span>
-							   						</div> <!-- End of .item_deatils -->
-							   					</div> <!-- End of .cart_item_wrapper -->
-							   				</li>
-							   			</ul>
-
-							   			<div class="cart_total clear_fix">
-
-							   				<span class="total font_fix float_left">Total - 140$</span>
-							   				<a href="#" class="s_color_bg float_right tran3s">View Cart</a>
-							   			</div>
-							   		</div> <!-- End of .cart_list -->
-							    </div>
-
-							</div>
-
-						</div>
-
-					</div>
-				</div> <!-- End of .bottom_header -->
-			</header>
-
-
-
-
-
 			<!-- Menu ******************************* -->
-			<div class="theme_menu color1_bg">
+			<div class="theme_menu color1_bg main-navbar">
 				<div class="container">
 					<nav class="menuzord pull-left" id="main_menu">
 					   <ul class="menuzord-menu">
-					      <li><a href="index.html">Home</a></li>
-					      <li><a href="about-us.html">About us</a></li>
-					      <li class="current_page"><a href="#">store</a>
-					      	<ul class="dropdown">
-					            <li><a href="shop.html">Shop With Sidebar</a></li>
-					            <li><a href="shop-single.html">Product Detail</a></li>
-					            <li><a href="shop-cart.html">Cart Page</a></li>
-					            <li><a href="checkout.html">Checkout Page</a></li>
-					            <li><a href="account.html">My Account</a></li>
-					         </ul>
-					      </li>
-					      <li><a href="#">News</a>
-					      	<ul class="dropdown">
-					            <li><a href="blog-Standard.html">News Standard</a></li>
-					            <li><a href="blog-list-sidebar.html">News With Sidebar</a></li>
-					            <li><a href="blog-grid.html">News Masonary</a></li>
-					            <li><a href="blog-details.html">News Single</a></li>
-					         </ul>
-					      </li>
-					      <li><a href="#">gallery</a>
-					      	<ul class="dropdown">
-					            <li><a href="gallery-grid.html">Gallery Grid</a></li>
-                                <li><a href="gallery-masonry.html">Gallery Masonary</a></li>
-                                <li><a href="gallery-single.html">Gallery Single</a></li>
-					         </ul>
-					      </li>
+					      <li class="current_page">
+					      	<a id="step-1-button">
+								<span class="numberCircle">1</span>
 
-					      <li><a href="#">Pages</a>
-					      	<ul class="dropdown">
-					            <li><a href="Testimonials.html">Testimonials</a></li>
-					            <li><a href="404.html">404v page</a></li>
-					            <li><a href="faq.html">FAQ</a></li>
-					         </ul>
+					      		<span class="vn">Shipping</span>
+					      		<span class="en">Shipping</span>
+					      	</a>
 					      </li>
-					      
-					      <li><a href="contact.html">Contact us</a></li>
-					   </ul> <!-- End of .menuzord-menu -->
+					      <li>
+					      	<a id="step-2-button">
+					      		<span class="numberCircle">2</span>
+
+					      		<span class="vn">Thanh Toán</span>
+					      		<span class="en">Payment</span>
+					      	</a>
+					      </li>
+					      <li>
+					      	<a id="step-3-button">
+					      		<span class="numberCircle">3</span>
+
+					      		<span class="vn">Review</span>
+					      		<span class="en">Review</span>
+					      	</a>
+					      </li>
+					    </ul> <!-- End of .menuzord-menu -->
 				   </nav> <!-- End of #main_menu -->
-
-
-				   <!-- ******* Cart And Search Option ******** -->
-				   <div class="nav_side_content pull-right">
-				   		<ul class="icon_header">
-							<li class="border_round tran3s"><a href="#"><i class="fa fa-facebook"></i></a></li>
-							<li class="border_round tran3s"><a href="#"><i class="fa fa-twitter"></i></a></li>
-							<li class="border_round tran3s"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							<li class="border_round tran3s"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-						</ul>
-				   </div> <!-- End of .nav_side_content -->
 				     
 			   </div> <!-- End of .conatiner -->
 			</div> <!-- End of .theme_menu -->
 
 
-			<section class="breadcrumb-area" style="background-image:url({% static 'ultimatefitbackend/images/background/2.jpg' %});">
-			    <div class="container">
-			        <div class="row">
-			            <div class="col-md-12">
-			                <div class="breadcrumbs text-center">
-			                    <h1>checkout</h1>
-			                    <h4>Welcome to certified online organic products suppliersr</h4>
-			                </div>
-			            </div>
-			        </div>
-			    </div>
-				<div class="breadcrumb-bottom-area">
-				    <div class="container">
-				        <div class="row">
-				            <div class="col-lg-8 col-md-5 col-sm-5">
-				                <ul>
-				                    <li><a href="#">Home</a></li>
-				                    <li><a href=""><i class="fa fa-angle-right"></i></a></li>
-				                    <li><a href="#">Gallery</a></li>
-				                    <li><a href=""><i class="fa fa-angle-right"></i></a></li>
-				                    <li>checkout</li> 
-				                </ul>
-				            </div>
-				            <div class="col-lg-4 col-md-7 col-sm-7">
-				                <p>We provide <span>100% organic</span> products</p>
-				            </div>
-				        </div>
-				    </div>
-				</div>
-			    
-			</section>
-
-
 	        <!-- Checkout page content******************* -->
-	        <div class="check_out_form container">
+	        <div class="check_out_form container cart_table" style="margin-top: 20px">
 				<div class="row">
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 submit_form">
+					<!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 submit_form">
 						<div class="theme-title">
 							<h2>Billing Address</h2>
 						</div>
@@ -329,11 +373,11 @@
 								<input type="text" placeholder="Phone Number">
 							</div>
 						</form>
-					</div> <!-- /submit_form -->
+					</div> --> <!-- /submit_form -->
 
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 submit_form shipping_address">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 submit_form shipping_address" id="step-1">
 						<div class="theme-title">
-							<h2>Shipping Address <input type="checkbox"></h2>
+							<h2>Shipping Address</h2>
 						</div>
 						<form action="#" class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -358,63 +402,34 @@
 								<input type="text" placeholder="">
 							</div>
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<span>Contact Info *</span>
+								<input type="email" placeholder="Email Address">
+								<input type="text" placeholder="Phone Number">
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								<span>Other Notes</span>
 								<textarea></textarea>
 							</div>
 						</form>
 					</div> <!-- /submit_form -->
-				</div> <!-- /row -->
-			</div> <!-- /check_out_form -->
 
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 submit_form" id="step-2" style="display: none;">
+						<div class="theme-title">
+							<h2>Payment Details</h2>
+						</div>
 
-
-
-			<!-- cart table*********************** -->
-			<div class="cart_table container">
-				<div class="row">
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<div class="table-responsive">
-							<table class="table table-1">
-								<thead>
-									<tr>
-										<th><span>Product</span></th>
-										<th style="padding-left:0"><span>Quantity</span></th>
-										<th><span style="margin-left: 9px;">Total</span></th>
-									</tr>
-								</thead> <!-- /thead -->
-								<tbody>
-
-									<tr>
-										<td class="flex_item clear_fix">
-											<img src="{% static 'ultimatefitbackend/images/shop/9.png' %}" alt="images" class="float_left">
-											<h6 class="float_left">Start From The Art</h6>
-										</td>
-										<td><input type="number" name="quantity" min="0" value="1"></td>
-										<td><span>$25.00</span></td>
-									</tr> <!-- /tr -->
-
-									<tr>
-										<td class="flex_item clear_fix">
-											<img src="{% static 'ultimatefitbackend/images/shop/10.png' %}" alt="images" class="float_left">
-											<h6 class="float_left">Lords Of Strategy</h6>
-										</td>
-										<td><input type="number" name="quantity" min="0" value="3"></td>
-										<td><span>$69.00</span></td>
-									</tr> <!-- /tr -->
-
-									<tr>
-										<td class="flex_item clear_fix">
-											<img src="{% static 'ultimatefitbackend/images/shop/11.png' %}" alt="images" class="float_left">
-											<h6 class="float_left">Start From The Art</h6>
-										</td>
-										<td><input type="number" name="quantity" min="0" value="2"></td>
-										<td><span>$29.00</span></td>
-									</tr> <!-- /tr -->
-
-								</tbody> <!-- /tbody -->
-							</table>
-						</div> <!-- /table-responsive -->
+						<p>Cash on delivery</p>
+						<div class="payment_system" id="cash-on-delivery-button">
+							<a class="tran3s color2_bg float_left">Cash on delivery</a>
+						</div>
 					</div>
+
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 submit_form" id="step-3" style="display: none;">
+						<div class="theme-title">
+							<h2>Review</h2>
+						</div>
+					</div>
+
 					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 						<h4>Cart Totals</h4>
 						<div class="table-responsive">
@@ -435,6 +450,101 @@
 								</tbody>
 							</table>
 						</div> <!-- /table-responsive -->
+						<!-- <div class="payment_system">
+							<div class="pay1">
+								<input type="checkbox">
+								<span>Direct Bank Transfer</span>
+								<p>Make your payment directly into our bank account. Please use your Order ID as the payment reference.order won’t be shipped until the funds have cleared.</p>
+							</div>
+							<div class="pay1">
+								<input type="checkbox">
+								<span>Cheque Payment</span>
+							</div>
+							<div class="pay1">
+								<input type="checkbox">
+								<span>Credit Card</span>
+								<img src="{% static 'ultimatefitbackend/images/check-out/1.jpg' %}" alt="image" class="float_right">
+							</div>
+							<div class="pay1">
+								<input type="checkbox">
+								<span>Paypal</span>
+								<img src="{% static 'ultimatefitbackend/images/check-out/2.jpg' %}" alt="image" class="float_right">
+							</div>
+							<a href="#" class="tran3s color2_bg float_right">Place Order</a>
+						</div> -->
+					</div>
+				</div> <!-- /row -->
+			</div> <!-- /check_out_form -->
+
+
+
+
+			<!-- cart table*********************** -->
+			<!-- <div class="cart_table container">
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<div class="table-responsive">
+							<table class="table table-1">
+								<thead>
+									<tr>
+										<th><span>Product</span></th>
+										<th style="padding-left:0"><span>Quantity</span></th>
+										<th><span style="margin-left: 9px;">Total</span></th>
+									</tr>
+								</thead>
+								<tbody>
+
+									<tr>
+										<td class="flex_item clear_fix">
+											<img src="{% static 'ultimatefitbackend/images/shop/9.png' %}" alt="images" class="float_left">
+											<h6 class="float_left">Start From The Art</h6>
+										</td>
+										<td><input type="number" name="quantity" min="0" value="1"></td>
+										<td><span>$25.00</span></td>
+									</tr>
+
+									<tr>
+										<td class="flex_item clear_fix">
+											<img src="{% static 'ultimatefitbackend/images/shop/10.png' %}" alt="images" class="float_left">
+											<h6 class="float_left">Lords Of Strategy</h6>
+										</td>
+										<td><input type="number" name="quantity" min="0" value="3"></td>
+										<td><span>$69.00</span></td>
+									</tr>
+
+									<tr>
+										<td class="flex_item clear_fix">
+											<img src="{% static 'ultimatefitbackend/images/shop/11.png' %}" alt="images" class="float_left">
+											<h6 class="float_left">Start From The Art</h6>
+										</td>
+										<td><input type="number" name="quantity" min="0" value="2"></td>
+										<td><span>$29.00</span></td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<h4>Cart Totals</h4>
+						<div class="table-responsive">
+							<table class="table table-2">
+								<tbody>
+									<tr>
+										<td><span>Cart Subtotal</span></td>
+										<td><span>$146.00</span></td>
+									</tr>
+									<tr>
+										<td><span>Shipping and Handling</span></td>
+										<td><span>Free Shipping</span></td>
+									</tr>
+									<tr>
+										<td><span>Order Total</span></td>
+										<td><span>$146.00</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 						<div class="payment_system">
 							<div class="pay1">
 								<input type="checkbox">
@@ -459,7 +569,7 @@
 						</div>
 					</div>
 				</div>
-			</div> <!-- /cart_table -->
+			</div> -->
 
 
 
@@ -610,6 +720,38 @@
 		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/theme.js' %}"></script>
 		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/google-map.js' %}"></script>
 
+		<script type="text/javascript">
+			function resetStepButtonColor() {
+				$('#step-1-button').css({"background-color": "#7fb401", "border-color": "#7fb401"});
+				$('#step-2-button').css({"background-color": "#7fb401", "border-color": "#7fb401"});
+				$('#step-3-button').css({"background-color": "#7fb401", "border-color": "#7fb401"});
+
+				$('#step-1').css("display", "none");
+				$('#step-2').css("display", "none");
+				$('#step-3').css("display", "none");
+			}
+
+			$(document).on("click", "#step-1-button", function() {
+				console.log("step 1");
+				resetStepButtonColor();
+				$('#step-1-button').css({"background-color": "#75a501", "border-color": "#699401"});
+				$('#step-1').css("display", "block");
+			});
+
+			$(document).on("click", "#step-2-button", function() {
+				console.log("step 2");
+				resetStepButtonColor();
+				$('#step-2-button').css({"background-color": "#75a501", "border-color": "#699401"});
+				$('#step-2').css("display", "block");
+			});
+
+			$(document).on("click", "#step-3-button, #cash-on-delivery-button", function() {
+				console.log("step 3");
+				resetStepButtonColor();
+				$('#step-3-button').css({"background-color": "#75a501", "border-color": "#699401"});
+				$('#step-3').css("display", "block");
+			});
+		</script>
 
 		</div> <!-- End of .main_page -->
 	</body>

@@ -996,20 +996,15 @@ class ShopsingleView(generic.ListView):
 class CheckoutView(generic.ListView):
     template_name = 'ultimatefitbackend/checkout.html'
     context_object_name = 'latest_question_list'
-
     def get_queryset(self):
-        """Return the last five published questions."""
-        '''return Question.objects.order_by('-pub_date')[:5]'''
+        return Food.objects.all()
 
-        """
-        Return the last five published questions (not including those set to be
-        published in the future).
-        """
-        return Food.objects.filter(
-            description__lte=timezone.now()
-        ).order_by('description')[:5]
 
-    
+class AccountView(generic.ListView):
+    template_name = 'ultimatefitbackend/account.html'
+    # context_object_name = 'latest_question_list'
+    def get_queryset(self):
+        return Food.objects.all()
 
 
 '''class DetailView(generic.DetailView):
