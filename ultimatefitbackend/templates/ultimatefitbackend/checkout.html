@@ -294,6 +294,15 @@
 			#step-1-button, #step-2-button, #step-3-button {
 				cursor: pointer;
 			}
+
+			#step-2-button, #step-3-button {
+				pointer-events: none;
+				color: lightgrey;
+			}
+
+			#continue-to-payment-button {
+				cursor: pointer;
+			}
 		</style>
 	</head>
 
@@ -379,38 +388,42 @@
 						<div class="theme-title">
 							<h2>Shipping Address</h2>
 						</div>
-						<form action="#" class="row">
+						<form action="#" class="row" name="shipping-details">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								<span>Country *</span>
-								<input type="text">
+								<input type="text" name="country">
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 								<span>First Name *</span>
-								<input type="text" placeholder="">
+								<input type="text" placeholder="" name="first_name">
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 								<span>Last Name *</span>
-								<input type="text" placeholder="">
+								<input type="text" placeholder="" name="last_name">
 							</div>
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								<span>Address</span>
-								<input type="text" placeholder="">
-								<input type="text" placeholder="">
+								<input type="text" placeholder="" name="address">
+								<!-- <input type="text" placeholder=""> -->
 							</div>
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								<span>Town / City *</span>
-								<input type="text" placeholder="">
+								<input type="text" placeholder="" name="city">
 							</div>
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								<span>Contact Info *</span>
-								<input type="email" placeholder="Email Address">
-								<input type="text" placeholder="Phone Number">
+								<input type="email" placeholder="Email Address" name="email">
+								<input type="text" placeholder="Phone Number" name="phone_number">
 							</div>
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								<span>Other Notes</span>
 								<textarea></textarea>
 							</div>
 						</form>
+
+						<div class="payment_system" id="continue-to-payment-button">
+							<a class="tran3s color2_bg float_left">Continue to Payment</a>
+						</div>
 					</div> <!-- /submit_form -->
 
 					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 submit_form" id="step-2" style="display: none;">
@@ -743,6 +756,8 @@
 				resetStepButtonColor();
 				$('#step-2-button').css({"background-color": "#75a501", "border-color": "#699401"});
 				$('#step-2').css("display", "block");
+
+				$(window).scrollTop(0);
 			});
 
 			$(document).on("click", "#step-3-button, #cash-on-delivery-button", function() {
@@ -750,6 +765,78 @@
 				resetStepButtonColor();
 				$('#step-3-button').css({"background-color": "#75a501", "border-color": "#699401"});
 				$('#step-3').css("display", "block");
+			});
+
+			// When click to each of the input, its color reset to normal
+			$('form[name="shipping-details"] input').each(function() {
+				$(this).click(function(){
+					$(this).css("border", "2px solid #f7f7f7");
+				});
+			});
+
+			// Validate shipping details form
+			function ValidateEmail(mail) {  
+				var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+				if (re.test(mail)) {
+				    return true;
+				} else {
+				    return false;
+				}  
+			};
+
+			function validateForm() {
+				var country = document.forms["shipping-details"]["country"].value;
+				var firstName = document.forms["shipping-details"]["first_name"].value;
+				var lastName = document.forms["shipping-details"]["last_name"].value;
+				var address = document.forms["shipping-details"]["address"].value;
+				var city = document.forms["shipping-details"]["city"].value;
+				var email = document.forms["shipping-details"]["email"].value;
+				var phoneNumber = document.forms["shipping-details"]["phone_number"].value;
+
+				if (country == "") {
+					$('input[name="country"]').css("border", "2px solid red");
+				}
+				if (firstName == "") {
+					$('input[name="first_name"]').css("border", "2px solid red");
+				}
+				if (lastName == "") {
+					$('input[name="last_name"]').css("border", "2px solid red");
+				}
+				if (address == "") {
+					$('input[name="address"]').css("border", "2px solid red");
+				}
+				if (city == "") {
+					$('input[name="city"]').css("border", "2px solid red");
+				}
+				if (ValidateEmail(email) == "") {
+					$('input[name="email"]').css("border", "2px solid red");
+				}
+				if (phoneNumber == "") {
+					$('input[name="phone_number"]').css("border", "2px solid red");
+				}
+
+				if (country == "" || firstName == "" || lastName == "" || address == "" || city == "" || !ValidateEmail(email) || phoneNumber == "") {
+					$(window).scrollTop(50);
+					return false;
+				}
+
+				return true;
+			}
+
+			$(document).on("click", "#continue-to-payment-button", function() {
+				if (validateForm()) {
+					resetStepButtonColor();
+					$('#step-2-button').css({"background-color": "#75a501", "border-color": "#699401"});
+					$('#step-2').css("display", "block");
+
+					$(window).scrollTop(0);
+
+					// Activate step buttons
+					$('#step-2-button, #step-3-button').css({
+						"pointer-events": "auto", 
+						"color": "#fff"
+					});
+				}
 			});
 		</script>
 
