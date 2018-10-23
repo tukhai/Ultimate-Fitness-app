@@ -345,3 +345,15 @@ class FoodOrder(models.Model):
     food = models.ForeignKey(Food)
     cart = models.ForeignKey(Cart)
     quantity = models.IntegerField()
+
+
+class DeliveryOrder(models.Model):
+    # order_data = models.OneToOneField(
+    #     FoodOrder,
+    #     # on_delete=models.CASCADE,
+    #     primary_key=True
+    # )
+    # order_data = models.ForeignKey(FoodOrder, null=True, blank=True)
+    order_data = models.TextField(null=True, blank=True)
+    order_date = models.DateTimeField(null=True)
+    user = models.ForeignKey(User, null=True, blank=True)

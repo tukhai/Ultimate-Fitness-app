@@ -449,7 +449,7 @@
 
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cart_update" style="text-align:right;">
 						<button class="cart_btn3 tran3s">Update Cart</button>
-						<button class="cart_btn2 tran3s color1_bg">Proceed to Checkout</button>
+						<button class="cart_btn2 tran3s color1_bg" id="proceed-to-checkout">Proceed to Checkout</button>
 					</div>
 				</div> <!-- /row -->
 
@@ -703,6 +703,29 @@
 			/*To remove coupon error message*/
 			$(document).on("click", "input#coupon-text-box", function(){
 				$("#coupon-error-message p").remove();
+			});
+
+			// Proceed to checkout button
+			$(document).on("click", "#proceed-to-checkout", function(){
+				console.log("proceed checkout");
+
+				$.post(
+					"/create_order_for_checkout/",
+					{ 
+						csrfmiddlewaretoken: "{{ csrf_token }}",
+						// couponCode: couponCodeToCheck
+					},
+					function(data, status) {
+						if (status == "success") {
+							console.log(data, "success post");
+							$(location).attr('href', '/order');
+						}
+					}
+		        ).fail(function(){
+					popUpInternetConnectionError();
+				});
+
+				// $(location).attr('href', '/order');
 			});
 		</script>
 

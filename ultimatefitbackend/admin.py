@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion, GroupPromotion, GroupPromotionFoodTypes, CouponPromotion
+from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion, GroupPromotion, GroupPromotionFoodTypes, CouponPromotion, DeliveryOrder
 
 from copy import deepcopy
 
@@ -68,11 +68,11 @@ class FoodTypeAdmin(admin.ModelAdmin):
 
 
 class FoodOrderAdmin(admin.ModelAdmin):
-    list_display = ('food', 'cart', 'quantity')
+    list_display = ('id', 'food', 'quantity')
 
 
 class CartAdmin(admin.ModelAdmin):
-    list_display = ('user', 'active', 'order_date')
+    list_display = ('id', 'user', 'active', 'order_date')
 
 
 def duplicate_menu(modeladmin, request, queryset):
@@ -165,6 +165,9 @@ class CouponPromotionAdmin(admin.ModelAdmin):
     )
 
 
+class DeliveryOrderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'order_date', 'order_data', 'user')
+
 
 admin.site.register(Food, FoodAdmin)
 admin.site.register(FoodType, FoodTypeAdmin)
@@ -176,6 +179,8 @@ admin.site.register(MenuCategory)
 
 admin.site.register(FoodOrder, FoodOrderAdmin)
 admin.site.register(Cart, CartAdmin)
+
+admin.site.register(DeliveryOrder, DeliveryOrderAdmin)
 
 admin.site.register(GeneralPromotion, GeneralPromotionAdmin)
 admin.site.register(GroupPromotion, GroupPromotionAdmin)

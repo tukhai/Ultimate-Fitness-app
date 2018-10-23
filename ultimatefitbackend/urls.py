@@ -55,6 +55,9 @@ urlpatterns = [
     url(r'^removeall/(\d+)', views.remove_all_from_cart, name='remove_all_from_cart'),
     url(r'^cart/', views.cart, name='cart'),
 
+    url(r'^create_order_for_checkout/', views.create_order, name='create_order'),
+    url(r'^order/', views.order, name='order'),
+
     url(r'^total/', views.total, name='total'),
     url(r'^list/', views.list, name='list'),
     url(r'^registration_validation/', views.registration_validation, name='registration_validation'),

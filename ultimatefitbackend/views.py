@@ -27,7 +27,7 @@ from django.core.exceptions import MultipleObjectsReturned
 
 #from carton.cart import Cart
 
-from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion, GroupPromotion, CouponPromotion
+from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion, GroupPromotion, CouponPromotion, DeliveryOrder
 
 # from .utcisoformat import utcisoformat
 
@@ -35,6 +35,8 @@ from django.contrib.auth.models import User
 
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import activate
+
+from django.db.models import Q
 
 #from django import forms
 
@@ -832,8 +834,7 @@ def remove_all_from_cart(request, food_id):
 
 
 def cart(request):
-    if request.user.is_authenticated():        
-
+    if request.user.is_authenticated():
         # Create cart_ano object in session for anonymous use
 
         # Although this code works, the code arrangement MAY BE not correct logically
@@ -998,6 +999,78 @@ class CheckoutView(generic.ListView):
     context_object_name = 'latest_question_list'
     def get_queryset(self):
         return Food.objects.all()
+
+
+def create_order(request):
+    if request.user.is_authenticated():
+        if request.method == "POST":
+            print "posting, create order for checkout.."
+
+            current_cart = Cart.objects.get(user = request.user)
+            order_data = FoodOrder.objects.filter(cart = current_cart)
+
+            copied_order_data_arr = []
+            for item_order_data in order_data:
+                copied_order_data_arr.append({
+                    'food_id': item_order_data.food.id,
+                    'quantity': item_order_data.quantity
+                })
+
+            string_FoodOrder_data_id = json.dumps(copied_order_data_arr)
+
+            # Current date
+            order_created_date = datetime.datetime.now()
+
+            delivery_order = DeliveryOrder.objects.create(
+                order_data = string_FoodOrder_data_id,
+                order_date = order_created_date,
+                user = request.user
+            )
+            delivery_order.save()
+
+            ########### After this have to delete cart ###########
+            current_cart.delete()
+
+        return JsonResponse({'a': 'dummy'}, safe=False)
+    else:
+        return redirect('/')
+
+
+def order(request):
+    if request.user.is_authenticated():
+
+        # Take the latest delivery created, another way is using cookie/session to pass between pages, but this is easier
+        latest_created_delivery = DeliveryOrder.objects.latest('order_date')
+
+        order_data_arr = json.loads(latest_created_delivery.order_data)
+
+        rendered_data_arr = []
+        total = 0
+        count = 0
+        number_of_kinds = 0
+        for item_arr in order_data_arr:
+            # print item_arr['food_id'], item_arr['quantity']
+            food_obj = Food.objects.get(id=item_arr['food_id'])
+            print food_obj.food_type.name, item_arr['quantity']
+            rendered_data_arr.append({
+                'food_obj': food_obj,
+                'quantity': item_arr['quantity']
+            })
+
+            total += (food_obj.price_from_foodtype * item_arr['quantity']) 
+            count += item_arr['quantity']
+            number_of_kinds += 1
+
+        context = {
+            'data_arr': rendered_data_arr,
+            'total': total,
+            'count': count,
+            'number_of_kinds': number_of_kinds
+        }
+
+        return render(request, 'ultimatefitbackend/checkout.html', context)
+    else:
+        return redirect('/')
 
 
 class AccountView(generic.ListView):

@@ -438,9 +438,49 @@
 					</div>
 
 					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 submit_form" id="step-3" style="display: none;">
-						<div class="theme-title">
-							<h2>Review</h2>
+						<div class="theme-title" style="margin-bottom: 20px;">
+							<h2>Review Your Order</h2>
 						</div>
+
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 submit_form" style="padding-left: 0;">
+							<div style="font-size: 22px; font-weight: 500; margin-bottom: 10px">Shipping</div>
+							<div>SHIPPING ADDRESS &nbsp;&nbsp;&nbsp; <u style="color: blue">Edit</u></div>
+							<p><b>Nguyen Tu Khai</b><br>
+							672A Jurong West Street<br>
+							Singapore, SG<br>
+							641672<br>
+							Singapore<br>
+							86206590</p>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 submit_form" style="padding-left: 0;">
+							<div style="font-size: 22px; font-weight: 500; margin-bottom: 10px">Payment</div>
+							<p>Cash on Delivery<p>
+						</div>
+
+						<div style="clear: both"></div>
+
+						<div class="theme-title" style="margin-top: 40px;">
+							<h2>Shopping Cart ({{number_of_kinds}})</h2>
+						</div>
+
+						{% for order in data_arr %}
+							<hr/>
+							<img style="width: 100px; height: 100px; float: left" src="{{order.food_obj.food_type.image}}"/>
+
+							<div style="float: left; margin-left: 40px; width: 100px;">{{order.food_obj.food_type.name}}</div>
+
+							<div style="float: left; margin-left: 40px;">
+								<p>Item Price: ${{order.food_obj.price_from_foodtype}}</p>
+								<p>Qty: {{order.quantity}}</p>
+							</div>
+
+							<div style="float: right">
+								${% widthratio order.food_obj.price_from_foodtype 1 order.quantity %}
+							</div>
+							
+							<div style="clear: both"></div>
+						{% endfor %}
+						<hr/>
 					</div>
 
 					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
