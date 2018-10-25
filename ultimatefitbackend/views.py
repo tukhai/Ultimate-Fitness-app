@@ -25,6 +25,8 @@ from django.contrib.sessions.models import Session
 
 from django.core.exceptions import MultipleObjectsReturned
 
+from django.core.mail import send_mail
+
 #from carton.cart import Cart
 
 from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion, GroupPromotion, CouponPromotion, DeliveryOrder
@@ -1049,7 +1051,6 @@ def order(request):
         count = 0
         number_of_kinds = 0
         for item_arr in order_data_arr:
-            # print item_arr['food_id'], item_arr['quantity']
             food_obj = Food.objects.get(id=item_arr['food_id'])
             print food_obj.food_type.name, item_arr['quantity']
             rendered_data_arr.append({
@@ -1071,6 +1072,56 @@ def order(request):
         return render(request, 'ultimatefitbackend/checkout.html', context)
     else:
         return redirect('/')
+
+
+def order_confirm_email(request):
+    if request.user.is_authenticated():
+
+        # Take the latest delivery created, another way is using cookie/session to pass between pages, but this is easier
+        # latest_created_delivery = DeliveryOrder.objects.latest('order_date')
+
+        # order_data_arr = json.loads(latest_created_delivery.order_data)
+
+        # rendered_data_arr = []
+        # total = 0
+        # count = 0
+        # number_of_kinds = 0
+        # for item_arr in order_data_arr:
+        #     food_obj = Food.objects.get(id=item_arr['food_id'])
+        #     print food_obj.food_type.name, item_arr['quantity']
+        #     rendered_data_arr.append({
+        #         'food_obj': food_obj,
+        #         'quantity': item_arr['quantity']
+        #     })
+
+        #     total += (food_obj.price_from_foodtype * item_arr['quantity']) 
+        #     count += item_arr['quantity']
+        #     number_of_kinds += 1
+
+        # context = {
+        #     'data_arr': rendered_data_arr,
+        #     'total': total,
+        #     'count': count,
+        #     'number_of_kinds': number_of_kinds
+        # }
+
+        # return render(request, 'ultimatefitbackend/checkout.html', context)
+
+        ########### Send order confirmation email ###########
+        send_mail(
+            'Subject here',
+            'Here is the message.',
+            # 'ntukhai@gmail.com',
+            'noreply@ultimate.fit',
+            ['ntukhai@gmail.com'],
+            fail_silently=False,
+        )
+
+        return JsonResponse({}, safe=False)
+    else:
+        # return redirect('/')
+        print "NO"
+        return JsonResponse({}, safe=False)
 
 
 class AccountView(generic.ListView):

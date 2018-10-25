@@ -57,6 +57,7 @@ urlpatterns = [
 
     url(r'^create_order_for_checkout/', views.create_order, name='create_order'),
     url(r'^order/', views.order, name='order'),
+    url(r'^order_confirm_email/', views.order_confirm_email, name='order_confirm_email'),
 
     url(r'^total/', views.total, name='total'),
     url(r'^list/', views.list, name='list'),

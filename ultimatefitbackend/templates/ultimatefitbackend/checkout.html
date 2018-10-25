@@ -481,6 +481,10 @@
 							<div style="clear: both"></div>
 						{% endfor %}
 						<hr/>
+
+						<div class="payment_system" id="confirm-order">
+							<a class="tran3s color2_bg float_left">Confirm Order</a>
+						</div>
 					</div>
 
 					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -877,6 +881,26 @@
 						"color": "#fff"
 					});
 				}
+			});
+
+			$(document).on("click", "#confirm-order", function() {
+				console.log("confirm order");
+
+				$.post(
+					"/order_confirm_email/",
+					{ 
+						csrfmiddlewaretoken: "{{ csrf_token }}",
+						// couponCode: couponCodeToCheck
+					},
+					function(data, status) {
+						if (status == "success") {
+							console.log(data, "confirm email");
+							// $(location).attr('href', '/order');
+						}
+					}
+		        ).fail(function(){
+					popUpInternetConnectionError();
+				});
 			});
 		</script>
 
