@@ -1033,16 +1033,21 @@ def create_order(request):
             ########### After this have to delete cart ###########
             current_cart.delete()
 
-        return JsonResponse({'a': 'dummy'}, safe=False)
+            ########### Get the id of newly created delivery_order and send to client side ###########
+            created_order_ID = delivery_order.id
+
+        return JsonResponse({'created_order_ID': created_order_ID}, safe=False)
     else:
         return redirect('/')
 
 
-def order(request):
-    if request.user.is_authenticated():
+def order(request, created_delivery_id):
+    print "request.history", request.META.get('HTTP_REFERER')
+    if request.user.is_authenticated() and request.META.get('HTTP_REFERER') != None:
 
         # Take the latest delivery created, another way is using cookie/session to pass between pages, but this is easier
-        latest_created_delivery = DeliveryOrder.objects.latest('order_date')
+        # latest_created_delivery = DeliveryOrder.objects.filter(user = request.user).latest('order_date')
+        latest_created_delivery = DeliveryOrder.objects.get(id = created_delivery_id)
 
         order_data_arr = json.loads(latest_created_delivery.order_data)
 
@@ -1063,6 +1068,7 @@ def order(request):
             number_of_kinds += 1
 
         context = {
+            'delivery_id': created_delivery_id,
             'data_arr': rendered_data_arr,
             'total': total,
             'count': count,
@@ -1074,55 +1080,42 @@ def order(request):
         return redirect('/')
 
 
-def order_confirm_email(request):
+def order_confirm_email(request, delivery_id):
     if request.user.is_authenticated():
+        address_object_from_client = request.POST.get("address_object_data","")
+        print address_object_from_client
 
-        # Take the latest delivery created, another way is using cookie/session to pass between pages, but this is easier
-        # latest_created_delivery = DeliveryOrder.objects.latest('order_date')
-
-        # order_data_arr = json.loads(latest_created_delivery.order_data)
-
-        # rendered_data_arr = []
-        # total = 0
-        # count = 0
-        # number_of_kinds = 0
-        # for item_arr in order_data_arr:
-        #     food_obj = Food.objects.get(id=item_arr['food_id'])
-        #     print food_obj.food_type.name, item_arr['quantity']
-        #     rendered_data_arr.append({
-        #         'food_obj': food_obj,
-        #         'quantity': item_arr['quantity']
-        #     })
-
-        #     total += (food_obj.price_from_foodtype * item_arr['quantity']) 
-        #     count += item_arr['quantity']
-        #     number_of_kinds += 1
-
-        # context = {
-        #     'data_arr': rendered_data_arr,
-        #     'total': total,
-        #     'count': count,
-        #     'number_of_kinds': number_of_kinds
-        # }
-
-        # return render(request, 'ultimatefitbackend/checkout.html', context)
+        delivery_obj_to_be_update = DeliveryOrder.objects.get(id = delivery_id)
 
         ########### Send order confirmation email ###########
+        address_data = json.loads(address_object_from_client)
+        msg_content = 'Dear ' + address_data['first_name'] + ' ' + address_data['last_name'] + ',\n' + 'Here is the detail of your order:\n' + address_object_from_client + '\n\nThank you,\nUltimate Fit Team.'
+        
+        print msg_content
         send_mail(
-            'Subject here',
-            'Here is the message.',
-            # 'ntukhai@gmail.com',
+            'Confirm Your Order',
+            msg_content,
             'noreply@ultimate.fit',
-            ['ntukhai@gmail.com'],
+            [address_data['email']],
             fail_silently=False,
         )
+
+        # Save address info
+        delivery_obj_to_be_update.address_info = address_object_from_client
+        delivery_obj_to_be_update.save()
 
         return JsonResponse({}, safe=False)
     else:
         # return redirect('/')
-        print "NO"
         return JsonResponse({}, safe=False)
 
+
+def success_order(request):
+    print request.META.get('HTTP_REFERER')
+    if request.user.is_authenticated() and request.META.get('HTTP_REFERER') != None:
+        return render(request, 'ultimatefitbackend/success-order.html')
+    else:
+        return redirect('/')
 
 class AccountView(generic.ListView):
     template_name = 'ultimatefitbackend/account.html'

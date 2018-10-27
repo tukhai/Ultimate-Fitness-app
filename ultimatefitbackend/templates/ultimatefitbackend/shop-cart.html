@@ -717,8 +717,8 @@
 					},
 					function(data, status) {
 						if (status == "success") {
-							console.log(data, "success post");
-							$(location).attr('href', '/order');
+							console.log(data, "success post",  typeof data.created_order_ID);
+							$(location).attr('href', '/order/' + data.created_order_ID);
 						}
 					}
 		        ).fail(function(){

@@ -884,24 +884,50 @@
 			});
 
 			$(document).on("click", "#confirm-order", function() {
-				console.log("confirm order");
+				var country = document.forms["shipping-details"]["country"].value;
+				var firstName = document.forms["shipping-details"]["first_name"].value;
+				var lastName = document.forms["shipping-details"]["last_name"].value;
+				var address = document.forms["shipping-details"]["address"].value;
+				var city = document.forms["shipping-details"]["city"].value;
+				var email = document.forms["shipping-details"]["email"].value;
+				var phoneNumber = document.forms["shipping-details"]["phone_number"].value;
+
+				var addressObj = {
+					country: country,
+					first_name: firstName,
+					last_name: lastName,
+					address: address,
+					city: city,
+					email: email,
+					phone_number: phoneNumber
+				};
+
+				addressObjData = JSON.stringify(addressObj);
+
+				console.log(addressObjData);
 
 				$.post(
-					"/order_confirm_email/",
+					"/order_confirm_email/" + {{delivery_id}},
 					{ 
 						csrfmiddlewaretoken: "{{ csrf_token }}",
-						// couponCode: couponCodeToCheck
+						address_object_data: addressObjData
 					},
 					function(data, status) {
 						if (status == "success") {
 							console.log(data, "confirm email");
-							// $(location).attr('href', '/order');
+							$(location).attr('href', '/success-order');
 						}
 					}
 		        ).fail(function(){
 					popUpInternetConnectionError();
 				});
 			});
+
+			function popUpInternetConnectionError() {
+				console.log("NO INTERNET");
+				$('.internet-connection-error').fadeIn(200);
+			    $('.internet-connection-error').delay(1500).fadeOut(200);
+			};
 		</script>
 
 		</div> <!-- End of .main_page -->

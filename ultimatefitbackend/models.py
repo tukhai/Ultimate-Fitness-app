@@ -357,3 +357,4 @@ class DeliveryOrder(models.Model):
     order_data = models.TextField(null=True, blank=True)
     order_date = models.DateTimeField(null=True)
     user = models.ForeignKey(User, null=True, blank=True)
+    address_info = models.TextField(null=True, blank=True)
