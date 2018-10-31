@@ -1117,6 +1117,14 @@ def success_order(request):
     else:
         return redirect('/')
 
+
+def account_page(request):
+    if request.user.is_authenticated():
+        return render(request, 'ultimatefitbackend/account.html')
+    else:
+        return redirect('/')
+
+
 class AccountView(generic.ListView):
     template_name = 'ultimatefitbackend/account.html'
     # context_object_name = 'latest_question_list'

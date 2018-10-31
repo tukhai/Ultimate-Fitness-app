@@ -60,6 +60,8 @@ urlpatterns = [
     url(r'^success-order/', views.success_order, name='success_order'),
     url(r'^order_confirm_email/(\d+)', views.order_confirm_email, name='order_confirm_email'),
 
+    url(r'^account_page/', views.account_page, name='account_page'),
+
     url(r'^total/', views.total, name='total'),
     url(r'^list/', views.list, name='list'),
     url(r'^registration_validation/', views.registration_validation, name='registration_validation'),
