@@ -61,6 +61,7 @@ urlpatterns = [
     url(r'^order_confirm_email/(\d+)', views.order_confirm_email, name='order_confirm_email'),
 
     url(r'^account_page/', views.account_page, name='account_page'),
+    url(r'^address_book/', views.address_book, name='address_book'),
 
     url(r'^total/', views.total, name='total'),
     url(r'^list/', views.list, name='list'),

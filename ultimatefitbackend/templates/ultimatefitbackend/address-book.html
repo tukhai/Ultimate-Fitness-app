@@ -1,0 +1,297 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+
+		{% block content %}
+			<style>
+				.register_form hr {
+					border-color: #dfdfdf;
+				}
+				.address-item {
+					height: 300px;
+					min-width: 250px;
+					border: 1px solid #699401;
+					border-radius: 10px;
+				}
+				.address-item-info-text {
+					margin-top: 25px;
+					float: left;
+				}
+				.address-item-info-text p {
+					color: black !important;
+					margin-top: -3px;
+				}
+				.address-item-info-text p.name-bold {
+					font-weight: 650 !important;
+				}
+				.check-icon {
+					background-color: #699401;
+					width: 22px;
+					border-radius: 20px;
+					/*position: absolute;*/
+					float: right;
+					text-align: center;
+					color: #fff;
+					margin-top: 30px;
+				}
+				span.address-item-button {
+					color: #004093 !important;
+				}
+				span.address-item-button:hover {
+					text-decoration: underline;
+					cursor: pointer;
+				}
+
+				.cancel-update-field, .update-info-field {
+					font-weight: 600;
+					line-height: 40px !important;
+					text-transform: capitalize !important;
+					float: left;
+					margin-top: 0 !important;
+					margin-bottom: 30px !important;
+					border: 1px solid #dfdfdf;
+				}
+				.cancel-update-field {
+					width: 25% !important;
+					color: #272727 !important;
+				}
+				.cancel-update-field:hover {
+					color: #fff !important;
+				}
+
+				.update-info-field {
+					width: 25% !important;
+					margin-left: 10px;
+				}
+
+				form#form-submit-account-info {
+					display: none;
+					padding-bottom: 70px !important;
+				}
+				.modify-address-title {
+					font-weight: 600 !important;
+					color: black !important;
+					margin-bottom: 10px;
+					margin-top: -10px;
+				}
+			</style>
+			<section class="breadcrumb-area" style="background-image:url({% static 'ultimatefitbackend/images/background/2.jpg' %});">
+			    <div class="container">
+			        <div class="row">
+			            <div class="col-md-12">
+			                <div class="breadcrumbs text-center">
+			                    <h1>Login / Register</h1>
+			                    <h4>Welcome to certified online organic products suppliersr</h4>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+				<div class="breadcrumb-bottom-area">
+				    <div class="container">
+				        <div class="row">
+				            <div class="col-lg-8 col-md-5 col-sm-5">
+				                <ul>
+				                    <li><a href="#">Home</a></li>
+				                    <li><a href=""><i class="fa fa-angle-right"></i></a></li>
+				                    <li><a href="#">Gallery</a></li>
+				                    <li><a href=""><i class="fa fa-angle-right"></i></a></li>
+				                    <li>Login / Register</li> 
+				                </ul>
+				            </div>
+				            <div class="col-lg-4 col-md-7 col-sm-7">
+				                <p>We provide <span>100% organic</span> products</p>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+			</section>
+
+
+			<!-- Account Page Content*********************** -->
+			<div class="account_page">
+	        	<div class="container">
+	        		<div class="row">
+	        			<!-- <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 login_form">
+	        				<div class="theme-title">
+								<h2>Login Now</h2>
+							</div>
+	        				<form action="#">
+	        					<div class="form_group">
+	        						<label>Username or Email</label>
+	        						<div class="input_group">
+	        							<input type="text" placeholder="iamsteelthemes@gmail.com">
+	        							<i class="fa fa-user" aria-hidden="true"></i>
+	        						</div>
+	        					</div>
+
+	        					<div class="form_group">
+	        						<label>Password</label>
+	        						<div class="input_group">
+	        							<input type="password" placeholder="********">
+	        							<i class="fa fa-lock" aria-hidden="true"></i>
+	        						</div>
+	        					</div>
+
+	        					<div class="clear_fix">
+	        						<div class="single_checkbox float_left">
+										<input type="checkbox" id="remember">
+										<label for="remember">Remember me</label>
+									</div>
+									<a href="#" class="float_right">Forgot Password?</a>
+	        					</div>
+	        					<button class="color1_bg tran3s">Login now</button>
+	        				</form>
+	        			</div> -->
+
+	        			<div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 register_form">
+	        				<div class="theme-title">
+								<h2>Address Book</h2>
+								<div style="color: grey; margin: 10px 0 30px 0;">
+									My Account &nbsp;>&nbsp; Address Book
+								</div>
+							</div>
+
+							<hr/>
+
+							<div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 field-info">
+								<!-- <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" style="font-weight: bold">
+									Username:
+								</div>
+								<div class="col-lg-9 col-md-9 col-sm-6 col-xs-12">
+									<span class="main-data-text">Nguyen Tu Khai</span>
+									<span class="field-required">Field Required*</span>
+								</div>
+								<div class="col-lg-1 col-md-1 col-sm-6 col-xs-12">
+									<a class="edit-field-link">Edit</a>
+								</div>-->
+								
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 address-item">
+									<div class="address-item-info-text">
+										<p class="name-bold">Nguyen Tu Khai</p>
+										<p>672A Jurong West Street</p>
+										<p>Singapore SG , 641672</p>
+										<p>Singapore</p>
+										<p>91228278</p>
+									</div>
+
+									<div class="check-icon">
+										<i class="fa fa-check" aria-hidden="true"></i>
+									</div>
+
+									<div style="clear: both;"></div>
+									<hr/>
+									<p><span class="address-item-button" id="delete-address-1">Delete</span> 
+										| 
+										<span class="address-item-button" id="edit-address-1">Edit</span></p>
+								</div>	
+							</div>
+
+							<div style="clear: both;"></div>
+							<hr/>
+
+	        				<form action="#" id="form-submit-account-info">
+	        					<div class="modify-address-title">Modify Address</div>
+	        					<div class="row">
+	        						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	        							<div class="form_group">
+			        						<div class="input_group">
+			        							<input type="text" placeholder="Username">
+			        							<i class="fa fa-user" aria-hidden="true"></i>
+			        						</div> <!-- End of .input_group -->
+			        					</div> <!-- End of .form_group -->
+
+			        					<div class="form_group">
+			        						<div class="input_group">
+			        							<input type="password" placeholder="Password">
+			        							<i class="fa fa-lock" aria-hidden="true"></i>
+			        						</div> <!-- End of .input_group -->
+			        					</div> <!-- End of .form_group -->
+
+			        					<div class="form_group">
+			        						<div class="input_group">
+			        							<input type="text" placeholder="Phone Number">
+			        							<i class="fa fa-phone" aria-hidden="true"></i>
+			        						</div> <!-- End of .input_group -->
+			        					</div> <!-- End of .form_group -->
+
+			        					<div class="form_group">
+			        						<div class="input_group">
+			        							<input type="email" placeholder="Email Address">
+			        							<i class="fa fa-envelope-o" aria-hidden="true"></i>
+			        						</div> <!-- End of .input_group -->
+			        					</div> <!-- End of .form_group -->
+
+			        					<div class="form_group">
+			        						<div class="input_group">
+			        							<input type="password" placeholder="Confirm Password">
+			        							<i class="fa fa-unlock-alt" aria-hidden="true"></i>
+			        						</div> <!-- End of .input_group -->
+			        					</div> <!-- End of .form_group -->
+
+			        					<div class="form_group">
+			        						<div class="input_group">
+			        							<input type="text" placeholder="Location">
+			        							<i class="fa fa-location-arrow" aria-hidden="true"></i>
+			        						</div> <!-- End of .input_group -->
+			        					</div> <!-- End of .form_group -->
+	        						</div>
+
+	        						<!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+	        							<div class="form_group">
+	        								<div class="input_group">
+			        							<input type="email" placeholder="Email Address">
+			        							<i class="fa fa-envelope-o" aria-hidden="true"></i>
+			        						</div>
+			        					</div>
+
+			        					<div class="form_group">
+			        						<div class="input_group">
+			        							<input type="password" placeholder="Confirm Password">
+			        							<i class="fa fa-unlock-alt" aria-hidden="true"></i>
+			        						</div>
+			        					</div>
+
+			        					<div class="form_group">
+			        						<div class="input_group">
+			        							<input type="text" placeholder="Location">
+			        							<i class="fa fa-location-arrow" aria-hidden="true"></i>
+			        						</div>
+			        					</div>
+	        						</div> -->
+	        					</div>
+	        					<div class="clear_fix">
+	        						<div class="single_checkbox float_left">
+										<!-- <input type="checkbox" id="terms">
+										<label for="terms">I agree the term’s & conditions</label> -->
+									</div> <!-- End .single_checkbox -->
+	        					</div>
+	        					<button class="cart_btn3 tran3s cancel-update-field">
+									Cancel
+								</button>
+								<button class="cart_btn1 tran3s color1_bg update-info-field">
+									Save
+								</button>
+	        				</form>
+	        			</div> <!-- End of .register_form -->
+
+	        		</div> <!-- End of .row -->
+	        	</div> <!-- End of .container -->
+			</div> <!-- End of .account_page -->
+
+			<script type="text/javascript">
+				$(document).on("click", "button.cancel-update-field, button.update-info-field", function(e) {
+					e.preventDefault();
+					$(this).parents("form#form-submit-account-info").css("display", "none");
+					$(document).scrollTop(400);
+				});
+
+				$(document).on("click", "span#edit-address-1", function() {
+					$("form#form-submit-account-info").css("display", "block");
+
+					var offset = $("form#form-submit-account-info").offset();
+					$(document).scrollTop(offset.top - 100);
+				});
+			</script>
+		{% endblock %}
