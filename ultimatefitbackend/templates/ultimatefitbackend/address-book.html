@@ -36,6 +36,16 @@
 					color: #fff;
 					margin-top: 30px;
 				}
+				.add-icon {
+					background-color: #699401;
+					width: 22px;
+					border-radius: 20px;
+					float: left;
+					text-align: center;
+					color: #fff;
+					margin-top: 30px;
+				}
+
 				span.address-item-button {
 					color: #004093 !important;
 				}
@@ -75,6 +85,11 @@
 					color: black !important;
 					margin-bottom: 10px;
 					margin-top: -10px;
+				}
+
+				.fa-circle {
+					color: #699401;
+					border-radius: 10px;
 				}
 			</style>
 			<section class="breadcrumb-area" style="background-image:url({% static 'ultimatefitbackend/images/background/2.jpg' %});">
@@ -185,13 +200,33 @@
 									<p><span class="address-item-button" id="delete-address-1">Delete</span> 
 										| 
 										<span class="address-item-button" id="edit-address-1">Edit</span></p>
-								</div>	
+								</div>
 							</div>
 
 							<div style="clear: both;"></div>
 							<hr/>
 
+							<div class="col-lg-12 col-md-12 col-sm-6 col-xs-12" id="add-address-container">
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 address-item" style="border-color: grey; cursor: pointer;" id="add-address-click">
+									<div style="margin-top: 100px;">
+										<div class="add-icon">
+											<i class="fa fa-plus" aria-hidden="true"></i>
+										</div>
+										<div class="address-item-info-text" style="font-weight: 600; margin-left: 20px; margin-top: 30px;">
+											Add a New Address
+										</div>
+									</div>
+									<div style="clear: both;"></div>
+								</div>
+							</div>
+
+							<div style="clear: both;"></div>
+
 	        				<form action="#" id="form-submit-account-info">
+	        					<div id="new-address-title" style="display: none; font-weight: 600; margin-bottom: 40px; font-size: 20px;">
+	        						<i class="fa fa-circle" aria-hidden="true"></i>
+	        						&nbsp;&nbsp;&nbsp;New Shipping Address
+	        					</div>
 	        					<div class="modify-address-title">Modify Address</div>
 	        					<div class="row">
 	        						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -284,14 +319,28 @@
 				$(document).on("click", "button.cancel-update-field, button.update-info-field", function(e) {
 					e.preventDefault();
 					$(this).parents("form#form-submit-account-info").css("display", "none");
+					$("#add-address-click").css("display", "block");
 					$(document).scrollTop(400);
+
+					$("#new-address-title").css("display", "none");
 				});
 
 				$(document).on("click", "span#edit-address-1", function() {
 					$("form#form-submit-account-info").css("display", "block");
+					$("#add-address-click").css("display", "none");
 
 					var offset = $("form#form-submit-account-info").offset();
 					$(document).scrollTop(offset.top - 100);
+				});
+
+				$(document).on("click", "#add-address-click", function() {
+					$(this).css("display", "none");
+					$("form#form-submit-account-info").css("display", "block");
+
+					var offset = $("form#form-submit-account-info").offset();
+					$(document).scrollTop(offset.top - 100);
+
+					$("#new-address-title").css("display", "block");
 				});
 			</script>
 		{% endblock %}
