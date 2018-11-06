@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion, GroupPromotion, GroupPromotionFoodTypes, CouponPromotion, DeliveryOrder
+from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion, GroupPromotion, GroupPromotionFoodTypes, CouponPromotion, DeliveryOrder, AddressBook
 
 from copy import deepcopy
 
@@ -169,6 +169,10 @@ class DeliveryOrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'order_date', 'order_data', 'user')
 
 
+class AddressBookAdmin(admin.ModelAdmin):
+    list_display = ('id', 'country', 'first_name', 'last_name', 'address', 'city', 'email', 'phone_number')
+
+
 admin.site.register(Food, FoodAdmin)
 admin.site.register(FoodType, FoodTypeAdmin)
 admin.site.register(FoodCategory)
@@ -181,6 +185,7 @@ admin.site.register(FoodOrder, FoodOrderAdmin)
 admin.site.register(Cart, CartAdmin)
 
 admin.site.register(DeliveryOrder, DeliveryOrderAdmin)
+admin.site.register(AddressBook, AddressBookAdmin)
 
 admin.site.register(GeneralPromotion, GeneralPromotionAdmin)
 admin.site.register(GroupPromotion, GroupPromotionAdmin)

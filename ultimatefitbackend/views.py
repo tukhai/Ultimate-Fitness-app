@@ -29,7 +29,7 @@ from django.core.mail import send_mail
 
 #from carton.cart import Cart
 
-from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion, GroupPromotion, CouponPromotion, DeliveryOrder
+from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart, GeneralPromotion, GroupPromotion, CouponPromotion, DeliveryOrder, AddressBook
 
 # from .utcisoformat import utcisoformat
 
@@ -1090,8 +1090,7 @@ def order_confirm_email(request, delivery_id):
         ########### Send order confirmation email ###########
         address_data = json.loads(address_object_from_client)
         msg_content = 'Dear ' + address_data['first_name'] + ' ' + address_data['last_name'] + ',\n' + 'Here is the detail of your order:\n' + address_object_from_client + '\n\nThank you,\nUltimate Fit Team.'
-        
-        print msg_content
+
         send_mail(
             'Confirm Your Order',
             msg_content,
@@ -1100,9 +1099,22 @@ def order_confirm_email(request, delivery_id):
             fail_silently=False,
         )
 
-        # Save address info
+        # Save address info into Delivery Order table
         delivery_obj_to_be_update.address_info = address_object_from_client
         delivery_obj_to_be_update.save()
+
+        # Save address info into Address Book table
+        address_book_item = AddressBook.objects.create(
+            country = address_data['country'],
+            first_name = address_data['first_name'],
+            last_name = address_data['last_name'],
+            address = address_data['address'],
+            city = address_data['city'],
+            email = address_data['email'],
+            phone_number = address_data['phone_number'],
+            user = request.user
+        )
+        address_book_item.save()
 
         return JsonResponse({}, safe=False)
     else:

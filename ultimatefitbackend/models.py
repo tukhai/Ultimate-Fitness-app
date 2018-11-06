@@ -358,3 +358,14 @@ class DeliveryOrder(models.Model):
     order_date = models.DateTimeField(null=True)
     user = models.ForeignKey(User, null=True, blank=True)
     address_info = models.TextField(null=True, blank=True)
+
+
+class AddressBook(models.Model):
+    country = models.CharField(max_length=100, null=True)
+    first_name = models.CharField(max_length=100, null=True)
+    last_name = models.CharField(max_length=100, null=True)
+    address = models.CharField(max_length=100, null=True)
+    city = models.CharField(max_length=100, null=True)
+    email = models.CharField(max_length=100, null=True)
+    phone_number = models.CharField(max_length=100, null=True)
+    user = models.ForeignKey(User, null=True, blank=True)
