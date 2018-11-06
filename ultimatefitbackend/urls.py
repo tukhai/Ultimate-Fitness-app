@@ -62,6 +62,7 @@ urlpatterns = [
 
     url(r'^account_page/', views.account_page, name='account_page'),
     url(r'^address_book/', views.address_book, name='address_book'),
+    url(r'^orders_history/', views.orders_history, name='orders_history'),
 
     url(r'^total/', views.total, name='total'),
     url(r'^list/', views.list, name='list'),

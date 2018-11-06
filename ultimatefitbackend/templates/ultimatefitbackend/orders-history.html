@@ -1,0 +1,269 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+
+		{% block content %}
+			<style>
+				.register_form hr {
+					border-color: #dfdfdf;
+				}
+				.cancel-update-field, .update-info-field {
+					font-weight: 600;
+					line-height: 40px !important;
+					text-transform: capitalize !important;
+					/*float: left;*/
+					margin-top: 0 !important;
+					margin-bottom: 30px !important;
+					border: 1px solid #dfdfdf;
+				}
+				.cancel-update-field {
+					width: 100% !important;
+					color: #272727 !important;
+				}
+				.cancel-update-field:hover {
+					color: #fff !important;
+				}
+
+				.update-info-field {
+					width: 100% !important;
+				}
+
+				.order-item-table {
+					border: 1px solid #dfdfdf;
+				}
+
+				.buttons-container-right-column {
+					margin: 20px 0 0 0 !important; 
+					padding: 0 !important; 
+					background-color: #fff !important; 
+					border: none !important;
+				}
+				.item-in-cart {
+					margin: 20px 10px 20px 0;
+				}
+				.item-in-cart img {
+					margin-right: 30px;
+					margin-bottom: 30px;
+				}
+
+				a.edit-field-link {
+					cursor: pointer;
+					font-weight: 700;
+					font-size: 16px;
+					margin-top: 0 !important;
+				}
+				a.edit-field-link:hover {
+					text-decoration: underline;
+				}
+
+				.table-title-order {
+					vertical-align: middle;
+				}
+
+				span.span-grey-title {
+					font-size: 15px;
+					color: grey;
+					font-weight: 500;
+				}
+				span.span-bold-content {
+					font-size: 18px;
+					font-weight: 500;
+				}
+
+				.table-cell-divider {
+					clear: both; 
+					border: 0.5px solid #dfdfdf;
+					width: calc(100% + 45px);
+					margin-left: -30px;
+				}
+			</style>
+			<section class="breadcrumb-area" style="background-image:url({% static 'ultimatefitbackend/images/background/2.jpg' %});">
+			    <div class="container">
+			        <div class="row">
+			            <div class="col-md-12">
+			                <div class="breadcrumbs text-center">
+			                    <h1>Login / Register</h1>
+			                    <h4>Welcome to certified online organic products suppliersr</h4>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+				<div class="breadcrumb-bottom-area">
+				    <div class="container">
+				        <div class="row">
+				            <div class="col-lg-8 col-md-5 col-sm-5">
+				                <ul>
+				                    <li><a href="#">Home</a></li>
+				                    <li><a href=""><i class="fa fa-angle-right"></i></a></li>
+				                    <li><a href="#">Gallery</a></li>
+				                    <li><a href=""><i class="fa fa-angle-right"></i></a></li>
+				                    <li>Login / Register</li> 
+				                </ul>
+				            </div>
+				            <div class="col-lg-4 col-md-7 col-sm-7">
+				                <p>We provide <span>100% organic</span> products</p>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+			</section>
+
+
+			<!-- Account Page Content*********************** -->
+			<div class="account_page">
+	        	<div class="container">
+	        		<div class="row">
+	        			<!-- <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 login_form">
+	        				<div class="theme-title">
+								<h2>Login Now</h2>
+							</div>
+	        				<form action="#">
+	        					<div class="form_group">
+	        						<label>Username or Email</label>
+	        						<div class="input_group">
+	        							<input type="text" placeholder="iamsteelthemes@gmail.com">
+	        							<i class="fa fa-user" aria-hidden="true"></i>
+	        						</div>
+	        					</div>
+
+	        					<div class="form_group">
+	        						<label>Password</label>
+	        						<div class="input_group">
+	        							<input type="password" placeholder="********">
+	        							<i class="fa fa-lock" aria-hidden="true"></i>
+	        						</div>
+	        					</div>
+
+	        					<div class="clear_fix">
+	        						<div class="single_checkbox float_left">
+										<input type="checkbox" id="remember">
+										<label for="remember">Remember me</label>
+									</div>
+									<a href="#" class="float_right">Forgot Password?</a>
+	        					</div>
+	        					<button class="color1_bg tran3s">Login now</button>
+	        				</form>
+	        			</div> -->
+
+	        			<div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 register_form">
+	        				<div class="theme-title">
+								<h2>Orders</h2>
+								<div style="color: grey; margin: 10px 0 30px 0;">
+									My Account &nbsp;>&nbsp; Orders
+								</div>
+							</div>
+
+							<div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 order-item-table" style="height: 50px;">
+								<div class="col-lg-10 col-md-10 col-sm-6 col-xs-12 table-title-order" style="height: 100%;">
+									<div style="float: left; line-height: 50px;">
+										<span class="span-grey-title">Order Number:</span> 
+										<span class="span-bold-content" style="color: blue;">307616782</span>
+										&nbsp;&nbsp;|&nbsp;&nbsp;
+										<span class="span-grey-title">Order Date:</span> 
+										<span class="span-bold-content">November 01 2018</span>
+									</div>
+									<div style="float: left; line-height: 50px; margin-left: 50px;">
+										<span class="span-grey-title">Total:</span> 
+										<span class="span-bold-content">SG$212.30</span>
+									</div>
+								</div>
+								<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12 table-title-order" style="height: 100%; line-height: 50px; font-size: 20px; color: orange; font-weight: 500; text-align: right;">
+									Processing
+								</div>
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 order-item-table">
+								<div class="col-lg-9 col-md-9 col-sm-6 col-xs-12" style="border-right: 1px solid #dfdfdf;">
+									<div class="item-in-cart">
+										<img style="height: 120px; width: 120px; float: left;"/>
+										<div style="width: 300px; float: left;">
+											<div>
+												MusclePharm, Combat Crunch, Chocolate Cake, 12 Bars, 2.22 oz (63g) Each
+											</div>
+											<div style="margin-top: 15px;">
+												<div style="float: left;">
+													<div style="font-size: 12px; color: grey;">Item Price</div>
+													<div style="font-weight: 700;">SG$38.79</div>
+												</div>
+												<div style="float: left; margin-left: 30px;">
+													<div style="font-size: 12px; color: grey;">Qty:</div>
+													<div style="font-weight: 700;">6</div>
+												</div>
+											</div>
+										</div>
+										<div style="width: 100px; float: right; text-align: right;">
+											<a class="edit-field-link">Add to Cart</a>
+										</div>
+									</div>
+
+									<div class="table-cell-divider"></div>
+
+									<div class="item-in-cart">
+										<img style="height: 120px; width: 120px; float: left;"/>
+										<div style="width: 300px; float: left;">
+											<div>
+												MusclePharm, Combat Crunch, Chocolate Cake, 12 Bars, 2.22 oz (63g) Each
+											</div>
+											<div style="margin-top: 15px;">
+												<div style="float: left;">
+													<div style="font-size: 12px; color: grey;">Item Price</div>
+													<div style="font-weight: 700;">SG$38.79</div>
+												</div>
+												<div style="float: left; margin-left: 30px;">
+													<div style="font-size: 12px; color: grey;">Qty:</div>
+													<div style="font-weight: 700;">6</div>
+												</div>
+											</div>
+										</div>
+										<div style="width: 100px; float: right; text-align: right;">
+											<a class="edit-field-link">Add to Cart</a>
+										</div>
+									</div>
+
+									<div class="table-cell-divider"></div>
+
+									<div class="item-in-cart">
+										<img style="height: 120px; width: 120px; float: left;"/>
+										<div style="width: 300px; float: left;">
+											<div>
+												MusclePharm, Combat Crunch, Chocolate Cake, 12 Bars, 2.22 oz (63g) Each
+											</div>
+											<div style="margin-top: 15px;">
+												<div style="float: left;">
+													<div style="font-size: 12px; color: grey;">Item Price</div>
+													<div style="font-weight: 700;">SG$38.79</div>
+												</div>
+												<div style="float: left; margin-left: 30px;">
+													<div style="font-size: 12px; color: grey;">Qty:</div>
+													<div style="font-weight: 700;">6</div>
+												</div>
+											</div>
+										</div>
+										<div style="width: 100px; float: right; text-align: right;">
+											<a class="edit-field-link">Add to Cart</a>
+										</div>
+									</div>
+									<div style="clear: both;"></div>
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+									<form class="buttons-container-right-column">
+										<button class="cart_btn1 tran3s color1_bg update-info-field">
+											Order Details
+										</button>
+										<button class="cart_btn3 tran3s cancel-update-field" style="margin-top: -10px !important;">
+											Modify Order
+										</button>
+									</form>
+								</div>
+							</div>
+
+							<div style="clear: both;"></div>
+	        			</div> <!-- End of .register_form -->
+
+	        		</div> <!-- End of .row -->
+	        	</div> <!-- End of .container -->
+			</div> <!-- End of .account_page -->
+
+			<script type="text/javascript"></script>
+		{% endblock %}

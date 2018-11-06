@@ -1132,6 +1132,13 @@ def address_book(request):
         return redirect('/')
 
 
+def orders_history(request):
+    if request.user.is_authenticated():
+        return render(request, 'ultimatefitbackend/orders-history.html')
+    else:
+        return redirect('/')
+
+
 class AccountView(generic.ListView):
     template_name = 'ultimatefitbackend/account.html'
     # context_object_name = 'latest_question_list'
