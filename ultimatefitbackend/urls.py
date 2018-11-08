@@ -61,7 +61,12 @@ urlpatterns = [
     url(r'^order_confirm_email/(\d+)', views.order_confirm_email, name='order_confirm_email'),
 
     url(r'^account_page/', views.account_page, name='account_page'),
+    
     url(r'^address_book/', views.address_book, name='address_book'),
+    url(r'^edit_address_book/', views.edit_address_book, name='edit_address_book'),
+    url(r'^add_address_book/', views.add_address_book, name='add_address_book'),
+    url(r'^delete_address_book/', views.delete_address_book, name='delete_address_book'),
+
     url(r'^orders_history/', views.orders_history, name='orders_history'),
 
     url(r'^total/', views.total, name='total'),

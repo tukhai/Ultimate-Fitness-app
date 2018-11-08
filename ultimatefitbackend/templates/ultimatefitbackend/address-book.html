@@ -22,6 +22,8 @@
 				.address-item-info-text p {
 					color: black !important;
 					margin-top: -3px;
+					min-width: 160px;
+					word-wrap: break-word;
 				}
 				.address-item-info-text p.name-bold {
 					font-weight: 650 !important;
@@ -30,11 +32,11 @@
 					background-color: #699401;
 					width: 22px;
 					border-radius: 20px;
-					/*position: absolute;*/
-					float: right;
+					position: absolute;
 					text-align: center;
 					color: #fff;
-					margin-top: 30px;
+					margin-top: 20px;
+					margin-left: calc(100% - 50px);
 				}
 				.add-icon {
 					background-color: #699401;
@@ -168,27 +170,20 @@
 								</div>
 							</div>
 
-							<hr/>
+							{% if address_list.count > 0 %}
+								<hr/>
+							{% endif %}
 
-							<div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 field-info">
-								<!-- <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" style="font-weight: bold">
-									Username:
-								</div>
-								<div class="col-lg-9 col-md-9 col-sm-6 col-xs-12">
-									<span class="main-data-text">Nguyen Tu Khai</span>
-									<span class="field-required">Field Required*</span>
-								</div>
-								<div class="col-lg-1 col-md-1 col-sm-6 col-xs-12">
-									<a class="edit-field-link">Edit</a>
-								</div>-->
-								
-								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 address-item">
+							{% for item_address in address_list %}
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 address-item" style="margin: 0 30px 30px 0;">
 									<div class="address-item-info-text">
-										<p class="name-bold">Nguyen Tu Khai</p>
-										<p>672A Jurong West Street</p>
-										<p>Singapore SG , 641672</p>
-										<p>Singapore</p>
-										<p>91228278</p>
+										<p class="name-bold">
+											{{item_address.first_name}} {{item_address.last_name}}
+										</p>
+										<p>{{item_address.address}}</p>
+										<p>{{item_address.city}}</p>
+										<p>{{item_address.country}}</p>
+										<p>{{item_address.phone_number}}</p>
 									</div>
 
 									<div class="check-icon">
@@ -196,33 +191,35 @@
 									</div>
 
 									<div style="clear: both;"></div>
-									<hr/>
-									<p><span class="address-item-button" id="delete-address-1">Delete</span> 
-										| 
-										<span class="address-item-button" id="edit-address-1">Edit</span></p>
+									<div style="bottom: 30px; position: absolute; width: calc(100% - 30px);">
+										<hr/>
+										<p>
+											<span class="address-item-button delete-address" data-id-address="{{item_address.id}}">Delete</span> 
+											| 
+											<span class="address-item-button edit-address" data-id-address="{{item_address.id}}">Edit</span>
+										</p>
+									</div>
 								</div>
-							</div>
+			   				{% endfor %}
 
 							<div style="clear: both;"></div>
 							<hr/>
 
-							<div class="col-lg-12 col-md-12 col-sm-6 col-xs-12" id="add-address-container">
-								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 address-item" style="border-color: grey; cursor: pointer;" id="add-address-click">
-									<div style="margin-top: 100px;">
-										<div class="add-icon">
-											<i class="fa fa-plus" aria-hidden="true"></i>
-										</div>
-										<div class="address-item-info-text" style="font-weight: 600; margin-left: 20px; margin-top: 30px;">
-											Add a New Address
-										</div>
+							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 address-item" style="border-color: grey; cursor: pointer;" id="add-address-click">
+								<div style="margin-top: 100px;">
+									<div class="add-icon">
+										<i class="fa fa-plus" aria-hidden="true"></i>
 									</div>
-									<div style="clear: both;"></div>
+									<div class="address-item-info-text" style="font-weight: 600; margin-left: 20px; margin-top: 30px;">
+										Add a New Address
+									</div>
 								</div>
+								<div style="clear: both;"></div>
 							</div>
 
 							<div style="clear: both;"></div>
 
-	        				<form action="#" id="form-submit-account-info">
+	        				<form action="#" id="form-submit-account-info" data-id-address="" name="shipping-details">
 	        					<div id="new-address-title" style="display: none; font-weight: 600; margin-bottom: 40px; font-size: 20px;">
 	        						<i class="fa fa-circle" aria-hidden="true"></i>
 	        						&nbsp;&nbsp;&nbsp;New Shipping Address
@@ -232,45 +229,53 @@
 	        						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 	        							<div class="form_group">
 			        						<div class="input_group">
-			        							<input type="text" placeholder="Username">
+			        							<input type="text" placeholder="First Name*" name="first_name">
 			        							<i class="fa fa-user" aria-hidden="true"></i>
 			        						</div> <!-- End of .input_group -->
 			        					</div> <!-- End of .form_group -->
 
 			        					<div class="form_group">
 			        						<div class="input_group">
-			        							<input type="password" placeholder="Password">
-			        							<i class="fa fa-lock" aria-hidden="true"></i>
+			        							<input type="text" placeholder="Last Name*" name="last_name">
+			        							<i class="fa fa-user" aria-hidden="true"></i>
 			        						</div> <!-- End of .input_group -->
 			        					</div> <!-- End of .form_group -->
 
 			        					<div class="form_group">
 			        						<div class="input_group">
-			        							<input type="text" placeholder="Phone Number">
-			        							<i class="fa fa-phone" aria-hidden="true"></i>
+			        							<input type="text" placeholder="Address*" name="address">
+			        							<i class="fa fa-location-arrow" aria-hidden="true"></i>
 			        						</div> <!-- End of .input_group -->
 			        					</div> <!-- End of .form_group -->
 
 			        					<div class="form_group">
 			        						<div class="input_group">
-			        							<input type="email" placeholder="Email Address">
+			        							<input type="text" placeholder="Town/City*" name="city">
+			        							<i class="fa fa-globe" aria-hidden="true"></i>
+			        						</div> <!-- End of .input_group -->
+			        					</div> <!-- End of .form_group -->
+
+			        					<div class="form_group">
+			        						<div class="input_group">
+			        							<input type="text" placeholder="Country*" name="country">
+			        							<i class="fa fa-globe" aria-hidden="true"></i>
+			        						</div> <!-- End of .input_group -->
+			        					</div> <!-- End of .form_group -->
+
+			        					<div class="form_group">
+			        						<div class="input_group">
+			        							<input type="email" placeholder="Email Address*" name="email">
 			        							<i class="fa fa-envelope-o" aria-hidden="true"></i>
 			        						</div> <!-- End of .input_group -->
 			        					</div> <!-- End of .form_group -->
 
 			        					<div class="form_group">
 			        						<div class="input_group">
-			        							<input type="password" placeholder="Confirm Password">
-			        							<i class="fa fa-unlock-alt" aria-hidden="true"></i>
+			        							<input type="text" placeholder="Phone Number*" name="phone_number">
+			        							<i class="fa fa-phone" aria-hidden="true"></i>
 			        						</div> <!-- End of .input_group -->
 			        					</div> <!-- End of .form_group -->
 
-			        					<div class="form_group">
-			        						<div class="input_group">
-			        							<input type="text" placeholder="Location">
-			        							<i class="fa fa-location-arrow" aria-hidden="true"></i>
-			        						</div> <!-- End of .input_group -->
-			        					</div> <!-- End of .form_group -->
 	        						</div>
 
 	        						<!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -316,21 +321,190 @@
 			</div> <!-- End of .account_page -->
 
 			<script type="text/javascript">
-				$(document).on("click", "button.cancel-update-field, button.update-info-field", function(e) {
-					e.preventDefault();
-					$(this).parents("form#form-submit-account-info").css("display", "none");
-					$("#add-address-click").css("display", "block");
-					$(document).scrollTop(400);
+				function popUpInternetConnectionError() {
+					$('.internet-connection-error').fadeIn(200);
+					$('.internet-connection-error').delay(1500).fadeOut(200);
+				};
 
-					$("#new-address-title").css("display", "none");
+				// Validate shipping details form
+				function ValidateEmail(mail) {  
+					var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+					if (re.test(mail)) {
+					    return true;
+					} else {
+					    return false;
+					}  
+				};
+
+				// When click to each of the input, its color reset to normal
+				$('form[name="shipping-details"] input').each(function() {
+					$(this).click(function(){
+						$(this).css("border", "2px solid #f7f7f7");
+					});
 				});
 
-				$(document).on("click", "span#edit-address-1", function() {
+				function validateForm() {
+					var country = document.forms["shipping-details"]["country"].value;
+					var firstName = document.forms["shipping-details"]["first_name"].value;
+					var lastName = document.forms["shipping-details"]["last_name"].value;
+					var address = document.forms["shipping-details"]["address"].value;
+					var city = document.forms["shipping-details"]["city"].value;
+					var email = document.forms["shipping-details"]["email"].value;
+					var phoneNumber = document.forms["shipping-details"]["phone_number"].value;
+
+					if (country == "") {
+						$('input[name="country"]').css("border", "2px solid red");
+					}
+					if (firstName == "") {
+						$('input[name="first_name"]').css("border", "2px solid red");
+					}
+					if (lastName == "") {
+						$('input[name="last_name"]').css("border", "2px solid red");
+					}
+					if (address == "") {
+						$('input[name="address"]').css("border", "2px solid red");
+					}
+					if (city == "") {
+						$('input[name="city"]').css("border", "2px solid red");
+					}
+					if (ValidateEmail(email) == "") {
+						$('input[name="email"]').css("border", "2px solid red");
+					}
+					if (phoneNumber == "") {
+						$('input[name="phone_number"]').css("border", "2px solid red");
+					}
+
+					if (country == "" || firstName == "" || lastName == "" || address == "" || city == "" || !ValidateEmail(email) || phoneNumber == "") {
+						// $(window).scrollTop(50);
+						return false;
+					}
+
+					return true;
+				}
+
+				$(document).on("click", "button.cancel-update-field, button.update-info-field", function(e) {
+					e.preventDefault();
+
+					// Save add/change of address into database
+					var addressObjID = $("form#form-submit-account-info").data('id-address');
+
+					var country = document.forms["shipping-details"]["country"].value;
+					var firstName = document.forms["shipping-details"]["first_name"].value;
+					var lastName = document.forms["shipping-details"]["last_name"].value;
+					var address = document.forms["shipping-details"]["address"].value;
+					var city = document.forms["shipping-details"]["city"].value;
+					var email = document.forms["shipping-details"]["email"].value;
+					var phoneNumber = document.forms["shipping-details"]["phone_number"].value;
+
+					var addressObj = {
+						country: country,
+						first_name: firstName,
+						last_name: lastName,
+						address: address,
+						city: city,
+						email: email,
+						phone_number: phoneNumber
+					};
+
+					addressObjData = JSON.stringify(addressObj);
+
+					if ($(this).hasClass('cancel-update-field')) {
+						$(this).parents("form#form-submit-account-info").css("display", "none");
+						$("#add-address-click").css("display", "block");
+						$(document).scrollTop(400);
+
+						$("#new-address-title").css("display", "none");
+					} else if ($(this).hasClass('update-info-field')) {
+						var currentFormDataAddress = $("form#form-submit-account-info").data('id-address');
+
+						if (validateForm()) {
+							if (typeof currentFormDataAddress == "number") {
+								$.post(
+									"/edit_address_book/",
+									{ 
+										csrfmiddlewaretoken: "{{ csrf_token }}",
+										address_obj_ID: addressObjID,
+										address_obj_data: addressObjData
+									},
+									function(data, status) {
+										if (status == "success") {
+											console.log(data, "success post");
+											$(document).scrollTop(400);
+											location.reload();
+										}
+									}
+								).fail(function(){
+									popUpInternetConnectionError();
+								});
+							} else if (typeof currentFormDataAddress == "string") {
+								if (currentFormDataAddress == "add_new_address") {
+									$.post(
+										"/add_address_book/",
+										{ 
+											csrfmiddlewaretoken: "{{ csrf_token }}",
+											address_obj_data: addressObjData
+										},
+										function(data, status) {
+											if (status == "success") {
+												console.log(data, "success post");
+												$(document).scrollTop(400);
+												location.reload();
+											}
+										}
+									).fail(function(){
+										popUpInternetConnectionError();
+									});
+								}
+							}
+						}
+					}
+				});
+
+				$(document).on("click", "span.edit-address", function() {
 					$("form#form-submit-account-info").css("display", "block");
 					$("#add-address-click").css("display", "none");
 
 					var offset = $("form#form-submit-account-info").offset();
 					$(document).scrollTop(offset.top - 100);
+
+					var addressDataID = $(this).data('id-address');
+					console.log(addressDataID);
+					// pass id address data to form
+					$("form#form-submit-account-info").data('id-address', addressDataID);
+
+					// Default value for form
+					{% for item_address in address_list %}
+						if (addressDataID == {{item_address.id}}) {
+							document.forms["shipping-details"]["country"].value = "{{item_address.country}}";
+							document.forms["shipping-details"]["first_name"].value = "{{item_address.first_name}}";
+							document.forms["shipping-details"]["last_name"].value = "{{item_address.last_name}}";
+							document.forms["shipping-details"]["address"].value = "{{item_address.address}}";
+							document.forms["shipping-details"]["city"].value = "{{item_address.city}}";
+							document.forms["shipping-details"]["email"].value = "{{item_address.email}}";
+							document.forms["shipping-details"]["phone_number"].value = "{{item_address.phone_number}}";
+						}
+					{% endfor %}
+				});
+
+				$(document).on("click", "span.delete-address", function() {
+					var addressDataID = $(this).data('id-address');
+
+					$.post(
+						"/delete_address_book/",
+						{ 
+							csrfmiddlewaretoken: "{{ csrf_token }}",
+							address_obj_ID: addressDataID
+						},
+						function(data, status) {
+							if (status == "success") {
+								console.log(data, "success post");
+								// $(document).scrollTop(400);
+								location.reload();
+							}
+						}
+					).fail(function(){
+						popUpInternetConnectionError();
+					});
 				});
 
 				$(document).on("click", "#add-address-click", function() {
@@ -341,6 +515,20 @@
 					$(document).scrollTop(offset.top - 100);
 
 					$("#new-address-title").css("display", "block");
+
+					// When add new address, empty all the form
+					document.forms["shipping-details"]["country"].value = "";
+					document.forms["shipping-details"]["first_name"].value = "";
+					document.forms["shipping-details"]["last_name"].value = "";
+					document.forms["shipping-details"]["address"].value = "";
+					document.forms["shipping-details"]["city"].value = "";
+					document.forms["shipping-details"]["email"].value = "";
+					document.forms["shipping-details"]["phone_number"].value = "";
+
+					// change data-id-address for the form in case of ading new address
+					$("form#form-submit-account-info").data('id-address', 'add_new_address');
 				});
+
+				// console.log("length --", {{ address_list.count }});
 			</script>
 		{% endblock %}

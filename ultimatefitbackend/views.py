@@ -1139,7 +1139,71 @@ def account_page(request):
 
 def address_book(request):
     if request.user.is_authenticated():
-        return render(request, 'ultimatefitbackend/address-book.html')
+        address_list = AddressBook.objects.filter(user = request.user)
+
+        context = {
+            'address_list': address_list
+        }
+        return render(request, 'ultimatefitbackend/address-book.html', context)
+    else:
+        return redirect('/')
+
+
+def edit_address_book(request):
+    if request.user.is_authenticated() and request.method == "POST":
+        address_obj_ID_from_client = request.POST.get("address_obj_ID","")
+        address_obj_data_from_client = request.POST.get("address_obj_data","")
+
+        address_data = json.loads(address_obj_data_from_client)
+
+        address_obj_to_be_update = AddressBook.objects.get(id = address_obj_ID_from_client)
+        ##############
+        address_obj_to_be_update.country = address_data['country']
+        address_obj_to_be_update.first_name = address_data['first_name']
+        address_obj_to_be_update.last_name = address_data['last_name']
+        address_obj_to_be_update.address = address_data['address']
+        address_obj_to_be_update.city = address_data['city']
+        address_obj_to_be_update.email = address_data['email']
+        address_obj_to_be_update.phone_number = address_data['phone_number']
+        ##############
+        address_obj_to_be_update.save()
+
+        return JsonResponse({}, safe=False)
+    else:
+        return JsonResponse({}, safe=False)
+
+
+def add_address_book(request):
+    if request.user.is_authenticated() and request.method == "POST":
+
+        address_obj_data_from_client = request.POST.get("address_obj_data","")
+
+        address_data = json.loads(address_obj_data_from_client)
+        ##############
+        address_book_item = AddressBook.objects.create(
+            country = address_data['country'],
+            first_name = address_data['first_name'],
+            last_name = address_data['last_name'],
+            address = address_data['address'],
+            city = address_data['city'],
+            email = address_data['email'],
+            phone_number = address_data['phone_number'],
+            user = request.user
+        )
+        address_book_item.save()
+
+        return JsonResponse({}, safe=False)
+    else:
+        return JsonResponse({}, safe=False)
+
+
+def delete_address_book(request):
+    if request.user.is_authenticated():
+        address_obj_ID_from_client = request.POST.get("address_obj_ID","")
+
+        instance_to_be_deleted = AddressBook.objects.get(id=address_obj_ID_from_client)
+        instance_to_be_deleted.delete()
+        return redirect('ultimatefitbackend:address_book')
     else:
         return redirect('/')
 
