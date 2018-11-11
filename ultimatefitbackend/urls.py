@@ -61,6 +61,9 @@ urlpatterns = [
     url(r'^order_confirm_email/(\d+)', views.order_confirm_email, name='order_confirm_email'),
 
     url(r'^account_page/', views.account_page, name='account_page'),
+    url(r'^account_change_username/', views.account_change_username, name='account_change_username'),
+    url(r'^account_change_email/', views.account_change_email, name='account_change_email'),
+    url(r'^account_change_password/', views.account_change_password, name='account_change_password'),
     
     url(r'^address_book/', views.address_book, name='address_book'),
     url(r'^edit_address_book/', views.edit_address_book, name='edit_address_book'),

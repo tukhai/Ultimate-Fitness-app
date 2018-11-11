@@ -1132,9 +1132,63 @@ def success_order(request):
 
 def account_page(request):
     if request.user.is_authenticated():
-        return render(request, 'ultimatefitbackend/account.html')
+        current_user = User.objects.get(id = request.user.id)
+
+        context = {
+            'username': current_user.username,
+            # 'first_name': current_user.first_name,
+            # 'last_name': current_user.last_name,
+            'email': current_user.email
+        }
+
+        return render(request, 'ultimatefitbackend/account.html', context)
     else:
         return redirect('/')
+
+
+def account_change_username(request):
+    if request.user.is_authenticated():
+        new_username_from_client = request.POST.get("new_username","")
+
+        current_user = User.objects.get(id = request.user.id)
+        current_user.username = new_username_from_client
+        current_user.save()
+
+        return JsonResponse({}, safe=False)
+    else:
+        return JsonResponse({}, safe=False)
+
+
+def account_change_email(request):
+    if request.user.is_authenticated():
+        new_email_from_client = request.POST.get("new_email","")
+
+        current_user = User.objects.get(id = request.user.id)
+        current_user.email = new_email_from_client
+        current_user.save()
+ 
+        return JsonResponse({}, safe=False)
+    else:
+        return JsonResponse({}, safe=False)
+
+
+def account_change_password(request):
+    if request.user.is_authenticated():
+        current_password_from_client = request.POST.get("current_password","")
+        new_password_from_client = request.POST.get("new_password","")
+
+        current_user = User.objects.get(id = request.user.id)
+
+        is_current_password_check_correct = False
+        if (current_user.check_password(current_password_from_client)):
+            current_user.set_password(new_password_from_client)
+            current_user.save()
+
+            is_current_password_check_correct = True
+
+        return JsonResponse({'is_current_password_check_correct': is_current_password_check_correct}, safe=False)
+    else:
+        return JsonResponse({}, safe=False)
 
 
 def address_book(request):

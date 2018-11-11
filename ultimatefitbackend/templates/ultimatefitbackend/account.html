@@ -139,7 +139,7 @@
 										Username:
 									</div>
 									<div class="col-lg-9 col-md-9 col-sm-6 col-xs-12">
-										<span class="main-data-text">Nguyen Tu Khai</span>
+										<span class="main-data-text">{{username}}</span>
 										<span class="field-required">Field Required*</span>
 									</div>
 									<div class="col-lg-1 col-md-1 col-sm-6 col-xs-12">
@@ -153,14 +153,15 @@
 										<form class="form-update-field" action="#">
 											<div class="form_group">
 												<div class="input_group">
-													<input type="text" placeholder="Username">
+													<input type="text" placeholder="Username" value="{{username}}">
 													<i class="fa fa-user" aria-hidden="true"></i>
 												</div>
 											</div>
+											<div id="username-error-msg"></div>
 											<button class="cart_btn3 tran3s cancel-update-field">
 												Cancel
 											</button>
-											<button class="cart_btn1 tran3s color1_bg update-info-field">
+											<button class="cart_btn1 tran3s color1_bg update-info-field" id="update-username">
 												Update Information
 											</button>
 										</form>
@@ -175,7 +176,7 @@
 										Email:
 									</div>
 									<div class="col-lg-9 col-md-9 col-sm-6 col-xs-12">
-										<span class="main-data-text">ntukhai@gmail.com</span>
+										<span class="main-data-text">{{email}}</span>
 										<span class="field-required">Field Required*</span>
 									</div>
 									<div class="col-lg-1 col-md-1 col-sm-6 col-xs-12">
@@ -189,14 +190,15 @@
 										<form class="form-update-field">
 											<div class="form_group">
 												<div class="input_group">
-													<input type="email" placeholder="Email Address">
+													<input type="email" placeholder="Email Address" value="{{email}}">
 			        								<i class="fa fa-envelope-o" aria-hidden="true"></i>
 												</div>
 											</div>
+											<div id="email-error-msg"></div>
 											<button class="cart_btn3 tran3s cancel-update-field">
 												Cancel
 											</button>
-											<button class="cart_btn1 tran3s color1_bg update-info-field">
+											<button class="cart_btn1 tran3s color1_bg update-info-field" id="update-email">
 												Update Information
 											</button>
 										</form>
@@ -206,7 +208,7 @@
 								<div style="clear: both;"></div>
 								<hr/>
 
-								<div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 field-info">
+								<!-- <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 field-info">
 									<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" style="font-weight: bold">
 										Phone Number:
 									</div>
@@ -240,14 +242,14 @@
 								</div>
 
 								<div style="clear: both;"></div>
-								<hr/>
+								<hr/>-->
 
 								<div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 field-info">
 									<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" style="font-weight: bold">
 										Password:
 									</div>
 									<div class="col-lg-9 col-md-9 col-sm-6 col-xs-12">
-										<input type="password" value="iahk9425" id="myInput" readonly="readonly" style="border-color: transparent; font-size: 18px; margin-top: -5px;" class="main-data-text">
+										<input type="password" value="0123456789" id="myInput" readonly="readonly" style="border-color: transparent; font-size: 18px; margin-top: -5px;" class="main-data-text">
 										<span class="field-required">Field Required*</span>
 									</div>
 									<div class="col-lg-1 col-md-1 col-sm-6 col-xs-12">
@@ -261,14 +263,20 @@
 										<form class="form-update-field">
 											<div class="form_group">
 												<div class="input_group">
-													<input type="password" placeholder="Password">
+													<input type="password" placeholder="Current Password*">
+			        								<i class="fa fa-lock" aria-hidden="true"></i>
+			        							</div>
+
+												<div class="input_group">
+													<input type="password" placeholder="New Password*">
 			        								<i class="fa fa-lock" aria-hidden="true"></i>
 			        							</div>
 											</div>
+											<div id="password-error-msg"></div>
 											<button class="cart_btn3 tran3s cancel-update-field">
 												Cancel
 											</button>
-											<button class="cart_btn1 tran3s color1_bg update-info-field">
+											<button class="cart_btn1 tran3s color1_bg update-info-field" id="update-password">
 												Update Information
 											</button>
 										</form>
@@ -279,83 +287,6 @@
 							<div style="clear: both;"></div>
 							<hr/>
 
-	        				<form action="#" id="form-submit-account-info">
-	        					<div class="row">
-	        						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-	        							<div class="form_group">
-			        						<div class="input_group">
-			        							<input type="text" placeholder="Username">
-			        							<i class="fa fa-user" aria-hidden="true"></i>
-			        						</div> <!-- End of .input_group -->
-			        					</div> <!-- End of .form_group -->
-
-			        					<div class="form_group">
-			        						<div class="input_group">
-			        							<input type="password" placeholder="Password">
-			        							<i class="fa fa-lock" aria-hidden="true"></i>
-			        						</div> <!-- End of .input_group -->
-			        					</div> <!-- End of .form_group -->
-
-			        					<div class="form_group">
-			        						<div class="input_group">
-			        							<input type="text" placeholder="Phone Number">
-			        							<i class="fa fa-phone" aria-hidden="true"></i>
-			        						</div> <!-- End of .input_group -->
-			        					</div> <!-- End of .form_group -->
-
-			        					<div class="form_group">
-			        						<div class="input_group">
-			        							<input type="email" placeholder="Email Address">
-			        							<i class="fa fa-envelope-o" aria-hidden="true"></i>
-			        						</div> <!-- End of .input_group -->
-			        					</div> <!-- End of .form_group -->
-
-			        					<div class="form_group">
-			        						<div class="input_group">
-			        							<input type="password" placeholder="Confirm Password">
-			        							<i class="fa fa-unlock-alt" aria-hidden="true"></i>
-			        						</div> <!-- End of .input_group -->
-			        					</div> <!-- End of .form_group -->
-
-			        					<div class="form_group">
-			        						<div class="input_group">
-			        							<input type="text" placeholder="Location">
-			        							<i class="fa fa-location-arrow" aria-hidden="true"></i>
-			        						</div> <!-- End of .input_group -->
-			        					</div> <!-- End of .form_group -->
-	        						</div>
-
-	        						<!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-	        							<div class="form_group">
-	        								<div class="input_group">
-			        							<input type="email" placeholder="Email Address">
-			        							<i class="fa fa-envelope-o" aria-hidden="true"></i>
-			        						</div>
-			        					</div>
-
-			        					<div class="form_group">
-			        						<div class="input_group">
-			        							<input type="password" placeholder="Confirm Password">
-			        							<i class="fa fa-unlock-alt" aria-hidden="true"></i>
-			        						</div>
-			        					</div>
-
-			        					<div class="form_group">
-			        						<div class="input_group">
-			        							<input type="text" placeholder="Location">
-			        							<i class="fa fa-location-arrow" aria-hidden="true"></i>
-			        						</div>
-			        					</div>
-	        						</div> -->
-	        					</div>
-	        					<div class="clear_fix">
-	        						<div class="single_checkbox float_left">
-										<!-- <input type="checkbox" id="terms">
-										<label for="terms">I agree the term’s & conditions</label> -->
-									</div> <!-- End .single_checkbox -->
-	        					</div>
-	        					<button class="color1_bg tran3s">Create Account</button>
-	        				</form>
 	        			</div> <!-- End of .register_form -->
 
 	        		</div> <!-- End of .row -->
@@ -363,7 +294,10 @@
 			</div> <!-- End of .account_page -->
 
 			<script type="text/javascript">
-				$('#form-submit-account-info').css("display", "none");
+				function popUpInternetConnectionError() {
+					$('.internet-connection-error').fadeIn(200);
+					$('.internet-connection-error').delay(1500).fadeOut(200);
+				};
 
 				$(document).on("click", "a.edit-field-link", function() {
 					$(this).parents(".field-info").find(".main-data-text").css("display", "none");
@@ -372,7 +306,7 @@
 					$(this).parents(".field-info").next(".edit-form").css("display", "block");
 				});
 
-				$(document).on("click", "button.cancel-update-field, button.update-info-field", function(e) {
+				$(document).on("click", "button.cancel-update-field", function(e) {
 					e.preventDefault();
 					$(this).parents(".edit-form").css("display", "none");
 					$(this).parents(".edit-form").prev(".field-info").find(".main-data-text").css("display", "block");
@@ -380,5 +314,176 @@
 					$(this).parents(".edit-form").prev(".field-info").find(".col-lg-1").css("display", "block");
 					$(this).parents(".edit-form").prev(".field-info").find(".col-lg-1").css("display", "block");
 				});
+
+				// function registrationValidation() {
+				// 	var inputRegistrationEmail = $("input#id_email").val();
+				// 	var inputRegistrationPassword = $("input#id_password1").val();
+				// 	var inputRegistrationPasswordConfirm = $("input#id_password2").val();
+
+				// 	if (!ValidateEmail(inputRegistrationEmail)) {
+				// 		$("#registration-error-message").append('<label style="color: red;">Invalid email! Please try to re-enter your email.</label>');
+				// 		return false;
+				// 	}
+
+				// 	if (inputRegistrationPassword.length < 8) {
+				// 		$("#registration-error-message").append('<label style="color: red;">Your password must have at least 8 characters.</label>');
+				// 		return false;
+				// 	}
+
+				// 	if (inputRegistrationPassword != inputRegistrationPasswordConfirm) {
+				// 		$("#registration-error-message").append('<label style="color: red;">Password confirmation does not match!</label>');
+				// 		return false;
+				// 	}
+
+				// 	return true;
+				// };
+
+				$('input[placeholder="Username"]').focus(function(e) {
+					$('#username-error-msg').empty();
+				});
+				$('input[placeholder="Email Address"]').focus(function(e) {
+					$('#username-error-msg').empty();
+				});
+				$('input[placeholder="Current Password*"]').focus(function(e) {
+					$('#password-error-msg').empty();
+				});
+				$('input[placeholder="New Password*"]').focus(function(e) {
+					$('#password-error-msg').empty();
+				});
+
+				function usernameValidation() {
+					var newUsername = $('input[placeholder="Username"]').val();
+
+					if (newUsername.length < 6) {
+						$('#username-error-msg').html('<label style="color: red;">Username must have at least 6 characters</label>');
+						return false;
+					}
+
+					if (newUsername == "{{username}}") {
+						$('#username-error-msg').html('<label style="color: red;">Username same as before.</label>');
+						return false;
+					}
+
+					return true;
+				}
+
+				// How to verify it's an active email??
+				function ValidateEmail(mail) {  
+					var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+					if (re.test(mail)) {
+					    return true;
+					} else {
+					    return false;
+					}  
+				};
+				function emailValidation() {
+					var newEmail = $('input[placeholder="Email Address"]').val();
+
+					if (!ValidateEmail(newEmail)) {
+						$('#email-error-msg').html('<label style="color: red;">Invalid email format.</label>');
+						return false;
+					}
+
+					if (newEmail == "{{email}}") {
+						$('#email-error-msg').html('<label style="color: red;">Email same as before.</label>');
+						return false;
+					}
+
+					return true;
+				}
+
+				function passwordValidation() {
+					var currentPassword = $('input[placeholder="Current Password*"]').val();
+					var newPassword = $('input[placeholder="New Password*"]').val();
+
+					if (newPassword.length < 8) {
+						$('#password-error-msg').html('<label style="color: red;">Password must be at least 8 characters.</label>');
+						return false;
+					}
+
+					if (newPassword == currentPassword) {
+						$('#password-error-msg').html('<label style="color: red;">New password must be different from old password.</label>');
+						return false;
+					}
+
+					return true;
+				};
+
+				$(document).on("click", "button.update-info-field", function(e) {
+					e.preventDefault();
+
+					if ($(this).attr('id') == "update-username") {
+						var newUsername = $('input[placeholder="Username"]').val();
+
+						if (usernameValidation()) {
+							$.post(
+								"/account_change_username/",
+								{ 
+									csrfmiddlewaretoken: "{{ csrf_token }}",
+									new_username: newUsername
+								},
+								function(data, status) {
+									if (status == "success") {
+										console.log(data, "success post");
+										// $(document).scrollTop(400);
+										location.reload();
+									}
+								}
+							).fail(function(){
+								popUpInternetConnectionError();
+							});
+						}
+					} else if ($(this).attr('id') == "update-email") {
+						var newEmail = $('input[placeholder="Email Address"]').val();
+
+						if (emailValidation()) {
+							$.post(
+								"/account_change_email/",
+								{ 
+									csrfmiddlewaretoken: "{{ csrf_token }}",
+									new_email: newEmail
+								},
+								function(data, status) {
+									if (status == "success") {
+										console.log(data, "success post");
+										// $(document).scrollTop(400);
+										location.reload();
+									}
+								}
+							).fail(function(){
+								popUpInternetConnectionError();
+							});
+						}
+					} else if ($(this).attr('id') == "update-password") {
+						var currentPassword = $('input[placeholder="Current Password*"]').val();
+						var newPassword = $('input[placeholder="New Password*"]').val();
+
+						if (passwordValidation()) {
+							$.post(
+								"/account_change_password/",
+								{ 
+									csrfmiddlewaretoken: "{{ csrf_token }}",
+									current_password: currentPassword,
+									new_password: newPassword
+								},
+								function(data, status) {
+									if (status == "success") {
+										console.log(data, "success post");
+										// $(document).scrollTop(400);
+										if (data && data.is_current_password_check_correct) {
+											alert("You are logging out after reset password. Please login again!");
+											location.reload();
+										} else {
+											$('#password-error-msg').html('<label style="color: red;">Wrong current password.</label>');
+										}
+									}
+								}
+							).fail(function(){
+								popUpInternetConnectionError();
+							});
+						}
+					}
+				});
+
 			</script>
 		{% endblock %}
