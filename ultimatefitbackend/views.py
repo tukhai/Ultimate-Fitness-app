@@ -1264,7 +1264,43 @@ def delete_address_book(request):
 
 def orders_history(request):
     if request.user.is_authenticated():
-        return render(request, 'ultimatefitbackend/orders-history.html')
+        all_orders_of_this_user = DeliveryOrder.objects.filter(user = request.user)
+
+        history_order_arr = []
+        for order in all_orders_of_this_user:
+            order_data_arr = json.loads(order.order_data)
+
+            rendered_data_arr = []
+            total = 0
+            count = 0
+            number_of_kinds = 0
+            for item_arr in order_data_arr:
+                food_obj = Food.objects.get(id=item_arr['food_id'])
+                rendered_data_arr.append({
+                    'food_obj': food_obj,
+                    'quantity': item_arr['quantity']
+                })
+
+                total += (food_obj.price_from_foodtype * item_arr['quantity']) 
+                count += item_arr['quantity']
+                number_of_kinds += 1
+
+            history_item = {
+                'delivery_id': order.id,
+                'date': order.order_date,
+                'data_arr': rendered_data_arr,
+                'total': total,
+                'count': count,
+                'number_of_kinds': number_of_kinds
+            }
+
+            history_order_arr.append(history_item)
+
+        context = {
+            "history_order_arr": history_order_arr 
+        }
+
+        return render(request, 'ultimatefitbackend/orders-history.html', context)
     else:
         return redirect('/')
 
