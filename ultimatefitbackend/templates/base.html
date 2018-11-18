@@ -31,7 +31,6 @@
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
 		<!-- Custom Css -->
 		<link rel="stylesheet" type="text/css" href="{% static 'ultimatefitbackend/css/style.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'ultimatefitbackend/css/responsive.css' %}">
@@ -272,11 +271,11 @@
 			}
 
 			.vn {
-				display: inline;
-			}
-			.en {
-				display: none;
-			}
+                display: none;
+            }
+            .en {
+                display: inline;
+            }
 		</style>
 
 		<link rel='stylesheet' href="{% static 'ultimatefitbackend/fullcalendar/fullcalendar.css' %}" />
@@ -312,26 +311,22 @@
 					   <ul class="menuzord-menu">
 					      <li class="current_page">
 					      	<a href="{% url 'ultimatefitbackend:index' %}">
-					      		<span class="vn">Trang chủ</span>
-					      		<span class="en">Home</span>
+					      		<span class="trn">Home</span>
 					      	</a>
 					      </li>
 					      <li>
 					      	<a href="{% url 'ultimatefitbackend:about' %}">
-					      		<span class="vn">Giới thiệu</span>
-					      		<span class="en">About us</span>
+					      		<span class="trn">About us</span>
 					      	</a>
 					      </li>
 					      <li>
 					      	<a href="#">
-					      		<span class="vn">cửa hàng</span>
-					      		<span class="en">Shop</span>
+					      		<span class="trn">Shop</span>
 					      	</a>
 					      	<ul class="dropdown">
 					            <li>
 					            	<a href="{% url 'ultimatefitbackend:shop' %}">
-					            		<span class="vn">Lịch Đặt Hàng</span>
-					            		<span class="en">Shop By Calendar</span>
+					            		<span class="trn">Shop By Calendar</span>
 					            	</a>
 					            </li>
 					            <li><a href="shop-single.html">Product Detail</a></li>
@@ -348,7 +343,7 @@
 					            <li><a href="blog-details.html">News Single</a></li>
 					         </ul>
 					      </li>
-					      <li><a href="#">gallery</a>
+					      <li><a href="#" class="trn">gallery</a>
 					      	<ul class="dropdown">
 					            <li><a href="gallery-grid.html">Gallery Grid</a></li>
                                 <li><a href="gallery-masonry.html">Gallery Masonary</a></li>
@@ -366,17 +361,14 @@
 					      
 					      <li class="distance-between-left-right">
 					      	<a href="{% url 'ultimatefitbackend:contact' %}">
-					      		<span class="vn">Liên Hệ</span>
-					      		<span class="en">Contact us</span>
+					      		<span class="trn">Contact us</span>
 					      	</a>
 					      </li>
 					      <li>
 					      	<a href="{% url 'ultimatefitbackend:cart' %}">
 						      	<button class="cart tran3s dropdown-toggle" id="cartDropdown-hover">
 						      		<i class="fa icon-icon-32846" aria-hidden="true" style="font-size: 130%;"></i>
-						      		<!--<span class="s_color_bg p_color" style="font-size: 80%; margin-bottom: -50px !important; position: auto;">2</span>-->
-						      		<span class="vn">Giỏ Hàng</span>
-						      		<span class="en">My Cart</span>
+						      		<span class="trn">My Cart</span>
 						      	</button>						      	
 					        </a>
 					      </li>
@@ -397,26 +389,21 @@
 						        <ul class="dropdown" style="text-align: left;">
 						        	<li>
 						            	<a href="{% url 'ultimatefitbackend:account_page' %}">
-						            		<span class="vn">Thông Tin Tài Khoản</span>
-						            		<span class="en">Account Info</span>
+						            		<span class="trn">Account Info</span>
 						            	</a>
 						            </li>
 						            <li>
 						            	<a href="{% url 'ultimatefitbackend:address_book' %}">
-						            		<span class="vn">Địa Chỉ Giao Hàng</span>
-						            		<span class="en">Address Book</span>
+						            		<span class="trn">Address Book</span>
 						            	</a>
 						            </li>
 						            <li>
 						            	<a href="{% url 'ultimatefitbackend:orders_history' %}">
-						            		<span class="vn">Lịch Sử Giao Hàng</span>
-						            		<span class="en">Orders History</span>
+						            		<span class="trn">Orders History</span>
 						            	</a>
 						            </li>
 						            <li>
-						            	<a href="{% url 'auth_logout' %}">
-						            		<span class="vn">Đăng Xuất</span>
-						            		<span class="en">Log Out</span>
+						            	<a href="{% url 'auth_logout' %}">										<span class="trn">Log Out</span>
 						            	</a>
 						            </li>
 						         </ul>
@@ -424,23 +411,20 @@
 						        <a>
 						        	<span style="text-transform: capitalize; cursor: pointer;">
 						        		<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i> 
-						        		<span class="vn">Đăng Nhập</span>
-					            		<span class="en">Sign In</span>
+					            		<span class="trn">Sign In</span>
 						        	</span>
 						        </a>
 						        <ul class="dropdown" style="text-align: left;">
 						            <!--<li><a href="{% url 'auth_login' %}">Sign In</a></li>-->
 						            <li>
 						            	<a class="button-for-authenticate" href="#signin_modal" data-toggle="modal" data-authentication-button="sign-in-button">
-						            		<span class="vn">Đăng Nhập</span>
-					            			<span class="en">Sign In</span>
+					            			<span class="trn">Sign In</span>
 						            	</a>
 						            </li>
 						            <!--<li><a href="{% url 'registration_register' %}">Register Here</a></li>-->
 						            <li>
 						            	<a class="button-for-authenticate" href="#signin_modal" data-toggle="modal" data-authentication-button="register-button">
-						            		<span class="vn">Đăng Ký</span>
-					            			<span class="en">Register Here</span>
+					            			<span class="trn">Register Here</span>
 						            	</a>
 						            </li>
 						        </ul>
@@ -488,8 +472,7 @@
 
 								   						<div class="item_deatils float_left">
 								   							<h6>
-								   								<span class="vn">{{ item.food.food_type.name_vn }}</span>
-								   								<span class="en">{{ item.food.food_type.name }}</span>
+								   								<span class="trn">{{ item.food.food_type.name }}</span>
 								   							</h6>
 								   							<!--<ul>
 																<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -527,8 +510,7 @@
 							   			<div class="cart_total clear_fix" style="background-color: #272727 !important;">
 
 							   				<span class="total font_fix float_left">
-							   					<text class="vn">Tổng</text>
-							   					<text class="en">Total</text>
+							   					<text class="trn">Total</text>
 							   					 - <text id="total-to-pay">{{ total }}</text> $
 							   				</span>
 							   				<a href="#" class="s_color_bg float_right tran3s">Checkout</a>
@@ -2061,6 +2043,8 @@
 
 		<!-- landguage switcher js -->
 		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.polyglot.language.switcher.js' %}"></script>
+		<script src="{% static 'ultimatefitbackend/js/jquery.translate.js' %}"/>
+		<script src="{% static 'ultimatefitbackend/js/dictionary.js' %}"/>
 		<!-- Fancybox js -->
 		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.fancybox.pack.js' %}"></script>
 		<!-- js count to -->
@@ -2171,25 +2155,40 @@
 			});
 
 			
-			// This part is the javascript front-end for language change
-			var currentLanguage ="vn";
+			// This part is the javascript front-end for language change, 
+			// but the dictionary is saved in a python file
+			var dictTranslationString = "{{dict_translation}}";
+			dictTranslationString = dictTranslationString.replace(/&quot;/g, '"');
+
+			var dict = JSON.parse(dictTranslationString);
+			var translator = $('body').translate({lang: "vn", t: dict});
 
 			$(document).on("click", "li.english-language", function(){
 				$("span#flag-icon-language").html('<span class="flag-icon-size"><img src="http://www.postkrieg.info/_assets/img/en_icon.png"/></span>&nbsp;English');
-				console.log("en");
-				currentLanguage = "en";
+
+				translator.lang("en");
+				localStorage.setItem('LANGUAGE', 'en');
+
 				$(".en").css("display", "inline");
 				$(".vn").css("display", "none");
 				$('#calendar').fullCalendar('option', 'locale', 'en');
 			});
 			$(document).on("click", "li.vietnam-language", function(){
 				$("span#flag-icon-language").html('<span class="flag-icon-size"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png"/></span>&nbsp;T . Việt');
-				console.log("vn");
-				currentLanguage = "vn";
+
+				translator.lang("vn");
+				localStorage.setItem('LANGUAGE', 'vn');
+
 				$(".en").css("display", "none");
 				$(".vn").css("display", "inline");
 				$('#calendar').fullCalendar('option', 'locale', 'vi');
 			});
+
+			// Initially will load from localStorage
+			var currentLang = localStorage.getItem('LANGUAGE');
+			if (currentLang == "en") {
+				$("li.english-language").click();
+			}
 
 
 			// When the page is freshly loaded, we would get the current quantity of each food in db

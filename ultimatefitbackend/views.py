@@ -42,6 +42,8 @@ from django.db.models import Q
 
 #from django import forms
 
+from .dictionary import dictionary_translation
+
 class IndexView(generic.ListView):
     template_name = 'ultimatefitbackend/base.html'
     context_object_name = 'latest_question_list'
@@ -315,6 +317,8 @@ def meal(request):
     food_item_in_selected_menu = menu[0].food.all()
     print food_item_in_selected_menu[0].name'''
 
+    dict_translation = dictionary_translation()
+
     context = {
         'cart': orders,
         'total': total,
@@ -323,7 +327,8 @@ def meal(request):
         'total_count': foods.count(),
         'lean_count': lean_count,
         'maintain_count': maintain_count,
-        'heavy_count': heavy_count
+        'heavy_count': heavy_count,
+        'dict_translation': dict_translation
     }
         
     return render(request, 'ultimatefitbackend/meal.html', context)
@@ -448,11 +453,14 @@ def meal_food_list_update_query_by_date(request):
         count += order.quantity
         print order.food.id,order.food.food_type.name,": $",order.food.price_from_foodtype," * ",order.quantity
 
+    dict_translation = dictionary_translation()
+
     context = {
         'cart': orders,
         'total': total,
         'count': count,
-        'foods': foods
+        'foods': foods,
+        'dict_translation': dict_translation
     }
         
     return render(request, 'ultimatefitbackend/meal_food_list_update.html', context)
@@ -541,10 +549,13 @@ def list(request):
     except IndexError:
         print "NO ITEM IN ORDERS"
 
+    dict_translation = dictionary_translation()
+
     context = {
         'cart': orders,
         'total': total,
         'count': count,
+        'dict_translation': dict_translation
     }
 
     return render(request, 'ultimatefitbackend/list.html', context)
