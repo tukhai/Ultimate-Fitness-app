@@ -311,22 +311,22 @@
 					   <ul class="menuzord-menu">
 					      <li class="current_page">
 					      	<a href="{% url 'ultimatefitbackend:index' %}">
-					      		<span class="trn">Home</span>
+					      		<span class="trn">lbl_Home</span>
 					      	</a>
 					      </li>
 					      <li>
 					      	<a href="{% url 'ultimatefitbackend:about' %}">
-					      		<span class="trn">About us</span>
+					      		<span class="trn">lbl_About_us</span>
 					      	</a>
 					      </li>
 					      <li>
 					      	<a href="#">
-					      		<span class="trn">Shop</span>
+					      		<span class="trn">lbl_Shop</span>
 					      	</a>
 					      	<ul class="dropdown">
 					            <li>
 					            	<a href="{% url 'ultimatefitbackend:shop' %}">
-					            		<span class="trn">Shop By Calendar</span>
+					            		<span class="trn">lbl_Shop_By_Calendar</span>
 					            	</a>
 					            </li>
 					            <li><a href="shop-single.html">Product Detail</a></li>
@@ -343,7 +343,7 @@
 					            <li><a href="blog-details.html">News Single</a></li>
 					         </ul>
 					      </li>
-					      <li><a href="#" class="trn">gallery</a>
+					      <li><a href="#" class="trn">lbl_gallery</a>
 					      	<ul class="dropdown">
 					            <li><a href="gallery-grid.html">Gallery Grid</a></li>
                                 <li><a href="gallery-masonry.html">Gallery Masonary</a></li>
@@ -361,14 +361,14 @@
 					      
 					      <li class="distance-between-left-right">
 					      	<a href="{% url 'ultimatefitbackend:contact' %}">
-					      		<span class="trn">Contact us</span>
+					      		<span class="trn">lbl_Contact_us</span>
 					      	</a>
 					      </li>
 					      <li>
 					      	<a href="{% url 'ultimatefitbackend:cart' %}">
 						      	<button class="cart tran3s dropdown-toggle" id="cartDropdown-hover">
 						      		<i class="fa icon-icon-32846" aria-hidden="true" style="font-size: 130%;"></i>
-						      		<span class="trn">My Cart</span>
+						      		<span class="trn">lbl_My_Cart</span>
 						      	</button>						      	
 					        </a>
 					      </li>
@@ -389,21 +389,21 @@
 						        <ul class="dropdown" style="text-align: left;">
 						        	<li>
 						            	<a href="{% url 'ultimatefitbackend:account_page' %}">
-						            		<span class="trn">Account Info</span>
+						            		<span class="trn">lbl_Account_Info</span>
 						            	</a>
 						            </li>
 						            <li>
 						            	<a href="{% url 'ultimatefitbackend:address_book' %}">
-						            		<span class="trn">Address Book</span>
+						            		<span class="trn">lbl_Address_Book</span>
 						            	</a>
 						            </li>
 						            <li>
 						            	<a href="{% url 'ultimatefitbackend:orders_history' %}">
-						            		<span class="trn">Orders History</span>
+						            		<span class="trn">lbl_Orders_History</span>
 						            	</a>
 						            </li>
 						            <li>
-						            	<a href="{% url 'auth_logout' %}">										<span class="trn">Log Out</span>
+						            	<a href="{% url 'auth_logout' %}">										<span class="trn">lbl_Log_Out</span>
 						            	</a>
 						            </li>
 						         </ul>
@@ -411,20 +411,20 @@
 						        <a>
 						        	<span style="text-transform: capitalize; cursor: pointer;">
 						        		<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i> 
-					            		<span class="trn">Sign In</span>
+					            		<span class="trn">lbl_Sign_In</span>
 						        	</span>
 						        </a>
 						        <ul class="dropdown" style="text-align: left;">
 						            <!--<li><a href="{% url 'auth_login' %}">Sign In</a></li>-->
 						            <li>
 						            	<a class="button-for-authenticate" href="#signin_modal" data-toggle="modal" data-authentication-button="sign-in-button">
-					            			<span class="trn">Sign In</span>
+					            			<span class="trn">lbl_Sign_In</span>
 						            	</a>
 						            </li>
 						            <!--<li><a href="{% url 'registration_register' %}">Register Here</a></li>-->
 						            <li>
 						            	<a class="button-for-authenticate" href="#signin_modal" data-toggle="modal" data-authentication-button="register-button">
-					            			<span class="trn">Register Here</span>
+					            			<span class="trn">lbl_Register_Here</span>
 						            	</a>
 						            </li>
 						        </ul>
@@ -510,7 +510,7 @@
 							   			<div class="cart_total clear_fix" style="background-color: #272727 !important;">
 
 							   				<span class="total font_fix float_left">
-							   					<text class="trn">Total</text>
+							   					<text class="trn">lbl_Total</text>
 							   					 - <text id="total-to-pay">{{ total }}</text> $
 							   				</span>
 							   				<a href="#" class="s_color_bg float_right tran3s">Checkout</a>
@@ -2161,6 +2161,15 @@
 			dictTranslationString = dictTranslationString.replace(/&quot;/g, '"');
 
 			var dict = JSON.parse(dictTranslationString);
+
+			/*Check if any wrong words, which not appear on dict, it's for developer use*/
+			$(".trn").each(function() {
+				if (!dict[$(this).html()]) {
+					throw new Error(`Key ${$(this).html()} doesnt exist in dictionary`);
+				}
+			});
+			/****************************************************************************/
+
 			var translator = $('body').translate({lang: "vn", t: dict});
 
 			$(document).on("click", "li.english-language", function(){
