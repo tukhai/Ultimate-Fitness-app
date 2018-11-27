@@ -1,0 +1,331 @@
+{% load static %}
+{% load i18n %}
+
+	<style>
+		@media (min-width: 992px) {
+			.flag-icon-size {
+				width: 19px; 
+				height: 13px; 
+				position: absolute; 
+				margin-top: 26px; 
+				margin-left: -22px; 
+				background-color: white;
+			}
+		}
+
+		@media (max-width: 992px) {
+			.flag-icon-size {
+				display: none;
+			}
+		}
+
+		.my-cart-preview {
+			position: fixed; 
+			z-index: 999; 
+			margin-top: -205px; 
+			margin-left: 50vw;
+		}
+		@media (min-width: 992px) and (max-width: 1024px) {				
+			.my-cart-preview {
+				margin-top: -182px;
+			}
+		}
+
+		.distance-between-left-right {
+			margin-right: 175px;
+		}
+		.main-navbar {
+			position: fixed; 
+			width: 100%; 
+			z-index: 10;
+			zoom: 0.8; /* Old IE only */
+		    /*-moz-transform: scale(0.8);
+		    -webkit-transform: scale(0.8);
+		    transform: scale(0.8);*/
+		    /*Text in navbar unselectable*/
+		    -webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;			    
+		}
+		.list-news {
+			display: none !important;
+		}
+		@media (min-width: 992px) {				
+			.distance-between-left-right {
+				margin-right: 0px;
+			}
+		}
+
+		.cart_list>ul>li .fa-times-circle {
+			display: none !important;
+		}
+
+		.date-on-cart-list {
+			/*max-height: 1px !important;
+			height: 1px;*/
+			background-color: #505050;
+			color: white;
+			font-weight: bold;
+			text-align: center;
+			border-top-style: solid;
+			border-top-width: 1px;
+			border-top-color: #A9A9A9;
+		}
+		.cart_list {
+			background-color: transparent !important;
+		}
+		.cart_list>ul {				
+			max-height: 400px !important;
+			overflow-y: auto;
+		}
+		.cart_list>ul::-webkit-scrollbar {
+		    width: 4px !important;
+		    background-color: #272727;
+		}
+		.cart_list>ul::-webkit-scrollbar-thumb {
+		    background-color: grey;
+		}
+		.cart_list_extension_for_hover {
+			height: 50vh;
+		}
+		.cart_list>ul>li .fa-times-circle {
+			display: none !important;
+		}
+
+		.close-list-cart {
+			position: absolute; 
+			top: 57px; 
+			right: 25px; 
+			font-size: 18px; 
+			color:#aaaaaa; 
+			cursor: pointer;
+		}
+	</style>
+<!-- Menu ******************************* -->
+			<div class="theme_menu color1_bg main-navbar" style="z-index: 8000;">
+				<div class="container">
+					<nav class="menuzord pull-left" id="main_menu">
+					   <ul class="menuzord-menu">
+					      <li class="current_page">
+					      	<a href="{% url 'ultimatefitbackend:index' %}">
+					      		<span class="trn">lbl_Home</span>
+					      	</a>
+					      </li>
+					      <li>
+					      	<a href="{% url 'ultimatefitbackend:about' %}">
+					      		<span class="trn">lbl_About_us</span>
+					      	</a>
+					      </li>
+					      <li>
+					      	<a href="#">
+					      		<span class="trn">lbl_Shop</span>
+					      	</a>
+					      	<ul class="dropdown">
+					            <li>
+					            	<a href="{% url 'ultimatefitbackend:shop' %}">
+					            		<span class="trn">lbl_Shop_By_Calendar</span>
+					            	</a>
+					            </li>
+					            <li><a href="shop-single.html">Product Detail</a></li>
+					            <li><a href="{% url 'ultimatefitbackend:cart' %}">Cart Page</a></li>
+					            <li><a href="checkout.html">Checkout Page</a></li>
+					            <li><a href="account.html">My Account</a></li>
+					         </ul>
+					      </li>
+					      <li class="list-news"><a href="#">News</a>
+					      	<ul class="dropdown">
+					            <li><a href="blog-Standard.html">News Standard</a></li>
+					            <li><a href="blog-list-sidebar.html">News With Sidebar</a></li>
+					            <li><a href="blog-grid.html">News Masonary</a></li>
+					            <li><a href="blog-details.html">News Single</a></li>
+					         </ul>
+					      </li>
+					      <li><a href="#" class="trn">lbl_gallery</a>
+					      	<ul class="dropdown">
+					            <li><a href="gallery-grid.html">Gallery Grid</a></li>
+                                <li><a href="gallery-masonry.html">Gallery Masonary</a></li>
+                                <li><a href="gallery-single.html">Gallery Single</a></li>
+					         </ul>
+					      </li>
+
+					      <!--<li><a href="#">Pages</a>
+					      	<ul class="dropdown">
+					            <li><a href="{% url 'ultimatefitbackend:testimonials' %}">Testimonials</a></li>
+					            <li><a href="{% url 'ultimatefitbackend:error' %}">404v page</a></li>
+					            <li><a href="{% url 'ultimatefitbackend:faq' %}">FAQ</a></li>
+					         </ul>
+					      </li>-->
+					      
+					      <li class="distance-between-left-right">
+					      	<a href="{% url 'ultimatefitbackend:contact' %}">
+					      		<span class="trn">lbl_Contact_us</span>
+					      	</a>
+					      </li>
+					      <li>
+					      	<a href="{% url 'ultimatefitbackend:cart' %}">
+						      	<button class="cart tran3s dropdown-toggle" id="cartDropdown-hover">
+						      		<i class="fa icon-icon-32846" aria-hidden="true" style="font-size: 130%;"></i>
+						      		<span class="trn">lbl_My_Cart</span>
+						      	</button>						      	
+					        </a>
+					      </li>
+					      <li style="overflow: hidden; width: 190px; white-space:nowrap; text-align: center;">
+					      	{% if request.user.is_authenticated %}
+						      	<a>
+						      		<span style="text-transform: lowercase; cursor: pointer;">
+						      			<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i> 
+						      			<span id="display-username-navbar">
+						      				{% if request.user.first_name %}!
+											{{ request.user.first_name }}
+											{% else %}
+											{{ request.user.username }}
+											{% endif %}
+										</span>
+									</span>
+						        </a>
+						        <ul class="dropdown" style="text-align: left;">
+						        	<li>
+						            	<a href="{% url 'ultimatefitbackend:account_page' %}">
+						            		<span class="trn">lbl_Account_Info</span>
+						            	</a>
+						            </li>
+						            <li>
+						            	<a href="{% url 'ultimatefitbackend:address_book' %}">
+						            		<span class="trn">lbl_Address_Book</span>
+						            	</a>
+						            </li>
+						            <li>
+						            	<a href="{% url 'ultimatefitbackend:orders_history' %}">
+						            		<span class="trn">lbl_Orders_History</span>
+						            	</a>
+						            </li>
+						            <li>
+						            	<a href="{% url 'auth_logout' %}">										<span class="trn">lbl_Log_Out</span>
+						            	</a>
+						            </li>
+						         </ul>
+					        {% else %}
+						        <a>
+						        	<span style="text-transform: capitalize; cursor: pointer;">
+						        		<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i> 
+					            		<span class="trn">lbl_Sign_In</span>
+						        	</span>
+						        </a>
+						        <ul class="dropdown" style="text-align: left;">
+						            <!--<li><a href="{% url 'auth_login' %}">Sign In</a></li>-->
+						            <li>
+						            	<a class="button-for-authenticate" href="#signin_modal" data-toggle="modal" data-authentication-button="sign-in-button">
+					            			<span class="trn">lbl_Sign_In</span>
+						            	</a>
+						            </li>
+						            <!--<li><a href="{% url 'registration_register' %}">Register Here</a></li>-->
+						            <li>
+						            	<a class="button-for-authenticate" href="#signin_modal" data-toggle="modal" data-authentication-button="register-button">
+					            			<span class="trn">lbl_Register_Here</span>
+						            	</a>
+						            </li>
+						        </ul>
+					        {% endif %}
+					      </li>
+					      <li>
+					      	<a style="text-transform: capitalize; cursor: pointer;">
+				      			<span id="flag-icon-language">
+				      				<span class="flag-icon-size">
+				      					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png"/>
+				      				</span>
+				      				&nbsp;T . Việt
+				      			</span>				      		
+					        </a>
+					        <ul class="dropdown">
+					            <li class="english-language"><a>English</a></li>
+					            <li class="vietnam-language"><a>Tiếng Việt</a></li>
+					        </ul>
+					      </li>
+					   </ul> <!-- End of .menuzord-menu -->
+				   </nav> <!-- End of #main_menu -->
+				     
+			   </div> <!-- End of .conatiner -->
+			</div> <!-- End of .theme_menu -->
+
+			<!-- Header *******************************  -->
+			<header style="margin-top: 56px;">
+				<div class="bottom_header my-cart-preview">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-4 col-sm-7 col-xs-6 pdt-14">
+							    <div class="cart_option float_right">
+								   		
+							   		<div class="cart_list color2_bg" aria-labelledby="cartDropdown">
+							   			
+							   			<ul style="background-color: #272727 !important;">
+							   				{% for item in cart %}
+								   				<li id="list-item-{{ item.food.id }}">
+								   					<div class="cart_item_wrapper clear_fix">
+								   						<!--<div class="img_holder float_left"><img src="{% static 'ultimatefitbackend/images/shop/9.png' %}" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
+
+								   						<div class="img_holder float_left">
+								   							<img src="{{item.food.food_type.image}}" alt="Cart Image" class="img-responsive" style="width:70px;height:80px;float:left;">
+								   						</div>
+
+								   						<div class="item_deatils float_left">
+								   							<h6>
+								   								<span class="trn">{{ item.food.food_type.name }}</span>
+								   							</h6>
+								   							<!--<ul>
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>								
+															</ul>-->
+															<div style="margin-top: 9px;">
+																<span class="font_fix">$ {{ item.food.price_from_foodtype }}</span> 
+																<span style="float: right; margin-left: 90px;">
+																	$ <span id="total-price-for-food-id-{{item.food.id}}">{% widthratio item.food.price_from_foodtype 1 item.quantity %}</span>
+																</span>
+															</div>
+															<div> 
+																<a class="remove-from-cart-list" data-id-food="{{item.food.id}}" data-price-food="{{item.food.price_from_foodtype}}">
+																	<i class="fa fa-minus-circle" aria-hidden="true"></i>
+																</a>
+																&nbsp;
+																<span id="quantity-for-food-id-{{item.food.id}}">{{item.quantity}}</span>
+																&nbsp;
+																<a class="add-to-cart-list" data-id-food="{{item.food.id}}" data-price-food="{{item.food.price_from_foodtype}}">
+																	<i class="fa fa-plus-circle" aria-hidden="true"></i>
+																</a>
+															</div>
+								   						</div> <!-- End of .item_deatils -->
+								   					</div> <!-- End of .cart_item_wrapper -->
+								   					<i class="fa fa-times-circle-o close-list-cart" data-id-food="{{item.food.id}}" data-price-food="{{item.food.price_from_foodtype}}" aria-hidden="true"></i>
+								   				</li>
+							   				{% empty %}
+							   					<!--<p style="text-align: center; margin-top: 3%; color: white;">There is no item in your cart</p>-->
+							   				{% endfor %}
+							   			</ul>
+
+							   			<div class="cart_total clear_fix" style="background-color: #272727 !important;">
+
+							   				<span class="total font_fix float_left">
+							   					<text class="trn">lbl_Total</text>
+							   					 - <text id="total-to-pay">{{ total }}</text> $
+							   				</span>
+							   				<a href="#" class="s_color_bg float_right tran3s">Checkout</a>
+							   			</div>
+								   		
+							   			<div class="cart_list_extension_for_hover"></div>
+							   		</div> <!-- End of .cart_list -->
+							    </div>
+
+							</div>
+
+						</div>
+
+					</div>
+				</div> <!-- End of .bottom_header -->
+
+				
+			</header>

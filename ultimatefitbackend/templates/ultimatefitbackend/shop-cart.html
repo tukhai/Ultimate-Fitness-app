@@ -85,225 +85,7 @@
 		<div class="main_page cart">
 
 			<!-- Menu ******************************* -->
-			<div class="theme_menu color1_bg main-navbar">
-				<div class="container">
-					<nav class="menuzord pull-left" id="main_menu">
-					   <ul class="menuzord-menu">
-					      <li class="current_page"><a href="{% url 'ultimatefitbackend:index' %}">Home</a></li>
-					      <li><a href="{% url 'ultimatefitbackend:about' %}">About us</a></li>
-					      <li><a href="#">store</a>
-					      	<ul class="dropdown">
-					            <li><a href="{% url 'ultimatefitbackend:shop' %}">Shop With Sidebar</a></li>
-					            <li><a href="shop-single.html">Product Detail</a></li>
-					            <li><a href="{% url 'ultimatefitbackend:cart' %}">Cart Page</a></li>
-					            <li><a href="checkout.html">Checkout Page</a></li>
-					            <li><a href="account.html">My Account</a></li>
-					         </ul>
-					      </li>
-					      <li class="list-news"><a href="#">News</a>
-					      	<ul class="dropdown">
-					            <li><a href="blog-Standard.html">News Standard</a></li>
-					            <li><a href="blog-list-sidebar.html">News With Sidebar</a></li>
-					            <li><a href="blog-grid.html">News Masonary</a></li>
-					            <li><a href="blog-details.html">News Single</a></li>
-					         </ul>
-					      </li>
-					      <li><a href="#">gallery</a>
-					      	<ul class="dropdown">
-					            <li><a href="gallery-grid.html">Gallery Grid</a></li>
-                                <li><a href="gallery-masonry.html">Gallery Masonary</a></li>
-                                <li><a href="gallery-single.html">Gallery Single</a></li>
-					         </ul>
-					      </li>
-
-					      <!--<li><a href="#">Pages</a>
-					      	<ul class="dropdown">
-					            <li><a href="{% url 'ultimatefitbackend:testimonials' %}">Testimonials</a></li>
-					            <li><a href="{% url 'ultimatefitbackend:error' %}">404v page</a></li>
-					            <li><a href="{% url 'ultimatefitbackend:faq' %}">FAQ</a></li>
-					         </ul>
-					      </li>-->
-					      
-					      <li class="distance-between-left-right">
-					      	<a href="{% url 'ultimatefitbackend:contact' %}">Contact us</a>
-					      </li>
-					      <li>
-					      	<a href="{% url 'ultimatefitbackend:cart' %}">
-						      	<button class="cart tran3s dropdown-toggle" id="cartDropdown-hover">
-						      		<i class="fa icon-icon-32846" aria-hidden="true" style="font-size: 130%;"></i>
-						      		<!--<span class="s_color_bg p_color" style="font-size: 80%; margin-bottom: -50px !important; position: auto;">2</span>-->
-						      		<span>My Cart</span>
-						      	</button>						      	
-					        </a>
-					      </li>
-					      <li>
-					      	{% if request.user.is_authenticated %}
-						      	<a>
-						      		<span style="text-transform: lowercase; cursor: pointer;">
-						      			<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i> 
-						      			{% if request.user.first_name %}!
-										{{ request.user.first_name }}
-										{% else %}
-										{{ request.user.username }}
-										{% endif %}
-									</span>
-						        </a>
-						        <ul class="dropdown">
-						            <li><a href="{% url 'auth_logout' %}">Log Out</a></li>
-						         </ul>
-					        {% else %}
-					        	<!--<a>
-						      		<button>
-							      		<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i>
-							      		<span>Sign In</span>							      		
-						      		</button>
-						      		<span><ul class="dropdown">
-							            <li><a href="{% url 'auth_login' %}">Sign In</a></li>
-							            <li><a href="{% url 'registration_register' %}">Register Here</a></li>
-							        </ul></span>
-						        </a>-->
-						        <a>
-						        	<span style="text-transform: capitalize; cursor: pointer;">
-						        		<i class="icon-photo" aria-hidden="true" style="font-size: 150%;"></i> Sign In
-						        	</span>
-						        </a>
-						        <ul class="dropdown">
-						            <li><a href="{% url 'auth_login' %}">Sign In</a></li>
-						            <li><a href="{% url 'registration_register' %}">Register Here</a></li>
-						        </ul>
-					        {% endif %}
-					      </li>
-					      <li>
-					      	<a style="text-transform: capitalize; cursor: pointer;">
-				      			<span>English</span>				      		
-					        </a>
-					        <ul class="dropdown">
-					            <li><a>English</a></li>
-					            <li><a>Tiếng Việt</a></li>
-					        </ul>
-					      </li>
-					   </ul> <!-- End of .menuzord-menu -->
-				   </nav> <!-- End of #main_menu -->
-				     
-			   </div> <!-- End of .conatiner -->
-			</div> <!-- End of .theme_menu -->
-
-			<!-- Header *******************************  -->
-			<header style="margin-top: 56px;">
-				<div class="bottom_header my-cart-preview">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-4 col-sm-7 col-xs-6 pdt-14">
-							    <div class="cart_option float_right">
-								   		
-							   		<div class="cart_list color2_bg" aria-labelledby="cartDropdown">
-							   			<ul>
-							   				<li>
-							   					<div class="cart_item_wrapper clear_fix">
-							   						<div class="img_holder float_left"><img src="{% static 'ultimatefitbackend/images/shop/9.png' %}" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
-
-							   						<div class="item_deatils float_left">
-							   							<h6>Turmeric Powde</h6>
-							   							<ul>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														</ul>
-														<span class="font_fix">$ 34.99</span>
-							   						</div> <!-- End of .item_deatils -->
-							   					</div> <!-- End of .cart_item_wrapper -->
-							   				</li>
-
-							   				<li>
-							   					<div class="cart_item_wrapper clear_fix">
-							   						<div class="img_holder float_left"><img src="{% static 'ultimatefitbackend/images/shop/10.png' %}" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
-							   						
-							   						<div class="item_deatils float_left">
-							   							<h6>Pure Jeans Coffee</h6>
-							   							<ul>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														</ul>
-														<span class="font_fix">$ 26.99</span>
-							   						</div> <!-- End of .item_deatils -->
-							   					</div> <!-- End of .cart_item_wrapper -->
-							   				</li>
-
-							   				<li>
-							   					<div class="cart_item_wrapper clear_fix">
-							   						<div class="img_holder float_left"><img src="{% static 'ultimatefitbackend/images/shop/11.png' %}" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
-							   						
-							   						<div class="item_deatils float_left">
-							   							<h6>Columbia Chocolate</h6>
-							   							<ul>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														</ul>
-														<span class="font_fix">$ 26.99</span>
-							   						</div> <!-- End of .item_deatils -->
-							   					</div> <!-- End of .cart_item_wrapper -->
-							   				</li>
-							   			</ul>
-
-							   			<div class="cart_total clear_fix">
-
-							   				<span class="total font_fix float_left">Total - 140$</span>
-							   				<a href="#" class="s_color_bg float_right tran3s">Checkout</a>
-							   			</div>
-							   		</div> <!-- End of .cart_list -->
-							    </div>
-
-							</div>
-
-						</div>
-
-					</div>
-				</div> <!-- End of .bottom_header -->
-				<div class="top_header">
-					<div class="container">
-						<div class="pull-left header_left">
-							<ul>
-		        				<li><a href="#">Order On Phone: <span>+321 453 68 739</span></a></li>
-		        				<li><i class="fa fa-envelope-o s_color" aria-hidden="true"></i><a href="#">organicstore@gmail.com</a></li>
-		        			</ul>
-						</div>
-
-						<div class="pull-right header_right">
-							<div class="state" id="value1">
-								<ul>
-			        				<li><i class="fa fa-user s_color" aria-hidden="true"></i><a href="#">Account</a></li>
-			        				<li><i class="fa fa-heart s_color" aria-hidden="true"></i><a href="#">Whishlist </a></li>
-			        				<li><i class="fa fa-truck s_color" aria-hidden="true"></i><a href="#">Whishlist</a></li>
-			        			</ul>
-			        			<div id="polyglotLanguageSwitcher">
-									<form action="#">
-										<select id="polyglot-language-options">
-											<option id="en" value="en" selected>English</option>
-											<option id="fr" value="fr">French</option>
-											<option id="de" value="de">German</option>
-											<option id="it" value="it">Italian</option>
-											<option id="es" value="es">Spanish</option>
-										</select>
-									</form>
-								</div>
-							</div>
-
-								
-						</div>
-					</div> <!-- End of .container -->
-				</div> <!-- End of .top_header -->				
-			</header>
-
-
-
+			{% include "small-common-components/header/header.html" with dict_translation=dict_translation %}
 
 
 			<!-- Menu ******************************* -->
@@ -634,6 +416,8 @@
 
 		<!-- landguage switcher js -->
 		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.polyglot.language.switcher.js' %}"></script>
+		<script src="{% static 'ultimatefitbackend/js/jquery.translate.js' %}"/>
+		
 		<!-- Fancybox js -->
 		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/jquery.fancybox.pack.js' %}"></script>
 		<!-- js count to -->
@@ -649,6 +433,11 @@
 		<!-- Theme js -->
 		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/theme.js' %}"></script>
 		<script type="text/javascript" src="{% static 'ultimatefitbackend/js/google-map.js' %}"></script>
+
+		<script type="text/javascript">
+			var dictTranslationString = "{{dict_translation}}";
+		</script>
+		<script src="{% static 'ultimatefitbackend/js/small-common-components/header/translation.js' %}"></script>
 
 		<script>
 			$('#cartDropdown-hover').hover(function() {

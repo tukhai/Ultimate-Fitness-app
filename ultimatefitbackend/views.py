@@ -190,10 +190,14 @@ def index(request):
             count += (order.quantity + count_ano)
         print 'orders 2 are ...'
         print orders
+
+        dict_translation = dictionary_translation()
+
         context = {
             'cart': orders,
             'total': total,
             'count': count,
+            'dict_translation': dict_translation
         }
 
         # When logged in and go to cart page, after add anonymous cart into user's cart,
@@ -944,10 +948,13 @@ def cart(request):
             count += (order.quantity + count_ano)
         print 'orders 2 are ...'
         print orders
+
+        dict_translation = dictionary_translation()
         context = {
             'cart': orders,
             'total': total,
             'count': count,
+            'dict_translation': dict_translation
         }
 
         # When logged in and go to cart page, after add anonymous cart into user's cart,
@@ -982,10 +989,13 @@ def cart(request):
         for order in orders:
             total += (order.food.price_from_foodtype * order.quantity) 
             count += order.quantity
+
+        dict_translation = dictionary_translation()
         context = {
             'cart': orders,
             'total': total,
             'count': count,
+            'dict_translation': dict_translation
         }
         return render(request, 'ultimatefitbackend/shop-cart.html', context)
     
