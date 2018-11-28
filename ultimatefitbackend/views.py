@@ -238,11 +238,14 @@ def index(request):
         for order in orders:
             total += (order.food.price_from_foodtype * order.quantity) 
             count += order.quantity
+
+        dict_translation = dictionary_translation()
         context = {
             'cart': orders,
             'total': total,
             'count': count,
-            'previous_url': previous_url
+            'previous_url': previous_url,
+            'dict_translation': dict_translation
         }
         #return render(request, 'base.html', context)
         return render(request, 'ultimatefitbackend/order.html', context)

@@ -436,6 +436,7 @@
 
 		<script type="text/javascript">
 			var dictTranslationString = "{{dict_translation}}";
+			var csrfToken = "{{ csrf_token }}";
 		</script>
 		<script src="{% static 'ultimatefitbackend/js/small-common-components/header/translation.js' %}"></script>
 
@@ -517,6 +518,8 @@
 				// $(location).attr('href', '/order');
 			});
 		</script>
+		<script src="{% static 'ultimatefitbackend/js/small-common-components/header/headerCartHover.js' %}"></script>
+		<script src="{% static 'ultimatefitbackend/js/small-common-components/header/signinRegister.js' %}"></script>
 
 		</div> <!-- End of .main_page -->
 	</body>
