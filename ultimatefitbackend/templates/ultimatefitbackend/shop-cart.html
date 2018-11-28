@@ -437,6 +437,25 @@
 		<script type="text/javascript">
 			var dictTranslationString = "{{dict_translation}}";
 			var csrfToken = "{{ csrf_token }}";
+
+			// When the page is freshly loaded, we would get the current quantity of each food in db
+			// Can't define varible within click function, because the varible would get its value reset whenever we click
+			var quantityOfFoodArray = [];
+			{% for item in cart %}
+				quantityOfFoodArray[{{item.food.id}}] = {{item.quantity}};
+				console.log("Quantity of " + {{item.food.id}} + ".{{item.food.food_type.name}}" + " when the page is freshly loaded: " + {{item.quantity}});
+
+				if (quantityOfFoodArray[{{item.food.id}}] > 0) {
+					$("div#food-" + {{item.food.id}} + "-quantity-on-meal").html(quantityOfFoodArray[{{item.food.id}}]);
+
+					$("#meal-none-zero-button-" + {{item.food.id}}).show();
+					$("#meal-zero-button-" + {{item.food.id}}).hide();
+				}
+			{% endfor %};
+			// since food id start from 1, this loop array is from 1 to n
+
+			var totalToPay = {{total}};
+			//console.log("total money to be paid when the page is freshly loaded: $" + totalToPay);
 		</script>
 		<script src="{% static 'ultimatefitbackend/js/small-common-components/header/translation.js' %}"></script>
 
