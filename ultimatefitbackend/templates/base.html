@@ -1771,7 +1771,11 @@
 			{% endfor %};
 			// since food id start from 1, this loop array is from 1 to n
 
-			var totalToPay = {{total}};
+			var totalToPay = 0;
+			if ("{{total}}" !== "") {
+				totalToPay = parseInt("{{total}}");
+			}
+			// var totalToPay = {{total}};
 			//console.log("total money to be paid when the page is freshly loaded: $" + totalToPay);
 
 			var csrfToken = "{{csrf_token}}"
