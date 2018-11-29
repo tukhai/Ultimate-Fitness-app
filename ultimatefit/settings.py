@@ -69,6 +69,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'ultimatefitbackend.context_processor_file.common_header',
+                'ultimatefitbackend.context_processor_file.translation_dictionary',
             ],
         },
     },

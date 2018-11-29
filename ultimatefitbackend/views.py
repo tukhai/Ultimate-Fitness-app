@@ -42,8 +42,6 @@ from django.db.models import Q
 
 #from django import forms
 
-from .dictionary import dictionary_translation
-
 class IndexView(generic.ListView):
     template_name = 'ultimatefitbackend/base.html'
     context_object_name = 'latest_question_list'
@@ -191,13 +189,10 @@ def index(request):
         print 'orders 2 are ...'
         print orders
 
-        dict_translation = dictionary_translation()
-
         context = {
             'cart': orders,
             'total': total,
-            'count': count,
-            'dict_translation': dict_translation
+            'count': count
         }
 
         # When logged in and go to cart page, after add anonymous cart into user's cart,
@@ -239,13 +234,11 @@ def index(request):
             total += (order.food.price_from_foodtype * order.quantity) 
             count += order.quantity
 
-        dict_translation = dictionary_translation()
         context = {
             'cart': orders,
             'total': total,
             'count': count,
-            'previous_url': previous_url,
-            'dict_translation': dict_translation
+            'previous_url': previous_url
         }
         #return render(request, 'base.html', context)
         return render(request, 'ultimatefitbackend/order.html', context)
@@ -324,8 +317,6 @@ def meal(request):
     food_item_in_selected_menu = menu[0].food.all()
     print food_item_in_selected_menu[0].name'''
 
-    dict_translation = dictionary_translation()
-
     context = {
         'cart': orders,
         'total': total,
@@ -334,8 +325,7 @@ def meal(request):
         'total_count': foods.count(),
         'lean_count': lean_count,
         'maintain_count': maintain_count,
-        'heavy_count': heavy_count,
-        'dict_translation': dict_translation
+        'heavy_count': heavy_count
     }
         
     return render(request, 'ultimatefitbackend/meal.html', context)
@@ -460,14 +450,11 @@ def meal_food_list_update_query_by_date(request):
         count += order.quantity
         print order.food.id,order.food.food_type.name,": $",order.food.price_from_foodtype," * ",order.quantity
 
-    dict_translation = dictionary_translation()
-
     context = {
         'cart': orders,
         'total': total,
         'count': count,
-        'foods': foods,
-        'dict_translation': dict_translation
+        'foods': foods
     }
         
     return render(request, 'ultimatefitbackend/meal_food_list_update.html', context)
@@ -556,13 +543,10 @@ def list(request):
     except IndexError:
         print "NO ITEM IN ORDERS"
 
-    dict_translation = dictionary_translation()
-
     context = {
         'cart': orders,
         'total': total,
-        'count': count,
-        'dict_translation': dict_translation
+        'count': count
     }
 
     return render(request, 'ultimatefitbackend/list.html', context)
@@ -634,10 +618,13 @@ def coupon_code_validation(request):
     return redirect('/')
 
 
-def contact(request):
-    return render(request, 'ultimatefitbackend/contact.html')
+def contact(request):    return render(request, 'ultimatefitbackend/contact.html')
+
+
 def about(request):
     return render(request, 'ultimatefitbackend/about-us.html')
+
+
 def testimonials(request):
     return render(request, 'ultimatefitbackend/Testimonials.html')
 def error(request):
@@ -952,12 +939,10 @@ def cart(request):
         print 'orders 2 are ...'
         print orders
 
-        dict_translation = dictionary_translation()
         context = {
             'cart': orders,
             'total': total,
-            'count': count,
-            'dict_translation': dict_translation
+            'count': count
         }
 
         # When logged in and go to cart page, after add anonymous cart into user's cart,
@@ -993,12 +978,10 @@ def cart(request):
             total += (order.food.price_from_foodtype * order.quantity) 
             count += order.quantity
 
-        dict_translation = dictionary_translation()
         context = {
             'cart': orders,
             'total': total,
-            'count': count,
-            'dict_translation': dict_translation
+            'count': count
         }
         return render(request, 'ultimatefitbackend/shop-cart.html', context)
     
