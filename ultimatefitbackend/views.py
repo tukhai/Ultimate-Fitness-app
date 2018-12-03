@@ -618,7 +618,8 @@ def coupon_code_validation(request):
     return redirect('/')
 
 
-def contact(request):    return render(request, 'ultimatefitbackend/contact.html')
+def contact(request):    
+    return render(request, 'ultimatefitbackend/contact.html')
 
 
 def about(request):
