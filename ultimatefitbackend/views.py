@@ -502,10 +502,14 @@ def total(request):
 
 def list(request):
     if request.user.is_authenticated():
-        cart = Cart.objects.get(
-            user=request.user,
-            active=True
-        );
+        try:
+            cart = Cart.objects.get(
+                user=request.user,
+                active=True
+            );
+        except Cart.DoesNotExist:
+            print "--ERROR--"
+            cart = None
     else:
         if 'cart' in request.session:
             print "cart is exist in session"
