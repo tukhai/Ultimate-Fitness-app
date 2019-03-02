@@ -2,9 +2,13 @@
 // but the dictionary is saved in a python file
 // var dictTranslationString = "{{dict_translation}}";
 dictTranslationString = dictTranslationString.replace(/&quot;/g, '"');
+dictTranslationString = dictTranslationString.replace(/&#39;/g, "'");
+dictTranslationString = dictTranslationString.replace(/'}/g, '"}');
+dictTranslationString = dictTranslationString.replace(/':/g, '":');
+dictTranslationString = dictTranslationString.replace(/',/g, '",');
+dictTranslationString = dictTranslationString.replace(/u'/g, '"');
 
 var dict = JSON.parse(dictTranslationString);
-console.log(dict);
 
 /*Check if any wrong words, which not appear on dict, it's for developer use*/
 $(".trn").each(function() {

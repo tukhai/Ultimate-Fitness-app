@@ -1,4 +1,6 @@
-from .dictionary import dictionary_translation
+# -*- coding: utf-8 -*- 
+import os
+import json, codecs
 
 from .models import Food, FoodCategory, FoodType, Order, Customer, Menu, MenuCategory, FoodOrder, Cart
 
@@ -12,9 +14,12 @@ PAGES_NEED_CONTEXT_PROCESSOR_CART = [
 
 
 def translation_dictionary(request):
-	dict_translation = dictionary_translation()
+	current_directory = os.getcwd()
+	with open(current_directory + '/ultimatefitbackend/dict.json') as f:
+		data = json.load(f)
+
 	return {
-		'dict_translation': dict_translation
+		'dict_translation': data
 	}
 
 
