@@ -9,8 +9,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import ObjectDoesNotExist
 
 from django.core import serializers
+import os
+
 import math
-import json
+import json, codecs
 import time
 
 from time import strftime
@@ -1406,3 +1408,22 @@ def group_promotion_list(request):
             print each_food_type.name
 
     return JsonResponse(response_data, safe=False)
+
+
+def test_cron(request):
+    print "calling translation script writer"
+
+    # print os.getcwd()
+    current_directory = os.getcwd()
+    # # with open(current_directory + '/ultimatefitbackend/dictionary.py', 'w') as f:
+    # with open(current_directory + '/ultimatefitbackend/dict.json', 'w') as f:
+    #     # print f.read()
+    #     f.write('hi there\n')
+    #     f.close()
+
+    with open(current_directory + '/ultimatefitbackend/python_cron_test.json', 'r') as f:
+        response_data = f.read()
+
+    return JsonResponse(response_data, safe=False)
+
+

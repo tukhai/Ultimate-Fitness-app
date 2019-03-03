@@ -18,12 +18,17 @@ job  = cron.new(command='print "HELLO"')
 job.minute.every(1)'''
 
 from django_cron import CronJobBase, Schedule
+import os
+from datetime import datetime
 
 class MyCronJob(CronJobBase):
-    RUN_EVERY_MINS = 1 # every 2 hours
+	RUN_EVERY_MINS = 1 # every 2 hours
 
-    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
-    code = 'my_app.my_cron_job'    # a unique code
+	schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+	code = 'my_app.my_cron_job'    # a unique code
 
-    def do(self):
-        print "Hello from CRON!"    # do your thing here
+	def do(self):
+		current_directory = os.getcwd()
+		with open(current_directory + '/ultimatefitbackend/python_cron_test.json', 'w') as f:
+			f.write("Hello from CRON! The time now is: " + str(datetime.now()))
+			f.close()
