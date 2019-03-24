@@ -1422,7 +1422,9 @@ def test_cron(request):
     #     f.close()
 
     with open(current_directory + '/ultimatefitbackend/python_cron_test.json', 'r') as f:
-        response_data = f.read()
+    # with open(current_directory + '/ultimatefitbackend/dict.json', 'r') as f:
+        # response_data = f.read()
+        response_data = json.load(f)
 
     return JsonResponse(response_data, safe=False)
 
