@@ -49,6 +49,7 @@ class MyCronJob(CronJobBase):
 		chrome_options.add_argument('window-size=1920x1480')
 
 		global driver
+		print webdriver
 		driver = webdriver.Chrome(chrome_options=chrome_options)
 		print driver
 
