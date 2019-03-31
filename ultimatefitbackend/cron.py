@@ -35,6 +35,7 @@ class MyCronJob(CronJobBase):
 	code = 'my_app.my_cron_job'    # a unique code
 
 	def do(self):
+		print "START!"
 		# current_directory = os.getcwd()
 		# with open(current_directory + '/ultimatefitbackend/python_cron_test.json', 'w') as f:
 		# 	f.write("Hello from CRON! The time now is: " + str(datetime.now()))
