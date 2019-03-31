@@ -106,7 +106,7 @@ class MyCronJob(CronJobBase):
 
 		final_translation_str = "{\n"
 
-		for key_word in keys_collection:
+		for index, key_word in enumerate(keys_collection):
 			translated_text_container = key_word.find_elements_by_css_selector("div.col-md-9.break-word table tbody tr.row-trans.translation")[1]
 
 			translation_label = key_word.get_attribute("data-name")
@@ -114,7 +114,10 @@ class MyCronJob(CronJobBase):
 			translation_vn = translated_text_container.find_element_by_css_selector("td.cell-trans div.clearfix div.modified-info-wrapper").get_attribute("data-value")
 
 			if (type(translation_label) != "" and str(type(translation_label)) == "<type 'unicode'>") and (type(translation_en) != "" and str(type(translation_en)) == "<type 'unicode'>") and (type(translation_vn) != "" and str(type(translation_vn)) == "<type 'unicode'>"):
-				final_translation_str += '\t"' + str(translation_label) + '": {"vn": "' + str(translation_vn.encode('utf8')) + '","en": "' + str(translation_en) + '"},\n'
+				if index == len(keys_collection) - 1:
+					final_translation_str += '\t"' + str(translation_label) + '": {"vn": "' + str(translation_vn.encode('utf8')) + '","en": "' + str(translation_en) + '"}\n'
+				else:
+					final_translation_str += '\t"' + str(translation_label) + '": {"vn": "' + str(translation_vn.encode('utf8')) + '","en": "' + str(translation_en) + '"},\n'
 
 		final_translation_str += "}"
 		driver.close()
