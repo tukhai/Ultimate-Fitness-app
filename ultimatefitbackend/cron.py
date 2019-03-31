@@ -42,6 +42,7 @@ class MyCronJob(CronJobBase):
 		# 	f.close()
 
 		chrome_options = Options()
+		print chrome_options
 		chrome_options.add_argument("--headless")
 		chrome_options.add_argument('--no-sandbox')
 		chrome_options.add_argument('--disable-dev-shm-usage')
@@ -49,6 +50,7 @@ class MyCronJob(CronJobBase):
 
 		global driver
 		driver = webdriver.Chrome(chrome_options=chrome_options)
+		print driver
 
 		# First have to log in
 		driver.get("https://lokalise.co/login")
