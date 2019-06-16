@@ -55,6 +55,19 @@
 			.en {
 				display: none;
 			}
+
+			.checkbox-side-dish .theme_inner_title {
+				margin-bottom: 15px;
+			}
+			.checkbox-side-dish input[type="checkbox"] {
+				float: left !important;
+				height: 20px !important;
+				width: 50px !important;
+				margin-top: 3px !important;
+			}
+			.checkbox-side-dish div.input-item-container {
+				padding: 10px 0;
+			}
 		</style>
 	</head>
 
@@ -208,12 +221,30 @@
 										</ul>
 										<span class="item_price">$ 19.00</span>
 										<p>There are many variations of passages,the majority suffered uts seds alterationin some of form uts, by injected humour random words which don't look evenslightly believable.</p>
-										<span class="check_location">Check Delivery Option at Your Location:</span>
+
+										<div class="sidebar_categories checkbox-side-dish">
+											<div class="theme_inner_title"><h6>Choices for 1st side:</h6></div>
+
+											<div class="input-item-container">
+												<input type="checkbox" name="age" value="30">Vegetables   (15)
+											</div>
+											<div class="input-item-container">
+												<input type="checkbox" name="age" value="30">Fruits & Drinks   (06)
+											</div>
+											<div class="input-item-container">
+												<input type="checkbox" name="age" value="30">Fresh Meat   (12)
+											</div>
+											<div class="input-item-container">
+												<input type="checkbox" name="age" value="30">Beauty Care   (14)
+											</div>
+										</div>
+
+										<!-- <span class="check_location">Check Delivery Option at Your Location:</span>
 										<div class="clear_fix">
 											<input type="text" class="float_left" placeholder="Pincode">
 											<button class="float_left tran3s">Check</button>
 											<span class="float_left color1">*Expected Delivery in 4-10 Days</span>
-										</div>
+										</div> -->
 										<input id="display-quantity-modalbox" style="display: none;" type="number" value="{{quantityInThisCart}}" min="0" disabled>
 										<!--<a href="{% url 'ultimatefitbackend:add_to_cart' food.id %}" class="tran3s color1_bg" id="add-cart-button">Add to Cart</a>-->
 										<a class="tran3s color1_bg unselectable" id="add-cart-button">
@@ -601,6 +632,9 @@
 							        window.parent.parent.$("text#total-to-pay").html(totalToPay);
 							    });
 							};
+
+							// Close popup when add to cart success
+							$(window.frameElement).parent().parent().find("button.close").click();
 				        }
 			        ).fail(function(){
 						window.parent.parent.$('.internet-connection-error').fadeIn(200);

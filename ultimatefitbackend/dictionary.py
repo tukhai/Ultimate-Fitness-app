@@ -70,6 +70,14 @@ def dictionary_translation():
 		'FEATURED PRODUCTS': {
 			'vn': 'SAN PHAM TIEU BIEU',
 			'en': 'FEATURED PRODUCTS'
+		},
+		'Chicken Wing': {
+			'vn': 'Cánh Gà',
+			'en': 'Chicken Wing'
+		},
+		"Steak": {
+			'vn': 'Bít Tết',
+			'en': 'Steak'
 		}
 	}
 

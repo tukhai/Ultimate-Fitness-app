@@ -1821,53 +1821,53 @@
 
 			//$(".add-to-cart-list").click(function(){
 			$(document).on("click", ".add-to-cart-list", function(){
-				var idOfFood = $(this).data('id-food'); 
-			    console.log("Adding food of id: " + idOfFood);
+				// var idOfFood = $(this).data('id-food'); 
+			 //    console.log("Adding food of id: " + idOfFood);
 
-			    var priceOfFood = $(this).data('price-food');
-			    console.log("Price of this food: " + priceOfFood);
+			 //    var priceOfFood = $(this).data('price-food');
+			 //    console.log("Price of this food: " + priceOfFood);
 
-			    var isFromMeal = $(this).data('is-from-meal');
+			 //    var isFromMeal = $(this).data('is-from-meal');
 
-			    if (navigator.onLine) {
-				    /*FAKE DISPLAY AT FRONT-END FOR FAST DISPLAY*/
-				    // IF ITEM NOT EXIST OR EQUAL 0, FIRST TIME ADD BECOME 1
-		            addFakeDataArray(idOfFood, priceOfFood);
-				    /*FAKE DISPLAY AT FRONT-END FOR FAST DISPLAY*/
+			 //    if (navigator.onLine) {
+				//     /*FAKE DISPLAY AT FRONT-END FOR FAST DISPLAY*/
+				//     // IF ITEM NOT EXIST OR EQUAL 0, FIRST TIME ADD BECOME 1
+		  //           addFakeDataArray(idOfFood, priceOfFood);
+				//     /*FAKE DISPLAY AT FRONT-END FOR FAST DISPLAY*/
 
-				    $.post(
-				    	"/add/" + idOfFood,
-				        { 
-				          csrfmiddlewaretoken: "{{ csrf_token }}"
-				        },
-				        function(data,status){
-				            console.log("Status: " + status);
+				//     $.post(
+				//     	"/add/" + idOfFood,
+				//         { 
+				//           csrfmiddlewaretoken: "{{ csrf_token }}"
+				//         },
+				//         function(data,status){
+				//             console.log("Status: " + status);
 
-				            if (status == "success") {
-					            //Consider moving this out of post function, so the number change faster, and do the check if status success or false, if false show error box/page 404
+				//             if (status == "success") {
+				// 	            //Consider moving this out of post function, so the number change faster, and do the check if status success or false, if false show error box/page 404
 
-					            // Only display pop up message if click add from meal
-					            // Display this message only if the adding is success
-					            //$("#test").append("<div class='popUpMessage'><p>Food of ID " + idOfFood + " is added to your cart</p><p>You currently have " + quantityOfFoodArray[idOfFood] + " ID " + idOfFood + " in your cart</p></div>");
+				// 	            // Only display pop up message if click add from meal
+				// 	            // Display this message only if the adding is success
+				// 	            //$("#test").append("<div class='popUpMessage'><p>Food of ID " + idOfFood + " is added to your cart</p><p>You currently have " + quantityOfFoodArray[idOfFood] + " ID " + idOfFood + " in your cart</p></div>");
 
-						        if (isFromMeal == "from-meal") {
-								    $("#test").append("<div class='popUpMessage'><p style='text-align: center; padding-top: 10px; padding-bottom: 7px;'><span style='font-weight: bold; font-size:200%;'>1</span>&nbsp; item added to your cart</p></div>");
-								    setTimeout(function() {     
-								        $("#test").html(""); 
-								    },1500);
-								}
+				// 		        if (isFromMeal == "from-meal") {
+				// 				    $("#test").append("<div class='popUpMessage'><p style='text-align: center; padding-top: 10px; padding-bottom: 7px;'><span style='font-weight: bold; font-size:200%;'>1</span>&nbsp; item added to your cart</p></div>");
+				// 				    setTimeout(function() {     
+				// 				        $("#test").html(""); 
+				// 				    },1500);
+				// 				}
 							    
-								getTotalToPayFromDB();
-							};
-				        }
-			        ).fail(function(){
-			        	// IF INTERNET OK, BUT SERVER DOWN, WHEN USER ADD, NUMBER WILL JUMP BUT IMMEDIATELY DISPLAY ERROR MESSAGE, WHICH STILL GOOD
-					    popUpInternetConnectionError();
-					    removeFakeDataArray(idOfFood, priceOfFood);
-					});
-			    } else {
-			    	popUpInternetConnectionError();
-			    }
+				// 				getTotalToPayFromDB();
+				// 			};
+				//         }
+			 //        ).fail(function(){
+			 //        	// IF INTERNET OK, BUT SERVER DOWN, WHEN USER ADD, NUMBER WILL JUMP BUT IMMEDIATELY DISPLAY ERROR MESSAGE, WHICH STILL GOOD
+				// 	    popUpInternetConnectionError();
+				// 	    removeFakeDataArray(idOfFood, priceOfFood);
+				// 	});
+			 //    } else {
+			 //    	popUpInternetConnectionError();
+			 //    }
 			});
 
 			function removeFakeDataArray(idOfFoodToBeRemoved, priceOfFoodToBeRemoved) {

@@ -56,7 +56,9 @@
             			1
             		</div>
             		<div style="width: 25%; float: left;" class="add-to-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.price_from_foodtype}}" data-is-from-meal="from-meal">
-            			&nbsp;&nbsp;+&nbsp;&nbsp;
+                        <a href="#my_modal" style="color: white" data-toggle="modal" data-food-id="{{food.food_type.name}}" data-modal-id="{% url 'ultimatefitbackend:food' food.id %}" class="btnAdd-{{food.food_type.name}}">
+                            &nbsp;&nbsp;+&nbsp;&nbsp;
+                        </a>
             		</div>
                 	
                 </div>

@@ -223,7 +223,9 @@
 				                            			1
 				                            		</div>
 				                            		<div style="width: 25%; float: left;" class="add-to-cart-list" data-id-food="{{food.id}}" data-price-food="{{food.price_from_foodtype}}" data-is-from-meal="from-meal">
-				                            			&nbsp;&nbsp;+&nbsp;&nbsp;
+				                            			<a href="#my_modal" style="color: white" data-toggle="modal" data-food-id="{{food.food_type.name}}" data-modal-id="{% url 'ultimatefitbackend:food' food.id %}" class="btnAdd-{{food.food_type.name}}">
+								                            &nbsp;&nbsp;+&nbsp;&nbsp;
+								                        </a>
 				                            		</div>
 					                            	
 					                            </div>
@@ -370,10 +372,7 @@
 				            <div>			        	
 								<iframe width="100%" scrolling="no" frameborder="0" src="" onload="this.height=this.contentWindow.document.body.scrollHeight;" ></iframe>					
 							</div>
-				        </div>			        				
-				        <!--<div class="modal-footer">
-				            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				        </div>-->
+				        </div>
 				    </div>
 			    </div>
 			</div>
@@ -400,11 +399,8 @@
 				});
 				
 				$(document).on('show.bs.modal', '#my_modal', function(e) {
-			        console.log("HII");
-			        var foodId = $(e.relatedTarget).data('food-id');		        
+			        var foodId = $(e.relatedTarget).data('food-id');
 			        $(e.currentTarget).find('h4[class="modal-title"]').html(foodId);
-			        console.log(foodId);
-			        console.log(typeof(foodId.toString()));
 
 			        var modalId = $(e.relatedTarget).data('modal-id');
 			        $(e.currentTarget).find('iframe').attr("src", modalId);

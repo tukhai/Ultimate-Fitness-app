@@ -1,4 +1,5 @@
 {
+	"lbl_gallery": {"vn": "Ảnh","en": "gallery"},
 	"lbl_Order_for_today": {"vn": "Đặt hàng hôm nay","en": "Order for today"},
 	"lbl_Order_for_future_days": {"vn": "Đặt hàng các ngày tới","en": "Order for future days"}
 }

@@ -1,5 +1,5 @@
 {
-	"lbl_gallery": {"vn": "Ảnh12","en": "gallery"},
+	"lbl_gallery": {"vn": "Ảnh","en": "gallery"},
 	"lbl_ADD_TO_CART": {"vn": "THÊM VÀO GIỎ","en": "ADD TO CART"},
 	"watermelon": {"vn": "dưa hấu","en": "watermelon"},
 	"lbl_Home": {"vn": "Trang Chủ","en": "Home"},
@@ -16,5 +16,6 @@
 	"lbl_Register_Here": {"vn": "Đăng Ký","en": "Register Here"},
 	"lbl_Total": {"vn": "Tổng","en": "Total"},
 	"FEATURED PRODUCTS": {"vn": "SAN PHAM TIEU BIEU","en": "FEATURED PRODUCTS"},
-	"Chicken Wing": {"vn": "Cánh Gà","en": "Chicken Wing"}
+	"Chicken Wing": {"vn": "Cánh Gà","en": "Chicken Wing"},
+	"Steak": {"vn": "Bít Tết","en": "Steak"}
 }
